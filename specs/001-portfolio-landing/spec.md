@@ -40,6 +40,20 @@ Preguntas planteadas y resueltas en esta sesión:
 - Q: ¿Qué nivel de metadatos y datos estructurados lleva el sitio? → A: Metadatos básicos,
   Open Graph y datos estructurados de negocio local con ámbito en Rute.
 
+### Corrección 2026-09-09
+
+El propietario aportó el copy definitivo (`copy-portfolio.md`) y corrigió dos datos de
+esta especificación:
+
+- **Stack de Cristalería Ruteña**: el original decía "React, Vite, Tailwind, PHP,
+  MySQL". Es incorrecto. El proyecto **no usa PHP ni MySQL**, y no tiene base de datos
+  ni CMS. El stack real es React, Vite, Tailwind y Cloudflare (Pages Functions, R2 y
+  Resend para el formulario). En la capa principal el badge muestra solo
+  `React · Vite · Tailwind · Cloudflare`, por el principio 70/30; el stack ampliado
+  queda reservado a la página opcional de caso de estudio.
+- **Titular de Inicio**: pasa de "Desarrollo web para empresas" a "Desarrollo web para
+  pymes y autónomos". El subtítulo no cambia.
+
 ## User Scenarios & Testing *(mandatory)*
 
 Las historias se han reordenado por valor de negocio. Entre corchetes se indica la
@@ -62,7 +76,7 @@ persona ajena al proyecto sabe decir, sin ayuda, qué se vende y dónde se pide 
 **Acceptance Scenarios**:
 
 1. **Given** un visitante que abre la página por primera vez, **When** la página termina
-   de cargar, **Then** ve el titular "Desarrollo web para empresas", el subtítulo
+   de cargar, **Then** ve el titular "Desarrollo web para pymes y autónomos", el subtítulo
    descriptivo y el botón "Solicitar presupuesto" sin necesidad de hacer scroll.
 2. **Given** un visitante en la parte superior de la página, **When** pulsa "Solicitar
    presupuesto", **Then** la vista se desplaza suavemente hasta la sección de contacto.
@@ -123,7 +137,7 @@ que el enlace "Visitar en vivo" abre cristaleriarutena.es en una pestaña nueva.
 
 1. **Given** un visitante en la sección de proyecto destacado, **When** la lee, **Then**
    ve el nombre del cliente, la descripción del trabajo, las tecnologías empleadas
-   (React, Vite, Tailwind, PHP, MySQL) y la firma "Proyecto realizado por Juan de Dios."
+   (React, Vite, Tailwind, Cloudflare) y la firma "Proyecto realizado por Juan de Dios."
 2. **Given** un visitante interesado en el proyecto, **When** pulsa "Visitar en vivo",
    **Then** se abre https://cristaleriarutena.es en una pestaña nueva sin perder el
    portfolio.
@@ -213,14 +227,14 @@ comprobando que se puede volver al portfolio.
 
 - **FR-001**: EL SISTEMA mostrará las cinco secciones (Inicio, Proyecto destacado,
   Servicios, Sobre mí, Contacto) en una sola página y en ese orden.
-- **FR-002**: EL SISTEMA mostrará en Inicio el titular "Desarrollo web para empresas", el
+- **FR-002**: EL SISTEMA mostrará en Inicio el titular "Desarrollo web para pymes y autónomos", el
   subtítulo "Diseño y desarrollo de páginas web modernas, rápidas y adaptadas a las
   necesidades de cada negocio." y la llamada a la acción "Solicitar presupuesto", con ese
   texto exacto.
 - **FR-003**: EL SISTEMA mostrará en Servicios exactamente tres tarjetas —Web corporativa,
   Tiendas online, Aplicaciones y soluciones web— cada una con su descripción cerrada.
 - **FR-004**: EL SISTEMA mostrará en Proyecto destacado la descripción cerrada de
-  Cristalería Ruteña, la lista de tecnologías (React, Vite, Tailwind, PHP, MySQL) y la
+  Cristalería Ruteña, la lista de tecnologías (React, Vite, Tailwind, Cloudflare) y la
   firma "Proyecto realizado por Juan de Dios."
 - **FR-005**: EL SISTEMA mostrará en Sobre mí el texto cerrado que identifica a la persona
   y su ámbito de trabajo desde Rute.

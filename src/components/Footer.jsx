@@ -12,7 +12,16 @@ export function Footer() {
     <footer data-inert-target className="border-t border-ink/10 bg-bg">
       <div className="contenedor flex flex-col gap-6 py-10 sm:flex-row sm:items-start sm:justify-between">
         <div className="text-sm text-muted">
-          <p className="font-display text-base text-ink">{identity.nombreComercial}</p>
+          <p className="flex items-center gap-2">
+            <img
+              src="/JdDLogo_marca.svg"
+              alt=""
+              width={28}
+              height={24}
+              className="h-6 w-auto"
+            />
+            <span className="font-display text-base text-ink">{identity.nombreComercial}</span>
+          </p>
           <p className="mt-1">{identity.razonSocial}</p>
           <p>{identity.domicilio}</p>
         </div>

@@ -41,15 +41,25 @@ export function Header({ base = '' }) {
       className="fixed inset-x-0 top-0 z-50 border-b border-ink/10 bg-bg/95 backdrop-blur"
     >
       <div className="contenedor flex h-16 items-center justify-between gap-4">
-        {/* PENDIENTE DE ASSET: cuando se aporte JdDLogo_marca.svg se sustituye este
-            logotipo de texto por la imagen, servida en negro o blanco puros y sin
-            recolorear (principio IV). No se genera un logo provisional a proposito. */}
+        {/* El monograma se sirve tal cual, sin recolorear: el SVG usa currentColor y
+            dentro de un <img> resuelve a negro puro, que es uno de los dos unicos
+            valores que admite el principio IV. Ancho y alto explicitos para que no
+            haya desplazamiento de layout al cargar. */}
         <a
           href={`${base}#inicio`}
-          className="font-display text-xl tracking-tight text-ink"
+          className="flex items-center gap-2.5"
           aria-label={`${identity.nombreComercial}, ir al inicio`}
         >
-          {identity.nombreComercial}
+          <img
+            src="/JdDLogo_marca.svg"
+            alt=""
+            width={37}
+            height={32}
+            className="h-8 w-auto"
+          />
+          <span className="font-display text-xl tracking-tight text-ink">
+            {identity.nombreComercial}
+          </span>
         </a>
 
         <nav aria-label="Secciones del sitio" className="hidden md:block">

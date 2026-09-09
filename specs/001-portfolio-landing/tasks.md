@@ -57,28 +57,33 @@ código en `src/`, la única función serverless en `functions/`, estáticos en 
 
 ## Estado de la implementación — 2026-09-09
 
-60 de 84 tareas cerradas. Cada una se marcó solo tras ejecutar su comprobación; el
+61 de 84 tareas cerradas. Cada una se marcó solo tras ejecutar su comprobación; el
 build (`npm run build`) termina sin errores ni warnings.
 
 **Las 25 pendientes se agrupan en cuatro causas, ninguna de código:**
 
 | Causa | Tareas | Qué hace falta |
 |---|---|---|
-| Assets que aún no se han aportado | T018, T057, T060, T061 | `JdDLogo_marca.svg` y las capturas de Cristalería Ruteña |
+| Assets que aún no se han aportado | T057, T060, T061 | Solo las capturas de Cristalería Ruteña; el logo ya está |
 | Panel de Cloudflare / GitHub | T002, T012, T013, T078, T079 | Rama `main`, `RESEND_API_KEY` y conexión del proyecto de Pages |
 | Validación manual en navegador o móvil real | T035, T056, T069, T070, T072–T077 | Recorrido de `quickstart.md`, Lighthouse, envío real de correo |
 | Fase 8, opcional | T080–T084 | Solo si el calendario lo permite; T083 exige un testimonio verificado |
 
 **Notas de implementación**
 
-- La cabecera muestra un logotipo de texto hasta que exista `JdDLogo_marca.svg`. No se
-  ha generado un logo provisional (principio IV y V).
-- `public/favicon.svg` y `public/og-image.png` son provisionales: usan la paleta y la
-  tipografía reales, pero no el monograma. Se rehacen al recibir el asset.
-- Los textos de servicios, proyecto, Sobre mí y Contacto que spec.md da por "cerrados"
-  no estaban transcritos en ningún artefacto. `src/content/copy.js` los marca como
-  `[PENDIENTE APROBACION]`: se redactaron sin cifras ni afirmaciones verificables y
-  esperan confirmación del propietario.
+- El logo real llegó el 2026-09-09. Cabecera y pie usan `JdDLogo_marca.svg` con
+  `currentColor`, que dentro de un `<img>` resuelve a negro puro. El favicon se
+  construye con ese mismo trazo en blanco puro sobre la banda oscura, y la imagen de
+  Open Graph usa la versión blanca en PNG. En ningún sitio se recolorea (principio IV).
+- El copy de las cinco secciones ya no es provisional: se sustituyó por el definitivo
+  de `copy-portfolio.md`, transcrito literalmente. Se retiraron las marcas
+  `[PENDIENTE APROBACION]`.
+- Corrección de dato: Cristalería Ruteña **no usa PHP ni MySQL**. El badge de la capa
+  principal es `React · Vite · Tailwind · Cloudflare` (principio 70/30). El stack
+  ampliado queda en `copy.js` bajo `casoEstudio`, listo para la Fase 8.
+- El `<title>` y la meta descripción siguen diciendo "Desarrollo web para empresas en
+  Rute", tal como fija T065, mientras el H1 ya dice "pymes y autónomos". Queda a
+  decisión del propietario alinear las dos cadenas.
 - La rama del repositorio es `master`, no `main`. El principio VIII y la configuración
   de Cloudflare Pages hablan de `main`: hay que decidir cuál de las dos se cambia.
 - T051 se cerró contra el runtime real: `npx wrangler pages dev dist` responde 405, 400,
@@ -124,7 +129,7 @@ build (`npm run build`) termina sin errores ni warnings.
 - [X] T015 Añadir a `src/content/identity.js` la salvaguarda que lanza un error en tiempo de build si `razonSocial`, `nif` o `domicilio` faltan o llegan vacíos, de modo que un Aviso Legal incompleto rompa el build en lugar de publicarse (data-model.md §2, principio V)
 - [X] T016 [P] Crear `src/content/copy.js` con el copy cerrado de las cinco secciones tomado literalmente de spec.md, **sin** clave `testimonio` (data-model.md §3)
 - [X] T017 [P] Crear `src/styles/index.css` con las directivas de Tailwind, la variable `--header-h`, `section[id] { scroll-margin-top: var(--header-h) }` y `scroll-behavior: smooth` anulado dentro de `prefers-reduced-motion` (research.md R-006)
-- [ ] T018 [P] Colocar `JdDLogo_marca.svg` en `public/` en sus variantes negro y blanco puros, sin recolorear (principio IV)
+- [X] T018 [P] Colocar `JdDLogo_marca.svg` en `public/` en sus variantes negro y blanco puros, sin recolorear (principio IV)
 - [X] T019 Crear `index.html`, `aviso-legal.html`, `privacidad.html` y `404.html` en la raíz, cada uno con `lang="es"`, su contenedor de montaje y su script de entrada
 - [X] T020 [P] Crear los puntos de montaje `src/entries/main.jsx`, `src/entries/legal.jsx` y `src/entries/notfound.jsx`
 - [X] T021 Crear `src/components/Footer.jsx` con los enlaces a Aviso Legal y Política de Privacidad, presente en las cuatro entradas (FR-021b, principio XII)
@@ -142,7 +147,7 @@ presupuesto. Grupos 2 y 3, 9–16 sept.
 la llamada a la acción sin hacer scroll, que los tres servicios se leen, y que tanto el botón
 como los enlaces de cabecera llevan a su sección. Escenarios V-1 y V-2 de `quickstart.md`.
 
-- [X] T022 [P] [US1] Crear `src/sections/Hero.jsx` con el titular "Desarrollo web para empresas", el subtítulo y el botón "Solicitar presupuesto", con el texto exacto de `copy.js` (FR-002)
+- [X] T022 [P] [US1] Crear `src/sections/Hero.jsx` con el titular "Desarrollo web para pymes y autónomos", el subtítulo y el botón "Solicitar presupuesto", con el texto exacto de `copy.js` (FR-002)
 - [X] T023 [P] [US1] Crear `src/sections/Servicios.jsx` con exactamente las tres tarjetas de `copy.js` (FR-003)
 - [X] T024 [US1] Crear `src/components/Header.jsx` con cabecera fija, logo, enlaces de ancla a las cinco secciones y la llamada a la acción (FR-009a)
 - [X] T025 [US1] Crear `src/hooks/useFocusTrap.js` que cicle el tabulador entre los elementos enfocables de un contenedor, sin dependencias externas (research.md R-005)
@@ -217,7 +222,7 @@ T052–T055 terminadas.
 cristaleriarutena.es en pestaña nueva. Escenario V-1 punto 2.
 
 - [ ] T057 [P] [US3] Recopilar las capturas del sitio de Cristalería Ruteña y exportarlas a formato moderno en `public/img/`, con dimensiones conocidas (research.md R-012)
-- [X] T058 [US3] Crear `src/sections/ProyectoDestacado.jsx` con la descripción cerrada, las tecnologías (React, Vite, Tailwind, PHP, MySQL) y la firma "Proyecto realizado por Juan de Dios." (FR-004)
+- [X] T058 [US3] Crear `src/sections/ProyectoDestacado.jsx` con la descripción cerrada, las tecnologías (React, Vite, Tailwind, Cloudflare) y la firma "Proyecto realizado por Juan de Dios." (FR-004)
 - [X] T059 [US3] Añadir el enlace "Visitar en vivo" a `https://cristaleriarutena.es` abriendo en pestaña nueva con `rel="noopener"` (FR-009)
 - [ ] T060 [US3] Aplicar `loading="lazy"`, `decoding="async"` y ancho y alto explícitos a las capturas, sin aplicar carga perezosa a nada de la mitad superior de la página (FR-023, research.md R-012)
 - [ ] T061 [US3] Escribir texto alternativo descriptivo para cada captura (FR-024)
