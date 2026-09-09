@@ -1,4 +1,10 @@
 node_modules/
 dist/
 .env
-.env.local
+.env.*
+.wrangler/
+.DS_Store
+*.log
+
+# Metadatos que Windows adjunta a los ficheros descargados
+*:Zone.Identifier

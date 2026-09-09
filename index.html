@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Desarrollo web para empresas en Rute | JdDLabs</title>
+    <meta
+      name="description"
+      content="Desarrollo web para empresas en Rute. Diseño y desarrollo de páginas web modernas, rápidas y adaptadas a las necesidades de cada negocio."
+    />
+    <link rel="canonical" href="https://jddlabs.dev/" />
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!-- Fraunces auto-alojada: una sola peticion de fuente bloqueante (principio II). -->
+    <link
+      rel="preload"
+      as="font"
+      type="font/woff2"
+      href="/fonts/fraunces-latin-700.woff2"
+      crossorigin
+    />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="es_ES" />
+    <meta property="og:site_name" content="JdDLabs" />
+    <meta property="og:title" content="Desarrollo web para empresas en Rute | JdDLabs" />
+    <meta
+      property="og:description"
+      content="Diseño y desarrollo de páginas web modernas, rápidas y adaptadas a las necesidades de cada negocio."
+    />
+    <meta property="og:url" content="https://jddlabs.dev/" />
+    <meta property="og:image" content="https://jddlabs.dev/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="JdDLabs, desarrollo web para empresas en Rute" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <!--
+      Datos estructurados de negocio local (FR-022c). El domicilio va como texto y no
+      descompuesto en PostalAddress a proposito: asi coincide caracter a caracter con
+      identity.js, con el Aviso Legal y con constitution.md, que es lo que exige el
+      escenario V-6 de quickstart.md. El NIF NO se publica aqui.
+    -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "name": "JdDLabs",
+        "description": "Desarrollo web para empresas y autónomos en Rute y alrededores.",
+        "url": "https://jddlabs.dev",
+        "telephone": "+34 666 67 78 38",
+        "email": "hola@jddlabs.dev",
+        "address": "Calle Francisco Salto 29, 1 Rute (Córdoba)",
+        "areaServed": [
+          { "@type": "City", "name": "Rute" },
+          { "@type": "AdministrativeArea", "name": "Córdoba" }
+        ]
+      }
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <!--
+      Si el script no llega a ejecutarse, los tres canales directos siguen siendo
+      utilizables. Es el caso limite de "JavaScript no disponible" de spec.md.
+    -->
+    <noscript>
+      <div style="padding: 2rem; font-family: system-ui, sans-serif">
+        <h1>JdDLabs — Desarrollo web para empresas</h1>
+        <p>Para ver el sitio completo hace falta activar JavaScript. Mientras tanto, puedes contactar directamente:</p>
+        <ul>
+          <li>Teléfono: <a href="tel:+34666677838">+34 666 67 78 38</a></li>
+          <li>WhatsApp: <a href="https://wa.me/34666677838">+34 666 67 78 38</a></li>
+          <li>Correo: <a href="mailto:hola@jddlabs.dev">hola@jddlabs.dev</a></li>
+        </ul>
+        <p>
+          <a href="/aviso-legal">Aviso legal</a> ·
+          <a href="/privacidad">Política de privacidad</a>
+        </p>
+      </div>
+    </noscript>
+
+    <script type="module" src="/src/entries/main.jsx"></script>
+  </body>
+</html>

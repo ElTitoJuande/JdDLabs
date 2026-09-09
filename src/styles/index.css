@@ -1,0 +1,90 @@
+/* Inter para el cuerpo, via @fontsource, solo subconjunto latino y solo los pesos
+   que la interfaz usa (principio II, research.md R-003). */
+@import '@fontsource/inter/latin-400.css';
+@import '@fontsource/inter/latin-500.css';
+@import '@fontsource/inter/latin-600.css';
+@import '@fontsource/inter/latin-700.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Fraunces para titulares: corte estatico auto-alojado, un unico fichero.
+   Ninguna peticion a fonts.googleapis.com ni fonts.gstatic.com (principio II). */
+@font-face {
+  font-family: 'Fraunces';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('/fonts/fraunces-latin-700.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC,
+    U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215,
+    U+FEFF, U+FFFD;
+}
+
+@layer base {
+  /* Un unico valor gobierna la altura de la cabecera fija y la compensacion de las
+     anclas, de modo que no puedan desincronizarse (research.md R-006). Header.jsx lo
+     sincroniza con la altura real medida. */
+  :root {
+    --header-h: 4rem;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* El encabezado de cada seccion queda por debajo de la cabecera fija, nunca tapado. */
+  section[id],
+  [id].scroll-anchor {
+    scroll-margin-top: var(--header-h);
+  }
+
+  body {
+    @apply bg-bg text-ink font-sans antialiased;
+  }
+
+  h1, h2, h3 {
+    @apply font-display;
+    text-wrap: balance;
+  }
+
+  /* Foco siempre visible en todo control interactivo (principio VII, FR-013). */
+  :focus-visible {
+    @apply outline-none ring-2 ring-accent ring-offset-2 ring-offset-bg rounded-sm;
+  }
+
+  /* Movimiento reducido: se anula el desplazamiento suave y cualquier transicion.
+     El contenido nunca queda invisible esperando una animacion (FR-011). */
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+@layer components {
+  /* Contenedor de ancho comun a todas las secciones y a la cabecera. */
+  .contenedor {
+    @apply mx-auto w-full max-w-5xl px-5 sm:px-8;
+  }
+
+  /* Campo trampa: fuera de pantalla, nunca display:none (research.md R-008). */
+  .campo-trampa {
+    position: absolute;
+    left: -9999px;
+    top: auto;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+  }
+}
