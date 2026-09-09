@@ -57,7 +57,7 @@ código en `src/`, la única función serverless en `functions/`, estáticos en 
 
 ## Estado de la implementación — 2026-09-09
 
-61 de 84 tareas cerradas. Cada una se marcó solo tras ejecutar su comprobación; el
+62 de 84 tareas cerradas. Cada una se marcó solo tras ejecutar su comprobación; el
 build (`npm run build`) termina sin errores ni warnings.
 
 **Las 25 pendientes se agrupan en cuatro causas, ninguna de código:**
@@ -65,7 +65,7 @@ build (`npm run build`) termina sin errores ni warnings.
 | Causa | Tareas | Qué hace falta |
 |---|---|---|
 | Assets que aún no se han aportado | T057, T060, T061 | Solo las capturas de Cristalería Ruteña; el logo ya está |
-| Panel de Cloudflare / GitHub | T002, T012, T013, T078, T079 | Rama `main`, `RESEND_API_KEY` y conexión del proyecto de Pages |
+| Panel de Cloudflare | T012, T013, T078, T079 | `RESEND_API_KEY` y conexión del proyecto de Pages |
 | Validación manual en navegador o móvil real | T035, T056, T069, T070, T072–T077 | Recorrido de `quickstart.md`, Lighthouse, envío real de correo |
 | Fase 8, opcional | T080–T084 | Solo si el calendario lo permite; T083 exige un testimonio verificado |
 
@@ -84,8 +84,8 @@ build (`npm run build`) termina sin errores ni warnings.
 - El `<title>` y la meta descripción siguen diciendo "Desarrollo web para empresas en
   Rute", tal como fija T065, mientras el H1 ya dice "pymes y autónomos". Queda a
   decisión del propietario alinear las dos cadenas.
-- La rama del repositorio es `master`, no `main`. El principio VIII y la configuración
-  de Cloudflare Pages hablan de `main`: hay que decidir cuál de las dos se cambia.
+- T002 verificada con `gh repo view`: el repositorio `ElTitoJuande/JdDLabs` existe, es
+  privado y su rama por defecto es `main`, como pide el principio VIII.
 - T051 se cerró contra el runtime real: `npx wrangler pages dev dist` responde 405, 400,
   200 silencioso por campo trampa, 200 silencioso por envío inmediato, 400 con detalle
   por campo y 500 con clave inválida. Falta un envío real con la clave de producción.
@@ -102,7 +102,7 @@ build (`npm run build`) termina sin errores ni warnings.
 **Purpose**: dejar el proyecto arrancable y desplegable. Grupo 1, 7–8 sept.
 
 - [X] T001 Eliminar el directorio obsoleto `node_modules/` del repositorio (20 paquetes del proyecto anterior, sin React) antes de instalar nada nuevo
-- [ ] T002 Inicializar el repositorio Git en la raíz y crear el repositorio remoto privado en GitHub con rama `main`
+- [X] T002 Inicializar el repositorio Git en la raíz y crear el repositorio remoto privado en GitHub con rama `main`
 - [X] T003 Crear `.gitignore` en la raíz con `node_modules/`, `dist/`, `.env*` y `.wrangler/`
 - [X] T004 Crear `package.json` en la raíz con React 18, react-dom, Vite 5, Tailwind CSS 3, postcss, autoprefixer y `@fontsource/inter`, y los scripts `dev`, `build` y `preview`
 - [X] T005 Crear `vite.config.js` en la raíz con `build.rollupOptions.input` declarando las entradas `index.html`, `aviso-legal.html`, `privacidad.html` y `404.html` (ver research.md R-001)
