@@ -81,9 +81,10 @@ build (`npm run build`) termina sin errores ni warnings.
 - Corrección de dato: Cristalería Ruteña **no usa PHP ni MySQL**. El badge de la capa
   principal es `React · Vite · Tailwind · Cloudflare` (principio 70/30). El stack
   ampliado queda en `copy.js` bajo `casoEstudio`, listo para la Fase 8.
-- El `<title>` y la meta descripción siguen diciendo "Desarrollo web para empresas en
-  Rute", tal como fija T065, mientras el H1 ya dice "pymes y autónomos". Queda a
-  decisión del propietario alinear las dos cadenas.
+- El `<title>`, la meta descripción, `og:title` y el texto alternativo de la imagen de
+  Open Graph ya dicen "pymes y autónomos", alineados con el H1 por decisión del
+  propietario el 2026-09-10. La imagen `og-image.png` ya rotulaba ese titular, así que
+  su texto alternativo estaba desalineado en las cuatro entradas HTML.
 - T002 verificada con `gh repo view`: el repositorio `ElTitoJuande/JdDLabs` existe, es
   privado y su rama por defecto es `main`, como pide el principio VIII.
 - T051 se cerró contra el runtime real: `npx wrangler pages dev dist` responde 405, 400,
@@ -249,7 +250,7 @@ cristaleriarutena.es en pestaña nueva. Escenario V-1 punto 2.
 
 **Purpose**: Grupos 4 y 5, 17–20 sept. Nada de desarrollo nuevo a partir del 19.
 
-- [X] T065 [P] Añadir `<title>` y `<meta name="description">` con "Desarrollo web para empresas en Rute" y URL canónica bajo `jddlabs.dev` en las cuatro entradas HTML (FR-022a, FR-021d)
+- [X] T065 [P] Añadir `<title>` y `<meta name="description">` con "Desarrollo web para pymes y autónomos en Rute" y URL canónica bajo `jddlabs.dev` en las cuatro entradas HTML (FR-022a, FR-021d)
 - [X] T066 [P] Añadir las etiquetas Open Graph y crear `public/og-image.png` para la previsualización al compartir (FR-022b)
 - [X] T067 [P] Generar `public/favicon.svg` a partir del monograma JdD, respetando el negro o blanco puros (principio IV)
 - [X] T068 Añadir en `index.html` el JSON-LD de tipo `LocalBusiness` con nombre comercial, domicilio literal de `identity.js`, ámbito Rute y provincia de Córdoba, y canales de contacto — **sin NIF** (FR-022c)
