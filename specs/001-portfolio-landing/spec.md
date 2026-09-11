@@ -4,7 +4,8 @@
 
 **Created**: 2026-09-08
 
-**Status**: Draft — clarificaciones resueltas 2026-09-08
+**Status**: Draft — clarificaciones resueltas 2026-09-08; FR-004 reformulado y US5 pasada a
+alcance comprometido el 2026-09-11
 
 **Input**: User description: "Portfolio de una sola página para JdDLabs (Juan de Dios Pérez Moreno, desarrollador Full Stack, Rute, Andalucía), dirigido a PYMEs y autónomos locales que necesitan una web profesional."
 
@@ -48,9 +49,11 @@ esta especificación:
 - **Stack de Cristalería Ruteña**: el original decía "React, Vite, Tailwind, PHP,
   MySQL". Es incorrecto. El proyecto **no usa PHP ni MySQL**, y no tiene base de datos
   ni CMS. El stack real es React, Vite, Tailwind y Cloudflare (Pages Functions, R2 y
-  Resend para el formulario). En la capa principal el badge muestra solo
-  `React · Vite · Tailwind · Cloudflare`, por el principio 70/30; el stack ampliado
-  queda reservado a la página opcional de caso de estudio.
+  Resend para el formulario). Lo que se publica es solo la forma corta,
+  `React · Vite · Tailwind · Cloudflare`, por el principio 70/30. **Corregido el
+  2026-09-11**: esa lista no se pinta en la tarjeta de la portada sino en la sección
+  "Tecnología utilizada" de la página de caso (FR-004a), y el stack ampliado con Pages
+  Functions, R2 y Resend no se publica en ninguna de las dos páginas.
 - **Titular de Inicio**: pasa de "Desarrollo web para empresas" a "Desarrollo web para
   pymes y autónomos". El subtítulo no cambia.
 
@@ -136,12 +139,17 @@ que el enlace "Visitar en vivo" abre cristaleriarutena.es en una pestaña nueva.
 **Acceptance Scenarios**:
 
 1. **Given** un visitante en la sección de proyecto destacado, **When** la lee, **Then**
-   ve el nombre del cliente, la descripción del trabajo, las tecnologías empleadas
-   (React, Vite, Tailwind, Cloudflare) y la firma "Proyecto realizado por Juan de Dios."
-2. **Given** un visitante interesado en el proyecto, **When** pulsa "Visitar en vivo",
+   ve una tarjeta con la imagen de portada del sitio del cliente, el título del proyecto,
+   una línea de contexto y los dos enlaces "Visitar en vivo" y "Ver caso de estudio", sin
+   lista de tecnologías ni firma de autoría dentro de la tarjeta.
+2. **Given** un visitante que quiere saber con qué está construido el proyecto o quién lo
+   firma, **When** pulsa "Ver caso de estudio", **Then** encuentra las tecnologías en la
+   sección "Tecnología utilizada" y la autoría en el campo "Rol" del bloque de datos del
+   cliente, y no las ha visto antes en la tarjeta.
+3. **Given** un visitante interesado en el proyecto, **When** pulsa "Visitar en vivo",
    **Then** se abre https://cristaleriarutena.es en una pestaña nueva sin perder el
    portfolio.
-3. **Given** que no existe un testimonio verificado del cliente en el momento de
+4. **Given** que no existe un testimonio verificado del cliente en el momento de
    implementar, **When** se publica la sección, **Then** no aparece ningún bloque de
    testimonio, ni vacío ni con texto de relleno.
 
@@ -166,13 +174,15 @@ que identifica a la persona y su ámbito geográfico de trabajo.
 
 ---
 
-### User Story 5 - Ver el caso de estudio ampliado (Priority: P4, opcional) [historia 5]
+### User Story 5 - Ver el caso de estudio ampliado (Priority: P4) [historia 5]
 
 El visitante especialmente interesado en el proyecto destacado quiere más detalle: el
 problema de partida, el enfoque y el resultado.
 
-**Why this priority**: Explícitamente marcada como opcional por el usuario. Es la primera
-candidata a recortar si peligra la fecha del 2026-09-21 (principio XI de la constitución).
+**Why this priority**: Nació marcada como opcional y **dejó de serlo el 2026-09-10**, por
+decisión del propietario. Desde que la portada se quedó en formato tarjeta, esta página es
+el único sitio donde se leen la descripción larga, el stack y la autoría: recortarla
+incumpliría FR-004a y FR-004b. Ya no es candidata a recorte si peligra el 2026-09-21.
 
 **Independent Test**: Se prueba abriendo la página de caso desde el proyecto destacado y
 comprobando que se puede volver al portfolio.
@@ -182,6 +192,12 @@ comprobando que se puede volver al portfolio.
 1. **Given** un visitante en la sección de proyecto destacado, **When** pulsa el enlace al
    caso de estudio, **Then** llega a una página dedicada con más detalle del proyecto y un
    camino claro de vuelta al portfolio.
+2. **Given** un visitante en la página de caso, **When** la recorre de arriba abajo,
+   **Then** ve una sola imagen de apertura y, debajo, solo texto: datos del cliente, reto,
+   solución, highlights y "Tecnología utilizada". No hay galería de capturas; para ver el
+   sitio real está el enlace "Visitar en vivo".
+3. **Given** un visitante en la página de caso, **When** lee el bloque de datos del
+   cliente, **Then** encuentra la autoría en el campo "Rol" y no una firma suelta al pie.
 
 ---
 
@@ -233,9 +249,17 @@ comprobando que se puede volver al portfolio.
   texto exacto.
 - **FR-003**: EL SISTEMA mostrará en Servicios exactamente tres tarjetas —Web corporativa,
   Tiendas online, Aplicaciones y soluciones web— cada una con su descripción cerrada.
-- **FR-004**: EL SISTEMA mostrará en Proyecto destacado la descripción cerrada de
-  Cristalería Ruteña, la lista de tecnologías (React, Vite, Tailwind, Cloudflare) y la
-  firma "Proyecto realizado por Juan de Dios."
+- **FR-004**: EL SISTEMA mostrará en Proyecto destacado una tarjeta con cuatro elementos
+  y solo esos cuatro: la imagen de portada del sitio del cliente, el título del proyecto,
+  una línea de contexto y los dos enlaces "Visitar en vivo" y "Ver caso de estudio". La
+  tarjeta **no** muestra la lista de tecnologías ni ninguna firma de autoría.
+- **FR-004a**: EL SISTEMA mostrará la lista de tecnologías (React, Vite, Tailwind,
+  Cloudflare) en la página de caso de estudio, en una sección propia titulada "Tecnología
+  utilizada", y en ningún otro punto del sitio.
+- **FR-004b**: EL SISTEMA mostrará la autoría del proyecto en la página de caso de
+  estudio, como el campo "Rol" del bloque de datos del cliente, con el valor "Diseño y
+  desarrollo completo — Juan de Dios Pérez Moreno". No existe una firma suelta al pie de
+  ninguna de las dos páginas.
 - **FR-005**: EL SISTEMA mostrará en Sobre mí el texto cerrado que identifica a la persona
   y su ámbito de trabajo desde Rute.
 - **FR-006**: EL SISTEMA mostrará en Contacto el texto cerrado de invitación y los cuatro
@@ -333,8 +357,10 @@ comprobando que se puede volver al portfolio.
 
 **Rendimiento**
 
-- **FR-023**: EL SISTEMA cargará de forma perezosa las imágenes de capturas del proyecto
-  destacado.
+- **FR-023**: EL SISTEMA cargará de forma perezosa la imagen del proyecto destacado en la
+  tarjeta de la portada. La misma imagen, cuando abre la página de caso, cae por encima
+  del pliegue y es su elemento de mayor superficie: allí se carga con prioridad alta y
+  nunca de forma perezosa.
 - **FR-024**: EL SISTEMA mostrará un texto alternativo descriptivo para cada imagen con
   contenido informativo.
 
@@ -353,7 +379,10 @@ comprobando que se puede volver al portfolio.
 - **Servicio**: cada una de las tres ofertas presentadas. Atributos: título y descripción.
   Conjunto cerrado y estático.
 - **Proyecto destacado**: el trabajo real que se exhibe. Atributos: nombre del cliente,
-  descripción, lista de tecnologías, firma de autoría, capturas y enlace al sitio en vivo.
+  línea de contexto y descripción larga, industria, rol (que es donde se lee la autoría),
+  lista de tecnologías, una única imagen de portada y enlace al sitio en vivo. Los
+  atributos se reparten entre dos superficies: la tarjeta de la portada muestra imagen,
+  título, contexto y enlaces; el resto solo se lee en la página de caso.
 - **Testimonio** *(condicional)*: cita verificada del cliente. Solo existe como entidad si
   el propietario la ha verificado; en caso contrario no se representa de ninguna forma.
 
@@ -397,8 +426,9 @@ comprobando que se puede volver al portfolio.
   opcional. No se ha especificado otra cosa y es el patrón estándar del sector.
 - El sitio se publica en español, para público de Rute y alrededores; no se contempla
   versión en otro idioma.
-- Las capturas del proyecto destacado se obtienen del sitio real ya publicado del cliente,
-  que está en producción y es accesible.
+- La imagen del proyecto destacado se obtiene del sitio real ya publicado del cliente, que
+  está en producción y es accesible. Es un recorte de su portada exportado a las
+  dimensiones en que se muestra, no una captura de página completa reencuadrada por CSS.
 - El visitante tipo llega desde móvil con conexión móvil variable: móvil es el escenario
   principal de diseño y de medición, no un caso derivado.
 - No se guarda ningún registro de los mensajes dentro del sitio: el sitio es estático y el
@@ -436,7 +466,7 @@ requisito del principio XII y condición para publicar el formulario.
 
 - Fichero del logo `JdDLogo_marca.svg` disponible antes de implementar la cabecera.
 - Ficheros `.woff2` de Fraunces disponibles para auto-alojarlos (principio II).
-- Capturas del sitio de Cristalería Ruteña.
+- Imagen de portada del sitio de Cristalería Ruteña, recortada a la proporción en que se muestra.
 - Datos de contacto reales del propietario (ver Q3).
 - Repositorio Git y proyecto de Cloudflare Pages conectado, para el despliegue automático
   exigido por el principio VIII.

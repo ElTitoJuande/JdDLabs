@@ -88,8 +88,15 @@ Conjuntos cerrados, copiados literalmente de la spec. Ninguna sección improvisa
 
 - **`hero`**: titular, subtítulo, texto de la llamada a la acción.
 - **`servicios`**: exactamente tres entradas, cada una con `titulo` y `descripcion`.
-- **`proyecto`**: nombre del cliente, descripción, lista de tecnologías, firma de autoría, URL
-  del sitio en vivo, y lista de capturas con su texto alternativo.
+- **`proyecto`**: nombre del cliente, título, línea de contexto, descripción larga, lista de
+  tecnologías, URL del sitio en vivo, texto de los dos enlaces y una única `captura` con su
+  texto alternativo y sus dimensiones reales. No existe clave de firma: desde el 2026-09-11 la
+  autoría se lee en el campo `rol` de `casoEstudio` (FR-004b).
+- **`casoEstudio`**: datos del cliente (`cliente`, `industria`, `rol`, y `anio`, `duracion` y
+  `servicios` cuando el propietario los aporte), los textos de `reto`, `solucion` y
+  `highlights`, y los encabezados de los bloques. La lista de tecnologías no se duplica aquí:
+  la página lee `proyecto.tecnologias`. Tampoco hay lista de capturas, porque la página no
+  tiene galería (FR-004a).
 - **`sobreMi`**: párrafo principal y línea de refuerzo.
 - **`contacto`**: texto de invitación.
 - **`testimonio`**: **ausente por defecto**. La sección de proyecto solo renderiza el bloque si

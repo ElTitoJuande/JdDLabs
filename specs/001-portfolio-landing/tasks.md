@@ -40,7 +40,7 @@ código en `src/`, la única función serverless en `functions/`, estáticos en 
 | 5 — US3 (P2) | Proyecto real | Grupo 2 | 9–13 sept |
 | 6 — US4 (P3) | Sobre mí | Grupo 2 | 9–13 sept |
 | 7 — Polish | — | Grupo 4 + Grupo 5 | 17–20 sept |
-| 8 — US5 (P4) | Caso de estudio | Grupo 6 — OPCIONAL | Solo si sobra tiempo |
+| 8 — US5 (P4) | Caso de estudio | Grupo 6 — COMPROMETIDO desde el 2026-09-10 | 10–16 sept, con US3 |
 
 **Producción confirmada: 21 sept** (principio XI).
 
@@ -55,19 +55,18 @@ código en `src/`, la única función serverless en `functions/`, estáticos en 
 
 ---
 
-## Estado de la implementación — 2026-09-09
+## Estado de la implementación — 2026-09-10
 
-62 de 84 tareas cerradas. Cada una se marcó solo tras ejecutar su comprobación; el
+69 de 86 tareas cerradas. Cada una se marcó solo tras ejecutar su comprobación; el
 build (`npm run build`) termina sin errores ni warnings.
 
-**Las 25 pendientes se agrupan en cuatro causas, ninguna de código:**
+**Las 17 pendientes se agrupan en tres causas, ninguna de código:**
 
 | Causa | Tareas | Qué hace falta |
 |---|---|---|
-| Assets que aún no se han aportado | T057, T060, T061 | Solo las capturas de Cristalería Ruteña; el logo ya está |
 | Panel de Cloudflare | T012, T013, T078, T079 | `RESEND_API_KEY` y conexión del proyecto de Pages |
-| Validación manual en navegador o móvil real | T035, T056, T069, T070, T072–T077 | Recorrido de `quickstart.md`, Lighthouse, envío real de correo |
-| Fase 8, opcional | T080–T084 | Solo si el calendario lo permite; T083 exige un testimonio verificado |
+| Validación manual en navegador o móvil real | T035, T056, T069, T070, T072–T077, T084, T085 | Recorrido de `quickstart.md`, Lighthouse, envío real de correo |
+| Testimonio del cliente | T083 | Sin cita verificada el bloque no se construye; hoy no existe ni marcador |
 
 **Notas de implementación**
 
@@ -95,6 +94,48 @@ build (`npm run build`) termina sin errores ni warnings.
   extensión, para que ninguna navegación pase por un redirect.
 - T069 queda abierta solo por su comprobación en producción. En el runtime local de
   Cloudflare una ruta inexistente ya devuelve un 404 real, no un 200.
+- Rediseño del 2026-09-10: el proyecto destacado pasa a formato tarjeta y la Fase 8 pasa
+  a alcance comprometido. Consecuencia sobre el copy: la portada ya no pinta ni
+  `proyecto.tecnologias` ni la firma, que se leen ahora en la página de caso.
+- **FR-004 resuelto el 2026-09-11** por decisión del propietario, siguiendo el formato de
+  la referencia. La tarjeta de la portada se queda en imagen y los dos enlaces. El stack
+  simplificado (`React · Vite · Tailwind · Cloudflare`) tiene su propia sección
+  **Tecnología utilizada** en la página de caso, con tags. La firma suelta desaparece:
+  la autoría se lee en la fila **Rol** del bloque de datos del cliente, con el valor
+  "Diseño y desarrollo completo — Juan de Dios Pérez Moreno". `proyecto.firma` y
+  `casoEstudio.stack` se eliminan de `copy.js`; el stack ampliado con Pages Functions,
+  Resend y R2 ya no se publica. `spec.md` y `data-model.md` quedan alineados el mismo día:
+  FR-004 pasa a describir la tarjeta de cuatro elementos, nacen **FR-004a** (tecnologías en
+  la sección "Tecnología utilizada" del caso) y **FR-004b** (autoría en el campo "Rol"), y
+  se reescriben el escenario 1 de US3, la entidad Proyecto destacado y FR-023.
+- **US5 deja de ser opcional en `spec.md` el 2026-09-11.** Ya lo era de hecho desde el
+  rediseño del 2026-09-10, pero ahora además FR-004a y FR-004b dependen de esa página:
+  recortarla dejaría el stack y la autoría sin ningún sitio donde leerse. Sale de la lista
+  de candidatas a recorte.
+- `proyecto.contexto` no es copy nuevo: es la primera frase literal de
+  `proyecto.descripcion`, recortada sin reescribir. Queda pendiente de que el propietario
+  confirme esa línea o aporte una propia.
+- La página de caso no declara `duracion` porque el propietario no la ha aportado. El
+  bloque de datos filtra los valores vacíos, así que añadir la clave a `casoEstudio`
+  basta para que aparezca la fila; mientras tanto no queda ningún hueco.
+- **Galería del caso retirada el 2026-09-11.** La referencia no tiene galería en su
+  página de detalle: una sola imagen de apertura y, debajo, solo texto. Quien quiera ver
+  el sitio real usa "Visitar en vivo". Se elimina el bloque entero de
+  `caso-cristaleria`, junto con `casoEstudio.capturas`, `encabezados.capturas` y
+  `verCaptura`. Las ocho capturas de página completa salen de `public/img/`: nunca
+  llegaron a un commit y ninguna queda referenciada.
+- **Riesgo de LCP cerrado (T070, T084).** La imagen de apertura era la captura de página
+  completa: 305 kB y 5441px de alto para enseñar unos 900. Ahora `proyecto.captura`
+  apunta a `public/img/portadaCRutena.webp`, un recorte real a **1356x904** y **75 kB**,
+  exportado desde aquella captura. El corte cae en el borde inferior de la franja del
+  hero y la proporción es 3:2 exacta, así que entra entera en el marco y no se recorta
+  nada por CSS. La tarjeta de la portada y la página de caso comparten esa única imagen.
+- `public/JdDLogo.jpg` y `public/JdDLogoLess.png` **eliminados el 2026-09-11**: 112 kB
+  que se publicaban sin que nada del código los referenciase. El logo en uso es
+  `public/JdDLogo_marca.svg`, que leen `Header` y `Footer`.
+- Los ficheros `*:Zone.Identifier` que Windows adjunta a las descargas **se borran, no se
+  archivan**. `.gitignore` ya los excluye; el borrado evita además que viajen al
+  despliegue.
 
 ---
 
@@ -222,11 +263,12 @@ T052–T055 terminadas.
 **Independent Test**: abrir la sección y comprobar que "Visitar en vivo" abre
 cristaleriarutena.es en pestaña nueva. Escenario V-1 punto 2.
 
-- [ ] T057 [P] [US3] Recopilar las capturas del sitio de Cristalería Ruteña y exportarlas a formato moderno en `public/img/`, con dimensiones conocidas (research.md R-012)
-- [X] T058 [US3] Crear `src/sections/ProyectoDestacado.jsx` con la descripción cerrada, las tecnologías (React, Vite, Tailwind, Cloudflare) y la firma "Proyecto realizado por Juan de Dios." (FR-004)
+- [X] T057 [P] [US3] Recopilar las capturas del sitio de Cristalería Ruteña y exportarlas a formato moderno en `public/img/`, con dimensiones conocidas (research.md R-012) — ocho capturas WebP aportadas el 2026-09-10, todas de página completa
+- [X] T057b [US3] Rediseñar `src/sections/ProyectoDestacado.jsx` a formato tarjeta: una imagen, título, una línea de contexto y los dos enlaces "Visitar en vivo" y "Ver caso de estudio". Sin métricas de resultado y sin testimonio (decisión del propietario 2026-09-10, principio V)
+- [X] T058 [US3] ~~Crear `src/sections/ProyectoDestacado.jsx` con la descripción cerrada, las tecnologías y la firma~~ → **reformulada el 2026-09-11**: la tarjeta se queda en imagen y los dos enlaces; las tecnologías pasan al bloque "Tecnología utilizada" del caso de estudio y la firma pasa a la fila "Rol" (FR-004)
 - [X] T059 [US3] Añadir el enlace "Visitar en vivo" a `https://cristaleriarutena.es` abriendo en pestaña nueva con `rel="noopener"` (FR-009)
-- [ ] T060 [US3] Aplicar `loading="lazy"`, `decoding="async"` y ancho y alto explícitos a las capturas, sin aplicar carga perezosa a nada de la mitad superior de la página (FR-023, research.md R-012)
-- [ ] T061 [US3] Escribir texto alternativo descriptivo para cada captura (FR-024)
+- [X] T060 [US3] Aplicar `loading="lazy"`, `decoding="async"` y ancho y alto explícitos a las capturas, sin aplicar carga perezosa a nada de la mitad superior de la página (FR-023, research.md R-012) — la imagen de apertura del caso va con `fetchpriority="high"` y sin carga perezosa; el resto sí
+- [X] T061 [US3] Escribir texto alternativo descriptivo para la imagen de portada (FR-024). Las líneas de contexto de la galería decaen al retirarse esa sección (2026-09-11)
 - [X] T062 [US3] Confirmar que el bloque de testimonio **no se renderiza** al no existir la clave `testimonio` en `copy.js`, sin dejar hueco ni marcador (FR-007, principio V)
 
 **Checkpoint**: la sección da credibilidad sin un solo dato sin verificar.
@@ -270,18 +312,24 @@ cristaleriarutena.es en pestaña nueva. Escenario V-1 punto 2.
 
 ---
 
-## Phase 8: US5 — Caso de estudio ampliado (P4, OPCIONAL)
+## Phase 8: US5 — Caso de estudio ampliado (P4, ALCANCE COMPROMETIDO)
 
-**Goal**: detalle del proyecto destacado. Grupo 6. **Primera candidata a recorte** ante cualquier
-conflicto de calendario (principio XI).
+**Goal**: detalle del proyecto destacado. Grupo 6.
+
+**Cambio de alcance 2026-09-10 (propietario)**: esta fase deja de ser opcional y deja de ser
+candidata a recorte. Motivo: la portada pasa a formato tarjeta y ya no contiene ni la
+descripción larga, ni el stack, ni ninguna captura, así que sin esta página el proyecto
+destacado se queda sin ningún sitio donde demostrarse. US3 y US5 pasan a ser una sola
+entrega. Si el calendario aprieta, el recorte se busca en otro sitio (ver §Calendario).
 
 **Independent Test**: abrir la página de caso desde el proyecto destacado y volver al portfolio.
 
-- [ ] T080 [US5] Crear `caso-cristaleria.html` en la raíz y añadirlo a `rollupOptions.input` de `vite.config.js`
-- [ ] T081 [US5] Crear `src/entries/caso.jsx` y la página con los bloques Cliente, Rol, Stack, Reto, Solución y Highlights, reutilizando `Header` y `Footer`
-- [ ] T082 [US5] Enlazar la página desde `src/sections/ProyectoDestacado.jsx` y ofrecer camino de vuelta al portfolio
-- [ ] T083 [US5] Insertar el testimonio de Cristalería Ruteña **solo si** el cliente ya ha respondido y el propietario lo ha verificado; si no, no se añade el bloque (FR-007, principio V)
+- [X] T080 [US5] Crear `caso-cristaleria.html` en la raíz y añadirlo a `rollupOptions.input` de `vite.config.js`
+- [X] T081 [US5] Crear `src/entries/caso.jsx` y la página con la imagen de apertura, el bloque de datos del cliente (Cliente, Industria, Rol), Reto, Solución, Highlights y Tecnología utilizada, reutilizando `Header` y `Footer`. Sin galería de capturas (2026-09-11)
+- [X] T082 [US5] Enlazar la página desde `src/sections/ProyectoDestacado.jsx` y ofrecer camino de vuelta al portfolio
+- [ ] T083 [US5] Insertar el testimonio de Cristalería Ruteña **solo si** el cliente ya ha respondido y el propietario lo ha verificado; si no, no se añade el bloque (FR-007, principio V) — decisión del 2026-09-10: por ahora se omite el bloque entero, sin marcador
 - [ ] T084 [US5] Ejecutar Lighthouse sobre la nueva página hasta 90 o más en las cuatro categorías
+- [ ] T085 [US5] Incluir `caso-cristaleria` en el recorrido de T075, T076 y T077: 320px sin scroll horizontal, tabulador con foco siempre visible y movimiento reducido con todo el contenido visible
 
 ---
 
@@ -294,7 +342,8 @@ conflicto de calendario (principio XI).
 - **US1, US3 y US4**: dependen solo de la Fase 2. Independientes entre sí.
 - **US2**: depende de la Fase 2, y de T012 y T013 de la Fase 1 para poder probar el envío real.
 - **Polish (Fase 7)**: depende de US1, US2, US3 y US4.
-- **US5 (Fase 8)**: depende de US3. Opcional.
+- **US5 (Fase 8)**: depende de US3. **Ya no es opcional** desde el 2026-09-10; entra en la
+  ventana de Polish y comparte con US3 la única dependencia real, las capturas (T057).
 
 ### Dependencias críticas dentro de las historias
 
@@ -331,16 +380,18 @@ US3 y US4 elevan la conversión, pero el sitio ya funciona sin ellas.
 2. US1 → página que explica y navega. Ya se puede enseñar.
 3. US2 → conversión completa, con su cumplimiento legal. **Aquí está el listón de publicación.**
 4. US3 y US4 → credibilidad y confianza.
-5. Fase 7 → puertas de calidad y producción.
-6. US5 → solo si el calendario lo permite.
+5. US5 → deja de ser condicional el 2026-09-10: sin esa página, US3 se queda sin nada que
+   demostrar y FR-004a y FR-004b no se cumplen.
+6. Fase 7 → puertas de calidad y producción.
 
 ### Orden de recorte ante presión de plazo
 
 Se recorta en este orden, nunca al revés (principio XI):
 
-1. US5 completa (Fase 8).
-2. US4, la sección Sobre mí.
-3. Capturas adicionales del proyecto destacado, dejando una sola.
+1. US4, la sección Sobre mí.
+2. ~~Capturas adicionales del proyecto destacado~~ → ya no aplica: desde el 2026-09-11 el
+   proyecto se muestra con una sola imagen y no hay galería que recortar.
 
 **Nunca recortable**: las páginas legales (T052–T055), las puertas de Lighthouse (T070), la
-accesibilidad del menú (T025–T028) y la verificación V-5 (T072).
+accesibilidad del menú (T025–T028), la verificación V-5 (T072) y, desde el 2026-09-10,
+**US5 completa** (Fase 8).
