@@ -115,9 +115,11 @@ build (`npm run build`) termina sin errores ni warnings.
 - `proyecto.contexto` no es copy nuevo: es la primera frase literal de
   `proyecto.descripcion`, recortada sin reescribir. Queda pendiente de que el propietario
   confirme esa línea o aporte una propia.
-- La página de caso no declara `duracion` porque el propietario no la ha aportado. El
-  bloque de datos filtra los valores vacíos, así que añadir la clave a `casoEstudio`
-  basta para que aparezca la fila; mientras tanto no queda ningún hueco.
+- **Bloque de datos del cliente completo el 2026-09-11.** El propietario aportó los tres
+  valores que faltaban: Año `2026`, Duración `6-8 semanas` y Servicios `Diseño web,
+  Desarrollo a medida, Perfil de Google`. Las seis filas del formato de referencia
+  —Cliente, Industria, Año, Duración, Servicios, Rol— se pintan ya sin ningún hueco. El
+  filtro de valores vacíos se mantiene: si una clave se retira, su fila desaparece sola.
 - **Galería del caso retirada el 2026-09-11.** La referencia no tiene galería en su
   página de detalle: una sola imagen de apertura y, debajo, solo texto. Quien quiera ver
   el sitio real usa "Visitar en vivo". Se elimina el bloque entero de

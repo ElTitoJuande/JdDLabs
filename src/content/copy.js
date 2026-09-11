@@ -81,17 +81,20 @@ export const proyecto = {
 // decision del propietario: la portada ya solo muestra la tarjeta, asi que sin esta
 // pagina el proyecto destacado se queda sin ningun sitio donde demostrarse.
 export const casoEstudio = {
-  // Bloque de datos del cliente. El orden del formato de referencia es
-  // Cliente / Industria / Año / Duración / Servicios / Rol, y la pagina filtra los
-  // valores vacios: basta con añadir aqui la clave que falte para que aparezca su fila,
-  // y mientras tanto no queda ningun hueco (principio V).
-  //
-  // `anio`, `duracion` y `servicios` NO se declaran todavia: el propietario no los ha
-  // aportado y no se rellenan a ojo.
+  // Bloque de datos del cliente, en el orden del formato de referencia:
+  // Cliente / Industria / Año / Duración / Servicios / Rol. Las seis filas estan
+  // completas desde el 2026-09-11, con los tres ultimos valores aportados por el
+  // propietario ese mismo dia. La pagina sigue filtrando los valores vacios, asi que si
+  // alguna clave se retira su fila desaparece sin dejar hueco (principio V).
   cliente: 'Cristalería Ruteña',
   industria: 'Vidrio, aluminio y carpintería a medida',
+  anio: '2026',
+  duracion: '6-8 semanas',
+  // Cadena y no lista: `Dato` pinta el valor tal cual dentro de un <dd>, y un array se
+  // renderizaria con los tres servicios pegados y sin separador.
+  servicios: 'Diseño web, Desarrollo a medida, Perfil de Google',
   // El Rol absorbe lo que antes era una firma suelta al pie de la pagina: la autoria se
-  // lee aqui, dentro de los datos del proyecto, y no repetida en dos sitios (FR-004).
+  // lee aqui, dentro de los datos del proyecto, y no repetida en dos sitios (FR-004b).
   rol: 'Diseño y desarrollo completo — Juan de Dios Pérez Moreno',
   reto:
     'La web anterior de Cristalería Ruteña tenía más de diez años y ya no reflejaba la experiencia y calidad real del negocio. El objetivo era trasladar esa calidad al entorno digital: presentar servicios y proyectos de forma clara y visual, mejorar la experiencia en móvil y facilitar las consultas y solicitudes de presupuesto.',

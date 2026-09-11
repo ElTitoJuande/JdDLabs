@@ -25,9 +25,9 @@ import { proyecto, casoEstudio, hero, contacto } from '../content/copy';
 // El hero cae por encima del pliegue, asi que nunca lleva carga perezosa (FR-023).
 const imagenHero = casoEstudio.imagenHero ?? proyecto.captura;
 
-// Orden del formato de referencia. Las claves que el propietario aun no ha aportado
-// —`anio`, `duracion`, `servicios`— no existen en copy.js: el filtro las descarta y el
-// bloque no muestra ninguna fila vacia. Basta con declararlas alli para que aparezcan.
+// Orden del formato de referencia. Las seis filas estan completas desde el 2026-09-11.
+// El filtro se queda igual: si una clave se retira de copy.js su fila desaparece sola,
+// sin dejar un hueco ni un valor a medias (principio V).
 const datos = [
   { clave: 'Cliente', valor: casoEstudio.cliente },
   { clave: 'Industria', valor: casoEstudio.industria },
