@@ -24,6 +24,7 @@ export default defineConfig({
         index: entry('./index.html'),
         avisoLegal: entry('./aviso-legal.html'),
         privacidad: entry('./privacidad.html'),
+        casoCristaleria: entry('./caso-cristaleria.html'),
         notFound: entry('./404.html'),
       },
     },

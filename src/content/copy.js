@@ -40,33 +40,59 @@ export const proyecto = {
   eyebrow: 'Proyecto destacado',
   titulo: 'Nueva presencia digital para Cristalería Ruteña',
   cliente: 'Cristalería Ruteña',
+  // Parrafo completo. Desde el rediseño en tarjeta ya no se lee en la portada: es la
+  // entradilla de la pagina de caso de estudio.
   descripcion:
     'Cristalería Ruteña lleva desde 1977 trabajando el vidrio y el aluminio en Rute: carpintería de aluminio, vidrio a medida, toldos y persianas para vivienda, negocio y proyectos técnicos. Diseñé y desarrollé su web desde cero — una página que presenta sus servicios, su proceso de trabajo y los proyectos ya realizados en Sevilla, Estepona y Marbella, con un objetivo claro: que pedir presupuesto sea tan fácil como escribir por WhatsApp.',
-  // Badge simplificado a proposito (principio 70/30). El proyecto NO usa PHP ni MySQL:
-  // no tiene base de datos ni CMS. El stack ampliado solo aparece en el caso de estudio.
+  // Linea de contexto de la tarjeta. NO es copy nuevo: es la primera frase de
+  // `descripcion`, recortada literalmente y sin reescribir una sola palabra. Si el
+  // propietario prefiere una linea propia, se sustituye aqui y solo aqui.
+  contexto:
+    'Cristalería Ruteña lleva desde 1977 trabajando el vidrio y el aluminio en Rute: carpintería de aluminio, vidrio a medida, toldos y persianas para vivienda, negocio y proyectos técnicos.',
+  // Stack simplificado a proposito (principio 70/30). El proyecto NO usa PHP ni MySQL:
+  // no tiene base de datos ni CMS. No se pinta en la tarjeta de la portada, que se
+  // queda en imagen y los dos enlaces: es la lista que lee el bloque "Tecnologia
+  // utilizada" del caso de estudio, y no hay una segunda copia en `casoEstudio`.
   tecnologias: ['React', 'Vite', 'Tailwind', 'Cloudflare'],
-  firma: 'Proyecto realizado por Juan de Dios.',
   url: 'https://cristaleriarutena.es',
   textoEnlace: 'Visitar en vivo',
-  // Vacio a proposito: las capturas reales del sitio del cliente todavia no se han
-  // aportado. La seccion no renderiza ninguna imagen mientras esta lista este vacia,
-  // en lugar de dejar un hueco o un marcador (principio V).
-  capturas: [],
+  enlaceCaso: 'Ver caso de estudio',
+  // Cloudflare Pages sirve sin extension y redirige 308 desde .html: se enlaza ya la
+  // forma final para que ninguna navegacion pase por un redirect.
+  urlCaso: '/caso-cristaleria',
+  // Imagen unica del proyecto: la tarjeta de la portada y la apertura del caso de
+  // estudio leen esta misma clave. Es un recorte real de la portada del cliente,
+  // exportado a 1356x904 desde la captura de pagina completa de 5441px que ya no vive
+  // en el repositorio. El corte cae justo en el borde inferior de la franja del hero,
+  // asi que la imagen entra entera en un marco 3:2 y el navegador no recorta nada por
+  // CSS. Si esta clave vuelve a null no se dibuja imagen ni marco vacio (principio V).
+  captura: {
+    src: '/img/portadaCRutena.webp',
+    alt: 'Portada de cristaleriarutena.es sobre una fotografía de la fachada del taller, con el titular “Rediseñamos espacios con vidrio, aluminio y soluciones a medida” y los botones de WhatsApp y de llamada.',
+    ancho: 1356,
+    alto: 904,
+  },
 };
 
-// Stack ampliado y narrativa del proyecto. Solo para caso-cristaleria.html (Fase 8,
-// opcional): esa pagina si admite profundidad tecnica. No se usa en la portada.
+// Stack ampliado y narrativa del proyecto. Solo para caso-cristaleria.html: esa pagina
+// si admite profundidad tecnica. No se usa en la portada.
+//
+// Desde el 2026-09-10 la Fase 8 deja de ser opcional y pasa a alcance comprometido, por
+// decision del propietario: la portada ya solo muestra la tarjeta, asi que sin esta
+// pagina el proyecto destacado se queda sin ningun sitio donde demostrarse.
 export const casoEstudio = {
+  // Bloque de datos del cliente. El orden del formato de referencia es
+  // Cliente / Industria / Año / Duración / Servicios / Rol, y la pagina filtra los
+  // valores vacios: basta con añadir aqui la clave que falte para que aparezca su fila,
+  // y mientras tanto no queda ningun hueco (principio V).
+  //
+  // `anio`, `duracion` y `servicios` NO se declaran todavia: el propietario no los ha
+  // aportado y no se rellenan a ojo.
   cliente: 'Cristalería Ruteña',
-  rol: 'Diseño y desarrollo completo (frontend + backend serverless)',
-  stack: [
-    'React',
-    'Vite',
-    'Tailwind',
-    'Cloudflare Pages Functions',
-    'Resend (formulario de contacto)',
-    'Cloudflare R2 (gestión de imágenes)',
-  ],
+  industria: 'Vidrio, aluminio y carpintería a medida',
+  // El Rol absorbe lo que antes era una firma suelta al pie de la pagina: la autoria se
+  // lee aqui, dentro de los datos del proyecto, y no repetida en dos sitios (FR-004).
+  rol: 'Diseño y desarrollo completo — Juan de Dios Pérez Moreno',
   reto:
     'La web anterior de Cristalería Ruteña tenía más de diez años y ya no reflejaba la experiencia y calidad real del negocio. El objetivo era trasladar esa calidad al entorno digital: presentar servicios y proyectos de forma clara y visual, mejorar la experiencia en móvil y facilitar las consultas y solicitudes de presupuesto.',
   solucion:
@@ -77,6 +103,24 @@ export const casoEstudio = {
     'FAQ para resolver dudas antes de presupuestar',
   ],
   // Sin fila de resultados: no hay datos de analitica reales que citar (principio V).
+
+  // Encabezados de los bloques de la pagina. Viven aqui y no en el JSX para que
+  // ninguna seccion improvise texto en pantalla.
+  encabezados: {
+    reto: 'El reto',
+    solucion: 'La solución',
+    highlights: 'Highlights del proyecto',
+    tecnologia: 'Tecnología utilizada',
+  },
+  volver: 'Volver al portfolio',
+  // Imagen de apertura. `null` reutiliza `proyecto.captura`, que es justo lo que
+  // interesa aqui: la misma portada del cliente que se ve en la tarjeta. Si tampoco la
+  // hubiera no se dibuja nada.
+  //
+  // No hay galeria de capturas y no es un descuido: la pagina de detalle es una sola
+  // imagen de apertura y despues texto. Quien quiera ver el sitio real tiene el enlace
+  // "Visitar en vivo", que enseña mas que ninguna captura.
+  imagenHero: null,
 };
 
 export const sobreMi = {
