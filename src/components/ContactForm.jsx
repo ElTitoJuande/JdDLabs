@@ -1,4 +1,5 @@
 import { useRef, useState } from 'react';
+import { Boton } from './Boton';
 import { identity, enlaces } from '../content/identity';
 
 const LIMITES = {
@@ -123,12 +124,20 @@ export function ContactForm() {
     }
   }
 
+  // El filete del campo va a `fg-mute` y no a `border`: un borde a rgba(255,255,255,.08)
+  // sobre `bg-3` no llega al 3:1 que WCAG 1.4.11 exige a un control de formulario.
   const claseCampo =
-    'mt-2 block w-full rounded-md border border-ink/20 bg-bg px-3 py-2 text-base text-ink placeholder:text-muted';
+    'mt-2.5 block w-full rounded-lg border border-fg-mute bg-bg-3 px-4 py-3.5 text-fs-300 text-fg placeholder:text-fg-mute transition-colors duration-fast ease-out-soft focus:border-accent motion-reduce:transition-none';
 
+  // Etiqueta mono en versalitas, el mismo tratamiento que los eyebrows de seccion.
+  const claseEtiqueta =
+    'block font-mono text-fs-100 uppercase tracking-[0.16em] text-fg-mute';
+
+  // El texto de error va en `accent-2` y nunca en `accent`: sobre `bg-3` el acento de
+  // relleno se queda en 4,4:1 y no pasa AA (principio VII).
   const mensajeError = (clave) =>
     errores[clave] ? (
-      <p id={`error-${clave}`} className="mt-2 text-sm text-accent">
+      <p id={`error-${clave}`} className="mt-2 text-fs-200 text-accent-2">
         {errores[clave]}
       </p>
     ) : null;
@@ -139,44 +148,50 @@ export function ContactForm() {
       : {};
 
   return (
-    <form ref={formularioRef} onSubmit={alEnviar} className="mt-8 space-y-6">
-      <div>
-        <label htmlFor="nombre" className="block text-sm font-medium text-ink">
-          Nombre
-        </label>
-        <input
-          id="nombre"
-          name="nombre"
-          type="text"
-          required
-          maxLength={LIMITES.nombre.max}
-          autoComplete="name"
-          className={claseCampo}
-          {...atributosError('nombre')}
-        />
-        {mensajeError('nombre')}
+    <form
+      ref={formularioRef}
+      onSubmit={alEnviar}
+      className="rounded-lg2 border border-border bg-bg-3 p-6 md:p-11"
+    >
+      <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+        <div>
+          <label htmlFor="nombre" className={claseEtiqueta}>
+            Nombre
+          </label>
+          <input
+            id="nombre"
+            name="nombre"
+            type="text"
+            required
+            maxLength={LIMITES.nombre.max}
+            autoComplete="name"
+            className={claseCampo}
+            {...atributosError('nombre')}
+          />
+          {mensajeError('nombre')}
+        </div>
+
+        <div>
+          <label htmlFor="email" className={claseEtiqueta}>
+            Correo electrónico
+          </label>
+          <input
+            id="email"
+            name="email"
+            type="email"
+            required
+            maxLength={LIMITES.email.max}
+            autoComplete="email"
+            className={claseCampo}
+            {...atributosError('email')}
+          />
+          {mensajeError('email')}
+        </div>
       </div>
 
-      <div>
-        <label htmlFor="email" className="block text-sm font-medium text-ink">
-          Correo electrónico
-        </label>
-        <input
-          id="email"
-          name="email"
-          type="email"
-          required
-          maxLength={LIMITES.email.max}
-          autoComplete="email"
-          className={claseCampo}
-          {...atributosError('email')}
-        />
-        {mensajeError('email')}
-      </div>
-
-      <div>
-        <label htmlFor="telefono" className="block text-sm font-medium text-ink">
-          Teléfono <span className="text-muted">(opcional)</span>
+      <div className="mt-5">
+        <label htmlFor="telefono" className={claseEtiqueta}>
+          Teléfono (opcional)
         </label>
         <input
           id="telefono"
@@ -190,8 +205,8 @@ export function ContactForm() {
         {mensajeError('telefono')}
       </div>
 
-      <div>
-        <label htmlFor="mensaje" className="block text-sm font-medium text-ink">
+      <div className="mt-5">
+        <label htmlFor="mensaje" className={claseEtiqueta}>
           Mensaje
         </label>
         <textarea
@@ -201,7 +216,7 @@ export function ContactForm() {
           required
           minLength={LIMITES.mensaje.min}
           maxLength={LIMITES.mensaje.max}
-          className={claseCampo}
+          className={`${claseCampo} resize-y`}
           {...atributosError('mensaje')}
         />
         {mensajeError('mensaje')}
@@ -218,14 +233,14 @@ export function ContactForm() {
         <input id="website" name="website" type="text" tabIndex={-1} autoComplete="off" />
       </div>
 
-      <div>
+      <div className="mt-7">
         <div className="flex items-start gap-3">
           <input
             id="consentimiento"
             name="consentimiento"
             type="checkbox"
             required
-            className="mt-1 h-5 w-5 shrink-0 rounded border-ink/30 text-accent"
+            className="mt-1 h-[18px] w-[18px] shrink-0 rounded border-border accent-accent"
             onInvalid={(evento) => {
               evento.target.setCustomValidity(AVISO_CONSENTIMIENTO);
               setErrores((previos) => ({ ...previos, consentimiento: AVISO_CONSENTIMIENTO }));
@@ -239,10 +254,10 @@ export function ContactForm() {
             }}
             {...atributosError('consentimiento')}
           />
-          <label htmlFor="consentimiento" className="text-sm leading-relaxed text-muted">
+          <label htmlFor="consentimiento" className="text-fs-200 leading-relaxed text-fg-dim">
             Acepto que {identity.razonSocial} trate mis datos para responder a esta
             consulta, según la{' '}
-            <a href="/privacidad" className="text-accent underline">
+            <a href="/privacidad" className="text-accent-2 underline underline-offset-2">
               política de privacidad
             </a>
             .
@@ -251,34 +266,30 @@ export function ContactForm() {
         {mensajeError('consentimiento')}
       </div>
 
-      <div>
-        <button
-          type="submit"
-          disabled={enviando}
-          className="rounded-md bg-accent px-6 py-3 text-base font-semibold text-bg hover:bg-accentHover disabled:cursor-not-allowed disabled:opacity-60"
-        >
-          {enviando ? 'Enviando…' : 'Enviar mensaje'}
-        </button>
-      </div>
+      {/* Sin `href`, `Boton` rinde un <button type="submit">: la pill de envio no
+          replica las clases del boton solido a mano. */}
+      <Boton disabled={enviando} className="mt-8 w-full">
+        {enviando ? 'Enviando…' : 'Enviar mensaje'}
+      </Boton>
 
       {/* Un solo punto de anuncio para los dos desenlaces, para que el lector de
           pantalla lea el resultado sin que el visitante tenga que buscarlo. */}
-      <div aria-live="polite" className="min-h-[1.5rem]">
+      <div aria-live="polite" className="empty:hidden">
         {estado === 'enviado' && (
-          <p className="rounded-md bg-accentTint px-4 py-3 text-base text-accent">
+          <p className="mt-6 rounded-lg border border-border-accent bg-accent-dim px-4 py-3 text-fs-200 text-fg">
             Mensaje enviado. Te respondo lo antes posible.
           </p>
         )}
 
         {estado === 'error' && (
-          <p className="rounded-md border border-accent px-4 py-3 text-base text-ink">
+          <p className="mt-6 rounded-lg border border-border-accent px-4 py-3 text-fs-200 leading-relaxed text-fg">
             No se ha podido enviar el mensaje. Lo escrito sigue aquí: puedes reintentarlo
             o escribirme directamente por{' '}
             <a
               href={enlaces.whatsapp}
               target="_blank"
               rel="noopener noreferrer"
-              className="font-semibold text-accent underline"
+              className="font-medium text-accent-2 underline underline-offset-2"
             >
               WhatsApp
             </a>
