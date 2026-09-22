@@ -4,14 +4,21 @@ import '../styles/index.css';
 import { Header } from '../components/Header';
 import { Footer } from '../components/Footer';
 import { Hero } from '../sections/Hero';
+import { Marquee } from '../components/Marquee';
 import { ProyectoDestacado } from '../sections/ProyectoDestacado';
 import { Servicios } from '../sections/Servicios';
+import { Stack } from '../sections/Stack';
 import { SobreMi } from '../sections/SobreMi';
 import { Contacto } from '../sections/Contacto';
+import { capacidades } from '../content/copy';
 
 /**
- * Portada. Las cinco secciones van en el orden exacto de FR-001:
- * Inicio, Proyecto destacado, Servicios, Sobre mi, Contacto.
+ * Portada v2. Siete bloques, en el orden de la maqueta aprobada.
+ *
+ * El orden respeta FR-001 (Inicio, Proyecto destacado, Servicios, Sobre mi, Contacto):
+ * el marquee y la seccion de tecnologia se intercalan sin alterar esa secuencia. La
+ * seccion de Proceso que contemplaba design.md no existe aqui porque la maqueta no la
+ * trae y su copy nunca llego a escribirse: era recortable por diseño.
  *
  * `data-inert-target` marca lo que el menu movil deja inerte mientras esta abierto.
  */
@@ -21,8 +28,10 @@ function Portada() {
       <Header />
       <main data-inert-target className="pt-[var(--header-h)]">
         <Hero />
+        <Marquee terminos={capacidades} />
         <ProyectoDestacado />
         <Servicios />
+        <Stack />
         <SobreMi />
         <Contacto />
       </main>
