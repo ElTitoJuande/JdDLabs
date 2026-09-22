@@ -4,7 +4,9 @@ import '../styles/index.css';
 import { Header } from '../components/Header';
 import { Footer } from '../components/Footer';
 import { Reveal } from '../components/Reveal';
-import { proyecto, casoEstudio, hero, contacto } from '../content/copy';
+import { Boton } from '../components/Boton';
+import { Eyebrow } from '../components/Eyebrow';
+import { proyecto, casoEstudio, hero, contacto, titulares } from '../content/copy';
 
 /**
  * Caso de estudio ampliado de Cristaleria Ruteña (US5, Fase 8).
@@ -40,16 +42,18 @@ const datos = [
 function Dato({ clave, valor }) {
   return (
     <div className="flex flex-col gap-1 py-3 sm:flex-row sm:gap-4">
-      <dt className="w-40 shrink-0 text-sm font-medium text-ink">{clave}</dt>
-      <dd className="text-base text-muted">{valor}</dd>
+      <dt className="w-44 shrink-0 font-mono text-fs-100 uppercase tracking-[0.16em] text-fg-mute">
+        {clave}
+      </dt>
+      <dd className="text-fs-300 text-fg">{valor}</dd>
     </div>
   );
 }
 
 function Bloque({ titulo, children }) {
   return (
-    <Reveal as="section" className="mt-14 border-t border-ink/10 pt-10">
-      <h2 className="text-2xl text-ink sm:text-3xl">{titulo}</h2>
+    <Reveal as="section" className="mt-14 border-t border-border pt-10">
+      <h2 className="text-fs-600 text-fg">{titulo}</h2>
       {children}
     </Reveal>
   );
@@ -61,24 +65,24 @@ function CasoCristaleria() {
       <Header base="/" />
 
       <main data-inert-target className="pt-[var(--header-h)]">
-        <article className="contenedor max-w-3xl py-16 sm:py-20">
+        <article className="contenedor max-w-3xl py-section">
           <a
             href="/#proyecto"
-            className="inline-flex items-center gap-2 text-sm font-medium text-accent hover:text-accentHover"
+            className="inline-flex items-center gap-2 text-fs-200 font-medium text-accent-2 no-underline transition-colors duration-fast ease-out-soft hover:text-fg motion-reduce:transition-none"
           >
             <span aria-hidden="true">←</span>
             {casoEstudio.volver}
           </a>
 
-          <h1 className="mt-6 text-3xl text-ink sm:text-4xl">{proyecto.titulo}</h1>
+          <h1 className="mt-7 text-fs-700 text-fg">{proyecto.titulo}</h1>
 
-          <p className="mt-5 text-base leading-relaxed text-muted">{proyecto.descripcion}</p>
+          <p className="mt-7 text-fs-300 leading-relaxed text-fg-dim">{proyecto.descripcion}</p>
 
           {/* Unico elemento visual de la pagina, igual que en la tarjeta de la portada.
               Ya viene recortada a 1356x904, asi que el marco solo reserva la proporcion
               3:2 y evita el salto de layout: aqui no se recorta nada por CSS. */}
           {imagenHero && (
-            <div className="mt-10 aspect-[3/2] w-full overflow-hidden rounded-xl border border-ink/10">
+            <div className="mt-10 aspect-[3/2] w-full overflow-hidden rounded-lg2 border border-border bg-bg-2">
               <img
                 src={imagenHero.src}
                 alt={imagenHero.alt}
@@ -91,26 +95,26 @@ function CasoCristaleria() {
             </div>
           )}
 
-          <dl className="mt-10 divide-y divide-ink/10 border-y border-ink/10">
+          <dl className="mt-12 divide-y divide-border border-y border-border">
             {datos.map((dato) => (
               <Dato key={dato.clave} clave={dato.clave} valor={dato.valor} />
             ))}
           </dl>
 
           <Bloque titulo={casoEstudio.encabezados.reto}>
-            <p className="mt-4 text-base leading-relaxed text-muted">{casoEstudio.reto}</p>
+            <p className="mt-5 text-fs-300 leading-relaxed text-fg-dim">{casoEstudio.reto}</p>
           </Bloque>
 
           <Bloque titulo={casoEstudio.encabezados.solucion}>
-            <p className="mt-4 text-base leading-relaxed text-muted">{casoEstudio.solucion}</p>
+            <p className="mt-5 text-fs-300 leading-relaxed text-fg-dim">{casoEstudio.solucion}</p>
           </Bloque>
 
           <Bloque titulo={casoEstudio.encabezados.highlights}>
             {/* Sin numerar: son tres piezas del mismo proyecto, no los pasos de una
                 secuencia, y numerarlas insinuaria un orden que no existe. */}
-            <ul className="mt-4 divide-y divide-ink/10 border-y border-ink/10">
+            <ul className="mt-5 divide-y divide-border border-y border-border">
               {casoEstudio.highlights.map((highlight) => (
-                <li key={highlight} className="py-3 text-base leading-relaxed text-ink">
+                <li key={highlight} className="py-3.5 text-fs-300 leading-relaxed text-fg">
                   {highlight}
                 </li>
               ))}
@@ -125,7 +129,7 @@ function CasoCristaleria() {
               {proyecto.tecnologias.map((pieza) => (
                 <li
                   key={pieza}
-                  className="rounded-full bg-accentTint px-4 py-1.5 text-sm font-medium text-accent"
+                  className="rounded-full border border-border bg-bg-3 px-5 py-2.5 font-mono text-fs-200 text-fg-dim"
                 >
                   {pieza}
                 </li>
@@ -133,27 +137,19 @@ function CasoCristaleria() {
             </ul>
           </Bloque>
 
-          <Reveal as="section" className="mt-14 rounded-xl border border-ink/10 p-6 sm:p-8">
-            <p className="text-base leading-relaxed text-ink">{contacto.invitacion}</p>
+          <Reveal as="section" className="mt-14 rounded-lg2 border border-border bg-bg-3 p-6 sm:p-9">
+            <Eyebrow>{titulares.contacto.eyebrow}</Eyebrow>
+            <p className="mt-4 text-fs-500 font-medium tracking-tight text-fg">
+              {contacto.titular}
+            </p>
+            <p className="mt-3 text-fs-300 leading-relaxed text-fg-dim">{contacto.invitacion}</p>
 
             <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-4">
-              <a
-                href="/#contacto"
-                className="inline-flex items-center justify-center rounded-md bg-accent px-5 py-3 text-base font-semibold text-bg hover:bg-accentHover"
-              >
-                {hero.cta}
-              </a>
+              <Boton href="/#contacto">{hero.cta}</Boton>
 
-              <a
-                href={proyecto.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 rounded-md px-5 py-3 text-base font-semibold text-accent underline underline-offset-4 hover:text-accentHover"
-              >
+              <Boton href={proyecto.url} variante="fantasma" externo>
                 {proyecto.textoEnlace}
-                <span aria-hidden="true">↗</span>
-                <span className="sr-only"> (se abre en una pestaña nueva)</span>
-              </a>
+              </Boton>
             </div>
           </Reveal>
         </article>

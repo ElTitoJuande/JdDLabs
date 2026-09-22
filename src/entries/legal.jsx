@@ -20,32 +20,32 @@ function PaginaLegal({ documento }) {
     <>
       <Header base="/" />
       <main data-inert-target className="pt-[var(--header-h)]">
-        <article className="contenedor max-w-3xl py-16 sm:py-20">
-          <h1 className="text-3xl text-ink sm:text-4xl">{documento.titulo}</h1>
-          <p className="mt-3 text-sm text-muted">
+        <article className="contenedor max-w-3xl py-section">
+          <h1 className="text-fs-700 text-fg">{documento.titulo}</h1>
+          <p className="mt-5 font-mono text-fs-100 uppercase tracking-[0.16em] text-fg-mute">
             Última actualización: {documento.actualizado}
           </p>
 
           {documento.secciones.map((seccion) => (
             <section key={seccion.titulo} className="mt-10">
-              <h2 className="text-xl text-ink">{seccion.titulo}</h2>
+              <h2 className="text-fs-500 text-fg">{seccion.titulo}</h2>
 
               {seccion.parrafos?.map((parrafo) => (
-                <p key={parrafo} className="mt-4 text-base leading-relaxed text-muted">
+                <p key={parrafo} className="mt-5 text-fs-300 leading-relaxed text-fg-dim">
                   {parrafo}
                 </p>
               ))}
 
               {seccion.datos && (
-                <dl className="mt-4 divide-y divide-ink/10 border-y border-ink/10">
+                <dl className="mt-5 divide-y divide-border border-y border-border">
                   {seccion.datos.map((dato) => (
                     <div key={dato.clave} className="flex flex-col gap-1 py-3 sm:flex-row sm:gap-4">
-                      <dt className="w-48 shrink-0 text-sm font-medium text-ink">
+                      <dt className="w-48 shrink-0 font-mono text-fs-100 uppercase tracking-[0.16em] text-fg-mute">
                         {dato.clave}
                       </dt>
-                      <dd className="text-base text-muted">
+                      <dd className="text-fs-300 text-fg">
                         {dato.href ? (
-                          <a href={dato.href} className="text-accent underline">
+                          <a href={dato.href} className="text-accent-2 underline underline-offset-2">
                             {dato.valor}
                           </a>
                         ) : (
@@ -58,7 +58,7 @@ function PaginaLegal({ documento }) {
               )}
 
               {seccion.lista && (
-                <ul className="mt-4 list-disc space-y-2 pl-6 text-base leading-relaxed text-muted">
+                <ul className="mt-5 list-disc space-y-2 pl-6 text-fs-300 leading-relaxed text-fg-dim">
                   {seccion.lista.map((elemento) => (
                     <li key={elemento}>{elemento}</li>
                   ))}
@@ -66,7 +66,7 @@ function PaginaLegal({ documento }) {
               )}
 
               {seccion.parrafosFinales?.map((parrafo) => (
-                <p key={parrafo} className="mt-4 text-base leading-relaxed text-muted">
+                <p key={parrafo} className="mt-5 text-fs-300 leading-relaxed text-fg-dim">
                   {parrafo}
                 </p>
               ))}
