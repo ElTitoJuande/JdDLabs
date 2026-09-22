@@ -1,62 +1,57 @@
-import { identity, enlaces } from '../content/identity';
+import { identity } from '../content/identity';
 
 /**
- * Pie comun a las cuatro paginas. Los enlaces legales son obligatorios en todas ellas
+ * Pie comun a las cinco paginas. Los enlaces legales son obligatorios en todas ellas
  * (FR-021b, principio XII), y por eso el pie es un unico componente compartido en vez
  * de marcado duplicado por pagina.
+ *
+ * El monograma va en blanco puro, con la misma mascara que la cabecera: nunca en
+ * acento, nunca con resplandor (principio IV).
  */
 export function Footer() {
   const anio = new Date().getFullYear();
 
   return (
-    <footer data-inert-target className="border-t border-ink/10 bg-bg">
-      <div className="contenedor flex flex-col gap-6 py-10 sm:flex-row sm:items-start sm:justify-between">
-        <div className="text-sm text-muted">
-          <p className="flex items-center gap-2">
-            <img
-              src="/JdDLogo_marca.svg"
-              alt=""
-              width={28}
-              height={24}
-              className="h-6 w-auto"
-            />
-            <span className="font-display text-base text-ink">{identity.nombreComercial}</span>
-          </p>
-          <p className="mt-1">{identity.razonSocial}</p>
-          <p>{identity.domicilio}</p>
-        </div>
+    <footer data-inert-target className="border-t border-border bg-bg-2">
+      <div className="contenedor flex flex-col gap-6 py-10 sm:flex-row sm:items-center sm:justify-between sm:gap-8 sm:py-14">
+        <p className="flex items-center gap-2.5">
+          <span
+            aria-hidden="true"
+            className="h-5 w-6 flex-none bg-fg"
+            style={{
+              WebkitMask: "url('/JdDLogo_marca.svg') center / contain no-repeat",
+              mask: "url('/JdDLogo_marca.svg') center / contain no-repeat",
+            }}
+          />
+          <span className="text-fs-300 font-medium tracking-tight text-fg">
+            {identity.nombreComercial}
+          </span>
+        </p>
 
-        <div className="text-sm text-muted">
-          <p>
-            <a href={enlaces.telefono} className="hover:text-accent">
-              {identity.telefono}
-            </a>
-          </p>
-          <p>
-            <a href={enlaces.email} className="hover:text-accent">
-              {identity.email}
-            </a>
-          </p>
-        </div>
-
-        <nav aria-label="Información legal" className="text-sm">
-          <ul className="flex flex-col gap-2">
+        <nav aria-label="Información legal">
+          <ul className="flex flex-col gap-3 sm:flex-row sm:gap-7">
             <li>
-              <a href="/aviso-legal" className="text-ink hover:text-accent">
+              <a
+                href="/aviso-legal"
+                className="text-fs-200 text-fg-dim no-underline transition-colors duration-fast ease-out-soft hover:text-accent-2 motion-reduce:transition-none"
+              >
                 Aviso legal
               </a>
             </li>
             <li>
-              <a href="/privacidad" className="text-ink hover:text-accent">
+              <a
+                href="/privacidad"
+                className="text-fs-200 text-fg-dim no-underline transition-colors duration-fast ease-out-soft hover:text-accent-2 motion-reduce:transition-none"
+              >
                 Política de privacidad
               </a>
             </li>
           </ul>
         </nav>
-      </div>
 
-      <div className="contenedor border-t border-ink/10 py-6 text-xs text-muted">
-        © {anio} {identity.razonSocial}
+        <p className="font-mono text-fs-100 tracking-[0.1em] text-fg-mute">
+          © {anio} {identity.nombreComercial}
+        </p>
       </div>
     </footer>
   );
