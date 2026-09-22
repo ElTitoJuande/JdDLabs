@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useId, useRef, useState } from 'react';
 import { useFocusTrap } from '../hooks/useFocusTrap';
+import { Boton } from './Boton';
 import { secciones, hero } from '../content/copy';
 
 /**
@@ -85,28 +86,29 @@ export function MobileMenu({ base = '' }) {
         aria-expanded={abierto}
         aria-controls={panelId}
         onClick={() => (abierto ? cerrarYDevolverFoco() : setAbierto(true))}
-        className="inline-flex h-11 w-11 items-center justify-center rounded-md text-ink hover:bg-accentTint"
+        className="inline-flex h-11 w-11 items-center justify-center rounded-full text-fg transition-colors duration-fast ease-out-soft hover:text-accent-2 motion-reduce:transition-none"
       >
         <span className="sr-only">{abierto ? 'Cerrar menú' : 'Abrir menú'}</span>
+        {/* Dos filetes de 1px, no el icono de tres barras de v1: es el trazo de la
+            maqueta y pesa lo mismo que el filete de la cabecera. */}
         <svg
           aria-hidden="true"
           viewBox="0 0 24 24"
           className="h-6 w-6"
           fill="none"
           stroke="currentColor"
-          strokeWidth="2"
+          strokeWidth="1"
           strokeLinecap="round"
         >
           {abierto ? (
             <>
-              <line x1="5" y1="5" x2="19" y2="19" />
-              <line x1="19" y1="5" x2="5" y2="19" />
+              <line x1="6" y1="6" x2="18" y2="18" />
+              <line x1="18" y1="6" x2="6" y2="18" />
             </>
           ) : (
             <>
-              <line x1="3" y1="7" x2="21" y2="7" />
-              <line x1="3" y1="12" x2="21" y2="12" />
-              <line x1="3" y1="17" x2="21" y2="17" />
+              <line x1="3" y1="9.5" x2="21" y2="9.5" />
+              <line x1="3" y1="14.5" x2="21" y2="14.5" />
             </>
           )}
         </svg>
@@ -116,7 +118,7 @@ export function MobileMenu({ base = '' }) {
         <div
           id={panelId}
           ref={panelRef}
-          className="fixed inset-x-0 top-[var(--header-h)] z-40 max-h-[calc(100vh-var(--header-h))] overflow-y-auto border-t border-ink/10 bg-bg shadow-lg"
+          className="fixed inset-x-0 top-[var(--header-h)] z-40 max-h-[calc(100vh-var(--header-h))] overflow-y-auto border-b border-border bg-bg-2"
         >
           <nav aria-label="Secciones del sitio" className="contenedor py-4">
             <ul className="flex flex-col gap-1">
@@ -126,7 +128,7 @@ export function MobileMenu({ base = '' }) {
                     ref={indice === 0 ? primerEnlaceRef : undefined}
                     href={`${base}#${seccion.id}`}
                     onClick={cerrarYDevolverFoco}
-                    className="block rounded-md px-3 py-3 text-base font-medium text-ink hover:bg-accentTint"
+                    className="block rounded-full px-3 py-3 text-fs-500 text-fg no-underline transition-colors duration-fast ease-out-soft hover:text-accent-2 motion-reduce:transition-none"
                   >
                     {seccion.nombre}
                   </a>
@@ -134,13 +136,13 @@ export function MobileMenu({ base = '' }) {
               ))}
             </ul>
 
-            <a
+            <Boton
               href={`${base}#contacto`}
               onClick={cerrarYDevolverFoco}
-              className="mt-4 block rounded-md bg-accent px-4 py-3 text-center text-base font-semibold text-bg hover:bg-accentHover"
+              className="mt-6 w-full"
             >
               {hero.cta}
-            </a>
+            </Boton>
           </nav>
         </div>
       )}
