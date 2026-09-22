@@ -9,10 +9,45 @@
 // del stack vive solo en la pagina opcional de caso de estudio.
 
 export const hero = {
+  // Eyebrow de posicionamiento del hero v2. No es un dato: es la etiqueta de lo que
+  // se hace, y acompaña al lugar, que se lee de identity.js y no se escribe aqui.
+  eyebrow: 'Desarrollo web',
   titular: 'Desarrollo web para pymes y autónomos',
   subtitulo:
     'Diseño y desarrollo de páginas web modernas, rápidas y adaptadas a las necesidades de cada negocio.',
   cta: 'Solicitar presupuesto',
+  // Segunda accion del hero, introducida por la maqueta v2: lleva al unico proyecto
+  // publicable que hay. Es navegacion, no una afirmacion sobre el negocio.
+  ctaSecundario: 'Ver trabajo',
+};
+
+// Terminos de la banda en bucle (seccion 2 de la portada v2).
+//
+// Los ocho salen de los tres `servicios` de abajo y de su propio texto ("paneles de
+// gestion, reservas, integraciones con lo que ya usas"). Son capacidades, no clientes
+// ni cifras: no hay nada que verificar y no hay ni un termino inventado (principio V).
+export const capacidades = [
+  'Web corporativa',
+  'Tiendas online',
+  'Aplicaciones web',
+  'Paneles de gestión',
+  'Reservas',
+  'Integraciones',
+  'Rendimiento',
+  'Accesibilidad',
+];
+
+// Aperturas de seccion de la portada v2: eyebrow mono + titular con punto final.
+// Transcritas de la maqueta aprobada por el propietario. Viven aqui y no en el JSX
+// por el mismo motivo que el resto del fichero: ninguna seccion improvisa texto en
+// pantalla. El titular de Contacto no esta aqui porque ya existia dentro de
+// `contacto`, y no se duplica.
+export const titulares = {
+  proyecto: { eyebrow: 'Trabajo seleccionado', titulo: 'Un proyecto, contado entero.' },
+  servicios: { eyebrow: 'Servicios', titulo: 'Lo que hago.' },
+  stack: { eyebrow: 'Tecnología', titulo: 'Las herramientas que uso.' },
+  sobreMi: { eyebrow: 'Sobre mí', titulo: 'La misma persona, de principio a fin.' },
+  contacto: { eyebrow: 'Contacto' },
 };
 
 export const servicios = [
@@ -54,6 +89,11 @@ export const proyecto = {
   // queda en imagen y los dos enlaces: es la lista que lee el bloque "Tecnologia
   // utilizada" del caso de estudio, y no hay una segunda copia en `casoEstudio`.
   tecnologias: ['React', 'Vite', 'Tailwind', 'Cloudflare'],
+  // Categoria corta de la tarjeta de la portada. NO es copy nuevo: es el recorte de
+  // `casoEstudio.industria` ('Vidrio, aluminio y carpinteria a medida') que usa la
+  // maqueta. El año de la tarjeta no se declara aqui: se lee de `casoEstudio.anio`,
+  // para que no existan dos copias del mismo dato.
+  categoria: 'Vidrio y aluminio',
   url: 'https://cristaleriarutena.es',
   textoEnlace: 'Visitar en vivo',
   enlaceCaso: 'Ver caso de estudio',
@@ -134,9 +174,28 @@ export const sobreMi = {
 };
 
 export const contacto = {
+  // Desde la v2 el copy del propietario se lee partido en dos: la pregunta es el
+  // titular de seccion y el resto la invitacion que va debajo. Ni una palabra
+  // reescrita ni añadida respecto a la version anterior.
+  titular: '¿Hablamos de tu proyecto?',
   invitacion:
-    '¿Hablamos de tu proyecto? Escríbeme por WhatsApp, llama o rellena el formulario — te respondo en menos de 24 horas.',
+    'Escríbeme por WhatsApp, llama o rellena el formulario — te respondo en menos de 24 horas.',
 };
+
+// Herramientas de trabajo, agrupadas como en la maqueta aprobada por el propietario.
+//
+// No confundir con `proyecto.tecnologias`, que es el stack del sitio de Cristaleria
+// Ruteña y solo se lee en el caso de estudio. Esto es el utillaje propio, y no es una
+// metrica ni un dato de cliente: es una descripcion de con que trabaja Juan.
+export const stack = [
+  { id: 'web', categoria: 'Web', items: ['React', 'Vite', 'Tailwind CSS', 'JavaScript'] },
+  {
+    id: 'servidor',
+    categoria: 'Servidor, datos y correo',
+    items: ['Node.js', 'MongoDB', 'Resend'],
+  },
+  { id: 'publicacion', categoria: 'Publicación', items: ['Cloudflare', 'GitHub'] },
+];
 
 // La clave `testimonio` NO existe a proposito (FR-007, principio V). El bloque de
 // testimonio solo se construye si el propietario aporta una cita verificada. No se
