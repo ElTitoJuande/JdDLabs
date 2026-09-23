@@ -93,9 +93,10 @@ export default {
           to: { transform: 'translateX(-50%)' },
         },
       },
-      // 38s es la duracion de la maqueta aprobada, no las 60s del borrador de design.md.
+      // 80s: la maqueta pedia 38s con letra de 13,6px. Con la banda a fs-600 cada copia
+      // mide el doble (3341px a 1440) y 38s la movia a 88px/s; 80s recupera los ~42px/s.
       animation: {
-        marquee: 'marquee 38s linear infinite',
+        marquee: 'marquee 80s linear infinite',
         // Giro del halo interior del CTA de cabecera (variante `brillo` de Boton). Su
         // @keyframes vive en index.css: con @apply, Tailwind 3 lo emite vacio.
         orbita: 'orbita 3s linear infinite',
