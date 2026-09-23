@@ -1488,3 +1488,12 @@ Lo que **no** se recorta, en ningún escenario: las puertas de Lighthouse y acce
 | AC-08 movimiento reducido | T007 paso 3, T016 paso 4 |
 | AC-09 navegación por teclado | T005 paso 6, T017 paso 5 |
 | AC-10 cero datos nuevos | T017 paso 7 |
+
+## Backlog post-lanzamiento
+
+Fuera del alcance del 2026-09-25. Ninguna bloquea la publicación.
+
+| Entrada | Por qué | Qué desbloquea |
+|---|---|---|
+| **Prerender del HTML** de cada entrada en el build | Hoy `#root` llega vacío y React monta las secciones después de que el navegador busque el fragmento de la URL | Las anclas entre páginas (`/#proyecto` desde legal, caso o 404) funcionarían de forma nativa y `src/hooks/useAnclaInicial.js` podría retirarse. Mejora de paso el primer pintado |
+| **Subir vite 5 → 8** (y `@vitejs/plugin-react` con él) | `npm audit`: [GHSA-4w7w-66w2-5vf9](https://github.com/advisories/GHSA-4w7w-66w2-5vf9), [GHSA-fx2h-pf6j-xcff](https://github.com/advisories/GHSA-fx2h-pf6j-xcff), [GHSA-v6wh-96g9-6wx3](https://github.com/advisories/GHSA-v6wh-96g9-6wx3) (vite) y [GHSA-67mh-4wv8-2f99](https://github.com/advisories/GHSA-67mh-4wv8-2f99) (esbuild, transitiva) | Cierra las cuatro. Afectan **solo al servidor de desarrollo**, nunca al `dist` publicado. Son tres versiones mayores: rama propia, build y Lighthouse de nuevo. Mientras tanto, no exponer `npm run dev` con `--host` |
