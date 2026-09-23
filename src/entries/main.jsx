@@ -29,7 +29,9 @@ function Portada() {
   return (
     <>
       <Header />
-      <main data-inert-target className="pt-header">
+      {/* Sin pt-header: en la portada lo lleva el hero, que empieza en y=0 para que su
+          halo pase por detras de la cabecera. */}
+      <main data-inert-target>
         <Hero />
         <Marquee terminos={capacidades} />
         <ProyectoDestacado />

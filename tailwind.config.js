@@ -92,7 +92,12 @@ export default {
         },
       },
       // 38s es la duracion de la maqueta aprobada, no las 60s del borrador de design.md.
-      animation: { marquee: 'marquee 38s linear infinite' },
+      animation: {
+        marquee: 'marquee 38s linear infinite',
+        // Giro del halo interior del CTA de cabecera (variante `brillo` de Boton). Su
+        // @keyframes vive en index.css: con @apply, Tailwind 3 lo emite vacio.
+        orbita: 'orbita 3s linear infinite',
+      },
     },
   },
   plugins: [],

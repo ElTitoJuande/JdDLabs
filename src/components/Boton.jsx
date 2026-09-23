@@ -3,9 +3,16 @@
  *
  *  - solido:   relleno `accent` con `accent-ink` encima. 4,8:1, pasa AA.
  *  - fantasma: sin relleno, filete `border`, texto `fg`, filete de acento en hover.
+ *  - brillo:   relleno `accent` con un halo desenfocado que lo OSCURECE por el centro
+ *              (accent -> accent-ink -> accent) y gira sin parar. Solo para el CTA de
+ *              cabecera. El texto pasa a `fg`: sobre el centro oscurecido gana
+ *              contraste, mientras que `accent-ink` lo perderia.
  *
  * El resplandor solo aparece en hover y solo en la variante solida: es lo que compensa
  * que el magenta tenga menos luminancia que el lima de la referencia visual.
+ *
+ * `flecha` añade un → que se separa del texto en hover y foco; con movimiento reducido
+ * se queda quieto.
  *
  * El tamaño va por prop y no por `className`: dos utilidades de la misma propiedad no
  * las decide el orden en el atributo sino el del CSS generado, y ahi `px-8` va despues
@@ -14,12 +21,14 @@
 const VARIANTES = {
   solido: 'bg-accent text-accent-ink hover:shadow-glow',
   fantasma: 'border border-border text-fg hover:border-border-accent',
+  brillo:
+    'relative isolate overflow-hidden bg-accent text-fg hover:shadow-glow active:scale-[.97]',
 };
 
 const TAMANOS = {
   md: 'px-8 py-4 text-fs-300',
-  // Para la cabecera: ~40px de alto dentro de sus 72.
-  sm: 'px-5 py-2.5 text-fs-200',
+  // Para la cabecera: ~46px de alto dentro de sus 72, los 13/24 a 15px de la maqueta.
+  sm: 'px-6 py-3 text-fs-200',
 };
 
 export function Boton({
@@ -28,6 +37,7 @@ export function Boton({
   variante = 'solido',
   tamano = 'md',
   externo = false,
+  flecha = false,
   className = '',
   ...resto
 }) {
@@ -43,7 +53,7 @@ export function Boton({
     <Etiqueta
       {...props}
       className={[
-        'inline-flex items-center justify-center gap-2 rounded-full',
+        'group inline-flex items-center justify-center gap-2 rounded-full',
         'font-medium no-underline',
         TAMANOS[tamano],
         'transition duration-fast ease-out-soft motion-reduce:transition-none',
@@ -55,7 +65,23 @@ export function Boton({
         .join(' ')}
       {...resto}
     >
-      {children}
+      {variante === 'brillo' && (
+        <span aria-hidden="true" className="boton-brillo">
+          <span />
+        </span>
+      )}
+      {/* El texto va por encima del halo: sin z-10 el halo lo tapa. */}
+      <span className="relative z-10 inline-flex items-center gap-2">
+        {children}
+        {flecha && (
+          <span
+            aria-hidden="true"
+            className="transition-transform duration-fast ease-out-soft motion-safe:group-hover:translate-x-1 motion-safe:group-focus-visible:translate-x-1"
+          >
+            →
+          </span>
+        )}
+      </span>
       {externo && (
         <>
           <span aria-hidden="true">↗</span>

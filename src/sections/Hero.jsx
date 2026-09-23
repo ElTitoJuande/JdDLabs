@@ -10,10 +10,13 @@ import { Boton } from '../components/Boton';
  *
  * Deja de ser "la unica banda oscura del sitio": en v2 el documento entero es oscuro y
  * el hero se distingue por el halo, no por el fondo.
+ *
+ * Empieza en y=0, por detras de la cabecera, como en la maqueta: `pt-header` compensa
+ * su alto dentro de la seccion y el halo sube sin quedar recortado en el filete.
  */
 export function Hero() {
   return (
-    <section id="inicio" className="halo-hero relative overflow-hidden">
+    <section id="inicio" className="halo-hero relative overflow-hidden pt-header">
       <div className="contenedor relative flex min-h-[calc(100svh-var(--header-h))] flex-col justify-center py-section">
         <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:gap-5">
           <Eyebrow as="span">{hero.eyebrow}</Eyebrow>

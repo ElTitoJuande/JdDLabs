@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useId, useRef, useState } from 'react';
 import { useFocusTrap } from '../hooks/useFocusTrap';
 import { Boton } from './Boton';
-import { secciones, hero } from '../content/copy';
+import { secciones, cabecera } from '../content/copy';
 
 /**
  * Menu desplegable de movil (FR-009c a FR-009e, research.md R-005).
@@ -139,9 +139,11 @@ export function MobileMenu({ base = '' }) {
             <Boton
               href={`${base}#contacto`}
               onClick={cerrarYDevolverFoco}
+              variante="brillo"
+              flecha
               className="mt-6 w-full"
             >
-              {hero.cta}
+              {cabecera.cta}
             </Boton>
           </nav>
         </div>

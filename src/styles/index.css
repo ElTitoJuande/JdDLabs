@@ -94,6 +94,58 @@
     @apply border-t border-border py-section;
   }
 
+  /* Halo interior del CTA de cabecera (Boton, variante `brillo`). Un disco desenfocado
+     que oscurece el magenta: el color central del degradado es `accent-ink`, y como el
+     disco gira sobre su centro, el centro del boton (donde va el texto `fg`) es siempre
+     la parte mas oscura. Los bordes quedan en `accent`. Gira siempre; en hover encoge.
+     Con movimiento reducido no gira. */
+  .boton-brillo {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+  }
+
+  .boton-brillo > span {
+    width: 10rem;
+    height: 10rem;
+    border-radius: 9999px;
+    background: linear-gradient(
+      90deg,
+      theme('colors.accent'),
+      theme('colors.accent-ink'),
+      theme('colors.accent')
+    );
+    filter: blur(20px);
+    opacity: 0.5;
+    transition-property: width, height;
+    transition-duration: theme('transitionDuration.base');
+    transition-timing-function: theme('transitionTimingFunction.out-soft');
+  }
+
+  .group:hover .boton-brillo > span,
+  .group:focus-visible .boton-brillo > span {
+    width: 8rem;
+    height: 8rem;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .boton-brillo > span {
+      animation: theme('animation.orbita');
+    }
+  }
+
+  /* El token `animation.orbita` vive en la config; su @keyframes, aqui. Declarado en la
+     config, Tailwind solo lo emite si alguien usa la clase animate-orbita. */
+  @keyframes orbita {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
   /* Campo trampa: fuera de pantalla, nunca display:none (research.md R-008). */
   .campo-trampa {
     position: absolute;

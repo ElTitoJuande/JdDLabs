@@ -21,6 +21,12 @@ export const hero = {
   ctaSecundario: 'Ver trabajo',
 };
 
+// CTA de la cabecera, en escritorio y en el menu movil. Mas corto que `hero.cta`: en
+// la barra compite con la navegacion y tiene que caber en un boton de ~40px.
+export const cabecera = {
+  cta: 'Hablemos',
+};
+
 // Terminos de la banda en bucle (seccion 2 de la portada v2).
 //
 // Los ocho salen de los tres `servicios` de abajo y de su propio texto ("paneles de

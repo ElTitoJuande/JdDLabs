@@ -1,6 +1,7 @@
+import { useEffect, useState } from 'react';
 import { MobileMenu } from './MobileMenu';
 import { Boton } from './Boton';
-import { secciones, hero } from '../content/copy';
+import { secciones, cabecera } from '../content/copy';
 import { identity } from '../content/identity';
 
 /**
@@ -14,8 +15,27 @@ export function Header({ base = '' }) {
   // (research.md R-006, FR-009b). No se mide: el border-b suma 1px a la altura medida y
   // una medida que alimenta su propia altura crece 1px por frame sin fin. Con
   // border-box el filete queda dentro de los 72px.
+  //
+  // Arriba del todo la cabecera es transparente y sin filete, para que el halo del hero
+  // pase por detras sin corte. En cuanto la pagina se mueve gana fondo, desenfoque y
+  // filete. setState con el mismo valor no re-renderiza: solo cuenta el cruce por 0.
+  const [arriba, setArriba] = useState(() => window.scrollY <= 0);
+
+  useEffect(() => {
+    const alDesplazar = () => setArriba(window.scrollY <= 0);
+    alDesplazar();
+    window.addEventListener('scroll', alDesplazar, { passive: true });
+    return () => window.removeEventListener('scroll', alDesplazar);
+  }, []);
+
   return (
-    <header className="fixed inset-x-0 top-0 z-50 h-header border-b border-border bg-bg/75 backdrop-blur-lg">
+    <header
+      className={[
+        'fixed inset-x-0 top-0 z-50 h-header border-b',
+        'transition-colors duration-fast ease-out-soft motion-reduce:transition-none',
+        arriba ? 'border-transparent bg-transparent' : 'border-border bg-bg/75 backdrop-blur-lg',
+      ].join(' ')}
+    >
       <div className="contenedor flex h-full items-center justify-between gap-4">
         <a
           href={`${base}#inicio`}
@@ -59,8 +79,8 @@ export function Header({ base = '' }) {
         <div className="flex items-center gap-2">
           {/* El desplazamiento suave lo hace scroll-behavior en CSS: ni una linea de
               JavaScript de scroll (FR-008, research.md R-006). */}
-          <Boton href={`${base}#contacto`} tamano="sm" className="hidden md:inline-flex">
-            {hero.cta}
+          <Boton href={`${base}#contacto`} variante="brillo" tamano="sm" flecha className="hidden md:inline-flex">
+            {cabecera.cta}
           </Boton>
           <MobileMenu base={base} />
         </div>

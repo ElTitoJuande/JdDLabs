@@ -102,9 +102,18 @@ Medidas tomadas de los estilos computados de la referencia a 1440px de viewport.
 
 ### 4.1 Cabecera
 
-Fija, altura `spacing.header` (4,5rem), `background: rgba(10,10,10,.85)` con `backdrop-filter: blur(12px)`, filete
-inferior `border`. Contenido: logo + wordmark a la izquierda, navegación centrada en enlaces de
-`fs-200` color `fg-dim` con padding 8/16 y radio pill en hover, y CTA pill `accent` a la derecha.
+Fija, altura `spacing.header` (4,5rem). Tiene dos estados:
+
+- **Arriba del todo**: transparente y sin filete. El hero empieza en y=0 por detrás de ella,
+  así que el halo pasa sin quedar cortado.
+- **Con scroll**: `bg/75`, `backdrop-blur` y filete inferior `border`.
+
+Contenido: logo + wordmark a la izquierda, navegación centrada en enlaces de `fs-200` color
+`fg-dim` con padding 8/16 y radio pill en hover, y CTA pill a la derecha en tamaño `sm` (~46px)
+con el texto «Hablemos →», variante `brillo` de `Boton`: relleno `accent` con un halo desenfocado
+(`accent → accent-ink → accent`) que oscurece el centro y gira sin parar, texto `fg`. En hover
+el halo encoge y aparece `shadow-glow`; la flecha se separa 4px en hover y foco. Con movimiento
+reducido no gira nada. El menú móvil usa el mismo CTA.
 
 ### 4.2 Hero
 
