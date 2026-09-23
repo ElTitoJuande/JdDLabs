@@ -11,8 +11,9 @@
  * El resplandor solo aparece en hover y solo en la variante solida: es lo que compensa
  * que el magenta tenga menos luminancia que el lima de la referencia visual.
  *
- * `flecha` añade un → que se separa del texto en hover y foco; con movimiento reducido
- * se queda quieto.
+ * `flecha` añade una flecha dibujada en CSS (`.flecha` en index.css): en reposo es solo
+ * la punta; en hover y foco aparece el asta y la punta avanza. Sin glifo: el lector de
+ * pantalla no la lee.
  *
  * El tamaño va por prop y no por `className`: dos utilidades de la misma propiedad no
  * las decide el orden en el atributo sino el del CSS generado, y ahi `px-8` va despues
@@ -73,14 +74,7 @@ export function Boton({
       {/* El texto va por encima del halo: sin z-10 el halo lo tapa. */}
       <span className="relative z-10 inline-flex items-center gap-2">
         {children}
-        {flecha && (
-          <span
-            aria-hidden="true"
-            className="transition-transform duration-fast ease-out-soft motion-safe:group-hover:translate-x-1 motion-safe:group-focus-visible:translate-x-1"
-          >
-            →
-          </span>
-        )}
+        {flecha && <span aria-hidden="true" className="flecha" />}
       </span>
       {externo && (
         <>

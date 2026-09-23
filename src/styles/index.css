@@ -159,6 +159,42 @@
     }
   }
 
+  /* Flecha de los CTAs (Boton, prop `flecha`). El asta es una barra de 2px; la punta, un
+     angulo de dos bordes girado 45 grados. En reposo el asta es transparente y solo se ve
+     la punta, como un ">"; en hover y foco el asta aparece y la punta avanza 3px hasta
+     cerrar la flecha. Todo en `currentColor`, asi que sirve sobre cualquier variante. */
+  .flecha {
+    position: relative;
+    flex: none;
+    width: 0.625rem;
+    height: 2px;
+    margin-top: 1px;
+    background-color: transparent;
+    transition: background-color theme('transitionDuration.fast') theme('transitionTimingFunction.out-soft');
+  }
+
+  .flecha::before {
+    content: '';
+    position: absolute;
+    top: -3px;
+    right: 3px;
+    padding: 3px;
+    border: solid currentColor;
+    border-width: 0 2px 2px 0;
+    transform: rotate(-45deg);
+    transition: right theme('transitionDuration.fast') theme('transitionTimingFunction.out-soft');
+  }
+
+  .group:hover .flecha,
+  .group:focus-visible .flecha {
+    background-color: currentColor;
+  }
+
+  .group:hover .flecha::before,
+  .group:focus-visible .flecha::before {
+    right: 0;
+  }
+
   /* Campo trampa: fuera de pantalla, nunca display:none (research.md R-008). */
   .campo-trampa {
     position: absolute;
