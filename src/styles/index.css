@@ -1,9 +1,12 @@
-/* Dos familias variables, auto-alojadas via @fontsource (principio II). Un unico
-   fichero por familia cubre todos los pesos que el diseño usa. Cero peticiones a los
+/* Tres familias auto-alojadas via @fontsource (principio II): dos variables, en las que
+   un unico fichero por familia cubre todos los pesos, y la serif de enfasis. Cero peticiones a los
    dominios de Google Fonts: la maqueta de referencia los enlaza porque es un export
    estatico, y eso es justo lo que aqui no se copia (principio II, AC-03). */
 @import '@fontsource-variable/space-grotesk';
 @import '@fontsource-variable/jetbrains-mono';
+/* Tercera familia (constitucion 3.1.0): solo la cursiva 400 en latin, que es lo unico que
+   usa el enfasis del hero. Importar el paquete entero traeria tambien la redonda. */
+@import '@fontsource/instrument-serif/latin-400-italic.css';
 
 @tailwind base;
 @tailwind components;

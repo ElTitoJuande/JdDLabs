@@ -44,6 +44,8 @@ export default {
       fontFamily: {
         sans: ['"Space Grotesk Variable"', 'system-ui', '-apple-system', 'Segoe UI', 'sans-serif'],
         mono: ['"JetBrains Mono Variable"', 'ui-monospace', 'SF Mono', 'Consolas', 'monospace'],
+        // Solo para el enfasis del h1 del hero (constitucion 3.1.0, principio II).
+        serif: ['"Instrument Serif"', 'Georgia', 'serif'],
       },
       // Escala fluida de nueve pasos. Ninguna seccion escribe un tamaño en pixeles:
       // la maqueta de Claude Design esta exportada en px porque es un HTML estatico,
@@ -59,14 +61,11 @@ export default {
         // fs-800 y fs-900 se recalibran contra los DOS artboards de la maqueta
         // aprobada (375 y 1440), que son la referencia visual del propietario:
         //   fs-800 -> h2 de seccion:  40px a 375,  88px a 1440
-        //   fs-900 -> h1 del hero:    50px a 375, 140px a 1440
-        // El extremo superior es el mismo que documenta la constitucion (5,5rem y
-        // 8,75rem); lo que cambia es la pendiente, porque la curva publicada
-        // daba 66px de h1 a 375px de ancho y "Desarrollo" desbordaba el gutter. El
-        // plan autoriza expresamente bajar el minimo del clamp en vez de parchear
-        // con una clase suelta (T006, paso 2).
+        //   fs-900 -> h1 del hero:    40px a 375, 117,6px a 1440
+        // fs-900 baja en la constitucion 3.1.0 para que el titular quepa en dos
+        // lineas: a 140px "pymes y autónomos" mide 1253px y saltaba a tres.
         'fs-800': 'clamp(2.5rem, 1.44rem + 4.5vw, 5.5rem)',
-        'fs-900': 'clamp(3rem, 1.14rem + 8.45vw, 8.75rem)',
+        'fs-900': 'clamp(2.5rem, .79rem + 7.29vw, 7.35rem)',
       },
       spacing: {
         section: 'clamp(5rem, 9vw, 11rem)',
@@ -74,6 +73,9 @@ export default {
         // Alto de la cabecera fija: los 72px de los dos artboards de la maqueta (375 y
         // 1440). Es fijo y no se mide: medirlo entraba en bucle con el border-b.
         header: '4.5rem',
+        // Aire vertical del hero, arriba y abajo: 48px a 375, 72px a 1440. Menor que
+        // `section` porque el hero ya empieza bajo la cabecera y no tiene altura minima.
+        hero: 'clamp(3rem, 5vw, 5rem)',
       },
       maxWidth: { site: '1440px' },
       borderRadius: { lg2: '22px', xl2: '32px' },

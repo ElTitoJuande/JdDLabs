@@ -20,7 +20,8 @@ Eso fija tres cosas que en la conversación previa estaban abiertas:
 |---|---|---|
 | Acento | Magenta `#F31A64` + rosa `#FF5C99` | Enmienda del principio III |
 | Titulares y cuerpo | Space Grotesk Variable | Fraunces e Inter se retiran (principio II) |
-| Eyebrows y cifras | JetBrains Mono Variable | Tercera familia: no, sustituye a Inter |
+| Eyebrows y cifras | JetBrains Mono Variable | Sustituye a Inter |
+| Énfasis del `h1` del hero | Instrument Serif, cursiva 400 | Tercera familia, enmienda 3.1.0 (2026-09-23), uso cerrado al hero |
 
 ## 2. Qué se toma de la referencia y qué no
 
@@ -117,12 +118,21 @@ reducido no gira nada. El menú móvil usa el mismo CTA.
 
 ### 4.2 Hero
 
-- Altura mínima `calc(100svh - header)`, padding superior 80px, inferior 24px.
-- Dos eyebrows mono en la misma línea, separados: uno de posicionamiento y uno de lugar.
-- `h1` a `fs-900`, peso 500, `letter-spacing: -0.05em`, `line-height: 0.9`, dos líneas forzadas.
-- Subtítulo a `fs-400`, color `fg-dim`, `max-width: 38rem`.
-- Dos acciones: pill `accent` con `accent-ink` + pill fantasma con `border-strong`.
+Rehecho el 2026-09-23 sobre la referencia de Domindez, medida con navegador headless.
+
+- Empieza en y=0 por detrás de la cabecera (`pt-header`) y **sin altura mínima**: con el
+  contenido arriba, una altura de ventana dejaba un vacío que la referencia rellena con cifras
+  que aquí no existen (principio V). El marquee sube justo debajo de los CTAs.
+- Aire vertical con el token `spacing.hero` (`clamp(3rem, 5vw, 5rem)`: 48px a 375, 72px a 1440).
+- Fila de eyebrows: raya de 28px en `accent` + posicionamiento a la izquierda, lugar a la derecha.
+- `h1` a `fs-900` (117,6px a 1440, 40px a 375), peso 500, `letter-spacing: -0.05em`,
+  `line-height: 0.9`, dos líneas desde 375 hasta 1920. Énfasis en Instrument Serif cursiva 400:
+  «para» en `fg-dim`, «pymes y autónomos» en `accent-2`. El texto del `h1` no cambia.
+- Subtítulo a `fs-400`, color `fg-dim`, `max-width: 38rem`, a la izquierda; las dos acciones a
+  la derecha en la misma fila desde `md` (pill `accent` + pill fantasma). En móvil, apilados.
 - Halo radial de `accent-glow` como decoración de fondo, `pointer-events: none`.
+- Verificado: CTAs sin scroll de 375×667 a 1920×1080. Única excepción, 320×568: el segundo CTA
+  queda 2px por debajo del borde.
 
 ### 4.3 Marquee de capacidades
 

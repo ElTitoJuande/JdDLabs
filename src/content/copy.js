@@ -12,7 +12,14 @@ export const hero = {
   // Eyebrow de posicionamiento del hero v2. No es un dato: es la etiqueta de lo que
   // se hace, y acompaña al lugar, que se lee de identity.js y no se escribe aqui.
   eyebrow: 'Desarrollo web',
-  titular: 'Desarrollo web para pymes y autónomos',
+  // El h1 se lee entero como "Desarrollo web para pymes y autónomos": los segmentos
+  // solo marcan que palabras van en la serif de enfasis (constitucion 3.1.0).
+  titular: [
+    { texto: 'Desarrollo web ' },
+    { texto: 'para', enfasis: 'enlace' },
+    { texto: ' ' },
+    { texto: 'pymes y autónomos', enfasis: 'clave' },
+  ],
   subtitulo:
     'Diseño y desarrollo de páginas web modernas, rápidas y adaptadas a las necesidades de cada negocio.',
   cta: 'Solicitar presupuesto',
