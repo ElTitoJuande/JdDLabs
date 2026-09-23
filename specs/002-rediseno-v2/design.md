@@ -85,10 +85,11 @@ torno a 9.000px, porque no se rellenan huecos con contenido que no existe.
 | 7 | Sobre mí | `SOBRE MÍ` | `bg` | `copy.js` → `sobreMi` | Copy existente |
 | 8 | Contacto | `CONTACTO` | `bg-2` | `copy.js` → `contacto` | Copy existente |
 
-**El orden respeta FR-001 de la spec 001** (Inicio → Proyecto destacado → Servicios → Sobre mí
-→ Contacto), con las tres secciones nuevas intercaladas sin alterar la secuencia original. La
-referencia pone sus servicios antes que su trabajo, pero ella tiene 150 proyectos y JdDLabs
-uno: abrir con la prueba pesa más que abrir con la oferta. `secciones` en `copy.js` no cambia.
+**Orden vigente (decisión del propietario, 2026-09-23)**: Inicio → Servicios → Proyecto
+destacado → Sobre mí → Contacto, en la portada y en la navegación (`secciones` en `copy.js`).
+Sustituye al orden de FR-001 de la spec 001, que abría con el proyecto. Los fondos se
+intercambian con el orden para que la alternancia `bg` / `bg-2` siga intacta tras el marquee:
+Servicios pasa a `bg` y Proyecto destacado a `bg-2`.
 
 **La sección 6 es la única que necesita contenido nuevo y es recortable.** Son tres o cuatro
 pasos del proceso real de trabajo de Juan (p. ej. "Hablamos" → "Propuesta y presupuesto" →
@@ -112,7 +113,8 @@ Fija, altura `spacing.header` (4,5rem). Tiene dos estados:
 Contenido: logo + wordmark a la izquierda, navegación centrada en enlaces de `fs-200` color
 `fg-dim` con padding 8/16 y radio pill en hover, y CTA pill a la derecha en tamaño `sm` (~46px)
 con el texto «Hablemos →», variante `brillo` de `Boton`: relleno `accent` con un halo desenfocado
-(`accent → accent-ink → accent`) que oscurece el centro y gira sin parar, texto `fg`. En hover
+(`accent → accent-ink → accent`, opacidad 0,75) que oscurece el centro y gira sin parar, texto
+`fg`. El disco mide `max(10rem, 110%)` para cubrir también el CTA del hero, más ancho. En hover
 el halo encoge y aparece `shadow-glow`; la flecha se separa 4px en hover y foco. Con movimiento
 reducido no gira nada. El menú móvil usa el mismo CTA.
 
@@ -128,8 +130,11 @@ Rehecho el 2026-09-23 sobre la referencia de Domindez, medida con navegador head
 - `h1` a `fs-900` (117,6px a 1440, 40px a 375), peso 500, `letter-spacing: -0.05em`,
   `line-height: 0.9`, dos líneas desde 375 hasta 1920. Énfasis en Instrument Serif cursiva 400:
   «para» en `fg-dim`, «pymes y autónomos» en `accent-2`. El texto del `h1` no cambia.
-- Subtítulo a `fs-400`, color `fg-dim`, `max-width: 38rem`, a la izquierda; las dos acciones a
-  la derecha en la misma fila desde `md` (pill `accent` + pill fantasma). En móvil, apilados.
+- Subtítulo a `fs-400`, color `fg-dim`, `max-width: 38rem`, a la izquierda: «Tu negocio merece
+  una web que venda, no una plantilla más. Diseño y desarrollo a medida, de principio a fin. De
+  lo técnico me encargo yo; tú, de lo tuyo.» (copy del propietario, sustituye al de FR-002 de la
+  spec 001). Las dos acciones a la derecha en la misma fila desde `md`: la principal con la
+  variante `brillo`, igual que el CTA de cabecera, y la fantasma. En móvil, apilados.
 - Halo radial de `accent-glow` como decoración de fondo, `pointer-events: none`.
 - Verificado: CTAs sin scroll de 375×667 a 1920×1080. Única excepción, 320×568: el segundo CTA
   queda 2px por debajo del borde.

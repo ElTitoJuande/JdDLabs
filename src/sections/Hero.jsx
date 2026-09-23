@@ -56,7 +56,9 @@ export function Hero() {
           </p>
 
           <div className="flex flex-none flex-col gap-3 sm:flex-row sm:items-center sm:gap-3.5">
-            <Boton href="#contacto">{hero.cta}</Boton>
+            <Boton href="#contacto" variante="brillo" flecha>
+              {hero.cta}
+            </Boton>
             <Boton href="#proyecto" variante="fantasma">
               {hero.ctaSecundario}
             </Boton>

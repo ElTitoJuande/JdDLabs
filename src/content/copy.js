@@ -20,8 +20,10 @@ export const hero = {
     { texto: ' ' },
     { texto: 'pymes y autónomos', enfasis: 'clave' },
   ],
+  // Copy del propietario (2026-09-23), sustituye al subtitulo literal de FR-002 de la
+  // spec 001.
   subtitulo:
-    'Diseño y desarrollo de páginas web modernas, rápidas y adaptadas a las necesidades de cada negocio.',
+    'Tu negocio merece una web que venda, no una plantilla más. Diseño y desarrollo a medida, de principio a fin. De lo técnico me encargo yo; tú, de lo tuyo.',
   cta: 'Solicitar presupuesto',
   // Segunda accion del hero, introducida por la maqueta v2: lleva al unico proyecto
   // publicable que hay. Es navegacion, no una afirmacion sobre el negocio.

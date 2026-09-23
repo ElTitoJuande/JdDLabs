@@ -4,8 +4,8 @@
  *  - solido:   relleno `accent` con `accent-ink` encima. 4,8:1, pasa AA.
  *  - fantasma: sin relleno, filete `border`, texto `fg`, filete de acento en hover.
  *  - brillo:   relleno `accent` con un halo desenfocado que lo OSCURECE por el centro
- *              (accent -> accent-ink -> accent) y gira sin parar. Solo para el CTA de
- *              cabecera. El texto pasa a `fg`: sobre el centro oscurecido gana
+ *              (accent -> accent-ink -> accent) y gira sin parar. Para los CTAs
+ *              principales: cabecera, menu movil y hero. El texto pasa a `fg`: sobre el centro oscurecido gana
  *              contraste, mientras que `accent-ink` lo perderia.
  *
  * El resplandor solo aparece en hover y solo en la variante solida: es lo que compensa
