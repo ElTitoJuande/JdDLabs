@@ -61,7 +61,7 @@ export default {
         //   fs-800 -> h2 de seccion:  40px a 375,  88px a 1440
         //   fs-900 -> h1 del hero:    50px a 375, 140px a 1440
         // El extremo superior es el mismo que documenta la constitucion (5,5rem y
-        // 8,75rem ~ 9rem); lo que cambia es la pendiente, porque la curva publicada
+        // 8,75rem); lo que cambia es la pendiente, porque la curva publicada
         // daba 66px de h1 a 375px de ancho y "Desarrollo" desbordaba el gutter. El
         // plan autoriza expresamente bajar el minimo del clamp en vez de parchear
         // con una clase suelta (T006, paso 2).

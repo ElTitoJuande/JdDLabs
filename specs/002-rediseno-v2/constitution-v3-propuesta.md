@@ -257,8 +257,8 @@ Escala fluida, en `tailwind.config.js` como única fuente de verdad:
 | `fs-500` | `clamp(1.25rem, 1.1rem + .7vw, 1.6rem)` |
 | `fs-600` | `clamp(1.6rem, 1.3rem + 1.4vw, 2.4rem)` |
 | `fs-700` | `clamp(2.2rem, 1.6rem + 2.8vw, 3.6rem)` |
-| `fs-800` | `clamp(3rem, 2rem + 4.5vw, 5.5rem)` |
-| `fs-900` | `clamp(4rem, 2.5rem + 7vw, 9rem)` |
+| `fs-800` | `clamp(2.5rem, 1.44rem + 4.5vw, 5.5rem)` |
+| `fs-900` | `clamp(3rem, 1.14rem + 8.45vw, 8.75rem)` |
 
 Tratamiento de titular: peso 500, `letter-spacing: -0.04em` (−0.05em en `fs-900`),
 `line-height: 0.9`, `text-wrap: balance`.
