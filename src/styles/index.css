@@ -11,10 +11,10 @@
 
 @layer base {
   /* Un unico valor gobierna la altura de la cabecera fija y la compensacion de las
-     anclas, de modo que no puedan desincronizarse (research.md R-006). Header.jsx lo
-     sincroniza con la altura real medida. 4,5rem = los 72px de la maqueta. */
+     anclas, de modo que no puedan desincronizarse (research.md R-006). Sale del token
+     `spacing.header`; la variable existe solo para los calc() y scroll-margin-top. */
   :root {
-    --header-h: 4.5rem;
+    --header-h: theme('spacing.header');
   }
 
   html {

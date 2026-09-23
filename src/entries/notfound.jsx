@@ -13,7 +13,7 @@ function NoEncontrada() {
   return (
     <>
       <Header base="/" />
-      <main data-inert-target className="pt-[var(--header-h)]">
+      <main data-inert-target className="pt-header">
         <div className="contenedor flex min-h-[60vh] max-w-2xl flex-col justify-center py-section">
           <p className="font-mono text-fs-600 text-accent-2">404</p>
           <h1 className="mt-6 text-fs-700 text-fg">Esta página no existe</h1>

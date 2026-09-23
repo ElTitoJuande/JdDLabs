@@ -1,4 +1,3 @@
-import { useLayoutEffect, useRef } from 'react';
 import { MobileMenu } from './MobileMenu';
 import { Boton } from './Boton';
 import { secciones, hero } from '../content/copy';
@@ -11,37 +10,13 @@ import { identity } from '../content/identity';
  *   paginas legales y en la 404, para que el ancla salte a la portada correcta.
  */
 export function Header({ base = '' }) {
-  const ref = useRef(null);
-
-  // La altura real de la cabecera alimenta --header-h, que es lo que consume
-  // scroll-margin-top (research.md R-006). Un solo valor gobierna las dos cosas, asi
-  // que ningun encabezado de seccion puede quedar tapado (FR-009b).
-  useLayoutEffect(() => {
-    const elemento = ref.current;
-    if (!elemento) return undefined;
-
-    const sincronizar = () => {
-      document.documentElement.style.setProperty('--header-h', `${elemento.offsetHeight}px`);
-    };
-
-    sincronizar();
-
-    if (typeof ResizeObserver === 'undefined') {
-      window.addEventListener('resize', sincronizar);
-      return () => window.removeEventListener('resize', sincronizar);
-    }
-
-    const observador = new ResizeObserver(sincronizar);
-    observador.observe(elemento);
-    return () => observador.disconnect();
-  }, []);
-
+  // El alto sale del token `spacing.header`, el mismo que compensa `main` y las anclas
+  // (research.md R-006, FR-009b). No se mide: el border-b suma 1px a la altura medida y
+  // una medida que alimenta su propia altura crece 1px por frame sin fin. Con
+  // border-box el filete queda dentro de los 72px.
   return (
-    <header
-      ref={ref}
-      className="fixed inset-x-0 top-0 z-50 border-b border-border bg-bg/75 backdrop-blur-lg"
-    >
-      <div className="contenedor flex h-[var(--header-h)] items-center justify-between gap-4">
+    <header className="fixed inset-x-0 top-0 z-50 h-header border-b border-border bg-bg/75 backdrop-blur-lg">
+      <div className="contenedor flex h-full items-center justify-between gap-4">
         <a
           href={`${base}#inicio`}
           className="flex items-center gap-2.5 no-underline"

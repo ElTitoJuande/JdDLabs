@@ -19,7 +19,7 @@ function PaginaLegal({ documento }) {
   return (
     <>
       <Header base="/" />
-      <main data-inert-target className="pt-[var(--header-h)]">
+      <main data-inert-target className="pt-header">
         <article className="contenedor max-w-3xl py-section">
           <h1 className="text-fs-700 text-fg">{documento.titulo}</h1>
           <p className="mt-5 font-mono text-fs-100 uppercase tracking-[0.16em] text-fg-mute">

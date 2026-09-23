@@ -26,7 +26,7 @@ function Portada() {
   return (
     <>
       <Header />
-      <main data-inert-target className="pt-[var(--header-h)]">
+      <main data-inert-target className="pt-header">
         <Hero />
         <Marquee terminos={capacidades} />
         <ProyectoDestacado />

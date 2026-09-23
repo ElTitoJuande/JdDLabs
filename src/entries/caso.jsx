@@ -64,7 +64,7 @@ function CasoCristaleria() {
     <>
       <Header base="/" />
 
-      <main data-inert-target className="pt-[var(--header-h)]">
+      <main data-inert-target className="pt-header">
         <article className="contenedor max-w-3xl py-section">
           <a
             href="/#proyecto"

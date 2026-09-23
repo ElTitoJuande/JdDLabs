@@ -71,6 +71,9 @@ export default {
       spacing: {
         section: 'clamp(5rem, 9vw, 11rem)',
         gutter: 'clamp(1.25rem, 3.5vw, 4rem)',
+        // Alto de la cabecera fija: los 72px de los dos artboards de la maqueta (375 y
+        // 1440). Es fijo y no se mide: medirlo entraba en bucle con el border-b.
+        header: '4.5rem',
       },
       maxWidth: { site: '1440px' },
       borderRadius: { lg2: '22px', xl2: '32px' },
