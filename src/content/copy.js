@@ -22,8 +22,11 @@ export const hero = {
   ],
   // Copy del propietario (2026-09-23), sustituye al subtitulo literal de FR-002 de la
   // spec 001.
-  subtitulo:
-    'Tu negocio merece una web que venda, no una plantilla más. Diseño y desarrollo a medida, de principio a fin. De lo técnico me encargo yo; tú, de lo tuyo.',
+  // `destacado` va en `fg` y el resto en `fg-dim`: la primera frase es la tesis.
+  subtitulo: {
+    destacado: 'Tu negocio merece una web que venda, no una plantilla más.',
+    resto: 'Diseño y desarrollo a medida, de principio a fin. De lo técnico me encargo yo; tú, de lo tuyo.',
+  },
   cta: 'Solicitar presupuesto',
   // Compromisos bajo el hero. Principio V: cifras dadas y verificadas explicitamente por
   // el propietario el 2026-09-23. No son metricas de resultado sino como trabaja: un solo

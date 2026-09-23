@@ -52,7 +52,7 @@ export function Hero() {
 
         <div className="mt-7 flex flex-col gap-8 md:mt-12 md:flex-row md:items-end md:justify-between">
           <p className="max-w-[38rem] text-fs-400 leading-normal text-fg-dim">
-            {hero.subtitulo}
+            <span className="text-fg">{hero.subtitulo.destacado}</span> {hero.subtitulo.resto}
           </p>
 
           <div className="flex flex-none flex-col gap-3 sm:flex-row sm:items-center sm:gap-3.5">
