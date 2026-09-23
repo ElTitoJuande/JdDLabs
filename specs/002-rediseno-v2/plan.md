@@ -1415,10 +1415,13 @@ romper.
 - [ ] **Paso 1: Borrar el prototipo**
 
 ```bash
-git rm preview-v2.html src/entries/preview-v2.jsx src/styles/preview-v2.css
+rm preview-v2.html src/entries/preview-v2.jsx src/styles/preview-v2.css
 ```
 
 Ya cumplió su función. Dejarlo es dejar una segunda fuente de verdad de la paleta.
+
+`rm` y no `git rm`: los tres ficheros nunca se versionaron, así que `git rm` falla y el
+borrado no genera commit. `git status` queda limpio sin nada que commitear.
 
 - [ ] **Paso 2: Confirmar que no era una entrada de build**
 
