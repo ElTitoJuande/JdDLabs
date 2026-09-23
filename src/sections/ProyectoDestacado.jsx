@@ -17,7 +17,7 @@ export function ProyectoDestacado() {
   const { captura } = proyecto;
 
   return (
-    <section id="proyecto" className="seccion">
+    <section id="proyecto" className="seccion bg-bg-2">
       <div className="contenedor">
         <TituloSeccion eyebrow={titulares.proyecto.eyebrow}>
           {titulares.proyecto.titulo}

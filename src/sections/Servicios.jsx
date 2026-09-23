@@ -20,7 +20,7 @@ export function Servicios() {
   const numero = (i) => String(i + 1).padStart(2, '0');
 
   return (
-    <section id="servicios" className="seccion bg-bg-2">
+    <section id="servicios" className="seccion">
       <div className="contenedor">
         <TituloSeccion eyebrow={titulares.servicios.eyebrow}>
           {titulares.servicios.titulo}

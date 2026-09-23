@@ -216,8 +216,8 @@ export const stack = [
 
 export const secciones = [
   { id: 'inicio', nombre: 'Inicio' },
-  { id: 'proyecto', nombre: 'Proyecto destacado' },
   { id: 'servicios', nombre: 'Servicios' },
+  { id: 'proyecto', nombre: 'Proyecto destacado' },
   { id: 'sobre-mi', nombre: 'Sobre mí' },
   { id: 'contacto', nombre: 'Contacto' },
 ];

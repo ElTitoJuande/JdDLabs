@@ -16,8 +16,9 @@ import { useAnclaInicial } from '../hooks/useAnclaInicial';
 /**
  * Portada v2. Siete bloques, en el orden de la maqueta aprobada.
  *
- * El orden respeta FR-001 (Inicio, Proyecto destacado, Servicios, Sobre mi, Contacto):
- * el marquee y la seccion de tecnologia se intercalan sin alterar esa secuencia. La
+ * Servicios va antes que Proyecto destacado por decision del propietario (2026-09-23),
+ * que sustituye al orden de FR-001 de la spec 001. El marquee y la seccion de
+ * tecnologia se intercalan sin alterar la secuencia de las cinco de la navegacion. La
  * seccion de Proceso que contemplaba design.md no existe aqui porque la maqueta no la
  * trae y su copy nunca llego a escribirse: era recortable por diseño.
  *
@@ -34,8 +35,8 @@ function Portada() {
       <main data-inert-target>
         <Hero />
         <Marquee terminos={capacidades} />
-        <ProyectoDestacado />
         <Servicios />
+        <ProyectoDestacado />
         <Stack />
         <SobreMi />
         <Contacto />
