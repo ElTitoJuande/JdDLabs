@@ -11,6 +11,7 @@ import { Stack } from '../sections/Stack';
 import { SobreMi } from '../sections/SobreMi';
 import { Contacto } from '../sections/Contacto';
 import { capacidades } from '../content/copy';
+import { useAnclaInicial } from '../hooks/useAnclaInicial';
 
 /**
  * Portada v2. Siete bloques, en el orden de la maqueta aprobada.
@@ -23,6 +24,8 @@ import { capacidades } from '../content/copy';
  * `data-inert-target` marca lo que el menu movil deja inerte mientras esta abierto.
  */
 function Portada() {
+  useAnclaInicial();
+
   return (
     <>
       <Header />
