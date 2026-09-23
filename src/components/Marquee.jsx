@@ -7,7 +7,7 @@
  *
  * Dos cosas que la maqueta no puede enseñar y que aqui no son opcionales:
  *  - Pausa en :hover. WCAG 2.2.2 exige poder detener cualquier movimiento automatico
- *    que dure mas de cinco segundos, y este dura 80 y no para nunca.
+ *    que dure mas de cinco segundos, y este dura 130 y no para nunca.
  *  - `motion-reduce:animate-none`, que deja la banda quieta y legible — no la oculta.
  */
 export function Marquee({ terminos }) {

@@ -93,10 +93,11 @@ export default {
           to: { transform: 'translateX(-50%)' },
         },
       },
-      // 80s: la maqueta pedia 38s con letra de 13,6px. Con la banda a fs-600 cada copia
-      // mide el doble (3341px a 1440) y 38s la movia a 88px/s; 80s recupera los ~42px/s.
+      // 130s: la maqueta pedia 38s con 8 terminos a 13,6px. Con la banda a fs-600 y 14
+      // terminos cada copia mide 5538px a 1440; 130s la mantiene a ~42px/s, la
+      // velocidad de la version original. Si cambia la lista, se recalcula.
       animation: {
-        marquee: 'marquee 80s linear infinite',
+        marquee: 'marquee 130s linear infinite',
         // Deriva de las tres manchas del sombreado de los CTAs (variante `brillo` de
         // Boton). Duraciones primas entre si: el conjunto no se repite a la vista. Sus
         // @keyframes viven en index.css.

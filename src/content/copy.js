@@ -51,18 +51,26 @@ export const cabecera = {
 
 // Terminos de la banda en bucle (seccion 2 de la portada v2).
 //
-// Los ocho salen de los tres `servicios` de abajo y de su propio texto ("paneles de
-// gestion, reservas, integraciones con lo que ya usas"). Son capacidades, no clientes
+// Los ocho primeros salen de los tres `servicios` de abajo y de su propio texto
+// ("paneles de gestion, reservas, integraciones con lo que ya usas"). Los seis
+// intercalados (CMS, Mantenimiento, Desarrollo a medida, SEO, Presencia digital,
+// Landing pages) los añade el propietario el 2026-09-23. Son capacidades, no clientes
 // ni cifras: no hay nada que verificar y no hay ni un termino inventado (principio V).
 export const capacidades = [
   'Web corporativa',
+  'Landing pages',
   'Tiendas online',
+  'CMS',
   'Aplicaciones web',
+  'Desarrollo a medida',
   'Paneles de gestión',
   'Reservas',
   'Integraciones',
+  'SEO',
   'Rendimiento',
+  'Presencia digital',
   'Accesibilidad',
+  'Mantenimiento',
 ];
 
 // Aperturas de seccion de la portada v2: eyebrow mono + titular con punto final.
