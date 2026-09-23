@@ -5,7 +5,7 @@
 **Estado**: propuesta, pendiente de revisión por el propietario
 **Referencia visual**: `https://domindez.com/` (Domindez Studio, Málaga), analizada el
 2026-09-20 con navegador headless: DOM, estilos computados y variables CSS del `:root`.
-**Constitución aplicable**: v3.0.0 (ver `constitution-v3-propuesta.md`, pendiente de ratificar)
+**Constitución aplicable**: v3.0.0 (`.specify/memory/constitution.md`, ratificada el 2026-09-23)
 
 ---
 

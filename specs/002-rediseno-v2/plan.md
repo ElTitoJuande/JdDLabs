@@ -17,7 +17,7 @@ de runtime nueva más allá de las dos fuentes.
 `@fontsource-variable/jetbrains-mono`, Cloudflare Pages.
 
 **Spec**: `specs/002-rediseno-v2/design.md`
-**Enmienda constitucional**: `specs/002-rediseno-v2/constitution-v3-propuesta.md`
+**Constitución**: `.specify/memory/constitution.md` (v3.0.0, ratificada el 2026-09-23)
 
 ## Nota sobre TDD
 
@@ -96,7 +96,10 @@ de cada día.
 Al final del día el sitio es oscuro y usa las fuentes nuevas, aunque el layout siga siendo el de
 v1. Es el día de mayor riesgo: si la puerta de Lighthouse cae aquí, cae por las fuentes.
 
-## T001: Ratificar la constitución v3.0.0
+## T001: Ratificar la constitución v3.0.0 ✅
+
+> **Hecha el 2026-09-23.** La v3.0.0 vive en `.specify/memory/constitution.md` y la propuesta
+> se borró con `git rm`. Los pasos quedan como registro.
 
 **Ficheros:**
 - Modificar: `.specify/memory/constitution.md`
@@ -104,17 +107,17 @@ v1. Es el día de mayor riesgo: si la puerta de Lighthouse cae aquí, cae por la
 
 **Produce:** las reglas que las diecisiete tareas siguientes dan por supuestas.
 
-- [ ] **Paso 1: Leer la propuesta entera**
+- [x] **Paso 1: Leer la propuesta entera**
 
 Léela de arriba abajo, no en diagonal. Presta atención a los cinco principios que cambian
 (II, III, IV, VII, XI) y a la tabla de contrastes.
 
-- [ ] **Paso 2: Aprobar explícitamente**
+- [x] **Paso 2: Aprobar explícitamente**
 
 El procedimiento de enmienda de la sección Governance exige aprobación explícita de Juan. Si
 algo no encaja, **se corrige ahora**: el resto del plan depende de este documento.
 
-- [ ] **Paso 3: Aplicar en un único commit**
+- [x] **Paso 3: Aplicar en un único commit**
 
 ```bash
 cd /home/juande00/projects/JdDLabs
