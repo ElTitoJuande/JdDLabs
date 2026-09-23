@@ -1,29 +1,20 @@
 <!--
 Sync Impact Report
-- Cambio de versión: 2.0.0 → 3.0.0
-- Motivo del MAJOR: la sección Governance tipifica "abrir la paleta del principio III"
-  como MAJOR, y eso es exactamente lo que ocurre: la paleta clara de siete colores se
-  retira entera y se sustituye por una paleta oscura de dieciséis tokens. Se redefinen
-  además los principios II (familias tipográficas) y XI (fecha límite), y cualquiera de
-  los tres por separado ya obligaría a MAJOR.
+- Cambio de versión: 3.0.0 → 3.1.0
+- Motivo del MINOR: la sección Governance tipifica "añadir una tercera familia
+  tipográfica" como MINOR. Entra Instrument Serif, acotada al énfasis del titular del
+  hero. No se retira ni redefine ningún principio.
 - Principios modificados:
-  - II. Fuentes auto-alojadas: Fraunces e Inter se retiran; entran Space Grotesk
-    (titulares y cuerpo) y JetBrains Mono (eyebrows, cifras y metadatos). La prohibición
-    de peticiones a Google Fonts se mantiene intacta y sigue siendo NO NEGOCIABLE.
-  - III. Paleta cerrada: nueva tabla de dieciséis tokens sobre fondo oscuro continuo.
-    La regla de fondo —tokens en `tailwind.config.js` como única fuente de verdad, cero
-    literales de color sueltos— no cambia.
-  - IV. Integridad del logo: se fija el blanco puro como forma canónica sobre el fondo
-    oscuro. Se mantiene expresamente la prohibición de recolorearlo con el acento.
-  - VII. Accesibilidad: se añade la regla de los dos acentos y la tabla de contrastes
-    verificados sobre las tres superficies oscuras.
-  - XI. Fecha límite: 2026-09-21 → 2026-09-25, por decisión explícita del propietario el
-    2026-09-20 al aprobar el rediseño v2.
+  - II. Fuentes auto-alojadas: de dos a tres familias. Instrument Serif en cursiva 400,
+    subconjunto latino, vía `@fontsource/instrument-serif` (no existe en corte variable).
+    Uso cerrado: palabras de énfasis del `h1` del hero, nunca un titular entero ni texto
+    corrido. La prohibición de Google Fonts no cambia y sigue siendo NO NEGOCIABLE.
 - Principios añadidos: ninguno.
 - Principios eliminados: ninguno.
-- Secciones modificadas: "Referencia de tokens y assets" (tabla de color y bloque de
-  tipografía rehechos; se añaden la escala tipográfica y el ritmo vertical como valores
-  canónicos).
+- Secciones modificadas: "Referencia de tokens y assets" → Tipografía (fila de la
+  familia serif, techo de `fs-900` de 8,75rem a 7,35rem —117,6px a 1440— y tratamiento
+  del énfasis). El cambio de `fs-900` es por sí solo PATCH; va aquí por ser el mismo
+  rediseño del hero.
 - Placeholders diferidos: ninguno.
 - Templates dependientes: sin cambios; plan-template.md, spec-template.md y
   tasks-template.md leen esta constitución en tiempo de ejecución.
@@ -33,6 +24,8 @@ Historial
 - 2.0.0 (2026-09-08): funciones serverless acotadas al formulario; principio XII.
 - 3.0.0 (2026-09-23): rediseño v2. Paleta oscura, nuevas familias tipográficas, nueva
   fecha límite. Propuesta el 2026-09-21 y ratificada por Juan el 2026-09-23 (T001).
+- 3.1.0 (2026-09-23): tercera familia, Instrument Serif, solo para el énfasis del titular
+  del hero; `fs-900` baja a 7,35rem para que el titular quepa en dos líneas.
 -->
 
 # Constitución del Portfolio JdDLabs
@@ -57,15 +50,20 @@ backend completo.
 
 ### II. Fuentes auto-alojadas (RGPD, NO NEGOCIABLE)
 
-Dos familias, ambas auto-alojadas vía paquete `@fontsource-variable`, ambas en corte variable
-y subconjunto latino:
+Tres familias, todas auto-alojadas vía paquete de `@fontsource` y en subconjunto latino:
 
-- **Space Grotesk** (`@fontsource-variable/space-grotesk`) para titulares y cuerpo.
-- **JetBrains Mono** (`@fontsource-variable/jetbrains-mono`) para eyebrows de sección, cifras
-  y metadatos.
+- **Space Grotesk** (`@fontsource-variable/space-grotesk`, corte variable) para titulares y
+  cuerpo.
+- **JetBrains Mono** (`@fontsource-variable/jetbrains-mono`, corte variable) para eyebrows de
+  sección, cifras y metadatos.
+- **Instrument Serif** (`@fontsource/instrument-serif`, solo cursiva 400) para las palabras de
+  énfasis del `h1` del hero. Uso cerrado: NO SE DEBE usar en un titular entero, en otro
+  titular ni en texto corrido. Es la única familia en corte estático porque no existe en
+  variable, y se importa solo el fichero de cursiva 400.
 
 NO DEBE existir ninguna petición a `fonts.googleapis.com` ni a `fonts.gstatic.com` en ninguna
-página publicada. NO SE DEBE añadir una tercera familia sin enmienda MINOR.
+página publicada. NO SE DEBE añadir una cuarta familia, ni ampliar el uso de la serif, sin
+enmienda MINOR.
 
 Fraunces e Inter quedan retiradas en la v2. El fichero `public/fonts/fraunces-latin-700.woff2`
 y la dependencia `@fontsource/inter` se eliminan del repositorio: una fuente que ya no se usa
@@ -239,6 +237,7 @@ aquí no se replica ese fallo.
 |---|---|---|
 | Titulares y cuerpo | Space Grotesk Variable | `h1`–`h3`, párrafos, botones, navegación |
 | Mono | JetBrains Mono Variable | Eyebrows de sección, cifras, metadatos, etiquetas de stack |
+| Énfasis | Instrument Serif, cursiva 400 | Solo palabras de énfasis del `h1` del hero |
 
 Escala fluida, en `tailwind.config.js` como única fuente de verdad:
 
@@ -252,10 +251,12 @@ Escala fluida, en `tailwind.config.js` como única fuente de verdad:
 | `fs-600` | `clamp(1.6rem, 1.3rem + 1.4vw, 2.4rem)` |
 | `fs-700` | `clamp(2.2rem, 1.6rem + 2.8vw, 3.6rem)` |
 | `fs-800` | `clamp(2.5rem, 1.44rem + 4.5vw, 5.5rem)` |
-| `fs-900` | `clamp(3rem, 1.14rem + 8.45vw, 8.75rem)` |
+| `fs-900` | `clamp(2.5rem, .79rem + 7.29vw, 7.35rem)` |
 
 Tratamiento de titular: peso 500, `letter-spacing: -0.04em` (−0.05em en `fs-900`),
 `line-height: 0.9`, `text-wrap: balance`.
+Tratamiento de énfasis del hero: Instrument Serif cursiva 400, `letter-spacing: -0.02em`. La
+palabra de enlace va en `fg-dim` y la frase clave en `accent-2` (regla de los dos acentos).
 Tratamiento de eyebrow: mono 400, `fs-100`, `text-transform: uppercase`,
 `letter-spacing: 0.16em`, color `fg-mute`.
 
@@ -351,4 +352,4 @@ Sync Impact Report de la cabecera, la aprueba Juan explícitamente y se aplica e
 
 **Revisión de cumplimiento**: en cada ejecución de `/speckit-plan` y de `/speckit-analyze`.
 
-**Version**: 3.0.0 | **Ratified**: 2026-09-08 | **Last Amended**: 2026-09-23
+**Version**: 3.1.0 | **Ratified**: 2026-09-08 | **Last Amended**: 2026-09-23
