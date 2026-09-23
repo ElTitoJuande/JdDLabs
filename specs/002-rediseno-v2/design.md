@@ -112,12 +112,13 @@ Fija, altura `spacing.header` (4,5rem). Tiene dos estados:
 
 Contenido: logo + wordmark a la izquierda, navegación centrada en enlaces de `fs-200` color
 `fg-dim` con padding 8/16 y radio pill en hover, y CTA pill a la derecha en tamaño `sm` (~46px)
-con el texto «Hablemos» y flecha, variante `brillo` de `Boton`: relleno `accent` con un halo desenfocado
-(`accent → accent-ink → accent`, opacidad 0,75) que oscurece el centro y gira sin parar, texto
-`fg`. El disco mide `max(10rem, 110%)` para cubrir también el CTA del hero, más ancho. En hover
-el halo encoge y aparece `shadow-glow`. La flecha es CSS (`.flecha`): en reposo solo la punta,
-«›»; en hover y foco aparece el asta y la punta avanza 3px hasta formar «→». Con movimiento
-reducido no gira nada. El menú móvil usa el mismo CTA.
+con el texto «Hablemos» y flecha, variante `brillo` de `Boton`: relleno `accent`, texto `fg` y
+un sombreado oscuro que deriva al azar — una capa base de `accent-ink` al 25 % y tres manchas
+desenfocadas que se mueven en 7, 11 y 13 s (primos entre sí: no se lee ningún patrón). Las
+manchas solo oscurecen, así que el contraste del texto no baja de 5,84:1. En hover aparece
+`shadow-glow`. La flecha es CSS (`.flecha`): en reposo solo la punta, «›»; en hover y foco
+aparece el asta y la punta avanza 3px hasta formar «→». Con movimiento reducido las manchas
+quedan quietas. El menú móvil y el hero usan el mismo CTA.
 
 ### 4.2 Hero
 
@@ -147,50 +148,45 @@ Rehecho el 2026-09-23 sobre la referencia de Domindez, medida con navegador head
 
 ### 4.3 Marquee de capacidades
 
-Banda a `bg-2`, términos en mono `fs-600` (38px a 1440) en `fg-dim`, separados por `✦` en
+Banda a `bg-2`, catorce términos en mono `fs-600` (38px a 1440) en `fg`, separados por `✦` en
 `accent-2`; 139px de alto a 1440 (antes 73px, con letra de 13,6px). Animación `translateX`
-infinita, `80s`, `linear`: con la letra más grande cada copia mide 3341px y 80s la mantiene a
-~42px/s, la velocidad de la versión pequeña. Dos copias del track para el bucle y pausa en hover.
+infinita, `130s`, `linear`: con catorce términos cada copia mide 5538px y 130s la mantiene a
+~42px/s, la velocidad de la versión original. Dos copias del track para el bucle.
 Pausa en `:hover` y anulada entera bajo `prefers-reduced-motion`.
 
 ### 4.4 Título de sección
 
 ```
-EYEBROW MONO                    ← fs-100, mono, uppercase, ls .16em, fg-mute
+—— EYEBROW MONO                 ← raya 28px en accent + fs-100, mono, uppercase, ls .16em, fg-mute
 Titular en dos líneas.          ← fs-800, peso 500, ls -.04em, lh .9, fg
 ```
 
 El titular lleva punto final, como en la referencia. `margin-top` entre eyebrow y titular: 24px.
+La raya `accent` delante del eyebrow (2026-09-23) es la misma del hero: el indicador de marca de
+cada apertura, en `TituloSeccion` y en un solo sitio.
 
-### 4.5 Bento de servicios
+### 4.5 Servicios: índice editorial
 
-Rejilla de 3 columnas, `gap: 16px`. La primera celda ocupa `span 2 / span 2` (destacada):
-fondo `bg-elev`, radio 22px, padding 36px, título a `fs-600`. Las demás: fondo `bg-3`, radio
-22px, padding 28px, título a `fs-500`. Filete `border` en todas; en hover pasa a `border-accent`.
+Rehecho el 2026-09-23. Con tres servicios el bento dejaba ~300px vacíos en la celda doble, así
+que cada servicio pasa a ser una fila a todo el ancho, separada por filetes: número mono
+(`fg-mute`, `accent-2` en hover), título `fs-700`, descripción `fs-300` en `fg-dim` con sus
+claves, y flecha en círculo que se rellena de `accent` en hover y foco. La fila entera enlaza a
+Contacto. Claves: recortes literales de la descripción, en píldora `accent-dim` con filete
+`border-accent`, punto `accent-2` y texto `fg`. En móvil, apilado con la flecha arriba.
 
-Con tres servicios: una celda destacada + dos normales. Por debajo de 768px, una columna y todas
-las celdas iguales.
+### 4.6 Proyecto destacado
 
-### 4.6 Tarjeta de proyecto
+Rehecho el 2026-09-23 en dos columnas (`1.15fr / 1fr` desde `md`, apilado en móvil):
 
-```
-┌────────────────────────────┐
-│  [imagen 3:2]        (01)  │  ← número: mono fs-100, accent-2,
-│                            │     píldora rgba(0,0,0,.75), abs. arriba-dcha
-├────────────────────────────┤
-│  Cristalería Ruteña   2026 │  ← h3 fs-500 + año mono fg-mute
-│  VIDRIO Y ALUMINIO         │  ← categoría mono fg-mute
-│  Contexto en una línea…    │  ← fs-300 fg-dim
-└────────────────────────────┘
-```
+- **Izquierda**: captura 3:2 con radio 22px y filete `border`; número `01` mono `accent-2` en
+  píldora abajo a la derecha, donde no tapa nada de la captura. La imagen no es enlace.
+- **Derecha**: año / categoría en mono `fg-mute`, título `fs-700`, descripción completa en
+  `fg-dim`, y los dos destinos: «Visitar en vivo» (botón fantasma con un punto `accent-2` que
+  late, externo) y «Ver caso de estudio» (enlace `accent-2` con la flecha de los CTAs).
 
-Fondo `bg-3`, radio 22px, filete `border` → `border-accent` en hover. Marco de imagen con
-`aspect-ratio: 3/2` y fondo `bg-elev` mientras carga.
-
-**Cambio respecto a v1**: hoy la tarjeta tiene dos CTAs compitiendo ("Visitar en vivo" y "Ver
-caso de estudio"). En v2 **toda la tarjeta es un enlace al caso de estudio**, y "Visitar en
-vivo" pasa a ser un enlace secundario dentro de la página del caso. Un destino primario por
-tarjeta.
+**Cambio respecto a la primera v2**: la tarjeta entera enlazaba al caso de estudio y «Visitar
+en vivo» vivía solo dentro del caso. El propietario pide el indicador de en vivo aquí, así que
+vuelven los dos destinos, cada uno con su peso.
 
 ### 4.7 Stack
 
