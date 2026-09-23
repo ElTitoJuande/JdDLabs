@@ -37,6 +37,13 @@
     @apply bg-bg text-fg font-sans antialiased;
   }
 
+  /* Seleccion de texto en el magenta de la marca y no en el azul del sistema. Relleno
+     `accent` con `accent-ink` encima: 4,8:1, el mismo par que el boton solido. */
+  ::selection {
+    background-color: theme('colors.accent');
+    color: theme('colors.accent-ink');
+  }
+
   /* Tratamiento unico de titular: peso 500 y no 700, tracking cerrado y line-height
      por debajo de 1. Es lo que separa un titular grande de un titular caro. */
   h1,
