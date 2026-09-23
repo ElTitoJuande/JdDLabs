@@ -1,12 +1,12 @@
 /**
- * Pill de accion, en dos variantes.
+ * Pill de accion, en tres variantes.
  *
  *  - solido:   relleno `accent` con `accent-ink` encima. 4,8:1, pasa AA.
  *  - fantasma: sin relleno, filete `border`, texto `fg`, filete de acento en hover.
- *  - brillo:   relleno `accent` con un halo desenfocado que lo OSCURECE por el centro
- *              (accent -> accent-ink -> accent) y gira sin parar. Para los CTAs
- *              principales: cabecera, menu movil y hero. El texto pasa a `fg`: sobre el centro oscurecido gana
- *              contraste, mientras que `accent-ink` lo perderia.
+ *  - brillo:   relleno `accent` con un sombreado oscuro que deriva al azar (una capa
+ *              base y tres manchas, en index.css). Para los CTAs principales:
+ *              cabecera, menu movil y hero. Texto `fg`: sobre el magenta oscurecido
+ *              pasa AA, mientras que `accent-ink` no.
  *
  * El resplandor solo aparece en hover y solo en la variante solida: es lo que compensa
  * que el magenta tenga menos luminancia que el lima de la referencia visual.
@@ -68,6 +68,8 @@ export function Boton({
     >
       {variante === 'brillo' && (
         <span aria-hidden="true" className="boton-brillo">
+          <span />
+          <span />
           <span />
         </span>
       )}

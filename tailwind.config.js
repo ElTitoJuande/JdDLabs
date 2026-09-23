@@ -97,9 +97,12 @@ export default {
       // mide el doble (3341px a 1440) y 38s la movia a 88px/s; 80s recupera los ~42px/s.
       animation: {
         marquee: 'marquee 80s linear infinite',
-        // Giro del halo interior del CTA de cabecera (variante `brillo` de Boton). Su
-        // @keyframes vive en index.css: con @apply, Tailwind 3 lo emite vacio.
-        orbita: 'orbita 3s linear infinite',
+        // Deriva de las tres manchas del sombreado de los CTAs (variante `brillo` de
+        // Boton). Duraciones primas entre si: el conjunto no se repite a la vista. Sus
+        // @keyframes viven en index.css.
+        'deriva-a': 'deriva-a 7s ease-in-out infinite',
+        'deriva-b': 'deriva-b 11s ease-in-out infinite',
+        'deriva-c': 'deriva-c 13s ease-in-out infinite',
       },
     },
   },

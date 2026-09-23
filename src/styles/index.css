@@ -104,59 +104,94 @@
     @apply border-t border-border py-section;
   }
 
-  /* Halo interior de los CTAs principales (Boton, variante `brillo`). Un disco desenfocado
-     que oscurece el magenta: el color central del degradado es `accent-ink`, y como el
-     disco gira sobre su centro, el centro del boton (donde va el texto `fg`) es siempre
-     la parte mas oscura. Los bordes quedan en `accent`. Gira siempre; en hover encoge.
-     Con movimiento reducido no gira. */
+  /* Sombreado de los CTAs principales (Boton, variante `brillo`). Dos capas:
+     - base: `accent-ink` al 25 % sobre todo el boton. Oscurece el magenta de forma
+       uniforme y fija el suelo de contraste del texto `fg` (~5,9:1 en el punto mas claro).
+     - tres manchas oscuras que derivan por trayectorias distintas en 7, 11 y 13 s. Al no
+       tener divisores comunes, la combinacion tarda ~1000 s en repetirse y no se lee
+       ningun patron. Las manchas solo oscurecen, asi que el contraste nunca baja del
+       suelo. Con movimiento reducido quedan quietas. */
   .boton-brillo {
     position: absolute;
     inset: 0;
     z-index: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    overflow: hidden;
+    border-radius: inherit;
     pointer-events: none;
   }
 
-  /* max() para que el disco cubra tambien el CTA del hero, mas ancho: si no llega a los
-     bordes del texto, el `fg` queda sobre `accent` puro, a 3,7:1. */
-  .boton-brillo > span {
-    flex: none;
-    width: max(10rem, 110%);
-    aspect-ratio: 1;
-    border-radius: 9999px;
-    background: linear-gradient(
-      90deg,
-      theme('colors.accent'),
-      theme('colors.accent-ink'),
-      theme('colors.accent')
-    );
-    filter: blur(20px);
-    /* 0,75: sombreado marcado, frente al 0,5 del original. */
-    opacity: 0.75;
-    transition-property: width;
-    transition-duration: theme('transitionDuration.base');
-    transition-timing-function: theme('transitionTimingFunction.out-soft');
+  .boton-brillo::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-color: theme('colors.accent-ink');
+    opacity: 0.25;
   }
 
-  .group:hover .boton-brillo > span,
-  .group:focus-visible .boton-brillo > span {
-    width: max(8rem, 95%);
+  .boton-brillo > span {
+    position: absolute;
+    width: 70%;
+    aspect-ratio: 1;
+    border-radius: 9999px;
+    background: radial-gradient(closest-side, theme('colors.accent-ink'), transparent);
+    filter: blur(8px);
+    opacity: 0.75;
+  }
+
+  .boton-brillo > span:nth-child(1) {
+    left: -10%;
+    top: -60%;
+  }
+
+  .boton-brillo > span:nth-child(2) {
+    left: 45%;
+    top: -20%;
+    width: 55%;
+  }
+
+  .boton-brillo > span:nth-child(3) {
+    left: 15%;
+    top: 10%;
+    width: 60%;
   }
 
   @media (prefers-reduced-motion: no-preference) {
-    .boton-brillo > span {
-      animation: theme('animation.orbita');
+    .boton-brillo > span:nth-child(1) {
+      animation: theme('animation.deriva-a');
+    }
+
+    .boton-brillo > span:nth-child(2) {
+      animation: theme('animation.deriva-b');
+    }
+
+    .boton-brillo > span:nth-child(3) {
+      animation: theme('animation.deriva-c');
     }
   }
 
-  /* El token `animation.orbita` vive en la config; su @keyframes, aqui. Declarado en la
-     config, Tailwind solo lo emite si alguien usa la clase animate-orbita. */
-  @keyframes orbita {
-    to {
-      transform: rotate(360deg);
-    }
+  /* Los tokens `animation.deriva-*` viven en la config; sus @keyframes, aqui: declarados
+     en la config, Tailwind solo los emite si alguien usa la clase animate-*. Porcentajes
+     del propio tamaño de la mancha, asi que escalan con el boton. */
+  @keyframes deriva-a {
+    0% { transform: translate(0, 0) scale(1); }
+    30% { transform: translate(55%, 35%) scale(1.15); }
+    65% { transform: translate(20%, 70%) scale(0.9); }
+    100% { transform: translate(0, 0) scale(1); }
+  }
+
+  @keyframes deriva-b {
+    0% { transform: translate(0, 0) scale(1); }
+    40% { transform: translate(-60%, 45%) scale(0.85); }
+    75% { transform: translate(-25%, -10%) scale(1.2); }
+    100% { transform: translate(0, 0) scale(1); }
+  }
+
+  @keyframes deriva-c {
+    0% { transform: translate(0, 0) scale(1); }
+    25% { transform: translate(40%, -30%) scale(1.1); }
+    55% { transform: translate(-35%, 20%) scale(0.95); }
+    80% { transform: translate(10%, 35%) scale(1.15); }
+    100% { transform: translate(0, 0) scale(1); }
   }
 
   /* Flecha de los CTAs (Boton, prop `flecha`). El asta es una barra de 2px; la punta, un
