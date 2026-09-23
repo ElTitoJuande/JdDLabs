@@ -8,3 +8,6 @@ dist/
 
 # Metadatos que Windows adjunta a los ficheros descargados
 *:Zone.Identifier
+
+# Cache local del hook de impeccable: se regenera en cada sesion
+.impeccable/hook.cache.json
