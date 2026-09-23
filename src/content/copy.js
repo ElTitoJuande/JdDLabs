@@ -25,6 +25,16 @@ export const hero = {
   subtitulo:
     'Tu negocio merece una web que venda, no una plantilla más. Diseño y desarrollo a medida, de principio a fin. De lo técnico me encargo yo; tú, de lo tuyo.',
   cta: 'Solicitar presupuesto',
+  // Compromisos bajo el hero. Principio V: cifras dadas y verificadas explicitamente por
+  // el propietario el 2026-09-23. No son metricas de resultado sino como trabaja: un solo
+  // interlocutor, ninguna plantilla, respuesta por WhatsApp en menos de 24 h. Si alguna
+  // deja de ser cierta, se quita el item; no se sustituye por otra cifra.
+  // `lectura` es lo que oye el lector de pantalla cuando la cifra lleva simbolos.
+  compromisos: [
+    { cifra: '1', texto: 'Interlocutor, del primer café al lanzamiento' },
+    { cifra: '0', texto: 'Plantillas. Código escrito para tu negocio' },
+    { cifra: '<24 h', lectura: 'Menos de 24 horas', texto: 'Respuesta por WhatsApp' },
+  ],
   // Segunda accion del hero, introducida por la maqueta v2: lleva al unico proyecto
   // publicable que hay. Es navegacion, no una afirmacion sobre el negocio.
   ctaSecundario: 'Ver trabajo',

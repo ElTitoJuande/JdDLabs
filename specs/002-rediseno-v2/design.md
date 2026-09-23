@@ -112,10 +112,11 @@ Fija, altura `spacing.header` (4,5rem). Tiene dos estados:
 
 Contenido: logo + wordmark a la izquierda, navegación centrada en enlaces de `fs-200` color
 `fg-dim` con padding 8/16 y radio pill en hover, y CTA pill a la derecha en tamaño `sm` (~46px)
-con el texto «Hablemos →», variante `brillo` de `Boton`: relleno `accent` con un halo desenfocado
+con el texto «Hablemos» y flecha, variante `brillo` de `Boton`: relleno `accent` con un halo desenfocado
 (`accent → accent-ink → accent`, opacidad 0,75) que oscurece el centro y gira sin parar, texto
 `fg`. El disco mide `max(10rem, 110%)` para cubrir también el CTA del hero, más ancho. En hover
-el halo encoge y aparece `shadow-glow`; la flecha se separa 4px en hover y foco. Con movimiento
+el halo encoge y aparece `shadow-glow`. La flecha es CSS (`.flecha`): en reposo solo la punta,
+«›»; en hover y foco aparece el asta y la punta avanza 3px hasta formar «→». Con movimiento
 reducido no gira nada. El menú móvil usa el mismo CTA.
 
 ### 4.2 Hero
@@ -135,14 +136,21 @@ Rehecho el 2026-09-23 sobre la referencia de Domindez, medida con navegador head
   lo técnico me encargo yo; tú, de lo tuyo.» (copy del propietario, sustituye al de FR-002 de la
   spec 001). Las dos acciones a la derecha en la misma fila desde `md`: la principal con la
   variante `brillo`, igual que el CTA de cabecera, y la fantasma. En móvil, apilados.
+- Bajo los CTAs, tras un filete: tres compromisos con cifra mono `fs-600` en `fg` y etiqueta
+  eyebrow — «1 · Interlocutor, del primer café al lanzamiento», «0 · Plantillas. Código escrito
+  para tu negocio», «<24 h · Respuesta por WhatsApp». Cifras dadas y verificadas por el
+  propietario el 2026-09-23 (principio V). Tres columnas con filete vertical desde `sm`; en
+  móvil, filas con la cifra a la izquierda. «<24 h» se lee como «Menos de 24 horas».
 - Halo radial de `accent-glow` como decoración de fondo, `pointer-events: none`.
 - Verificado: CTAs sin scroll de 375×667 a 1920×1080. Única excepción, 320×568: el segundo CTA
   queda 2px por debajo del borde.
 
 ### 4.3 Marquee de capacidades
 
-Banda a `bg-2`, padding vertical 32px, sin filete. Términos separados por `✦` en `accent-2`.
-Animación `translateX` infinita, duración `60s`, `linear`. Dos copias del track para el bucle.
+Banda a `bg-2`, términos en mono `fs-600` (38px a 1440) en `fg-dim`, separados por `✦` en
+`accent-2`; 139px de alto a 1440 (antes 73px, con letra de 13,6px). Animación `translateX`
+infinita, `80s`, `linear`: con la letra más grande cada copia mide 3341px y 80s la mantiene a
+~42px/s, la velocidad de la versión pequeña. Dos copias del track para el bucle y pausa en hover.
 Pausa en `:hover` y anulada entera bajo `prefers-reduced-motion`.
 
 ### 4.4 Título de sección
