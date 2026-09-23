@@ -21,7 +21,7 @@ export function Marquee({ terminos }) {
           key={`${termino}-${i}`}
           className="flex items-center gap-6 whitespace-nowrap md:gap-10"
         >
-          <span className="font-mono text-fs-600 uppercase tracking-[0.02em] text-fg-dim">
+          <span className="font-mono text-fs-600 uppercase tracking-[0.02em] text-fg">
             {termino}
           </span>
           <span aria-hidden="true" className="text-fs-400 text-accent-2">
