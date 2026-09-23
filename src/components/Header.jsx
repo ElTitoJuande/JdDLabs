@@ -59,10 +59,7 @@ export function Header({ base = '' }) {
         <div className="flex items-center gap-2">
           {/* El desplazamiento suave lo hace scroll-behavior en CSS: ni una linea de
               JavaScript de scroll (FR-008, research.md R-006). */}
-          <Boton
-            href={`${base}#contacto`}
-            className="hidden px-6 py-3 text-fs-200 md:inline-flex"
-          >
+          <Boton href={`${base}#contacto`} tamano="sm" className="hidden md:inline-flex">
             {hero.cta}
           </Boton>
           <MobileMenu base={base} />
