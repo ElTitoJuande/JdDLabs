@@ -223,10 +223,12 @@ export const sobreMi = {
     'Soy desarrollador web y trabajo con empresas que necesitan una presencia digital profesional o soluciones web adaptadas a su negocio. Trabajo desde Rute con empresas de la localidad y alrededores.',
   refuerzo:
     'La misma persona que atenderá tu llamada, diseñará tu proyecto y escribirá cada línea de código.',
-  // Foto PROVISIONAL del propietario (2026-09-24), 571x571 en WebP (13,2 KB, fondo recortado). Si se
-  // retira, la seccion vuelve a una sola columna sin hueco (null = sin imagen).
+  // Foto del propietario (2026-09-24), 571x571 en WebP (13,2 KB) con el fondo
+  // recortado: va sin marco, sobre el fondo de la seccion. Nombre de archivo nuevo para
+  // que ninguna cache sirva la version con fondo. Si se retira, la seccion vuelve a una
+  // sola columna sin hueco (null = sin imagen).
   foto: {
-    src: '/img/juan-de-dios.webp',
+    src: '/img/juan-de-dios-recorte.webp',
     alt: 'Juan de Dios, desarrollador de JdDLabs, con polo negro y los brazos cruzados.',
     ancho: 571,
     alto: 571,

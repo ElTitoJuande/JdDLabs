@@ -35,7 +35,13 @@ export function SobreMi() {
 
           {foto && (
             <Reveal retardo={80} className="md:justify-self-end">
-              <div className="aspect-square w-full max-w-[26rem] overflow-hidden rounded-lg2 border border-border bg-bg-3">
+              {/* Sin marco: la foto viene recortada. Un halo `accent-dim` detras separa el
+                  polo negro del fondo oscuro de la seccion. */}
+              <div className="relative aspect-square w-full max-w-[26rem]">
+                <div
+                  aria-hidden="true"
+                  className="absolute inset-[12%] rounded-full bg-accent-dim blur-3xl"
+                />
                 <img
                   src={foto.src}
                   alt={foto.alt}
@@ -43,7 +49,7 @@ export function SobreMi() {
                   height={foto.alto}
                   loading="lazy"
                   decoding="async"
-                  className="h-full w-full object-cover"
+                  className="relative h-full w-full object-contain"
                 />
               </div>
             </Reveal>
