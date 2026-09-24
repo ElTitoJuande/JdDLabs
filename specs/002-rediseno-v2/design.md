@@ -117,12 +117,11 @@ wordmark («JdD» bold `fg`, «Labs» regular `fg` al 60 %), sin cambios de esta
 `fg-dim` con padding 8/16 y radio pill en hover, y CTA pill a la derecha en tamaño `sm` (~46px)
 con el texto «Hablemos» y flecha, variante `brillo` de `Boton`: botón de cristal oscuro
 (2026-09-24, adaptado de un componente de referencia del propietario). `bg-3` teñido de
-`accent` al 30 % —sin tinte no destacaba sobre el botón fantasma— con filete `border-accent`, brillos interiores de `fg` en capas y anillo exterior de sombras; icono de
-destellos en `accent-2` que parpadea, y letras con una onda de brillo escalonada 80ms (de
-`fg-dim` a `fg` con destello `accent-2`). En hover y foco: filete `accent`, brillos interiores
+`accent` al 65 % —tiene que destacar sobre el botón fantasma— con filete `border-accent`, brillos interiores de `fg` en capas y anillo exterior de sombras; icono de
+destellos en `fg` que parpadea, y letras siempre en `fg` recorridas por una onda escalonada
+80ms de destello `accent-2`. En hover y foco: filete `accent`, brillos interiores
 teñidos de `accent-2` desde abajo y resplandor fino en el borde inferior. En hover y foco la onda
-se detiene y las letras quedan en `fg`. Contraste medido: letra apagada en reposo 4,63:1 en el
-peor caso; en hover, 9,42:1. Con movimiento reducido no hay onda
+se detiene. Contraste medido del texto: 5,80:1 en el peor caso (cabecera, hover). Con movimiento reducido no hay onda
 ni parpadeo. La flecha es CSS (`.flecha`): en reposo solo la punta, «›»; en hover y foco
 aparece el asta y la punta avanza 3px hasta formar «→». El menú móvil y el hero usan el mismo
 CTA.

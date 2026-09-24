@@ -105,19 +105,19 @@
   }
 
   /* CTAs principales (Boton, variante `brillo`): boton de cristal oscuro.
-     - Reposo: `bg-3` teñido de `accent` al 30 %, filete `border-accent`, brillos interiores de `fg` en capas
+     - Reposo: `bg-3` teñido de `accent` al 65 %, filete `border-accent`, brillos interiores de `fg` en capas
        (arriba mas intensos) y un anillo exterior de sombras que lo biselan.
      - Hover y foco: el filete pasa a `accent`, los brillos interiores se tiñen de
        `accent-2` desde abajo y aparece un resplandor fino en el borde inferior.
-     - Letras: onda de brillo escalonada de `fg-dim` a `fg` con destello `accent-2`. En su
-       punto mas apagado, `fg-dim` sobre `bg-3` queda a 6,9:1: pasa AA en todo momento.
-     Con movimiento reducido no hay onda ni parpadeo: letras en `fg`, icono quieto. */
-  /* Tinte `accent` al 30 % sobre `bg-3`: sin el, el CTA principal no destacaba sobre el
-     boton fantasma. Al 40 % la letra apagada bajaria a 4,1:1; al 30 % queda por encima
-     de AA tambien en hover. */
+     - Letras: siempre en `fg`; la onda escalonada es un destello `accent-2` que las
+       recorre (text-shadow), sin apagarlas, para que el tinte pueda ser intenso.
+     Con movimiento reducido no hay onda ni parpadeo. */
+  /* Tinte `accent` al 65 % sobre `bg-3`: el CTA tiene que destacar sobre el boton
+     fantasma. Es posible porque las letras ya no se apagan: con `fg` fijo el peor caso
+     medido es 5,8:1 (cabecera, hover). */
   .boton-cristal {
     background-color: theme('colors.bg-3');
-    background-image: linear-gradient(theme('colors.accent / 30%'), theme('colors.accent / 30%'));
+    background-image: linear-gradient(theme('colors.accent / 65%'), theme('colors.accent / 65%'));
     border: 1px solid theme('colors.border-accent');
     box-shadow:
       inset 0 1px 1px theme('colors.fg / 20%'),
@@ -180,8 +180,9 @@
     width: 1.15em;
     height: 1.15em;
     flex: none;
-    fill: theme('colors.accent-2');
-    filter: drop-shadow(0 0 2px theme('colors.accent-2 / 60%'));
+    /* `fg` y no `accent-2`: sobre el tinte magenta el rosa se perdia. */
+    fill: theme('colors.fg');
+    filter: drop-shadow(0 0 2px theme('colors.accent-2 / 80%'));
     transition: fill theme('transitionDuration.fast'), filter theme('transitionDuration.fast');
   }
 
@@ -193,7 +194,6 @@
 
   @media (prefers-reduced-motion: no-preference) {
     .boton-cristal__letra {
-      color: theme('colors.fg-dim');
       animation: theme('animation.letra');
     }
 
@@ -206,12 +206,10 @@
       animation: none;
     }
 
-    /* En hover y foco la onda se detiene y las letras quedan en `fg`: el resplandor
-       aclara el fondo y la letra apagada (`fg-dim`) bajaria de AA sobre el tinte. */
+    /* En hover y foco la onda se detiene: el boton entero ya se ilumina. */
     .boton-cristal:hover .boton-cristal__letra,
     .boton-cristal:focus-visible .boton-cristal__letra {
       animation: none;
-      color: theme('colors.fg');
     }
   }
 
@@ -220,8 +218,7 @@
      clase animate-*. */
   @keyframes letra {
     50% {
-      color: theme('colors.fg');
-      text-shadow: 0 0 6px theme('colors.accent-2 / 70%');
+      text-shadow: 0 0 8px theme('colors.accent-2 / 90%');
     }
   }
 
