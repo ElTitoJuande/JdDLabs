@@ -218,13 +218,13 @@
      clase animate-*. */
   @keyframes letra {
     50% {
-      text-shadow: 0 0 5px theme('colors.accent-2 / 45%');
+      text-shadow: 0 0 8px theme('colors.accent-2 / 90%');
     }
   }
 
   @keyframes chispa {
     50% {
-      opacity: 0.7;
+      opacity: 0.3;
     }
   }
 
