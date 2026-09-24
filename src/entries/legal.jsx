@@ -74,7 +74,7 @@ function PaginaLegal({ documento }) {
           ))}
         </article>
       </main>
-      <Footer />
+      <Footer base="/" />
     </>
   );
 }

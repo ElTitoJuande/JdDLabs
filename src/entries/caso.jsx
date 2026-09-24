@@ -155,7 +155,7 @@ function CasoCristaleria() {
         </article>
       </main>
 
-      <Footer />
+      <Footer base="/" />
     </>
   );
 }

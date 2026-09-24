@@ -44,6 +44,14 @@ export const hero = {
   ctaSecundario: 'Ver trabajo',
 };
 
+// Pie (2026-09-24). `eyebrow` es copy nuevo, tomado de la referencia visual con el visto
+// bueno pendiente del propietario. `descripcion` NO es nueva: es la del JSON-LD de negocio
+// local de index.html, literal.
+export const pie = {
+  eyebrow: '¿Listo para empezar?',
+  descripcion: 'Desarrollo web para pymes y autónomos en Rute y alrededores.',
+};
+
 // CTA de la cabecera, en escritorio y en el menu movil. Mas corto que `hero.cta`: en
 // la barra compite con la navegacion y tiene que caber en un boton de ~40px.
 export const cabecera = {

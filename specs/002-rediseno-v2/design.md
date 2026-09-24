@@ -229,6 +229,21 @@ filete `accent`; a la derecha la foto del propietario, cuadrada, radio 22px y fi
 **Foto provisional** (2026-09-24, `sobreMi.foto` en `copy.js`); con `null`, una sola columna.
 En móvil la foto va debajo del texto.
 
+### 4.10 Pie
+
+Rehecho el 2026-09-24 sobre el pie de la referencia, en las cinco páginas:
+
+- **Llamada a la acción**: raya `accent` + eyebrow «¿Listo para empezar?» y «Hablemos ↗» a
+  `fs-800` en Space Grotesk, que enlaza a Contacto. No va en serif: la 3.2.0 la acota al `h1`
+  del hero y al cierre de los `h2` de sección.
+- **Wordmark gigante**: SVG que se escala al ancho del contenedor (así no hace falta un paso
+  nuevo en la escala tipográfica), con el tratamiento del wordmark de la cabecera: «JdD» bold
+  `fg`, «Labs» regular `fg` al 60 %. Nunca el acento (principio IV). Decorativo.
+- **Columnas**: Estudio (lugar y la descripción del JSON-LD, literal), Contacto (email,
+  teléfono y WhatsApp) y Navegación (las secciones, con prefijo `/` fuera de la portada).
+- **Barra legal**: © año, «Aviso legal» y «Política de privacidad» (obligatorios, principio
+  XII) y el lugar en mono.
+
 ## 5. Movimiento
 
 | Efecto | Alcance | Recortable |

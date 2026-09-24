@@ -25,7 +25,7 @@ function NoEncontrada() {
           </div>
         </div>
       </main>
-      <Footer />
+      <Footer base="/" />
     </>
   );
 }
