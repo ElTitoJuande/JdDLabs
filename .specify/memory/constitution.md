@@ -1,20 +1,19 @@
 <!--
 Sync Impact Report
-- Cambio de versión: 3.0.0 → 3.1.0
-- Motivo del MINOR: la sección Governance tipifica "añadir una tercera familia
-  tipográfica" como MINOR. Entra Instrument Serif, acotada al énfasis del titular del
-  hero. No se retira ni redefine ningún principio.
+- Cambio de versión: 3.1.0 → 3.2.0
+- Motivo del MINOR: amplía la guía sin redefinir ningún principio. El principio II ya
+  exigía enmienda MINOR para ampliar el uso de la serif, y el IV gana una guía nueva.
 - Principios modificados:
-  - II. Fuentes auto-alojadas: de dos a tres familias. Instrument Serif en cursiva 400,
-    subconjunto latino, vía `@fontsource/instrument-serif` (no existe en corte variable).
-    Uso cerrado: palabras de énfasis del `h1` del hero, nunca un titular entero ni texto
-    corrido. La prohibición de Google Fonts no cambia y sigue siendo NO NEGOCIABLE.
+  - II. Fuentes auto-alojadas: el uso de Instrument Serif se amplía del `h1` del hero al
+    cierre de los `h2` de apertura de sección.
+  - IV. Integridad del logo: sin cambios en el monograma, que sigue en blanco puro sin
+    recolorear. Se añade el tratamiento del wordmark ("JdD" en bold `fg`, "Labs" en regular
+    `fg` al 60 %) y el filete vertical en `accent` entre monograma y wordmark, que no es
+    parte del logo.
 - Principios añadidos: ninguno.
 - Principios eliminados: ninguno.
-- Secciones modificadas: "Referencia de tokens y assets" → Tipografía (fila de la
-  familia serif, techo de `fs-900` de 8,75rem a 7,35rem —117,6px a 1440— y tratamiento
-  del énfasis). El cambio de `fs-900` es por sí solo PATCH; va aquí por ser el mismo
-  rediseño del hero.
+- Secciones modificadas: "Referencia de tokens y assets" → Tipografía (uso y tratamiento
+  del énfasis serif) y Assets y build (fila del logo).
 - Placeholders diferidos: ninguno.
 - Templates dependientes: sin cambios; plan-template.md, spec-template.md y
   tasks-template.md leen esta constitución en tiempo de ejecución.
@@ -26,6 +25,8 @@ Historial
   fecha límite. Propuesta el 2026-09-21 y ratificada por Juan el 2026-09-23 (T001).
 - 3.1.0 (2026-09-23): tercera familia, Instrument Serif, solo para el énfasis del titular
   del hero; `fs-900` baja a 7,35rem para que el titular quepa en dos líneas.
+- 3.2.0 (2026-09-24): la serif de énfasis llega al cierre de los `h2` de sección; guía del
+  wordmark y del filete `accent` junto al monograma, que sigue en blanco puro.
 -->
 
 # Constitución del Portfolio JdDLabs
@@ -57,8 +58,8 @@ Tres familias, todas auto-alojadas vía paquete de `@fontsource` y en subconjunt
 - **JetBrains Mono** (`@fontsource-variable/jetbrains-mono`, corte variable) para eyebrows de
   sección, cifras y metadatos.
 - **Instrument Serif** (`@fontsource/instrument-serif`, solo cursiva 400) para las palabras de
-  énfasis del `h1` del hero. Uso cerrado: NO SE DEBE usar en un titular entero, en otro
-  titular ni en texto corrido. Es la única familia en corte estático porque no existe en
+  énfasis del `h1` del hero y del cierre de cada `h2` de apertura de sección. Uso cerrado: NO
+  SE DEBE usar en un titular entero, en `h3` ni en texto corrido. Es la única familia en corte estático porque no existe en
   variable, y se importa solo el fichero de cursiva 400.
 
 NO DEBE existir ninguna petición a `fonts.googleapis.com` ni a `fonts.gstatic.com` en ninguna
@@ -94,9 +95,15 @@ oscuro de la v2 la forma canónica es el **blanco puro**. NO SE DEBE recolorear 
 con el acento ni con ningún otro tono de la paleta, ni aplicarle resplandor, máscara de color o
 degradado.
 
+Wordmark junto al monograma: "JdD" en bold y `fg`; "Labs" en regular y `fg` al 60 % de
+opacidad. Entre ambos, un filete vertical de 1px en `accent`: es el único punto de color de
+marca del bloque y no forma parte del logo, así que el monograma sigue sin recolorear. NO SE
+DEBE colorear el wordmark con el acento.
+
 Racional: el acento cambia de versión a versión —ya ha cambiado una vez—, y un logo que lo
 sigue deja de ser una marca estable. El resplandor magenta del prototipo `preview-v2` se
-descarta por este motivo.
+descarta por este motivo. El filete lleva el color sin tocar el logo: si el acento cambia, el
+monograma no.
 
 ### V. Cero datos inventados (NO NEGOCIABLE)
 
@@ -237,7 +244,7 @@ aquí no se replica ese fallo.
 |---|---|---|
 | Titulares y cuerpo | Space Grotesk Variable | `h1`–`h3`, párrafos, botones, navegación |
 | Mono | JetBrains Mono Variable | Eyebrows de sección, cifras, metadatos, etiquetas de stack |
-| Énfasis | Instrument Serif, cursiva 400 | Solo palabras de énfasis del `h1` del hero |
+| Énfasis | Instrument Serif, cursiva 400 | Énfasis del `h1` del hero y cierre de los `h2` de sección |
 
 Escala fluida, en `tailwind.config.js` como única fuente de verdad:
 
@@ -255,8 +262,9 @@ Escala fluida, en `tailwind.config.js` como única fuente de verdad:
 
 Tratamiento de titular: peso 500, `letter-spacing: -0.04em` (−0.05em en `fs-900`),
 `line-height: 0.9`, `text-wrap: balance`.
-Tratamiento de énfasis del hero: Instrument Serif cursiva 400, `letter-spacing: -0.02em`. La
-palabra de enlace va en `fg-dim` y la frase clave en `accent-2` (regla de los dos acentos).
+Tratamiento de énfasis: Instrument Serif cursiva 400, `letter-spacing: -0.02em`. En el hero, la
+palabra de enlace va en `fg-dim` y la frase clave en `accent-2`; en los `h2` de sección, solo el
+cierre de la frase, en `accent-2` (regla de los dos acentos).
 Tratamiento de eyebrow: mono 400, `fs-100`, `text-transform: uppercase`,
 `letter-spacing: 0.16em`, color `fg-mute`.
 
@@ -287,7 +295,8 @@ Tratamiento de eyebrow: mono 400, `fs-100`, `text-transform: uppercase`,
 
 ### Assets y build
 
-- **Logo**: `JdDLogo_marca.svg`, en blanco puro sobre el fondo oscuro (principio IV).
+- **Logo**: `JdDLogo_marca.svg`, en blanco puro sobre el fondo oscuro, con filete `accent` y
+  wordmark en la cabecera (principio IV).
 - **Entradas de build Vite**: `index.html`, `caso-cristaleria.html`, `privacidad.html`,
   `aviso-legal.html` y `404.html`.
 
@@ -352,4 +361,4 @@ Sync Impact Report de la cabecera, la aprueba Juan explícitamente y se aplica e
 
 **Revisión de cumplimiento**: en cada ejecución de `/speckit-plan` y de `/speckit-analyze`.
 
-**Version**: 3.1.0 | **Ratified**: 2026-09-08 | **Last Amended**: 2026-09-23
+**Version**: 3.2.0 | **Ratified**: 2026-09-08 | **Last Amended**: 2026-09-24

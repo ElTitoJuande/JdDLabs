@@ -5,7 +5,7 @@
 **Estado**: propuesta, pendiente de revisión por el propietario
 **Referencia visual**: `https://domindez.com/` (Domindez Studio, Málaga), analizada el
 2026-09-20 con navegador headless: DOM, estilos computados y variables CSS del `:root`.
-**Constitución aplicable**: v3.0.0 (`.specify/memory/constitution.md`, ratificada el 2026-09-23)
+**Constitución aplicable**: v3.2.0 (`.specify/memory/constitution.md`, última enmienda 2026-09-24)
 
 ---
 
@@ -21,7 +21,7 @@ Eso fija tres cosas que en la conversación previa estaban abiertas:
 | Acento | Magenta `#F31A64` + rosa `#FF5C99` | Enmienda del principio III |
 | Titulares y cuerpo | Space Grotesk Variable | Fraunces e Inter se retiran (principio II) |
 | Eyebrows y cifras | JetBrains Mono Variable | Sustituye a Inter |
-| Énfasis del `h1` del hero | Instrument Serif, cursiva 400 | Tercera familia, enmienda 3.1.0 (2026-09-23), uso cerrado al hero |
+| Énfasis de titulares | Instrument Serif, cursiva 400 | Tercera familia (3.1.0); desde 3.2.0, `h1` del hero y cierre de los `h2` de sección |
 
 ## 2. Qué se toma de la referencia y qué no
 
@@ -67,7 +67,9 @@ Eso fija tres cosas que en la conversación previa estaban abiertas:
 ### No se toma (choca con el principio IV: integridad del logo)
 
 El prototipo `preview-v2` pinta el monograma en magenta con `mask-image` y `drop-shadow`. Se
-descarta: el logo va en blanco puro. El resplandor magenta se reserva para botones y foco.
+descarta: el logo va en blanco puro. El color de marca del bloque lo lleva un filete vertical
+`accent` entre monograma y wordmark (constitución 3.2.0), que no es parte del logo. El
+resplandor magenta se reserva para botones y foco.
 
 ## 3. Inventario de secciones de la portada
 
@@ -110,7 +112,8 @@ Fija, altura `spacing.header` (4,5rem). Tiene dos estados:
   así que el halo pasa sin quedar cortado.
 - **Con scroll**: `bg/75`, `backdrop-blur` y filete inferior `border`.
 
-Contenido: logo + wordmark a la izquierda, navegación centrada en enlaces de `fs-200` color
+Contenido: a la izquierda, monograma blanco de 32px, filete vertical de 1px en `accent` y
+wordmark («JdD» bold `fg`, «Labs» regular `fg` al 60 %), sin cambios de estado; navegación centrada en enlaces de `fs-200` color
 `fg-dim` con padding 8/16 y radio pill en hover, y CTA pill a la derecha en tamaño `sm` (~46px)
 con el texto «Hablemos» y flecha, variante `brillo` de `Boton`: relleno `accent`, texto `fg` y
 un sombreado oscuro que deriva al azar — una capa base de `accent-ink` al 25 % y tres manchas
@@ -238,7 +241,8 @@ heredan el sistema; lo que necesitan es revisión, no rediseño propio.
 - **AC-04**: no queda ninguna referencia a Fraunces ni a Inter en el repositorio ni en el bundle.
 - **AC-05**: Lighthouse ≥ 90 en las cuatro categorías, desktop y móvil, en las cinco páginas.
 - **AC-06**: todos los pares de color en uso pasan AA, verificado con herramienta.
-- **AC-07**: el monograma se sirve en blanco puro, sin recolorear.
+- **AC-07**: el monograma se sirve en blanco puro, sin recolorear; el acento solo en el filete
+  entre monograma y wordmark, nunca en el wordmark.
 - **AC-08**: con `prefers-reduced-motion: reduce` no hay movimiento y todo el contenido es visible.
 - **AC-09**: el sitio es navegable entero por teclado con foco visible en cada control.
 - **AC-10**: ninguna cifra, testimonio o nombre de cliente que no estuviera ya en `copy.js`.
