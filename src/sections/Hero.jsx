@@ -94,7 +94,7 @@ export function Hero() {
                 i < hero.compromisos.length - 1 ? 'pr-3 sm:pr-6 md:pr-8' : '',
               ].join(' ')}
             >
-              <p className="font-mono text-fs-600 leading-none text-accent-2">
+              <p className="font-mono text-fs-600 leading-none text-fg">
                 {lectura ? (
                   <>
                     <span aria-hidden="true">{cifra}</span>
