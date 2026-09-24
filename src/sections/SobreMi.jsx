@@ -7,7 +7,7 @@ export function SobreMi() {
   return (
     <section id="sobre-mi" className="seccion bg-bg-2">
       <div className="contenedor">
-        <TituloSeccion eyebrow={titulares.sobreMi.eyebrow} className="max-w-[68rem]">
+        <TituloSeccion eyebrow={titulares.sobreMi.eyebrow} enfasis={titulares.sobreMi.enfasis} className="max-w-[68rem]">
           {titulares.sobreMi.titulo}
         </TituloSeccion>
 

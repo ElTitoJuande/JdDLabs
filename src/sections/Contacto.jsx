@@ -19,7 +19,7 @@ export function Contacto() {
   return (
     <section id="contacto" className="seccion">
       <div className="contenedor">
-        <TituloSeccion eyebrow={titulares.contacto.eyebrow}>
+        <TituloSeccion eyebrow={titulares.contacto.eyebrow} enfasis={titulares.contacto.enfasis}>
           {contacto.titular}
         </TituloSeccion>
 

@@ -14,7 +14,7 @@ export function Stack() {
   return (
     <section id="stack" className="seccion">
       <div className="contenedor">
-        <TituloSeccion eyebrow={titulares.stack.eyebrow}>
+        <TituloSeccion eyebrow={titulares.stack.eyebrow} enfasis={titulares.stack.enfasis}>
           {titulares.stack.titulo}
         </TituloSeccion>
 

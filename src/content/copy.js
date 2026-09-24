@@ -78,12 +78,15 @@ export const capacidades = [
 // por el mismo motivo que el resto del fichero: ninguna seccion improvisa texto en
 // pantalla. El titular de Contacto no esta aqui porque ya existia dentro de
 // `contacto`, y no se duplica.
+//
+// `enfasis`: el cierre del titular que va en la serif `accent-2` (constitucion 3.2.0,
+// aceptado por el propietario el 2026-09-24). Tiene que ser el final literal del titulo.
 export const titulares = {
-  proyecto: { eyebrow: 'Trabajo seleccionado', titulo: 'Un proyecto, contado entero.' },
-  servicios: { eyebrow: 'Servicios', titulo: 'Lo que hago.' },
-  stack: { eyebrow: 'Tecnología', titulo: 'Las herramientas que uso.' },
-  sobreMi: { eyebrow: 'Sobre mí', titulo: 'La misma persona, de principio a fin.' },
-  contacto: { eyebrow: 'Contacto' },
+  proyecto: { eyebrow: 'Trabajo seleccionado', titulo: 'Un proyecto, contado entero.', enfasis: 'contado entero.' },
+  servicios: { eyebrow: 'Servicios', titulo: 'Lo que hago.', enfasis: 'hago.' },
+  stack: { eyebrow: 'Tecnología', titulo: 'Las herramientas que uso.', enfasis: 'que uso.' },
+  sobreMi: { eyebrow: 'Sobre mí', titulo: 'La misma persona, de principio a fin.', enfasis: 'de principio a fin.' },
+  contacto: { eyebrow: 'Contacto', enfasis: 'tu proyecto?' },
 };
 
 export const servicios = [

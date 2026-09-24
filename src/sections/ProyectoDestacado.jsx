@@ -22,7 +22,7 @@ export function ProyectoDestacado() {
   return (
     <section id="proyecto" className="seccion bg-bg-2">
       <div className="contenedor">
-        <TituloSeccion eyebrow={titulares.proyecto.eyebrow}>
+        <TituloSeccion eyebrow={titulares.proyecto.eyebrow} enfasis={titulares.proyecto.enfasis}>
           {titulares.proyecto.titulo}
         </TituloSeccion>
 
