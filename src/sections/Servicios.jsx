@@ -20,7 +20,7 @@ export function Servicios() {
   return (
     <section id="servicios" className="seccion">
       <div className="contenedor">
-        <TituloSeccion eyebrow={titulares.servicios.eyebrow}>
+        <TituloSeccion eyebrow={titulares.servicios.eyebrow} enfasis={titulares.servicios.enfasis}>
           {titulares.servicios.titulo}
         </TituloSeccion>
 
@@ -29,13 +29,15 @@ export function Servicios() {
             <Reveal as="li" key={servicio.id} retardo={80 * i} className="border-t border-border">
               <a
                 href="#contacto"
-                className="group relative grid grid-cols-[auto_1fr_auto] gap-x-5 gap-y-4 rounded-lg2 px-2 py-8 no-underline transition-colors duration-fast ease-out-soft hover:bg-bg-2 focus-visible:bg-bg-2 motion-reduce:transition-none md:grid-cols-[4rem_minmax(0,1fr)_minmax(0,1.1fr)_auto] md:gap-x-10 md:px-6 md:py-12"
+                className="group relative grid grid-cols-[auto_minmax(0,1fr)_auto] gap-x-5 gap-y-4 rounded-lg2 px-2 py-8 no-underline transition-colors duration-fast ease-out-soft hover:bg-bg-2 focus-visible:bg-bg-2 motion-reduce:transition-none md:grid-cols-[4rem_minmax(0,1fr)_minmax(0,1.1fr)_auto] md:gap-x-10 md:px-6 md:py-12"
               >
                 <span className="pt-2 font-mono text-fs-200 tracking-[0.16em] text-fg-mute transition-colors duration-fast group-hover:text-accent-2 group-focus-visible:text-accent-2 md:pt-3">
                   {numero(i)}
                 </span>
 
-                <h3 className="text-fs-700 text-fg">{servicio.titulo}</h3>
+                {/* fs-600 en movil: a 320px "Aplicaciones" a fs-700 no cabia en la columna y
+                    desbordaba la pagina 17px. */}
+                <h3 className="text-fs-600 text-fg md:text-fs-700">{servicio.titulo}</h3>
 
                 <div className="col-span-3 md:col-span-1 md:row-start-1 md:col-start-3">
                   <p className="max-w-[34rem] text-fs-300 leading-relaxed text-fg-dim">
