@@ -10,7 +10,7 @@ export function SobreMi() {
   const { foto } = sobreMi;
 
   return (
-    <section id="sobre-mi" className="seccion bg-bg-2">
+    <section id="sobre-mi" className="seccion">
       <div className="contenedor">
         <TituloSeccion eyebrow={titulares.sobreMi.eyebrow} enfasis={titulares.sobreMi.enfasis} className="max-w-[68rem]">
           {titulares.sobreMi.titulo}
@@ -19,7 +19,7 @@ export function SobreMi() {
         <div
           className={[
             'mt-8 grid gap-10 md:mt-14 md:items-center md:gap-14',
-            foto ? 'md:grid-cols-[minmax(0,1fr)_minmax(0,26rem)]' : '',
+            foto ? 'md:grid-cols-[minmax(0,1fr)_minmax(0,32rem)]' : '',
           ].join(' ')}
         >
           <Reveal>
@@ -39,7 +39,7 @@ export function SobreMi() {
                   el polo negro del fondo oscuro de la seccion. Sube 30px en escritorio
                   (propietario, 2026-09-24); el desplazamiento va aqui y no en el Reveal,
                   que anima su propio transform. */}
-              <div className="relative aspect-square w-full max-w-[26rem] md:-translate-y-[30px]">
+              <div className="relative aspect-square w-full max-w-[32rem] md:-translate-y-[30px]">
                 <div
                   aria-hidden="true"
                   className="absolute -inset-[6%] rounded-full bg-accent/25 blur-[110px]"

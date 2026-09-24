@@ -37,8 +37,8 @@ function Portada() {
         <Marquee terminos={capacidades} />
         <Servicios />
         <ProyectoDestacado />
-        <Stack />
         <SobreMi />
+        <Stack />
         <Contacto />
       </main>
       <Footer />

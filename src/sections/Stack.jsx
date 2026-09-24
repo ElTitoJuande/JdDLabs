@@ -18,7 +18,7 @@ import { TituloSeccion } from '../components/TituloSeccion';
  */
 export function Stack() {
   return (
-    <section id="stack" className="seccion">
+    <section id="stack" className="seccion bg-bg-2">
       <div className="contenedor">
         <TituloSeccion eyebrow={titulares.stack.eyebrow} enfasis={titulares.stack.enfasis}>
           {titulares.stack.titulo}
