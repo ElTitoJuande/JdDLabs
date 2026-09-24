@@ -35,12 +35,14 @@ export function SobreMi() {
 
           {foto && (
             <Reveal retardo={80} className="md:justify-self-end">
-              {/* Sin marco: la foto viene recortada. Un halo `accent-dim` detras separa el
-                  polo negro del fondo oscuro de la seccion. */}
-              <div className="relative aspect-square w-full max-w-[26rem]">
+              {/* Sin marco: la foto viene recortada. Un halo `accent-dim` amplio detras separa
+                  el polo negro del fondo oscuro de la seccion. Sube 30px en escritorio
+                  (propietario, 2026-09-24); el desplazamiento va aqui y no en el Reveal,
+                  que anima su propio transform. */}
+              <div className="relative aspect-square w-full max-w-[26rem] md:-translate-y-[30px]">
                 <div
                   aria-hidden="true"
-                  className="absolute inset-[12%] rounded-full bg-accent-dim blur-3xl"
+                  className="absolute -inset-[6%] rounded-full bg-accent/25 blur-[110px]"
                 />
                 <img
                   src={foto.src}
