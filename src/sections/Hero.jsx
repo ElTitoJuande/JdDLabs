@@ -81,16 +81,17 @@ export function Hero() {
 
         {/* Compromisos: cifras mono con su etiqueta, separadas por filetes. Lista y no
             <dl>: cada item se lee de corrido, "1, Interlocutor, del primer café…". */}
-        <ul className="mt-12 grid gap-5 border-t border-border pt-7 sm:grid-cols-3 sm:gap-0 sm:pt-0 md:mt-16">
+        <ul className="mt-12 grid grid-cols-3 border-t border-border md:mt-16">
           {hero.compromisos.map(({ cifra, lectura, texto }, i) => (
             <li
               key={texto}
               className={[
-                // Movil: fila sin filetes, cifra a la izquierda y etiqueta en texto
-                // corrido. Desde sm: columnas con filete vertical, cifra arriba.
-                'grid grid-cols-[5.5rem_1fr] items-baseline gap-4 sm:block sm:pt-8',
-                i > 0 ? 'sm:border-l sm:border-border sm:pl-6 md:pl-8' : '',
-                i < hero.compromisos.length - 1 ? 'sm:pr-6 md:pr-8' : '',
+                // Tres columnas en todos los anchos, cifra arriba y etiqueta debajo,
+                // separadas por filete vertical. La estructura en filas (cifra a un lado,
+                // texto al otro) la descarto el propietario en movil.
+                'pt-6 sm:pt-8',
+                i > 0 ? 'border-l border-border pl-3 sm:pl-6 md:pl-8' : '',
+                i < hero.compromisos.length - 1 ? 'pr-3 sm:pr-6 md:pr-8' : '',
               ].join(' ')}
             >
               <p className="font-mono text-fs-600 leading-none text-accent-2">
@@ -103,9 +104,9 @@ export function Hero() {
                   cifra
                 )}
               </p>
-              {/* En movil, texto corrido: las versalitas mono con tracking se partian en
-                  dos lineas apretadas. Desde sm, el eyebrow de siempre. */}
-              <p className="text-fs-300 leading-snug text-fg-dim sm:hidden">{texto}</p>
+              {/* En movil, texto corrido pequeño: en columnas de ~100px las versalitas
+                  mono con tracking no caben. Desde sm, el eyebrow de siempre. */}
+              <p className="mt-3 text-fs-200 leading-snug text-fg-dim sm:hidden">{texto}</p>
               <Eyebrow className="hidden max-w-[18rem] sm:mt-4 sm:block">{texto}</Eyebrow>
             </li>
           ))}

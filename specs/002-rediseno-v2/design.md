@@ -150,10 +150,11 @@ Rehecho el 2026-09-23 sobre la referencia de Domindez, medida con navegador head
 - Bajo los CTAs, tras un filete: tres compromisos con cifra mono `fs-600` en `fg` y etiqueta
   eyebrow — «1 · Interlocutor, del primer café al lanzamiento», «0 · Plantillas. Código escrito
   para tu negocio», «<24 h · Respuesta por WhatsApp». Cifras dadas y verificadas por el
-  propietario el 2026-09-23 (principio V). Tres columnas con filete vertical desde `sm`; en
-  móvil, filas sin filetes: cifra `accent-2` a la izquierda y etiqueta en texto corrido
-  `fs-300` `fg-dim` (las versalitas mono se partían en dos líneas apretadas). La cifra va en
-  `accent-2` en todos los anchos. «<24 h» se lee como «Menos de 24 horas».
+  propietario el 2026-09-23 (principio V). Tres columnas con filete vertical en todos los
+  anchos, cifra `accent-2` arriba y etiqueta debajo: eyebrow desde `sm`; en móvil, texto
+  corrido `fs-200` `fg-dim`, porque en columnas de ~100px las versalitas mono no caben. La
+  estructura en filas (cifra a un lado, texto al otro) la descartó el propietario. «<24 h» se
+  lee como «Menos de 24 horas».
 - Halo radial de `accent-glow` como decoración de fondo, `pointer-events: none`.
 - Verificado: CTAs sin scroll de 375×667 a 1920×1080. Única excepción, 320×568: el segundo CTA
   queda 2px por debajo del borde.
@@ -219,6 +220,15 @@ etiqueta mono `fg-mute` y valor `fg`. WhatsApp y teléfono comparten número, as
 sola fila con el número una vez y dos acciones en píldora («Escribir por WhatsApp» y «Llamar»);
 siguen siendo tres anclas (FR-006). Si los números difieren, la fila vuelve a partirse. Derecha: el formulario, con campos de
 fondo `bg-3`, filete `border` → `accent` en `:focus`, radio 8px, y botón de envío pill `accent`.
+La casilla de consentimiento nombra a «JdDLabs» (nombre comercial, decisión del propietario del
+2026-09-24); el responsable con nombre fiscal sigue en la política de privacidad enlazada.
+
+### 4.9 Sobre mí
+
+Dos columnas desde `md` (`1fr / 26rem`): a la izquierda el párrafo y la línea de refuerzo con
+filete `accent`; a la derecha la foto del propietario, cuadrada, radio 22px y filete `border`.
+**Foto provisional** (2026-09-24, `sobreMi.foto` en `copy.js`); con `null`, una sola columna.
+En móvil la foto va debajo del texto.
 
 ## 5. Movimiento
 
