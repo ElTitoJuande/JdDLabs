@@ -104,22 +104,23 @@ export const servicios = [
     titulo: 'Web corporativa',
     descripcion:
       'Páginas para presentar tu negocio con una imagen profesional: quiénes sois, qué ofrecéis y cómo contactar, lista para generar confianza desde el primer segundo.',
-    // Claves: sacadas literalmente de la descripcion. No añaden ninguna promesa nueva.
-    claves: ['Quiénes sois', 'Qué ofrecéis', 'Cómo contactar'],
+    // Claves: el trabajo que hay detras de cada servicio (propietario, 2026-09-24), no un
+    // resumen de la descripcion.
+    claves: ['Diseño a medida', 'UI/UX', 'Responsive', 'SEO on-page'],
   },
   {
     id: 'tiendas-online',
     titulo: 'Tiendas online',
     descripcion:
       'Tiendas funcionales y fáciles de gestionar, pensadas para vender sin fricciones ni complicaciones técnicas.',
-    claves: ['Fácil de gestionar', 'Sin fricciones'],
+    claves: ['Catálogo y carrito', 'Pagos con Stripe', 'Gestión de pedidos', 'Emails automáticos'],
   },
   {
     id: 'aplicaciones',
     titulo: 'Aplicaciones y soluciones web',
     descripcion:
       'Herramientas a medida cuando una plantilla se queda corta: paneles de gestión, reservas, integraciones con lo que ya usas.',
-    claves: ['Paneles de gestión', 'Reservas', 'Integraciones'],
+    claves: ['Paneles de gestión', 'Sistemas de reservas', 'APIs e integraciones', 'Bases de datos'],
   },
 ];
 
