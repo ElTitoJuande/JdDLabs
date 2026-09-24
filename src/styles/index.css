@@ -37,11 +37,11 @@
     @apply bg-bg text-fg font-sans antialiased;
   }
 
-  /* Seleccion de texto en el magenta de la marca y no en el azul del sistema. Relleno
-     `accent` con `accent-ink` encima: 4,8:1, el mismo par que el boton solido. */
+  /* Seleccion de texto en el magenta de la marca y no en el azul del sistema, pero
+     translucido: `accent-glow` (el magenta al 35 %) y el texto conserva su color. Sobre
+     el fondo base, `fg` seleccionado queda a ~11:1. */
   ::selection {
-    background-color: theme('colors.accent');
-    color: theme('colors.accent-ink');
+    background-color: theme('colors.accent-glow');
   }
 
   /* Tratamiento unico de titular: peso 500 y no 700, tracking cerrado y line-height
