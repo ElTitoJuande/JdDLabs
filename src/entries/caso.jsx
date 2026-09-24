@@ -79,10 +79,13 @@ function CasoCristaleria() {
           <p className="mt-7 text-fs-300 leading-relaxed text-fg-dim">{proyecto.descripcion}</p>
 
           {/* Unico elemento visual de la pagina, igual que en la tarjeta de la portada.
-              Ya viene recortada a 1356x904, asi que el marco solo reserva la proporcion
-              3:2 y evita el salto de layout: aqui no se recorta nada por CSS. */}
+              Aqui se ve entera: el marco toma la proporcion de la propia imagen, asi que
+              reserva el hueco sin recortar nada por CSS. */}
           {imagenHero && (
-            <div className="mt-10 aspect-[3/2] w-full overflow-hidden rounded-lg2 border border-border bg-bg-2">
+            <div
+              className="mt-10 w-full overflow-hidden rounded-lg2 border border-border bg-bg-2"
+              style={{ aspectRatio: `${imagenHero.ancho} / ${imagenHero.alto}` }}
+            >
               <img
                 src={imagenHero.src}
                 alt={imagenHero.alt}

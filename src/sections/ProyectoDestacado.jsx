@@ -33,9 +33,8 @@ export function ProyectoDestacado() {
             captura ? 'md:grid-cols-[minmax(0,1.15fr)_minmax(0,1fr)]' : '',
           ].join(' ')}
         >
-          {/* La captura ya es un recorte real de la portada del cliente a 1356x904, asi
-              que el marco 3:2 solo reserva el hueco y evita el salto de layout: no
-              recorta nada por CSS. */}
+          {/* La fachada es panoramica (1024x468): el marco 3:2 la recorta por los
+              laterales, centrada, y el rotulo queda entero dentro. */}
           {captura && (
             <div className="relative aspect-[3/2] w-full overflow-hidden rounded-lg2 border border-border bg-bg-3">
               <img
@@ -45,7 +44,7 @@ export function ProyectoDestacado() {
                 height={captura.alto}
                 loading="lazy"
                 decoding="async"
-                className="h-full w-full object-cover object-top"
+                className="h-full w-full object-cover"
               />
               <span className="absolute bottom-3.5 right-3.5 rounded-full border border-border bg-bg/60 px-3.5 py-1.5 font-mono text-fs-100 tracking-[0.14em] text-accent-2 backdrop-blur-md md:bottom-5 md:right-5 md:px-4">
                 01
@@ -62,13 +61,14 @@ export function ProyectoDestacado() {
               <span>{proyecto.categoria}</span>
             </div>
 
-            {/* El nombre del cliente, en `accent-2`: es lo que tiene que quedarse. Solo
-                color, sin serif: la serif esta acotada a h1 y h2 (constitucion 3.2.0). */}
+            {/* El nombre del cliente, en `fg` y cursiva (propietario, 2026-09-24). Cursiva
+                de la propia Space Grotesk, no la serif: la serif esta acotada a h1 y h2
+                (constitucion 3.2.0). */}
             <h3 className="mt-4 text-fs-700 text-fg md:mt-5">
               {proyecto.titulo.endsWith(proyecto.cliente) ? (
                 <>
                   {proyecto.titulo.slice(0, -proyecto.cliente.length)}
-                  <span className="text-accent-2">{proyecto.cliente}</span>
+                  <span className="italic text-fg">{proyecto.cliente}</span>
                 </>
               ) : (
                 proyecto.titulo

@@ -154,16 +154,15 @@ export const proyecto = {
   // forma final para que ninguna navegacion pase por un redirect.
   urlCaso: '/caso-cristaleria',
   // Imagen unica del proyecto: la tarjeta de la portada y la apertura del caso de
-  // estudio leen esta misma clave. Es un recorte real de la portada del cliente,
-  // exportado a 1356x904 desde la captura de pagina completa de 5441px que ya no vive
-  // en el repositorio. El corte cae justo en el borde inferior de la franja del hero,
-  // asi que la imagen entra entera en un marco 3:2 y el navegador no recorta nada por
-  // CSS. Si esta clave vuelve a null no se dibuja imagen ni marco vacio (principio V).
+  // estudio leen esta misma clave. Desde el 2026-09-24 es la foto de la fachada del
+  // taller (la misma de cristaleriarutena.es), panoramica a 1024x468. La tarjeta la
+  // encaja en su marco 3:2 recortando los laterales; el caso de estudio la muestra
+  // entera. Si esta clave vuelve a null no se dibuja imagen ni marco vacio (principio V).
   captura: {
-    src: '/img/portadaCRutena.webp',
-    alt: 'Portada de cristaleriarutena.es sobre una fotografía de la fachada del taller, con el titular “Rediseñamos espacios con vidrio, aluminio y soluciones a medida” y los botones de WhatsApp y de llamada.',
-    ancho: 1356,
-    alto: 904,
+    src: '/img/fachada-cristaleria.webp',
+    alt: 'Fachada blanca del taller de Cristalería Ruteña en Rute, con el rótulo “Cristalería Ruteña, S.L. — La industria más antigua del vidrio en Rute” y el logotipo CR en rojo.',
+    ancho: 1024,
+    alto: 468,
   },
 };
 
