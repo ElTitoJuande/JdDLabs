@@ -4,8 +4,8 @@
    estatico, y eso es justo lo que aqui no se copia (principio II, AC-03). */
 @import '@fontsource-variable/space-grotesk';
 @import '@fontsource-variable/jetbrains-mono';
-/* Tercera familia (constitucion 3.1.0): solo la cursiva 400 en latin, que es lo unico que
-   usa el enfasis del hero. Importar el paquete entero traeria tambien la redonda. */
+/* Tercera familia (constitucion 3.1.0 y 3.2.0): solo la cursiva 400 en latin, que es lo
+   unico que usa el enfasis de los titulares. El paquete entero traeria tambien la redonda. */
 @import '@fontsource/instrument-serif/latin-400-italic.css';
 
 @tailwind base;
@@ -104,94 +104,119 @@
     @apply border-t border-border py-section;
   }
 
-  /* Sombreado de los CTAs principales (Boton, variante `brillo`). Dos capas:
-     - base: `accent-ink` al 25 % sobre todo el boton. Oscurece el magenta de forma
-       uniforme y fija el suelo de contraste del texto `fg` (~5,9:1 en el punto mas claro).
-     - tres manchas oscuras que derivan por trayectorias distintas en 7, 11 y 13 s. Al no
-       tener divisores comunes, la combinacion tarda ~1000 s en repetirse y no se lee
-       ningun patron. Las manchas solo oscurecen, asi que el contraste nunca baja del
-       suelo. Con movimiento reducido quedan quietas. */
-  .boton-brillo {
-    position: absolute;
-    inset: 0;
-    z-index: 0;
-    overflow: hidden;
-    border-radius: inherit;
-    pointer-events: none;
+  /* CTAs principales (Boton, variante `brillo`): boton de cristal oscuro.
+     - Reposo: `bg-3` con filete `border-accent`, brillos interiores de `fg` en capas
+       (arriba mas intensos) y un anillo exterior de sombras que lo biselan.
+     - Hover y foco: el filete pasa a `accent`, los brillos interiores se tiñen de
+       `accent-2` desde abajo y aparece un resplandor fino en el borde inferior.
+     - Letras: onda de brillo escalonada de `fg-dim` a `fg` con destello `accent-2`. En su
+       punto mas apagado, `fg-dim` sobre `bg-3` queda a 6,9:1: pasa AA en todo momento.
+     Con movimiento reducido no hay onda ni parpadeo: letras en `fg`, icono quieto. */
+  .boton-cristal {
+    background-color: theme('colors.bg-3');
+    border: 1px solid theme('colors.border-accent');
+    box-shadow:
+      inset 0 1px 1px theme('colors.fg / 20%'),
+      inset 0 2px 2px theme('colors.fg / 15%'),
+      inset 0 4px 4px theme('colors.fg / 10%'),
+      inset 0 8px 8px theme('colors.fg / 5%'),
+      inset 0 16px 16px theme('colors.fg / 5%'),
+      0 0 0 4px theme('colors.accent-ink / 40%'),
+      1px 1px 1px theme('colors.fg / 12%'),
+      -1px -1px 1px theme('colors.accent-ink / 30%');
   }
 
-  .boton-brillo::before {
+  .boton-cristal:hover,
+  .boton-cristal:focus-visible {
+    border-color: theme('colors.accent');
+    box-shadow:
+      inset 0 1px 1px theme('colors.fg / 20%'),
+      inset 0 -8px 8px -6px theme('colors.fg / 55%'),
+      inset 0 -16px 16px -8px theme('colors.accent-2 / 35%'),
+      inset 0 8px 8px theme('colors.fg / 5%'),
+      0 0 0 4px theme('colors.accent-ink / 40%'),
+      0 0 24px theme('colors.accent-glow');
+  }
+
+  .boton-cristal:active {
+    border-color: theme('colors.accent-2');
+    background-color: theme('colors.accent-dim');
+  }
+
+  /* Resplandor del borde inferior: un degradado que se apaga en el 8 % inferior. */
+  .boton-cristal::after {
     content: '';
     position: absolute;
     inset: 0;
-    background-color: theme('colors.accent-ink');
-    opacity: 0.25;
+    border-radius: inherit;
+    pointer-events: none;
+    background-image: linear-gradient(
+      0deg,
+      theme('colors.fg'),
+      theme('colors.accent-2'),
+      theme('colors.accent / 50%'),
+      8%,
+      transparent
+    );
+    opacity: 0;
+    transition: opacity theme('transitionDuration.base') theme('transitionTimingFunction.out-soft');
   }
 
-  .boton-brillo > span {
-    position: absolute;
-    width: 70%;
-    aspect-ratio: 1;
-    border-radius: 9999px;
-    background: radial-gradient(closest-side, theme('colors.accent-ink'), transparent);
-    filter: blur(8px);
-    opacity: 0.75;
+  .boton-cristal:hover::after,
+  .boton-cristal:focus-visible::after {
+    opacity: 0.8;
   }
 
-  .boton-brillo > span:nth-child(1) {
-    left: -10%;
-    top: -60%;
+  .boton-cristal__letra {
+    display: inline-block;
+    color: theme('colors.fg');
   }
 
-  .boton-brillo > span:nth-child(2) {
-    left: 45%;
-    top: -20%;
-    width: 55%;
+  .boton-cristal__chispa {
+    width: 1.15em;
+    height: 1.15em;
+    flex: none;
+    fill: theme('colors.accent-2');
+    filter: drop-shadow(0 0 2px theme('colors.accent-2 / 60%'));
+    transition: fill theme('transitionDuration.fast'), filter theme('transitionDuration.fast');
   }
 
-  .boton-brillo > span:nth-child(3) {
-    left: 15%;
-    top: 10%;
-    width: 60%;
+  .boton-cristal:hover .boton-cristal__chispa,
+  .boton-cristal:focus-visible .boton-cristal__chispa {
+    fill: theme('colors.fg');
+    filter: drop-shadow(0 0 4px theme('colors.accent-2'));
   }
 
   @media (prefers-reduced-motion: no-preference) {
-    .boton-brillo > span:nth-child(1) {
-      animation: theme('animation.deriva-a');
+    .boton-cristal__letra {
+      color: theme('colors.fg-dim');
+      animation: theme('animation.letra');
     }
 
-    .boton-brillo > span:nth-child(2) {
-      animation: theme('animation.deriva-b');
+    .boton-cristal__chispa {
+      animation: theme('animation.chispa');
     }
 
-    .boton-brillo > span:nth-child(3) {
-      animation: theme('animation.deriva-c');
+    .boton-cristal:hover .boton-cristal__chispa,
+    .boton-cristal:focus-visible .boton-cristal__chispa {
+      animation: none;
     }
   }
 
-  /* Los tokens `animation.deriva-*` viven en la config; sus @keyframes, aqui: declarados
-     en la config, Tailwind solo los emite si alguien usa la clase animate-*. Porcentajes
-     del propio tamaño de la mancha, asi que escalan con el boton. */
-  @keyframes deriva-a {
-    0% { transform: translate(0, 0) scale(1); }
-    30% { transform: translate(55%, 35%) scale(1.15); }
-    65% { transform: translate(20%, 70%) scale(0.9); }
-    100% { transform: translate(0, 0) scale(1); }
+  /* Los tokens `animation.letra` y `animation.chispa` viven en la config; sus
+     @keyframes, aqui: declarados en la config, Tailwind solo los emite si alguien usa la
+     clase animate-*. */
+  @keyframes letra {
+    50% {
+      color: theme('colors.fg');
+      text-shadow: 0 0 6px theme('colors.accent-2 / 70%');
+    }
   }
 
-  @keyframes deriva-b {
-    0% { transform: translate(0, 0) scale(1); }
-    40% { transform: translate(-60%, 45%) scale(0.85); }
-    75% { transform: translate(-25%, -10%) scale(1.2); }
-    100% { transform: translate(0, 0) scale(1); }
-  }
-
-  @keyframes deriva-c {
-    0% { transform: translate(0, 0) scale(1); }
-    25% { transform: translate(40%, -30%) scale(1.1); }
-    55% { transform: translate(-35%, 20%) scale(0.95); }
-    80% { transform: translate(10%, 35%) scale(1.15); }
-    100% { transform: translate(0, 0) scale(1); }
+  @keyframes chispa {
+    50% {
+      opacity: 0.3;
+    }
   }
 
   /* Flecha de los CTAs (Boton, prop `flecha`). El asta es una barra de 2px; la punta, un

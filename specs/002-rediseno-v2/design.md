@@ -115,13 +115,16 @@ Fija, altura `spacing.header` (4,5rem). Tiene dos estados:
 Contenido: a la izquierda, monograma blanco de 32px, filete vertical de 1px en `accent` y
 wordmark («JdD» bold `fg`, «Labs» regular `fg` al 60 %), sin cambios de estado; navegación centrada en enlaces de `fs-200` color
 `fg-dim` con padding 8/16 y radio pill en hover, y CTA pill a la derecha en tamaño `sm` (~46px)
-con el texto «Hablemos» y flecha, variante `brillo` de `Boton`: relleno `accent`, texto `fg` y
-un sombreado oscuro que deriva al azar — una capa base de `accent-ink` al 25 % y tres manchas
-desenfocadas que se mueven en 7, 11 y 13 s (primos entre sí: no se lee ningún patrón). Las
-manchas solo oscurecen, así que el contraste del texto no baja de 5,84:1. En hover aparece
-`shadow-glow`. La flecha es CSS (`.flecha`): en reposo solo la punta, «›»; en hover y foco
-aparece el asta y la punta avanza 3px hasta formar «→». Con movimiento reducido las manchas
-quedan quietas. El menú móvil y el hero usan el mismo CTA.
+con el texto «Hablemos» y flecha, variante `brillo` de `Boton`: botón de cristal oscuro
+(2026-09-24, adaptado de un componente de referencia del propietario). `bg-3` con filete
+`border-accent`, brillos interiores de `fg` en capas y anillo exterior de sombras; icono de
+destellos en `accent-2` que parpadea, y letras con una onda de brillo escalonada 80ms (de
+`fg-dim` a `fg` con destello `accent-2`). En hover y foco: filete `accent`, brillos interiores
+teñidos de `accent-2` desde abajo y resplandor fino en el borde inferior. Contraste medido de
+la letra en su punto más apagado: 5,72:1 en el peor caso. Con movimiento reducido no hay onda
+ni parpadeo. La flecha es CSS (`.flecha`): en reposo solo la punta, «›»; en hover y foco
+aparece el asta y la punta avanza 3px hasta formar «→». El menú móvil y el hero usan el mismo
+CTA.
 
 ### 4.2 Hero
 

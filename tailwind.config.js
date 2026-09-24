@@ -44,7 +44,8 @@ export default {
       fontFamily: {
         sans: ['"Space Grotesk Variable"', 'system-ui', '-apple-system', 'Segoe UI', 'sans-serif'],
         mono: ['"JetBrains Mono Variable"', 'ui-monospace', 'SF Mono', 'Consolas', 'monospace'],
-        // Solo para el enfasis del h1 del hero (constitucion 3.1.0, principio II).
+        // Solo para el enfasis del h1 del hero y el cierre de los h2 de seccion
+        // (constitucion 3.2.0, principio II).
         serif: ['"Instrument Serif"', 'Georgia', 'serif'],
       },
       // Escala fluida de nueve pasos. Ninguna seccion escribe un tamaño en pixeles:
@@ -98,12 +99,10 @@ export default {
       // velocidad de la version original. Si cambia la lista, se recalcula.
       animation: {
         marquee: 'marquee 130s linear infinite',
-        // Deriva de las tres manchas del sombreado de los CTAs (variante `brillo` de
-        // Boton). Duraciones primas entre si: el conjunto no se repite a la vista. Sus
-        // @keyframes viven en index.css.
-        'deriva-a': 'deriva-a 7s ease-in-out infinite',
-        'deriva-b': 'deriva-b 11s ease-in-out infinite',
-        'deriva-c': 'deriva-c 13s ease-in-out infinite',
+        // CTAs de cristal (variante `brillo` de Boton): onda de brillo de las letras,
+        // escalonada 80ms por letra, y parpadeo del icono. Sus @keyframes, en index.css.
+        letra: 'letra 2s ease-in-out infinite',
+        chispa: 'chispa 2s linear infinite',
       },
     },
   },
