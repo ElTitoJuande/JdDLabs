@@ -202,9 +202,11 @@ vuelven los dos destinos, cada uno con su peso.
 
 ### 4.7 Stack
 
-Lista de etiquetas mono a `fs-200`, color `fg-dim`, sobre píldoras `bg-3` con filete `border`.
-Lee `proyecto.tecnologias` (React, Vite, Tailwind, Cloudflare). Sustituye funcionalmente a la
-franja de cifras de la referencia: ocupa ese hueco del ritmo sin afirmar nada que no sea cierto.
+Nueve categorías y cuarenta herramientas (lista del propietario, 2026-09-24, en `stack` de
+`copy.js`). Rejilla de 3×3 desde `lg`, 2 columnas desde `sm`, 1 en móvil; cada categoría bajo
+un filete, con su nombre en mono `accent-2` y las herramientas en píldoras `bg-2` con filete
+`border` (`border-accent` en hover) y texto `fs-200` en `fg`. El caso de estudio sigue leyendo
+su propio `proyecto.tecnologias`. Alto: 989px a 1440, 1720px a 375.
 
 ### 4.8 Contacto
 
