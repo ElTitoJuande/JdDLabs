@@ -3,8 +3,8 @@ import { secciones, cabecera, pie } from '../content/copy';
 
 /**
  * Pie comun a las cinco paginas, adaptado del de la referencia visual (2026-09-24):
- * llamada a la accion, wordmark gigante, tres columnas y barra legal. Email, telefono y
- * WhatsApp viven en la seccion Contacto; el pie solo enlaza a Instagram ("Sígueme").
+ * llamada a la accion, wordmark gigante, tres columnas y barra legal. El telefono vive en
+ * la seccion Contacto; "Sígueme" repite WhatsApp y email junto a Instagram y GitHub.
  *
  * Los enlaces legales son obligatorios en todas las paginas (FR-021b, principio XII), y
  * por eso el pie es un unico componente compartido en vez de marcado duplicado.
@@ -43,10 +43,21 @@ export function Footer({ base = '' }) {
       titulo: 'Sígueme',
       contenido: (
         <ul className="flex flex-col gap-2.5">
+          {[
+            ['Instagram', enlaces.instagram],
+            ['GitHub', enlaces.github],
+            ['WhatsApp', enlaces.whatsapp],
+          ].map(([nombre, href]) => (
+            <li key={nombre}>
+              <a href={href} target="_blank" rel="noopener noreferrer" className={enlace}>
+                {nombre} <span aria-hidden="true">↗</span>
+                <span className="sr-only"> (se abre en una pestaña nueva)</span>
+              </a>
+            </li>
+          ))}
           <li>
-            <a href={enlaces.instagram} target="_blank" rel="noopener noreferrer" className={enlace}>
-              Instagram <span aria-hidden="true">↗</span>
-              <span className="sr-only"> (se abre en una pestaña nueva)</span>
+            <a href={enlaces.email} className={enlace}>
+              {identity.email}
             </a>
           </li>
         </ul>

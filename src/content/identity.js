@@ -28,6 +28,7 @@ export const enlaces = {
   sitio: `https://${identity.dominio}`,
   // Cuenta que el propietario abre el 2026-09-25 (dato suyo, 2026-09-24).
   instagram: 'https://www.instagram.com/jddlabs/',
+  github: 'https://github.com/ElTitoJuande',
 };
 
 // Claves sin las cuales el Aviso Legal incumple el articulo 10 de la LSSI.
