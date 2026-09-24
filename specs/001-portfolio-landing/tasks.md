@@ -304,9 +304,9 @@ cristaleriarutena.es en pestaña nueva. Escenario V-1 punto 2.
 - [ ] T072 **Ejecutar el escenario V-5 completo**: enviar el formulario usando solo teclado y con lector de pantalla activo, y confirmar que el correo llega a Resend sin caer en ninguno de los dos filtros anti-spam (SC-004a) — **no omitible**
 - [ ] T073 Probar el formulario en un móvil real, no en el emulador del navegador (SC-008)
 - [ ] T074 Validar el JSON-LD en una herramienta de resultados enriquecidos y comprobar la tarjeta al compartir el enlace por WhatsApp (SC-003a, SC-003b)
-- [ ] T075 Verificar a 320px de ancho que no hay scroll horizontal ni texto cortado (SC-006)
-- [ ] T076 Recorrer la página entera con el tabulador comprobando foco siempre visible y sin trampas (FR-013, SC-007)
-- [ ] T077 Activar la reducción de movimiento del sistema y confirmar que no hay animación y que **todo el contenido queda visible** (FR-011)
+- [x] T075 Verificar a 320px de ancho que no hay scroll horizontal ni texto cortado (SC-006)
+- [x] T076 Recorrer la página entera con el tabulador comprobando foco siempre visible y sin trampas (FR-013, SC-007)
+- [x] T077 Activar la reducción de movimiento del sistema y confirmar que no hay animación y que **todo el contenido queda visible** (FR-011)
 - [ ] T078 Primer despliegue a producción en `jddlabs.dev`, sin anunciarlo (17–18 sept)
 - [ ] T079 Ventana de contingencia 19–20 sept: corregir únicamente lo que falle del despliegue, sin desarrollo nuevo (principio XI)
 
@@ -330,8 +330,8 @@ entrega. Si el calendario aprieta, el recorte se busca en otro sitio (ver §Cale
 - [X] T081 [US5] Crear `src/entries/caso.jsx` y la página con la imagen de apertura, el bloque de datos del cliente (Cliente, Industria, Rol), Reto, Solución, Highlights y Tecnología utilizada, reutilizando `Header` y `Footer`. Sin galería de capturas (2026-09-11)
 - [X] T082 [US5] Enlazar la página desde `src/sections/ProyectoDestacado.jsx` y ofrecer camino de vuelta al portfolio
 - [ ] T083 [US5] Insertar el testimonio de Cristalería Ruteña **solo si** el cliente ya ha respondido y el propietario lo ha verificado; si no, no se añade el bloque (FR-007, principio V) — decisión del 2026-09-10: por ahora se omite el bloque entero, sin marcador
-- [ ] T084 [US5] Ejecutar Lighthouse sobre la nueva página hasta 90 o más en las cuatro categorías
-- [ ] T085 [US5] Incluir `caso-cristaleria` en el recorrido de T075, T076 y T077: 320px sin scroll horizontal, tabulador con foco siempre visible y movimiento reducido con todo el contenido visible
+- [x] T084 [US5] Ejecutar Lighthouse sobre la nueva página hasta 90 o más en las cuatro categorías
+- [x] T085 [US5] Incluir `caso-cristaleria` en el recorrido de T075, T076 y T077: 320px sin scroll horizontal, tabulador con foco siempre visible y movimiento reducido con todo el contenido visible
 
 ---
 
