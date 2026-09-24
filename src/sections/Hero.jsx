@@ -81,18 +81,19 @@ export function Hero() {
 
         {/* Compromisos: cifras mono con su etiqueta, separadas por filetes. Lista y no
             <dl>: cada item se lee de corrido, "1, Interlocutor, del primer café…". */}
-        <ul className="mt-12 grid border-t border-border sm:grid-cols-3 md:mt-16">
+        <ul className="mt-12 grid gap-5 border-t border-border pt-7 sm:grid-cols-3 sm:gap-0 sm:pt-0 md:mt-16">
           {hero.compromisos.map(({ cifra, lectura, texto }, i) => (
             <li
               key={texto}
               className={[
-                // Movil: fila con la cifra a la izquierda. Desde sm: columna, cifra arriba.
-                'flex items-center gap-5 py-5 sm:block sm:pb-0 sm:pt-8',
-                i > 0 ? 'border-t border-border sm:border-l sm:border-t-0 sm:pl-6 md:pl-8' : '',
+                // Movil: fila sin filetes, cifra a la izquierda y etiqueta en texto
+                // corrido. Desde sm: columnas con filete vertical, cifra arriba.
+                'grid grid-cols-[5.5rem_1fr] items-baseline gap-4 sm:block sm:pt-8',
+                i > 0 ? 'sm:border-l sm:border-border sm:pl-6 md:pl-8' : '',
                 i < hero.compromisos.length - 1 ? 'sm:pr-6 md:pr-8' : '',
               ].join(' ')}
             >
-              <p className="w-20 flex-none font-mono text-fs-600 leading-none text-fg sm:w-auto">
+              <p className="font-mono text-fs-600 leading-none text-accent-2">
                 {lectura ? (
                   <>
                     <span aria-hidden="true">{cifra}</span>
@@ -102,7 +103,10 @@ export function Hero() {
                   cifra
                 )}
               </p>
-              <Eyebrow className="max-w-[18rem] sm:mt-4">{texto}</Eyebrow>
+              {/* En movil, texto corrido: las versalitas mono con tracking se partian en
+                  dos lineas apretadas. Desde sm, el eyebrow de siempre. */}
+              <p className="text-fs-300 leading-snug text-fg-dim sm:hidden">{texto}</p>
+              <Eyebrow className="hidden max-w-[18rem] sm:mt-4 sm:block">{texto}</Eyebrow>
             </li>
           ))}
         </ul>

@@ -116,12 +116,13 @@ Contenido: a la izquierda, monograma blanco de 32px, filete vertical de 1px en `
 wordmark («JdD» bold `fg`, «Labs» regular `fg` al 60 %), sin cambios de estado; navegación centrada en enlaces de `fs-200` color
 `fg-dim` con padding 8/16 y radio pill en hover, y CTA pill a la derecha en tamaño `sm` (~46px)
 con el texto «Hablemos» y flecha, variante `brillo` de `Boton`: botón de cristal oscuro
-(2026-09-24, adaptado de un componente de referencia del propietario). `bg-3` con filete
-`border-accent`, brillos interiores de `fg` en capas y anillo exterior de sombras; icono de
+(2026-09-24, adaptado de un componente de referencia del propietario). `bg-3` teñido de
+`accent` al 30 % —sin tinte no destacaba sobre el botón fantasma— con filete `border-accent`, brillos interiores de `fg` en capas y anillo exterior de sombras; icono de
 destellos en `accent-2` que parpadea, y letras con una onda de brillo escalonada 80ms (de
 `fg-dim` a `fg` con destello `accent-2`). En hover y foco: filete `accent`, brillos interiores
-teñidos de `accent-2` desde abajo y resplandor fino en el borde inferior. Contraste medido de
-la letra en su punto más apagado: 5,72:1 en el peor caso. Con movimiento reducido no hay onda
+teñidos de `accent-2` desde abajo y resplandor fino en el borde inferior. En hover y foco la onda
+se detiene y las letras quedan en `fg`. Contraste medido: letra apagada en reposo 4,63:1 en el
+peor caso; en hover, 9,42:1. Con movimiento reducido no hay onda
 ni parpadeo. La flecha es CSS (`.flecha`): en reposo solo la punta, «›»; en hover y foco
 aparece el asta y la punta avanza 3px hasta formar «→». El menú móvil y el hero usan el mismo
 CTA.
@@ -150,7 +151,9 @@ Rehecho el 2026-09-23 sobre la referencia de Domindez, medida con navegador head
   eyebrow — «1 · Interlocutor, del primer café al lanzamiento», «0 · Plantillas. Código escrito
   para tu negocio», «<24 h · Respuesta por WhatsApp». Cifras dadas y verificadas por el
   propietario el 2026-09-23 (principio V). Tres columnas con filete vertical desde `sm`; en
-  móvil, filas con la cifra a la izquierda. «<24 h» se lee como «Menos de 24 horas».
+  móvil, filas sin filetes: cifra `accent-2` a la izquierda y etiqueta en texto corrido
+  `fs-300` `fg-dim` (las versalitas mono se partían en dos líneas apretadas). La cifra va en
+  `accent-2` en todos los anchos. «<24 h» se lee como «Menos de 24 horas».
 - Halo radial de `accent-glow` como decoración de fondo, `pointer-events: none`.
 - Verificado: CTAs sin scroll de 375×667 a 1920×1080. Única excepción, 320×568: el segundo CTA
   queda 2px por debajo del borde.
@@ -192,7 +195,7 @@ Rehecho el 2026-09-23 en dos columnas (`1.15fr / 1fr` desde `md`, apilado en mó
 
 - **Izquierda**: captura 3:2 con radio 22px y filete `border`; número `01` mono `accent-2` en
   píldora abajo a la derecha, donde no tapa nada de la captura. La imagen no es enlace.
-- **Derecha**: año / categoría en mono `fg-mute`, título `fs-700`, descripción completa en
+- **Derecha**: año / categoría en mono `fg-mute`, título `fs-700` con el cliente en `accent-2`, descripción completa en
   `fg-dim`, y los dos destinos: «Visitar en vivo» (botón fantasma con un punto `accent-2` que
   late, externo) y «Ver caso de estudio» (enlace `accent-2` con la flecha de los CTAs).
 
@@ -210,8 +213,11 @@ su propio `proyecto.tecnologias`. Alto: 989px a 1440, 1720px a 375.
 
 ### 4.8 Contacto
 
-Dos columnas. Izquierda: los tres canales directos como filas con filete, etiqueta mono
-`fg-mute` y valor `fg` que pasa a `accent-2` en hover. Derecha: el formulario, con campos de
+Dos columnas. Izquierda, fija con `sticky` desde `lg` (bajo la cabecera, con 2rem de aire)
+mientras el formulario sigue haciendo scroll: los canales directos como filas con filete,
+etiqueta mono `fg-mute` y valor `fg`. WhatsApp y teléfono comparten número, así que van en una
+sola fila con el número una vez y dos acciones en píldora («Escribir por WhatsApp» y «Llamar»);
+siguen siendo tres anclas (FR-006). Si los números difieren, la fila vuelve a partirse. Derecha: el formulario, con campos de
 fondo `bg-3`, filete `border` → `accent` en `:focus`, radio 8px, y botón de envío pill `accent`.
 
 ## 5. Movimiento
