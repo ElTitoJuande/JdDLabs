@@ -39,7 +39,7 @@ export function Header({ base = '' }) {
       <div className="contenedor flex h-full items-center justify-between gap-4">
         <a
           href={`${base}#inicio`}
-          className="flex items-center gap-2.5 no-underline"
+          className="flex items-center gap-3.5 no-underline"
           aria-label={`${identity.nombreComercial}, ir al inicio`}
         >
           {/*
@@ -50,14 +50,19 @@ export function Header({ base = '' }) {
           */}
           <span
             aria-hidden="true"
-            className="h-6 w-7 flex-none bg-fg md:h-7 md:w-8"
+            className="h-8 w-9 flex-none bg-fg"
             style={{
               WebkitMask: "url('/JdDLogo_marca.svg') center / contain no-repeat",
               mask: "url('/JdDLogo_marca.svg') center / contain no-repeat",
             }}
           />
-          <span className="text-fs-400 font-medium tracking-tight text-fg">
-            {identity.nombreComercial}
+          {/* Filete `accent`: el unico color de marca del bloque (constitucion 3.2.0,
+              principio IV). No es parte del logo, asi que el monograma no se recolorea. */}
+          <span aria-hidden="true" className="h-6 w-px flex-none bg-accent" />
+          {/* Wordmark: "JdD" en bold `fg`, "Labs" en regular `fg` al 60 %. Nunca acento. */}
+          <span className="text-fs-400 tracking-tight">
+            <span className="font-bold text-fg">{identity.nombreComercial.slice(0, 3)}</span>
+            <span className="font-normal text-fg/60">{identity.nombreComercial.slice(3)}</span>
           </span>
         </a>
 
