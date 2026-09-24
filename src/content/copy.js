@@ -9,9 +9,10 @@
 // del stack vive solo en la pagina opcional de caso de estudio.
 
 export const hero = {
-  // Eyebrow de posicionamiento del hero v2. No es un dato: es la etiqueta de lo que
-  // se hace, y acompaña al lugar, que se lee de identity.js y no se escribe aqui.
-  eyebrow: 'Desarrollo web',
+  // Eyebrow del hero: quien hace el trabajo (propietario, 2026-09-24). Se lee "Juan de
+  // Dios · Desarrollador independiente"; en dos piezas para poder partirlo por el punto
+  // en movil. Acompaña al lugar, que se lee de identity.js. Las versalitas, del CSS.
+  eyebrow: { nombre: 'Juan de Dios', rol: 'Desarrollador independiente' },
   // El h1 se lee entero como "Desarrollo web para pymes y autónomos": los segmentos
   // solo marcan que palabras van en la serif de enfasis (constitucion 3.1.0).
   titular: [

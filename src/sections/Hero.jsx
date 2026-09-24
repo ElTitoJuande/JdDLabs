@@ -30,9 +30,23 @@ export function Hero() {
           <div className="flex items-center gap-4 sm:gap-5">
             {/* Raya decorativa: `accent` como relleno, no como texto. */}
             <span aria-hidden="true" className="h-px w-7 flex-none bg-accent" />
-            <Eyebrow as="span">{hero.eyebrow}</Eyebrow>
+            {/* Por debajo de sm el eyebrow no cabe en una linea: se parte por el punto,
+                nombre arriba y rol abajo, en lugar de dejar que corte por cualquier sitio. */}
+            <Eyebrow as="span">
+              {hero.eyebrow.nombre}
+              <span aria-hidden="true" className="hidden sm:inline">
+                {' · '}
+              </span>
+              <br className="sm:hidden" />
+              <span className="sr-only"> </span>
+              {hero.eyebrow.rol}
+            </Eyebrow>
           </div>
-          <Eyebrow as="span">{`${identity.localidad}, ${identity.provincia}`}</Eyebrow>
+          {/* El lugar se oculta por debajo de md: junto al eyebrow no cabe hasta 768px, y
+              Rute ya esta en el title, la meta description, el JSON-LD, Contacto y el pie. */}
+          <Eyebrow as="span" className="hidden md:inline">
+            {`${identity.localidad}, ${identity.provincia}`}
+          </Eyebrow>
         </div>
 
         <h1 className="mt-5 text-fs-900 text-fg md:mt-9">
