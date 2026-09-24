@@ -1,3 +1,4 @@
+import { useEffect, useRef, useState } from 'react';
 import { servicios, titulares } from '../content/copy';
 import { Reveal } from '../components/Reveal';
 import { TituloSeccion } from '../components/TituloSeccion';
@@ -13,9 +14,32 @@ import { TituloSeccion } from '../components/TituloSeccion';
  *
  * Hover y foco: la fila gana fondo `bg-2`, el numero pasa a `accent-2` y la flecha se
  * rellena de `accent`. En movil la fila se apila y la flecha queda arriba a la derecha.
+ *
+ * En pantallas tactiles (sin hover) ese mismo estado lo da el scroll: la fila que cruza
+ * la franja central de la pantalla queda `data-activo` y se enciende, una detras de
+ * otra (propietario, 2026-09-24). Con raton no se observa nada y manda el hover.
  */
 export function Servicios() {
   const numero = (i) => String(i + 1).padStart(2, '0');
+  const filas = useRef([]);
+  const [activo, setActivo] = useState(-1);
+
+  useEffect(() => {
+    if (typeof window.matchMedia !== 'function' || !window.matchMedia('(hover: none)').matches) return;
+    // Franja del 20 % central: solo cabe una fila a la vez.
+    const observador = new IntersectionObserver(
+      (entradas) => {
+        for (const entrada of entradas) {
+          const i = filas.current.indexOf(entrada.target);
+          if (entrada.isIntersecting) setActivo(i);
+          else setActivo((actual) => (actual === i ? -1 : actual));
+        }
+      },
+      { rootMargin: '-40% 0px -40% 0px' },
+    );
+    filas.current.forEach((fila) => fila && observador.observe(fila));
+    return () => observador.disconnect();
+  }, []);
 
   return (
     <section id="servicios" className="seccion">
@@ -28,10 +52,12 @@ export function Servicios() {
           {servicios.map((servicio, i) => (
             <Reveal as="li" key={servicio.id} retardo={80 * i} className="border-t border-border">
               <a
+                ref={(el) => (filas.current[i] = el)}
+                data-activo={activo === i || undefined}
                 href="#contacto"
-                className="group relative grid grid-cols-[auto_minmax(0,1fr)_auto] gap-x-5 gap-y-4 rounded-lg2 px-2 py-8 no-underline transition-colors duration-fast ease-out-soft hover:bg-bg-2 focus-visible:bg-bg-2 motion-reduce:transition-none md:grid-cols-[4rem_minmax(0,1fr)_minmax(0,1.1fr)_auto] md:gap-x-10 md:px-6 md:py-12"
+                className="group relative grid grid-cols-[auto_minmax(0,1fr)_auto] gap-x-5 gap-y-4 rounded-lg2 px-2 py-8 no-underline transition-colors duration-fast ease-out-soft hover:bg-bg-2 focus-visible:bg-bg-2 data-[activo]:bg-bg-2 motion-reduce:transition-none md:grid-cols-[4rem_minmax(0,1fr)_minmax(0,1.1fr)_auto] md:gap-x-10 md:px-6 md:py-12"
               >
-                <span className="pt-2 font-mono text-fs-200 tracking-[0.16em] text-fg-mute transition-colors duration-fast group-hover:text-accent-2 group-focus-visible:text-accent-2 md:pt-3">
+                <span className="pt-2 font-mono text-fs-200 tracking-[0.16em] text-fg-mute transition-colors duration-fast group-hover:text-accent-2 group-focus-visible:text-accent-2 group-data-[activo]:text-accent-2 md:pt-3">
                   {numero(i)}
                 </span>
 
@@ -61,7 +87,7 @@ export function Servicios() {
                     Decorativa: el nombre del enlace lo da el titulo y el sr-only. */}
                 <span
                   aria-hidden="true"
-                  className="col-start-3 row-start-1 flex h-12 w-12 items-center justify-center self-start rounded-full border border-border-strong text-fg transition-colors duration-fast ease-out-soft group-hover:border-accent group-hover:bg-accent group-focus-visible:border-accent group-focus-visible:bg-accent md:col-start-4 md:h-14 md:w-14"
+                  className="col-start-3 row-start-1 flex h-12 w-12 items-center justify-center self-start rounded-full border border-border-strong text-fg transition-colors duration-fast ease-out-soft group-hover:border-accent group-hover:bg-accent group-focus-visible:border-accent group-focus-visible:bg-accent group-data-[activo]:border-accent group-data-[activo]:bg-accent md:col-start-4 md:h-14 md:w-14"
                 >
                   <span className="flecha" />
                 </span>

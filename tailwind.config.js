@@ -31,6 +31,9 @@ const paleta = {
 
 export default {
   content: ['./*.html', './src/**/*.{js,jsx}'],
+  // Las utilidades hover: solo en dispositivos con raton. En tactil el toque dejaba
+  // filas "encendidas" al hacer scroll; alli el estado lo da `data-activo` (Servicios).
+  future: { hoverOnlyWhenSupported: true },
   theme: {
     extend: {
       colors: {

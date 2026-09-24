@@ -255,12 +255,14 @@
   }
 
   .group:hover .flecha,
-  .group:focus-visible .flecha {
+  .group:focus-visible .flecha,
+  .group[data-activo] .flecha {
     background-color: currentColor;
   }
 
   .group:hover .flecha::before,
-  .group:focus-visible .flecha::before {
+  .group:focus-visible .flecha::before,
+  .group[data-activo] .flecha::before {
     right: 0;
   }
 
