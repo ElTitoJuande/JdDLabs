@@ -216,7 +216,7 @@ export function ContactForm() {
           required
           minLength={LIMITES.mensaje.min}
           maxLength={LIMITES.mensaje.max}
-          className={`${claseCampo} resize-y`}
+          className={`${claseCampo} resize-none`}
           {...atributosError('mensaje')}
         />
         {mensajeError('mensaje')}
