@@ -255,7 +255,10 @@ export function ContactForm() {
             {...atributosError('consentimiento')}
           />
           <label htmlFor="consentimiento" className="text-fs-200 leading-relaxed text-fg-dim">
-            Acepto que {identity.razonSocial} trate mis datos para responder a esta
+            {/* Nombre comercial por decision del propietario (2026-09-24). El responsable
+                del tratamiento con nombre fiscal sigue identificado en la politica de
+                privacidad enlazada aqui mismo (principio XII). */}
+            Acepto que {identity.nombreComercial} trate mis datos para responder a esta
             consulta, según la{' '}
             <a href="/privacidad" className="text-accent-2 underline underline-offset-2">
               política de privacidad
