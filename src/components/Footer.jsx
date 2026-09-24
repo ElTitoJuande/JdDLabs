@@ -3,7 +3,8 @@ import { secciones, cabecera, pie } from '../content/copy';
 
 /**
  * Pie comun a las cinco paginas, adaptado del de la referencia visual (2026-09-24):
- * llamada a la accion, wordmark gigante, cuatro columnas y barra legal.
+ * llamada a la accion, wordmark gigante, tres columnas y barra legal. Email, telefono y
+ * WhatsApp viven en la seccion Contacto; el pie solo enlaza a Instagram ("Sígueme").
  *
  * Los enlaces legales son obligatorios en todas las paginas (FR-021b, principio XII), y
  * por eso el pie es un unico componente compartido en vez de marcado duplicado.
@@ -39,22 +40,12 @@ export function Footer({ base = '' }) {
       ),
     },
     {
-      titulo: 'Contacto',
+      titulo: 'Sígueme',
       contenido: (
         <ul className="flex flex-col gap-2.5">
           <li>
-            <a href={enlaces.email} className={enlace}>
-              {identity.email}
-            </a>
-          </li>
-          <li>
-            <a href={enlaces.telefono} className={enlace}>
-              {identity.telefono}
-            </a>
-          </li>
-          <li>
-            <a href={enlaces.whatsapp} target="_blank" rel="noopener noreferrer" className={enlace}>
-              WhatsApp <span aria-hidden="true">↗</span>
+            <a href={enlaces.instagram} target="_blank" rel="noopener noreferrer" className={enlace}>
+              Instagram <span aria-hidden="true">↗</span>
               <span className="sr-only"> (se abre en una pestaña nueva)</span>
             </a>
           </li>
@@ -72,19 +63,6 @@ export function Footer({ base = '' }) {
               </a>
             </li>
           ))}
-        </ul>
-      ),
-    },
-    {
-      titulo: 'Redes',
-      contenido: (
-        <ul className="flex flex-col gap-2.5">
-          <li>
-            <a href={enlaces.instagram} target="_blank" rel="noopener noreferrer" className={enlace}>
-              Instagram <span aria-hidden="true">↗</span>
-              <span className="sr-only"> (se abre en una pestaña nueva)</span>
-            </a>
-          </li>
         </ul>
       ),
     },
@@ -134,7 +112,7 @@ export function Footer({ base = '' }) {
         </svg>
 
         {/* Columnas */}
-        <div className="mt-14 grid grid-cols-1 gap-10 border-t border-border pt-10 sm:grid-cols-2 md:mt-20 lg:grid-cols-4 md:pt-12">
+        <div className="mt-14 grid grid-cols-1 gap-10 border-t border-border pt-10 sm:grid-cols-3 md:mt-20 md:pt-12">
           {columnas.map(({ titulo, contenido }) => (
             <div key={titulo}>
               <p className="font-mono text-fs-100 uppercase tracking-[0.16em] text-fg-mute">
