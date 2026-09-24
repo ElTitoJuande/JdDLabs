@@ -4,6 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+    <!-- Precarga de las fuentes del titular: sin ella el h1 se pinta con la del sistema y
+         al llegar la web cambia de alto y empuja la pagina (CLS 0,23 en movil). Vite
+         resuelve la ruta al mismo archivo con hash que emite desde el CSS. -->
+    <link rel="preload" as="font" type="font/woff2" crossorigin href="./node_modules/@fontsource-variable/space-grotesk/files/space-grotesk-latin-wght-normal.woff2" />
     <title>Política de privacidad | JdDLabs</title>
     <meta name="description" content="Cómo trata JdDLabs los datos enviados a través del formulario de contacto, conforme al RGPD." />
     <link rel="canonical" href="https://jddlabs.dev/privacidad" />
