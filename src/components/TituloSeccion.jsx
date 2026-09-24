@@ -15,7 +15,7 @@ import { Reveal } from './Reveal';
  * (constitucion 3.2.0). Si no coincide con el final del texto, el titular sale entero
  * en Space Grotesk: mejor sin enfasis que con el enfasis en la palabra equivocada.
  */
-function conEnfasis(texto, enfasis) {
+export function conEnfasis(texto, enfasis) {
   if (typeof texto !== 'string' || !enfasis || !texto.endsWith(enfasis)) return texto;
   return (
     <>
