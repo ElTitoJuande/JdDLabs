@@ -75,6 +75,19 @@ export function Footer({ base = '' }) {
         </ul>
       ),
     },
+    {
+      titulo: 'Redes',
+      contenido: (
+        <ul className="flex flex-col gap-2.5">
+          <li>
+            <a href={enlaces.instagram} target="_blank" rel="noopener noreferrer" className={enlace}>
+              Instagram <span aria-hidden="true">↗</span>
+              <span className="sr-only"> (se abre en una pestaña nueva)</span>
+            </a>
+          </li>
+        </ul>
+      ),
+    },
   ];
 
   return (
@@ -121,7 +134,7 @@ export function Footer({ base = '' }) {
         </svg>
 
         {/* Columnas */}
-        <div className="mt-14 grid grid-cols-1 gap-10 border-t border-border pt-10 sm:grid-cols-3 md:mt-20 md:pt-12">
+        <div className="mt-14 grid grid-cols-1 gap-10 border-t border-border pt-10 sm:grid-cols-2 md:mt-20 lg:grid-cols-4 md:pt-12">
           {columnas.map(({ titulo, contenido }) => (
             <div key={titulo}>
               <p className="font-mono text-fs-100 uppercase tracking-[0.16em] text-fg-mute">
