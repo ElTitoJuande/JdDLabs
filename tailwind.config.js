@@ -105,7 +105,7 @@ export default {
         // CTAs de cristal (variante `brillo` de Boton): onda de brillo de las letras,
         // escalonada 80ms por letra, y parpadeo del icono. Sus @keyframes, en index.css.
         letra: 'letra 2s ease-in-out infinite',
-        chispa: 'chispa 2s linear infinite',
+        chispa: 'chispa 2s ease-in-out infinite',
       },
     },
   },
