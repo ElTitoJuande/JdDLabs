@@ -78,7 +78,7 @@ torno a 9.000px, porque no se rellenan huecos con contenido que no existe.
 
 | # | Sección | Eyebrow | Fondo | Origen del contenido | Estado |
 |---|---|---|---|---|---|
-| 1 | Hero | `DESARROLLO WEB` · `RUTE, CÓRDOBA` | `bg` | `copy.js` → `hero` | Copy existente |
+| 1 | Hero | `JUAN DE DIOS · DESARROLLADOR INDEPENDIENTE` · `RUTE, CÓRDOBA` | `bg` | `copy.js` → `hero` | Copy existente |
 | 2 | Marquee de capacidades | — | `bg-2` | Derivado de `servicios` | Copy existente |
 | 3 | Proyecto destacado | `TRABAJO SELECCIONADO` | `bg` | `copy.js` → `proyecto` | Copy existente |
 | 4 | Servicios (bento) | `SERVICIOS` | `bg-2` | `copy.js` → `servicios` | Copy existente |
@@ -131,7 +131,10 @@ Rehecho el 2026-09-23 sobre la referencia de Domindez, medida con navegador head
   contenido arriba, una altura de ventana dejaba un vacío que la referencia rellena con cifras
   que aquí no existen (principio V). El marquee sube justo debajo de los CTAs.
 - Aire vertical con el token `spacing.hero` (`clamp(3rem, 5vw, 5rem)`: 48px a 375, 72px a 1440).
-- Fila de eyebrows: raya de 28px en `accent` + posicionamiento a la izquierda, lugar a la derecha.
+- Fila de eyebrows: raya de 28px en `accent` + «Juan de Dios · Desarrollador independiente» a la
+  izquierda, lugar a la derecha. Por debajo de `sm` el eyebrow se parte por el punto (nombre y
+  rol en dos líneas); por debajo de `md` el lugar se oculta, porque junto al eyebrow no cabe
+  hasta 768px y Rute ya está en el title, la meta description, el JSON-LD, Contacto y el pie.
 - `h1` a `fs-900` (117,6px a 1440, 40px a 375), peso 500, `letter-spacing: -0.05em`,
   `line-height: 0.9`, dos líneas desde 375 hasta 1920. Énfasis en Instrument Serif cursiva 400:
   «para» en `fg-dim`, «pymes y autónomos» en `accent-2`. El texto del `h1` no cambia.
@@ -165,6 +168,9 @@ Titular en dos líneas.          ← fs-800, peso 500, ls -.04em, lh .9, fg
 ```
 
 El titular lleva punto final, como en la referencia. `margin-top` entre eyebrow y titular: 24px.
+El cierre de cada titular va en Instrument Serif cursiva `accent-2` (constitución 3.2.0): «Lo que
+*hago.*», «Un proyecto, *contado entero.*», «Las herramientas *que uso.*», «La misma persona, *de
+principio a fin.*», «¿Hablamos de *tu proyecto?*». El cierre vive en `titulares.*.enfasis`.
 La raya `accent` delante del eyebrow (2026-09-23) es la misma del hero: el indicador de marca de
 cada apertura, en `TituloSeccion` y en un solo sitio.
 
