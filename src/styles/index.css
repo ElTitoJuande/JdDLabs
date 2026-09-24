@@ -216,12 +216,11 @@
   /* Los tokens `animation.letra` y `animation.chispa` viven en la config; sus
      @keyframes, aqui: declarados en la config, Tailwind solo los emite si alguien usa la
      clase animate-*. */
-  /* Onda bien marcada (propietario, 2026-09-24): la letra crece un 12 % y se enciende
-     con nucleo blanco y halo `accent-2`. Solo rosa no se ve: el boton ya lleva tinte
+  /* Onda bien marcada (propietario, 2026-09-24): la letra se enciende con nucleo blanco
+     y halo `accent-2`, sin cambiar de tamaño. Solo rosa no se ve: el boton ya lleva tinte
      magenta. La chispa late entre apagada y pequeña, y grande, girada y con halo. */
   @keyframes letra {
     50% {
-      transform: scale(1.12);
       text-shadow:
         0 0 4px theme('colors.fg / 85%'),
         0 0 12px theme('colors.accent-2'),
