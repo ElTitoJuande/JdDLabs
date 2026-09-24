@@ -62,7 +62,18 @@ export function ProyectoDestacado() {
               <span>{proyecto.categoria}</span>
             </div>
 
-            <h3 className="mt-4 text-fs-700 text-fg md:mt-5">{proyecto.titulo}</h3>
+            {/* El nombre del cliente, en `accent-2`: es lo que tiene que quedarse. Solo
+                color, sin serif: la serif esta acotada a h1 y h2 (constitucion 3.2.0). */}
+            <h3 className="mt-4 text-fs-700 text-fg md:mt-5">
+              {proyecto.titulo.endsWith(proyecto.cliente) ? (
+                <>
+                  {proyecto.titulo.slice(0, -proyecto.cliente.length)}
+                  <span className="text-accent-2">{proyecto.cliente}</span>
+                </>
+              ) : (
+                proyecto.titulo
+              )}
+            </h3>
 
             <p className="mt-5 text-fs-300 leading-relaxed text-fg-dim md:mt-6">
               {proyecto.descripcion}
