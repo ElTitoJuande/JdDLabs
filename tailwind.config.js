@@ -4,29 +4,23 @@
 // suelto en JSX o CSS: todo color se referencia por su token, y el CSS que necesite uno
 // lo lee con theme().
 const paleta = {
-  bg: '#0a0a0a',
-  'bg-2': '#111111',
-  'bg-3': '#181818',
-  'bg-elev': '#1f1f1f',
-  fg: '#F5F5F0',
-  'fg-dim': '#A1A1A1',
-  // #8A8A8A y no el #6B6B6B de la referencia: ese valor da 3,7:1 sobre #0a0a0a y no
-  // llega a AA. Aqui pasa en las tres superficies (6,7 / 6,4 / 5,1).
-  'fg-mute': '#8A8A8A',
-  // Solo decorativo: filetes y separadores. Nunca texto. Es el token con el que se
-  // pinta la barra "/" que separa los eyebrows, que en la maqueta va a
-  // rgba(255,255,255,.2) — el mismo gris resultante sobre el fondo base.
-  'fg-faint': '#3A3A3A',
-  // Regla de los dos acentos (principio VII): `accent` solo como relleno o como texto
-  // sobre bg/bg-2; `accent-2` para todo acento de texto.
-  accent: '#F31A64',
-  'accent-2': '#FF5C99',
-  'accent-ink': '#0a0a0a',
-  'accent-dim': 'rgba(243,26,100,.15)',
-  'accent-glow': 'rgba(243,26,100,.35)',
-  border: 'rgba(255,255,255,.08)',
-  'border-strong': 'rgba(255,255,255,.18)',
-  'border-accent': 'rgba(243,26,100,.4)',
+  // PRUEBA paleta verde (temporal, se deshace)
+  bg: '#0B2A22',
+  'bg-2': '#12382F',
+  'bg-3': '#174539',
+  'bg-elev': '#1B4A3E',
+  fg: '#F5F6F1',
+  'fg-dim': '#BAC3BD', // light al 75% sobre bg
+  'fg-mute': '#97A49E', // light al 60% sobre bg
+  'fg-faint': 'rgba(69,224,176,.25)',
+  accent: '#45E0B0',
+  'accent-2': '#45E0B0',
+  'accent-ink': '#15201C',
+  'accent-dim': 'rgba(69,224,176,.15)',
+  'accent-glow': 'rgba(69,224,176,.35)',
+  border: 'rgba(69,224,176,.15)',
+  'border-strong': 'rgba(69,224,176,.3)',
+  'border-accent': 'rgba(69,224,176,.4)',
 };
 
 export default {
