@@ -27,7 +27,7 @@ export function Footer({ base = '' }) {
 
   const columnas = [
     {
-      titulo: 'Estudio',
+      titulo: 'Dónde estoy',
       contenido: (
         <>
           <p className="text-fs-200 font-medium text-fg">

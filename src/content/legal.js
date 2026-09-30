@@ -100,8 +100,8 @@ export const privacidad = {
         'Este sitio no vende ni cede datos personales a terceros. Para su funcionamiento intervienen los siguientes proveedores, que actúan como encargados del tratamiento:',
       ],
       lista: [
-        'Cloudflare, Inc. — alojamiento del sitio y ejecución de la función que procesa el formulario.',
-        'Resend (Plus Five Five, Inc.) — envío del correo electrónico que contiene el mensaje del formulario.',
+        'Cloudflare, Inc.: alojamiento del sitio y ejecución de la función que procesa el formulario.',
+        'Resend (Plus Five Five, Inc.): envío del correo electrónico que contiene el mensaje del formulario.',
       ],
       parrafosFinales: [
         'Ambos proveedores pueden tratar datos fuera del Espacio Económico Europeo, amparados en las garantías previstas en el capítulo V del RGPD.',

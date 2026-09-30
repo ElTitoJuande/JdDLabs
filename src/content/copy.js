@@ -3,7 +3,8 @@
 //
 // Fuente: copy-portfolio.md, version definitiva aportada por el propietario el
 // 2026-09-09. Sustituye por completo al copy provisional anterior. Se transcribe
-// literalmente, sin reescrituras.
+// literalmente, sin reescrituras. El 2026-09-30 el propietario revisa y aprueba una pasada
+// de estilo sobre hero, servicios, proyecto, sobre mi, contacto y pie.
 //
 // Principio 70/30: en la capa principal no entra jerga tecnica. La version ampliada
 // del stack vive solo en la pagina opcional de caso de estudio.
@@ -26,7 +27,7 @@ export const hero = {
   // `destacado` va en `fg` y el resto en `fg-dim`: la primera frase es la tesis.
   subtitulo: {
     destacado: 'Tu negocio merece una web que venda, no una plantilla más.',
-    resto: 'Diseño y desarrollo a medida, de principio a fin. De lo técnico me encargo yo; tú, de lo tuyo.',
+    resto: 'Diseño y programo tu web a medida. De lo técnico me encargo yo; tú, de lo tuyo.',
   },
   cta: 'Solicitar presupuesto',
   // Compromisos bajo el hero. Principio V: cifras dadas y verificadas explicitamente por
@@ -44,11 +45,10 @@ export const hero = {
   ctaSecundario: 'Ver trabajo',
 };
 
-// Pie (2026-09-24). `eyebrow` es copy nuevo, tomado de la referencia visual con el visto
-// bueno pendiente del propietario. `descripcion` NO es nueva: es la del JSON-LD de negocio
+// Pie (2026-09-24). `eyebrow` elegido por el propietario el 2026-09-30. `descripcion` NO es nueva: es la del JSON-LD de negocio
 // local de index.html, literal.
 export const pie = {
-  eyebrow: '¿Listo para empezar?',
+  eyebrow: '¿Empezamos?',
   descripcion: 'Desarrollo web para pymes y autónomos en Rute y alrededores.',
 };
 
@@ -103,7 +103,7 @@ export const servicios = [
     id: 'web-corporativa',
     titulo: 'Web corporativa',
     descripcion:
-      'Páginas para presentar tu negocio con una imagen profesional: quiénes sois, qué ofrecéis y cómo contactar, lista para generar confianza desde el primer segundo.',
+      'La web que presenta tu negocio: quiénes sois, qué ofrecéis y cómo contactaros, con una imagen profesional que dé confianza.',
     // Claves: el trabajo que hay detras de cada servicio (propietario, 2026-09-24), no un
     // resumen de la descripcion.
     claves: ['Diseño a medida', 'UI/UX', 'Responsive', 'SEO on-page'],
@@ -112,7 +112,7 @@ export const servicios = [
     id: 'tiendas-online',
     titulo: 'Tiendas online',
     descripcion:
-      'Tiendas funcionales y fáciles de gestionar, pensadas para vender sin fricciones ni complicaciones técnicas.',
+      'Tu tienda, fácil de gestionar en el día a día y con una compra sencilla para tus clientes.',
     claves: ['Catálogo y carrito', 'Pagos con Stripe', 'Gestión de pedidos', 'Emails automáticos'],
   },
   {
@@ -131,7 +131,7 @@ export const proyecto = {
   // Parrafo completo. Desde el rediseño en tarjeta ya no se lee en la portada: es la
   // entradilla de la pagina de caso de estudio.
   descripcion:
-    'Cristalería Ruteña lleva desde 1977 trabajando el vidrio y el aluminio en Rute: carpintería de aluminio, vidrio a medida, toldos y persianas para vivienda, negocio y proyectos técnicos. Diseñé y desarrollé su web desde cero — una página que presenta sus servicios, su proceso de trabajo y los proyectos ya realizados en Sevilla, Estepona y Marbella, con un objetivo claro: que pedir presupuesto sea tan fácil como escribir por WhatsApp.',
+    'Cristalería Ruteña lleva desde 1977 trabajando el vidrio y el aluminio en Rute: carpintería de aluminio, vidrio a medida, toldos y persianas para vivienda, negocio y proyectos técnicos. Diseñé y desarrollé su web desde cero. Presenta sus servicios, cómo trabajan y los proyectos que han hecho en Sevilla, Estepona y Marbella. La idea era que pedir presupuesto fuera tan fácil como escribir por WhatsApp.',
   // Linea de contexto de la tarjeta. NO es copy nuevo: es la primera frase de
   // `descripcion`, recortada literalmente y sin reescribir una sola palabra. Si el
   // propietario prefiere una linea propia, se sustituye aqui y solo aqui.
@@ -187,9 +187,9 @@ export const casoEstudio = {
   servicios: 'Diseño web, Desarrollo a medida, Perfil de Google',
   // El Rol absorbe lo que antes era una firma suelta al pie de la pagina: la autoria se
   // lee aqui, dentro de los datos del proyecto, y no repetida en dos sitios (FR-004b).
-  rol: 'Diseño y desarrollo completo — Juan de Dios Pérez Moreno',
+  rol: 'Diseño y desarrollo completo · Juan de Dios Pérez',
   reto:
-    'La web anterior de Cristalería Ruteña tenía más de diez años y ya no reflejaba la experiencia y calidad real del negocio. El objetivo era trasladar esa calidad al entorno digital: presentar servicios y proyectos de forma clara y visual, mejorar la experiencia en móvil y facilitar las consultas y solicitudes de presupuesto.',
+    'La web anterior de Cristalería Ruteña tenía más de diez años y ya no reflejaba la calidad del trabajo que hacen. Había que enseñar sus servicios y proyectos de forma clara y con imágenes, que la web funcionara bien en el móvil y que pedir presupuesto costara menos.',
   solucion:
     'Una web completa con presentación de servicios (carpintería de aluminio, vidrio a medida, toldos y persianas), catálogo de proyectos propios, proceso de trabajo en tres pasos y contacto directo por WhatsApp, formulario y teléfono.',
   highlights: [
@@ -220,9 +220,9 @@ export const casoEstudio = {
 
 export const sobreMi = {
   parrafo:
-    'Soy desarrollador web y trabajo con empresas que necesitan una presencia digital profesional o soluciones web adaptadas a su negocio. Trabajo desde Rute con empresas de la localidad y alrededores.',
+    'Soy desarrollador web y trabajo desde Rute con empresas del pueblo y alrededores que necesitan una web profesional o una herramienta hecha para su negocio.',
   refuerzo:
-    'La misma persona que atenderá tu llamada, diseñará tu proyecto y escribirá cada línea de código.',
+    'Atiendo tu llamada, diseño tu proyecto y escribo cada línea de código.',
   // Foto del propietario (2026-09-24), 571x571 en WebP (13,2 KB) con el fondo
   // recortado: va sin marco, sobre el fondo de la seccion. Nombre de archivo nuevo para
   // que ninguna cache sirva la version con fondo. Si se retira, la seccion vuelve a una
@@ -237,11 +237,11 @@ export const sobreMi = {
 
 export const contacto = {
   // Desde la v2 el copy del propietario se lee partido en dos: la pregunta es el
-  // titular de seccion y el resto la invitacion que va debajo. Ni una palabra
-  // reescrita ni añadida respecto a la version anterior.
+  // titular de seccion y el resto la invitacion que va debajo. Las 24 h solo se
+  // prometen por WhatsApp, igual que en `hero.compromisos` (propietario, 2026-09-30).
   titular: '¿Hablamos de tu proyecto?',
   invitacion:
-    'Escríbeme por WhatsApp, llama o rellena el formulario — te respondo en menos de 24 horas.',
+    'Escríbeme por WhatsApp y te respondo en menos de 24 horas. Si prefieres llamarme o usar el formulario, te contesto lo antes posible.',
 };
 
 // Herramientas de trabajo, agrupadas como en la maqueta aprobada por el propietario.
