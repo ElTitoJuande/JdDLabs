@@ -3398,3 +3398,63 @@ section[id] {
     border-top-left-radius: 14px;
   }
 }
+
+/* Microanimaciones de iconos: cada pieza declara su movimiento en --icon-move
+   (o --icon-anim) y solo se aplica al pasar el ratón o enfocar el elemento que lo contiene. */
+.icon path {
+  transform-box: fill-box;
+  transform-origin: var(--icon-origin, center);
+  transition: transform 0.38s cubic-bezier(0.2, 0.75, 0.25, 1) var(--icon-delay, 0s);
+}
+@keyframes icon-draw {
+  from { stroke-dashoffset: 1; }
+  to { stroke-dashoffset: 0; }
+}
+.icon-arrow path { --icon-move: translate(3px, -3px); }
+.icon-close path { --icon-move: rotate(90deg); }
+.icon-mail :nth-child(2) { --icon-origin: top; --icon-move: scaleY(-0.5); }
+.icon-web :nth-child(n + 3) { --icon-move: translateX(9px); }
+.icon-web :nth-child(4) { --icon-delay: 0.06s; }
+.icon-cart path { --icon-move: translateX(2px); }
+.icon-code :nth-child(1) { --icon-move: translateX(-2px); }
+.icon-code :nth-child(2) { --icon-move: translateX(2px); }
+.icon-code :nth-child(3) { --icon-move: rotate(14deg); }
+.icon-phone path { transform-box: view-box; --icon-origin: 12px 12px; --icon-move: rotate(-10deg); }
+.icon-search :nth-child(1) { --icon-move: translate(1px, 1px); }
+.icon-search :nth-child(2) { --icon-move: scale(1.1); }
+.icon-user :nth-child(1) { --icon-move: translateY(-1.5px); }
+.icon-pencil path { transform-box: view-box; --icon-origin: 12px 12px; --icon-move: translate(-1.5px, 1.5px) rotate(-6deg); }
+.icon-card :nth-child(3) { --icon-origin: left; --icon-move: scaleX(2.5); }
+.icon-box path { --icon-move: translateY(-2px); }
+.icon-chart path { stroke-dasharray: 1; --icon-anim: icon-draw 0.45s ease-out both; }
+.icon-chart :nth-child(2) { --icon-anim: icon-draw 0.45s ease-out 0.1s both; }
+.icon-chart :nth-child(3) { --icon-anim: icon-draw 0.45s ease-out 0.2s both; }
+.icon-calendar :nth-child(2),
+.icon-calendar :nth-child(3) { --icon-move: translateY(-1.5px); }
+.icon-calendar :nth-child(3) { --icon-delay: 0.06s; }
+.icon-link :nth-child(2) { --icon-move: translate(-1.5px, 1.5px); }
+.icon-link :nth-child(3) { --icon-move: translate(1.5px, -1.5px); }
+.icon-database :nth-child(2) { stroke-dasharray: 1; --icon-anim: icon-draw 0.5s ease-out both; }
+.icon-layers :nth-child(1) { --icon-move: translateY(-2.5px); }
+.icon-layers :nth-child(2) { --icon-move: translateY(-1px); }
+.icon-server :nth-child(odd) { --icon-move: translateY(-1.5px); }
+.icon-server :nth-child(even) { --icon-move: translateY(1.5px); }
+.icon-cloud path { --icon-move: translateX(2px); }
+.icon-plug :nth-child(-n + 3) { --icon-move: translateY(-2px); }
+.icon-plug :nth-child(4) { --icon-origin: bottom; --icon-move: scaleY(1.5); }
+.icon-workflow :nth-child(n + 4) { stroke-dasharray: 1; --icon-anim: icon-draw 0.45s ease-out both; }
+.icon-workflow :nth-child(5) { --icon-anim: icon-draw 0.45s ease-out 0.2s both; }
+.icon-settings :nth-child(2) { --icon-move: rotate(90deg); }
+@media (prefers-reduced-motion: no-preference) {
+  :is(a, button):focus-visible .icon path {
+    transform: var(--icon-move, none);
+    animation: var(--icon-anim, none);
+  }
+}
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  :is(a, button, .service-features li, .tech-node, .footer-cta h2):hover .icon path,
+  .service-card:hover .service-icon .icon path {
+    transform: var(--icon-move, none);
+    animation: var(--icon-anim, none);
+  }
+}

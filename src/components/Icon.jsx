@@ -26,9 +26,12 @@ const paths = {
     "M12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8 M9 2h6l1 4 4 1 2 5-2 5-4 1-1 4H9l-1-4-4-1-2-5 2-5 4-1z",
 };
 export function Icon({ name = "code", className = "" }) {
+  const icono = paths[name] ? name : "code";
+  // Cada subtrazo va en su propio <path> para que el CSS pueda animarlo por separado.
+  const partes = paths[icono].split(/ (?=M)/);
   return (
     <svg
-      className={"icon " + className}
+      className={`icon icon-${icono} ${className}`}
       viewBox="0 0 24 24"
       width="24"
       height="24"
@@ -40,7 +43,9 @@ export function Icon({ name = "code", className = "" }) {
       strokeLinejoin="round"
       aria-hidden="true"
     >
-      <path d={paths[name] || paths.code} />
+      {partes.map((d) => (
+        <path key={d} d={d} pathLength="1" />
+      ))}
     </svg>
   );
 }
