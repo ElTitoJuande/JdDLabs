@@ -1,5 +1,6 @@
 import { useRef, useState } from 'react';
 import { Boton } from './Boton';
+import { LabelInput } from './LabelInput';
 import { identity, enlaces } from '../content/identity';
 
 const LIMITES = {
@@ -124,16 +125,6 @@ export function ContactForm() {
     }
   }
 
-  // El filete del campo va a `fg-mute` y no a `border`: `border` (el acento al 15 %) se
-  // queda en 1,4:1 sobre `bg-3`, lejos del 3:1 que WCAG 1.4.11 exige a un control de
-  // formulario. `fg-mute` da 4,9:1.
-  const claseCampo =
-    'mt-2.5 block w-full rounded-lg border border-fg-mute bg-bg-3 px-4 py-3.5 text-fs-300 text-fg placeholder:text-fg-mute transition-colors duration-fast ease-out-soft focus:border-accent motion-reduce:transition-none';
-
-  // Etiqueta mono en versalitas, el mismo tratamiento que los eyebrows de seccion.
-  const claseEtiqueta =
-    'block font-mono text-fs-100 uppercase tracking-[0.16em] text-fg-mute';
-
   // El texto de error va en `accent-2`, el acento de texto, y no en `accent`, el de
   // relleno (principio VII). Sobre `bg-3` queda a 6,4:1.
   const mensajeError = (clave) =>
@@ -154,36 +145,34 @@ export function ContactForm() {
       onSubmit={alEnviar}
       className="rounded-lg2 border border-border bg-bg-3 p-6 md:p-11"
     >
+      {/* Campos con etiqueta flotante (LabelInput): la etiqueta hace de placeholder y
+          sube al borde con el foco. El filete de reposo va a `fg-mute` y no a `border`:
+          `border` (el acento al 15 %) se queda en 1,4:1 sobre `bg-3`, lejos del 3:1 que
+          WCAG 1.4.11 exige a un control de formulario. `fg-mute` da 4,9:1. */}
       <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
         <div>
-          <label htmlFor="nombre" className={claseEtiqueta}>
-            Nombre
-          </label>
-          <input
+          <LabelInput
+            etiqueta="Nombre"
             id="nombre"
             name="nombre"
             type="text"
             required
             maxLength={LIMITES.nombre.max}
             autoComplete="name"
-            className={claseCampo}
             {...atributosError('nombre')}
           />
           {mensajeError('nombre')}
         </div>
 
         <div>
-          <label htmlFor="email" className={claseEtiqueta}>
-            Correo electrónico
-          </label>
-          <input
+          <LabelInput
+            etiqueta="Correo electrónico"
             id="email"
             name="email"
             type="email"
             required
             maxLength={LIMITES.email.max}
             autoComplete="email"
-            className={claseCampo}
             {...atributosError('email')}
           />
           {mensajeError('email')}
@@ -191,33 +180,28 @@ export function ContactForm() {
       </div>
 
       <div className="mt-5">
-        <label htmlFor="telefono" className={claseEtiqueta}>
-          Teléfono (opcional)
-        </label>
-        <input
+        <LabelInput
+          etiqueta="Teléfono (opcional)"
           id="telefono"
           name="telefono"
           type="tel"
           maxLength={LIMITES.telefono.max}
           autoComplete="tel"
-          className={claseCampo}
           {...atributosError('telefono')}
         />
         {mensajeError('telefono')}
       </div>
 
       <div className="mt-5">
-        <label htmlFor="mensaje" className={claseEtiqueta}>
-          Mensaje
-        </label>
-        <textarea
+        <LabelInput
+          etiqueta="Mensaje"
+          multilinea
           id="mensaje"
           name="mensaje"
           rows={5}
           required
           minLength={LIMITES.mensaje.min}
           maxLength={LIMITES.mensaje.max}
-          className={`${claseCampo} resize-none`}
           {...atributosError('mensaje')}
         />
         {mensajeError('mensaje')}

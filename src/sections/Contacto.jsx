@@ -87,7 +87,9 @@ export function Contacto() {
             </ul>
           </Reveal>
 
-          <Reveal retardo={80}>
+          {/* -mt-5 y no translate: Reveal ya usa translate-y para su aparicion y lo
+              pisaria. */}
+          <Reveal retardo={80} className="-mt-5">
             <h3 className="sr-only">Escríbeme un mensaje</h3>
             <ContactForm />
           </Reveal>
