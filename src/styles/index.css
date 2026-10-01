@@ -493,4 +493,121 @@
     opacity: 0.63;
     pointer-events: none;
   }
+
+  /* ══ Logo que esquiva (EscapeButton.jsx) ═════════════════════════════════════════
+     Adaptado de "Escape button" de Bencho (MIT). Del CSS original solo sobrevive el
+     movimiento: aqui no hay pastilla, asi que sus tokens (--fill-slab, --fill-on,
+     --ink, --wash, --font-ui, --on-ink, --pane-edge y los -rgb) no tienen trabajo que
+     hacer y no se definen. El logo conserva su tinta y su fuente (principio IV: el
+     monograma no se recolorea, ni al rendirse ni al pulsarlo). Tampoco viene el
+     bloque de Stroke ni el de paneles planos: son controles del banco de Bencho. */
+  .esc {
+    position: relative;
+    display: inline-flex;
+  }
+
+  /* El campo en que se mueve, y no pinta nada. Absoluto y centrado en el logo: en la
+     cabecera no caben los 360x240 del original, asi que desborda por abajo sobre el
+     hero sin ocupar sitio en la maqueta. Sigue EXISTIENDO: es la caja contra la que se
+     recorta el recorrido y el centro fijo desde el que se mide la casa. */
+  .esc-field {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 360px;
+    height: 160px;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+  }
+
+  /* Dos duraciones detras de un atributo. En el original huir eran 130ms y volver
+     620: un dardo y un alivio. Aqui se pidieron mas suaves (propietario, 2026-10-01):
+     - Huir, 340ms con salida suave. El transform se reescribe en cada frame mientras
+       el cursor se mueve, y cada reescritura relanza la transicion desde donde va; con
+       340ms eso hace de filtro y el monograma sigue al cursor deslizandose en vez de
+       saltar de posicion en posicion. El salto a traves del cursor (cuando cruzas su
+       casa, o cuando la pared lo hace rodearte) sigue viajando, ahora sin latigazo.
+     - Volver a casa, 900ms con un rebote apenas visible: sigue siendo el alivio y no
+       una reaccion, pero sin el resorte del original, que con 36px parecia un muelle. */
+  .esc-btn {
+    position: relative;
+    display: inline-flex;
+    transition: transform 900ms cubic-bezier(0.25, 1.06, 0.4, 1);
+  }
+
+  .esc-btn[data-fled='true'] {
+    transition: transform 340ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .esc[data-flat] .esc-btn,
+  .esc[data-flat] .esc-btn[data-fled='true'] {
+    transition: none;
+  }
+
+  /* ══ Menu de movil (MobileMenu.jsx) ═══════════════════════════════════════════════
+     Antes aparecia y desaparecia de golpe (se montaba y desmontaba). Ahora anima al
+     entrar y al salir. El panel, a pantalla completa, se despliega hacia abajo como
+     una persiana con un clip-path, y no con height: la altura no se anima sin
+     medirla, y el recorte no mueve la maqueta. Los enlaces entran despues,
+     escalonados 50ms, bajando 8px y apareciendo. Abrir es lento y suave (600ms,
+     `out-soft`); cerrar recorre lo mismo al reves en 400ms, con los enlaces
+     saliendo todos a la vez antes que la persiana: quien cierra ya ha decidido y no
+     quiere esperar a una coreografia.
+
+     visibility va con retardo al cerrar: sigue visible mientras dura la salida y solo
+     al final sale del foco y del lector de pantalla. Al abrir el retardo es 0, asi
+     que el primer enlace puede recibir el foco en el mismo frame. Con movimiento
+     reducido la regla global deja todas las duraciones en 0,01ms. */
+  .menu-movil {
+    clip-path: inset(0 0 100% 0);
+    opacity: 0;
+    visibility: hidden;
+    transition:
+      clip-path 400ms theme('transitionTimingFunction.in-out-soft') 60ms,
+      opacity 300ms theme('transitionTimingFunction.in-out-soft') 160ms,
+      visibility 0s linear 460ms;
+  }
+
+  .menu-movil[data-abierto] {
+    clip-path: inset(0 0 0 0);
+    opacity: 1;
+    visibility: visible;
+    transition:
+      clip-path 600ms theme('transitionTimingFunction.out-soft'),
+      opacity 250ms theme('transitionTimingFunction.out-soft'),
+      visibility 0s;
+  }
+
+  .menu-movil__item {
+    opacity: 0;
+    transform: translateY(-8px);
+    transition:
+      opacity 200ms theme('transitionTimingFunction.in-out-soft'),
+      transform 200ms theme('transitionTimingFunction.in-out-soft');
+  }
+
+  .menu-movil[data-abierto] .menu-movil__item {
+    opacity: 1;
+    transform: none;
+    transition:
+      opacity 400ms theme('transitionTimingFunction.out-soft'),
+      transform theme('transitionDuration.base') theme('transitionTimingFunction.out-soft');
+    transition-delay: calc(100ms + var(--i, 0) * 50ms);
+  }
+
+  /* El icono: las dos lineas de la hamburguesa bajan y suben al centro (y = 12) y se
+     giran 45 grados hasta la X. Se traslada primero y se gira despues (el transform se
+     lee de derecha a izquierda), asi que el giro es sobre el centro del icono. */
+  .icono-menu__linea {
+    transform-origin: 12px 12px;
+    transition: transform 400ms theme('transitionTimingFunction.out-soft');
+  }
+
+  .icono-menu[data-abierto] .icono-menu__linea:first-child {
+    transform: rotate(45deg) translateY(2.5px);
+  }
+
+  .icono-menu[data-abierto] .icono-menu__linea:last-child {
+    transform: rotate(-45deg) translateY(-2.5px);
+  }
 }

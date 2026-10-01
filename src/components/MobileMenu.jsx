@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useId, useRef, useState } from 'react';
+import { createPortal } from 'react-dom';
 import { useFocusTrap } from '../hooks/useFocusTrap';
 import { Boton } from './Boton';
 import { secciones, cabecera } from '../content/copy';
@@ -94,36 +95,43 @@ export function MobileMenu({ base = '' }) {
         <svg
           aria-hidden="true"
           viewBox="0 0 24 24"
-          className="h-6 w-6"
+          className="icono-menu h-6 w-6"
+          data-abierto={abierto || undefined}
           fill="none"
           stroke="currentColor"
           strokeWidth="1"
           strokeLinecap="round"
         >
-          {abierto ? (
-            <>
-              <line x1="6" y1="6" x2="18" y2="18" />
-              <line x1="18" y1="6" x2="6" y2="18" />
-            </>
-          ) : (
-            <>
-              <line x1="3" y1="9.5" x2="21" y2="9.5" />
-              <line x1="3" y1="14.5" x2="21" y2="14.5" />
-            </>
-          )}
+          {/* Las dos lineas son siempre las mismas y se giran hasta la X (index.css,
+              .icono-menu): cambiar unas por otras era un salto seco. */}
+          <line className="icono-menu__linea" x1="3" y1="9.5" x2="21" y2="9.5" />
+          <line className="icono-menu__linea" x1="3" y1="14.5" x2="21" y2="14.5" />
         </svg>
       </button>
 
-      {abierto && (
+      {/* El panel esta siempre montado para poder animar tambien el cierre. Cerrado
+          queda con visibility: hidden (index.css, .menu-movil), que lo saca del foco
+          y del lector de pantalla igual que no renderizarlo, pero despues de la
+          animacion de salida y no antes.
+
+          Ocupa la pantalla entera, cabecera incluida: queda por detras de ella (z-40
+          frente a z-50) y la rellena con su fondo, que arriba del todo es
+          transparente, asi que el logo y la X siguen a la vista. Va en un portal a
+          <body> porque con la pagina desplazada la cabecera lleva backdrop-filter, y un
+          ancestro con filtro es el bloque contenedor de sus hijos fixed: dentro de ella,
+          inset-0 seria la caja de la cabecera y no la pantalla. En <body> ademas queda
+          fuera de lo que se vuelve inert. */}
+      {createPortal(
         <div
           id={panelId}
           ref={panelRef}
-          className="fixed inset-x-0 top-[var(--header-h)] z-40 max-h-[calc(100vh-var(--header-h))] overflow-y-auto border-b border-border bg-bg-2"
+          data-abierto={abierto || undefined}
+          className="menu-movil fixed inset-0 z-40 overflow-y-auto bg-bg-2 pt-[var(--header-h)] lg:hidden"
         >
           <nav aria-label="Secciones del sitio" className="contenedor py-4">
             <ul className="flex flex-col gap-1">
               {secciones.map((seccion, indice) => (
-                <li key={seccion.id}>
+                <li key={seccion.id} className="menu-movil__item" style={{ '--i': indice }}>
                   <a
                     ref={indice === 0 ? primerEnlaceRef : undefined}
                     href={`${base}#${seccion.id}`}
@@ -136,17 +144,22 @@ export function MobileMenu({ base = '' }) {
               ))}
             </ul>
 
-            <Boton
-              href={`${base}#contacto`}
-              onClick={cerrarYDevolverFoco}
-              variante="brillo"
-              flecha
-              className="mt-6 w-full"
-            >
-              {cabecera.cta}
-            </Boton>
+            {/* Envuelto: Boton trae su propia transicion de utilidad y pisaria la de
+                entrada. */}
+            <div className="menu-movil__item mt-6" style={{ '--i': secciones.length }}>
+              <Boton
+                href={`${base}#contacto`}
+                onClick={cerrarYDevolverFoco}
+                variante="brillo"
+                flecha
+                className="w-full"
+              >
+                {cabecera.cta}
+              </Boton>
+            </div>
           </nav>
-        </div>
+        </div>,
+        document.body,
       )}
     </div>
   );

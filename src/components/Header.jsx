@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { MobileMenu } from './MobileMenu';
 import { Boton } from './Boton';
+import { EscapeButton } from './EscapeButton';
 import { secciones, cabecera } from '../content/copy';
 import { identity } from '../content/identity';
 
@@ -47,15 +48,21 @@ export function Header({ base = '' }) {
             currentColor y dentro de un <img> resolveria a negro, invisible sobre el
             fondo base: se sirve como mascara sobre el token `fg`. Sin resplandor, sin
             recolorear con el acento y sin degradado.
+
+            Solo el monograma se aparta del raton unas cuantas veces y luego se deja
+            pulsar (EscapeButton); el filete y el wordmark no se mueven. Con teclado o
+            tactil nunca esquiva.
           */}
-          <span
-            aria-hidden="true"
-            className="h-8 w-9 flex-none bg-fg"
-            style={{
-              WebkitMask: "url('/JdDLogo_marca.svg') center / contain no-repeat",
-              mask: "url('/JdDLogo_marca.svg') center / contain no-repeat",
-            }}
-          />
+          <EscapeButton>
+            <span
+              aria-hidden="true"
+              className="block h-8 w-9 flex-none bg-fg"
+              style={{
+                WebkitMask: "url('/JdDLogo_marca.svg') center / contain no-repeat",
+                mask: "url('/JdDLogo_marca.svg') center / contain no-repeat",
+              }}
+            />
+          </EscapeButton>
           {/* Filete `accent`: el unico color de marca del bloque (constitucion 3.2.0,
               principio IV). No es parte del logo, asi que el monograma no se recolorea. */}
           <span aria-hidden="true" className="h-6 w-px flex-none bg-accent" />
