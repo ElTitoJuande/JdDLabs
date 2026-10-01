@@ -1,20 +1,17 @@
 <!--
 Sync Impact Report
-- Cambio de versión: 3.3.0 → 3.4.0
-- Motivo del MINOR: las reglas del principio III (dieciséis tokens, superficie oscura
-  continua) y del VII (AA, regla de los dos acentos) no cambian; cambian los valores de
-  la paleta, que pasa de magenta a verde, y con ellos los contrastes verificados.
+- Cambio de versión: 3.4.0 → 3.5.0
+- Motivo del MINOR: se amplía el uso de la serif, que el principio II reserva a enmienda
+  MINOR.
 - Principios modificados:
-  - VII. Accesibilidad: la regla de los dos acentos se mantiene, pero con la paleta verde
-    `accent` y `accent-2` comparten valor (`#45E0B0`), que pasa AA como texto en las
-    cuatro superficies. El motivo de la regla deja de ser el contraste de hoy y pasa a
-    ser que una paleta futura pueda separarlos sin tocar componentes.
+  - II. Fuentes auto-alojadas: la serif de énfasis llega también al nombre del cliente en
+    el `h3` de Proyecto destacado, con el mismo tratamiento que el cierre de los `h2`
+    (pedido por el propietario el 2026-10-01). Ese nombre iba en Plex Mono cursiva 500,
+    que deja de usarse y se retira: la mono queda en 400 y 500.
 - Principios añadidos: ninguno.
 - Principios eliminados: ninguno.
-- Secciones modificadas: "Referencia de tokens y assets" → Color: tabla de tokens con la
-  paleta verde (en producción desde 2026-09-29, rama `v2-preview-verde`) y tabla de
-  contrastes recalculada, ahora en las cuatro superficies. `fg-mute` sube de `#97A49E` a
-  `#A5B1AB`: el valor de la prueba no llegaba a AA sobre `bg-3` ni `bg-elev`.
+- Secciones modificadas: "Referencia de tokens y assets" → Tipografía (roles de la mono
+  y de la serif, tratamiento de énfasis).
 - Placeholders diferidos: ninguno.
 - Templates dependientes: sin cambios; plan-template.md, spec-template.md y
   tasks-template.md leen esta constitución en tiempo de ejecución.
@@ -32,6 +29,8 @@ Historial
   titulares van en Plex Mono.
 - 3.4.0 (2026-10-01): paleta verde en lugar de la magenta; contrastes recalculados y
   `fg-mute` subido a `#A5B1AB` para pasar AA en las cuatro superficies.
+- 3.5.0 (2026-10-01): la serif de énfasis llega al nombre del cliente en el `h3` de
+  Proyecto destacado; se retira la Plex Mono cursiva 500.
 -->
 
 # Constitución del Portfolio JdDLabs
@@ -60,11 +59,12 @@ Tres familias, todas auto-alojadas vía paquete de `@fontsource` y en subconjunt
 
 - **IBM Plex Sans** (`@fontsource-variable/ibm-plex-sans`, corte variable) para cuerpo,
   botones y navegación.
-- **IBM Plex Mono** (`@fontsource/ibm-plex-mono`, cortes estáticos latinos 400, 500 y
-  cursiva 500) para titulares `h1`–`h3`, eyebrows de sección, cifras y metadatos.
+- **IBM Plex Mono** (`@fontsource/ibm-plex-mono`, cortes estáticos latinos 400 y 500) para
+  titulares `h1`–`h3`, eyebrows de sección, cifras y metadatos.
 - **IBM Plex Serif** (`@fontsource/ibm-plex-serif`, solo cursiva 400) para las palabras de
-  énfasis del `h1` del hero y del cierre de cada `h2` de apertura de sección. Uso cerrado: NO
-  SE DEBE usar en un titular entero, en `h3` ni en texto corrido. Se importa solo el fichero
+  énfasis del `h1` del hero, del cierre de cada `h2` de apertura de sección y del nombre del
+  cliente en el `h3` de Proyecto destacado. Uso cerrado: NO SE DEBE usar en un titular
+  entero, en ningún otro `h3` ni en texto corrido. Se importa solo el fichero
   de cursiva 400.
 
 Mono y serif van en corte estático porque no existen en variable: se importa solo cada
@@ -252,8 +252,8 @@ borde de un control de formulario, que necesita 3:1 (WCAG 1.4.11). Los campos us
 | Rol | Familia | Uso |
 |---|---|---|
 | Cuerpo | IBM Plex Sans Variable | Párrafos, botones, navegación |
-| Mono | IBM Plex Mono 400, 500 y cursiva 500 | `h1`–`h3` (500), eyebrows de sección, cifras, metadatos, etiquetas de stack |
-| Énfasis | IBM Plex Serif, cursiva 400 | Énfasis del `h1` del hero y cierre de los `h2` de sección, a 1.12em |
+| Mono | IBM Plex Mono 400 y 500 | `h1`–`h3` (500), eyebrows de sección, cifras, metadatos, etiquetas de stack |
+| Énfasis | IBM Plex Serif, cursiva 400 | Énfasis del `h1` del hero, cierre de los `h2` de sección y nombre del cliente en el `h3` de Proyecto destacado, a 1.12em |
 
 Escala fluida, en `tailwind.config.js` como única fuente de verdad:
 
@@ -274,7 +274,8 @@ Tratamiento de titular: IBM Plex Mono, peso 500, `letter-spacing: -0.04em` (−0
 Tratamiento de énfasis: IBM Plex Serif cursiva 400 a `1.12em` (iguala la altura de la mono),
 `letter-spacing: -0.02em`. En el hero, la
 palabra de enlace va en `fg-dim` y la frase clave en `accent-2`; en los `h2` de sección, solo el
-cierre de la frase, en `accent-2` (regla de los dos acentos).
+cierre de la frase, en `accent-2` (regla de los dos acentos); en el `h3` de Proyecto destacado,
+solo el nombre del cliente, en `accent-2`.
 Tratamiento de eyebrow: mono 400, `fs-100`, `text-transform: uppercase`,
 `letter-spacing: 0.16em`, color `fg-mute`.
 
@@ -371,4 +372,4 @@ Sync Impact Report de la cabecera, la aprueba Juan explícitamente y se aplica e
 
 **Revisión de cumplimiento**: en cada ejecución de `/speckit-plan` y de `/speckit-analyze`.
 
-**Version**: 3.4.0 | **Ratified**: 2026-09-08 | **Last Amended**: 2026-10-01
+**Version**: 3.5.0 | **Ratified**: 2026-09-08 | **Last Amended**: 2026-10-01

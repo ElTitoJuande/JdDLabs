@@ -61,14 +61,16 @@ export function ProyectoDestacado() {
               <span>{proyecto.categoria}</span>
             </div>
 
-            {/* El nombre del cliente, en `fg` y cursiva (propietario, 2026-09-24). Cursiva
-                de la propia IBM Plex Mono, no la serif: la serif esta acotada a h1 y h2
-                (constitucion 3.3.0). */}
+            {/* El nombre del cliente lleva el mismo enfasis que el cierre de los h2: IBM Plex
+                Serif cursiva en `accent-2` a 1.12em (propietario, 2026-10-01; constitucion
+                3.5.0). */}
             <h3 className="mt-4 text-fs-700 text-fg md:mt-5">
               {proyecto.titulo.endsWith(proyecto.cliente) ? (
                 <>
                   {proyecto.titulo.slice(0, -proyecto.cliente.length)}
-                  <span className="italic text-fg">{proyecto.cliente}</span>
+                  <span className="font-serif text-[1.12em] font-normal italic tracking-[-0.02em] text-accent-2">
+                    {proyecto.cliente}
+                  </span>
                 </>
               ) : (
                 proyecto.titulo
