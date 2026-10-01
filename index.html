@@ -9,10 +9,12 @@
          resuelve la ruta al mismo archivo con hash que emite desde el CSS. -->
     <link rel="preload" as="font" type="font/woff2" crossorigin href="./node_modules/@fontsource/ibm-plex-mono/files/ibm-plex-mono-latin-500-normal.woff2" />
     <link rel="preload" as="font" type="font/woff2" crossorigin href="./node_modules/@fontsource/ibm-plex-serif/files/ibm-plex-serif-latin-400-italic.woff2" />
-    <title>Desarrollo web para pymes y autónomos en Rute | JdDLabs</title>
+    <!-- La marca delante solo en la portada: la pestaña se corta enseguida y es lo que
+         tiene que leerse. Las subpaginas mantienen "Pagina | JdDLabs". -->
+    <title>JdDLabs | Desarrollo web para pymes y autónomos en Rute</title>
     <meta
       name="description"
-      content="Diseño y desarrollo de páginas web modernas y rápidas para pymes y autónomos en Rute y alrededores."
+      content="Diseño y desarrollo web a medida para pymes y autónomos en Rute (Córdoba). Webs rápidas, pensadas para el móvil y para que pedirte presupuesto sea fácil."
     />
     <link rel="canonical" href="https://jddlabs.dev/" />
 
@@ -21,7 +23,7 @@
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="es_ES" />
     <meta property="og:site_name" content="JdDLabs" />
-    <meta property="og:title" content="Desarrollo web para pymes y autónomos en Rute | JdDLabs" />
+    <meta property="og:title" content="JdDLabs | Desarrollo web para pymes y autónomos en Rute" />
     <meta
       property="og:description"
       content="Diseño y desarrollo de webs rápidas y a medida para pymes y autónomos."
@@ -32,6 +34,20 @@
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content="JdDLabs, desarrollo web para pymes y autónomos en Rute" />
     <meta name="twitter:card" content="summary_large_image" />
+
+    <!--
+      Nombre del sitio para Google: sin un WebSite con `name` en la portada, el
+      resultado de busqueda muestra el dominio (jddlabs.dev) en lugar de la marca.
+    -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "JdDLabs",
+        "alternateName": "jddlabs.dev",
+        "url": "https://jddlabs.dev/"
+      }
+    </script>
 
     <!--
       Datos estructurados de negocio local (FR-022c). El domicilio va como texto y no
