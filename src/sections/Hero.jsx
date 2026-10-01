@@ -1,77 +1,27 @@
-import { hero } from '../content/copy';
-import { identity } from '../content/identity';
-import { Eyebrow } from '../components/Eyebrow';
-import { Boton } from '../components/Boton';
-
-// Enfasis del titular (constitucion 3.3.0, principio II): IBM Plex Serif en cursiva, a
-// 1.12em para igualar la altura de la mono del resto del titular. La palabra de enlace
-// en `fg-dim`; la frase clave en `accent-2`, que es el acento de TEXTO (regla de los dos
-// acentos).
-const ENFASIS = {
-  enlace: 'text-fg-dim',
-  clave: 'text-accent-2',
-};
-
-/**
- * Hero (FR-002). Titular, subtitulo y llamadas a la accion se ven sin hacer scroll.
- *
- * Sin min-height: el titular a `fs-900` cabe en dos lineas y el parrafo comparte fila
- * con los CTAs, asi que el bloque entero entra en la primera pantalla incluso a
- * 1366x768 y la banda del marquee sube justo debajo. Con min-height de ventana quedaba
- * un vacio que la referencia rellena con cifras, y aqui no hay cifras (principio V).
- *
- * Empieza en y=0, por detras de la cabecera: `pt-header` compensa su alto dentro de la
- * seccion y el halo sube sin quedar recortado en el filete.
- */
+import { hero } from "../content/copy";
+import { Boton } from "../components/Boton";
 export function Hero() {
   return (
-    <section id="inicio" className="halo-hero relative overflow-hidden pt-header">
-      <div className="contenedor relative py-hero">
-        <div className="flex items-center justify-between gap-4">
-          <div className="flex items-center gap-4 sm:gap-5">
-            {/* Raya decorativa: `accent` como relleno, no como texto. */}
-            <span aria-hidden="true" className="h-px w-7 flex-none bg-accent" />
-            {/* Por debajo de sm el eyebrow no cabe en una linea: se parte por el punto,
-                nombre arriba y rol abajo, en lugar de dejar que corte por cualquier sitio. */}
-            <Eyebrow as="span">
-              {hero.eyebrow.nombre}
-              <span aria-hidden="true" className="hidden sm:inline">
-                {' · '}
-              </span>
-              <br className="sm:hidden" />
-              <span className="sr-only"> </span>
-              {hero.eyebrow.rol}
-            </Eyebrow>
-          </div>
-          {/* El lugar se oculta por debajo de md: junto al eyebrow no cabe hasta 768px, y
-              Rute ya esta en el title, la meta description, el JSON-LD, Contacto y el pie. */}
-          <Eyebrow as="span" className="hidden md:inline">
-            {`${identity.localidad}, ${identity.provincia}`}
-          </Eyebrow>
-        </div>
-
-        <h1 className="mt-5 text-fs-900 text-fg md:mt-9">
-          {hero.titular.map(({ texto, enfasis }) =>
-            enfasis ? (
-              <span
-                key={texto}
-                className={`font-serif text-[1.12em] font-normal italic tracking-[-0.02em] ${ENFASIS[enfasis]}`}
-              >
-                {texto}
-              </span>
-            ) : (
-              texto
-            )
-          )}
-        </h1>
-
-        <div className="mt-7 flex flex-col gap-8 md:mt-12 md:flex-row md:items-end md:justify-between">
-          <p className="max-w-[38rem] text-fs-400 leading-normal text-fg-dim">
-            <span className="text-fg">{hero.subtitulo.destacado}</span> {hero.subtitulo.resto}
+    <section id="inicio" className="hero-section">
+      <div className="contenedor hero-grid">
+        <div className="hero-copy">
+          <p className="eyebrow hero-eyebrow">
+            {hero.eyebrow.nombre} · {hero.eyebrow.rol}
+            <br />
+            Rute, Córdoba
           </p>
-
-          <div className="flex flex-none flex-col gap-3 sm:flex-row sm:items-center sm:gap-3.5">
-            <Boton href="#contacto" variante="brillo" flecha>
+          <h1>
+            Desarrollo web{" "}
+            <span>
+              para pymes
+              <br className="desktop-break" /> y autónomos
+            </span>
+          </h1>
+          <p className="hero-description">
+            {hero.subtitulo.destacado} {hero.subtitulo.resto}
+          </p>
+          <div className="button-row">
+            <Boton href="#contacto" flecha>
               {hero.cta}
             </Boton>
             <Boton href="#proyecto" variante="fantasma">
@@ -79,43 +29,23 @@ export function Hero() {
             </Boton>
           </div>
         </div>
-
-        {/* Compromisos: cifras mono con su etiqueta, separadas por filetes. Lista y no
-            <dl>: cada item se lee de corrido, "1, Interlocutor, del primer café…". */}
-        <ul className="mt-12 grid grid-cols-3 border-t border-border md:mt-16">
-          {hero.compromisos.map(({ cifra, lectura, texto }, i) => (
-            <li
-              key={texto}
-              className={[
-                // Tres columnas en todos los anchos, cifra arriba y etiqueta debajo,
-                // separadas por filete vertical. La estructura en filas (cifra a un lado,
-                // texto al otro) la descarto el propietario en movil.
-                'pt-6 sm:pt-8',
-                i > 0 ? 'border-l border-border pl-3 sm:pl-6 md:pl-8' : '',
-                i < hero.compromisos.length - 1 ? 'pr-3 sm:pr-6 md:pr-8' : '',
-              ].join(' ')}
-            >
-              <p className="font-mono text-fs-600 leading-none text-fg">
-                {lectura ? (
-                  <>
-                    <span aria-hidden="true">{cifra}</span>
-                    <span className="sr-only">{lectura}</span>
-                  </>
-                ) : (
-                  cifra
-                )}
-              </p>
-              {/* Etiqueta en texto corrido, como en el comparador de tipografias (opcion
-                  D): la mono queda para la cifra y la etiqueta se lee de un tiron. */}
-              <p className="mt-2.5 text-fs-200 leading-snug text-fg-mute">
-                {texto}
-              </p>
-            </li>
-          ))}
-        </ul>
+        <picture className="hero-photo">
+          <source
+            type="image/webp"
+            srcSet="/img/estudio-desarrollo-640.webp 640w, /img/estudio-desarrollo.webp 1200w"
+            sizes="(max-width: 767px) calc(100vw - 48px), 46vw"
+          />
+          <img
+            src="/img/estudio-desarrollo.webp"
+            alt="Espacio de desarrollo web con un portátil, un monitor y una mesa de trabajo iluminada con luz natural."
+            width="1200"
+            height="1500"
+            fetchpriority="high"
+            decoding="async"
+          />
+        </picture>
       </div>
     </section>
   );
 }
-
 export default Hero;

@@ -4,31 +4,11 @@
 // suelto en JSX o CSS: todo color se referencia por su token, y el CSS que necesite uno
 // lo lee con theme().
 const paleta = {
-  // Paleta verde (en produccion desde 2026-09-29). Sustituye a la magenta, que queda en
-  // la rama `v2-preview-magenta`.
-  bg: '#0B2A22',
-  'bg-2': '#12382F',
-  'bg-3': '#174539',
-  'bg-elev': '#1B4A3E',
-  fg: '#F5F6F1',
-  'fg-dim': '#BAC3BD', // light al 75% sobre bg
-  // Al 66 % y no al 60 % (#97A49E): ese valor daba 4,2:1 sobre bg-3 y 3,9:1 sobre
-  // bg-elev. Este pasa AA en las cuatro superficies (peor caso 4,5:1, bg-elev).
-  'fg-mute': '#A5B1AB', // light al 66% sobre bg
-  // Solo decorativo: filetes y separadores. Nunca texto.
-  'fg-faint': 'rgba(69,224,176,.25)',
-  // Regla de los dos acentos (principio VII): `accent` como relleno, `accent-2` como
-  // acento de texto. En esta paleta valen lo mismo (el verde pasa AA como texto en todas
-  // las superficies, 6,0:1 en el peor caso), pero se mantienen los dos tokens para que el
-  // codigo diga la intencion y otra paleta pueda separarlos sin tocar componentes.
-  accent: '#45E0B0',
-  'accent-2': '#45E0B0',
-  'accent-ink': '#15201C',
-  'accent-dim': 'rgba(69,224,176,.15)',
-  'accent-glow': 'rgba(69,224,176,.35)',
-  border: 'rgba(69,224,176,.15)',
-  'border-strong': 'rgba(69,224,176,.3)',
-  'border-accent': 'rgba(69,224,176,.4)',
+  bg: '#F5F6F1', 'bg-2': '#E9EFEB', 'bg-3': '#FFFFFF', 'bg-elev': '#FFFFFF',
+  fg: '#15201C', 'fg-dim': '#5D6963', 'fg-mute': '#5D6963', 'fg-faint': '#A6B6AC',
+  accent: '#45E0B0', 'accent-2': '#08765A', 'accent-ink': '#15201C',
+  'accent-dim': '#CFF3E5', 'accent-glow': 'rgba(69,224,176,.25)',
+  border: '#D4DDD7', 'border-strong': '#A6B6AC', 'border-accent': '#08765A'
 };
 
 export default {

@@ -15,7 +15,7 @@ export const hero = {
   // en movil. Acompaña al lugar, que se lee de identity.js. Las versalitas, del CSS.
   eyebrow: { nombre: 'Juan de Dios', rol: 'Desarrollador independiente' },
   // El h1 se lee entero como "Desarrollo web para pymes y autónomos": los segmentos
-  // solo marcan que palabras van en la serif de enfasis (constitucion 3.1.0).
+  // marcan las palabras destacadas.
   titular: [
     { texto: 'Desarrollo web ' },
     { texto: 'para', enfasis: 'enlace' },
@@ -30,16 +30,6 @@ export const hero = {
     resto: 'Diseño y programo tu web a medida. De lo técnico me encargo yo; tú, de lo tuyo.',
   },
   cta: 'Solicitar presupuesto',
-  // Compromisos bajo el hero. Principio V: cifras dadas y verificadas explicitamente por
-  // el propietario el 2026-09-23. No son metricas de resultado sino como trabaja: un solo
-  // interlocutor, ninguna plantilla, respuesta por WhatsApp en menos de 24 h. Si alguna
-  // deja de ser cierta, se quita el item; no se sustituye por otra cifra.
-  // `lectura` es lo que oye el lector de pantalla cuando la cifra lleva simbolos.
-  compromisos: [
-    { cifra: '1', texto: 'Interlocutor, del primer café al lanzamiento' },
-    { cifra: '0', texto: 'Plantillas. Código escrito para tu negocio' },
-    { cifra: '<24 h', lectura: 'Menos de 24 horas', texto: 'Respuesta por WhatsApp' },
-  ],
   // Segunda accion del hero, introducida por la maqueta v2: lleva al unico proyecto
   // publicable que hay. Es navegacion, no una afirmacion sobre el negocio.
   ctaSecundario: 'Ver trabajo',
@@ -49,7 +39,8 @@ export const hero = {
 // local de index.html, literal.
 export const pie = {
   eyebrow: '¿Empezamos?',
-  descripcion: 'Desarrollo web para pymes y autónomos en Rute y alrededores.',
+  descripcion: 'Desarrollo a medida para pymes y autónomos en Rute y alrededores.',
+  propuesta: 'Desarrollo soluciones a medida para tu negocio: aplicaciones, automatizaciones y webs que te ayuden a ahorrar tiempo y trabajar mejor. Yo me encargo de la tecnología; tú, de tu negocio.',
 };
 
 // CTA de la cabecera, en escritorio y en el menu movil. Mas corto que `hero.cta`: en
@@ -131,7 +122,7 @@ export const proyecto = {
   // Parrafo completo. Desde el rediseño en tarjeta ya no se lee en la portada: es la
   // entradilla de la pagina de caso de estudio.
   descripcion:
-    'Cristalería Ruteña lleva desde 1977 trabajando el vidrio y el aluminio en Rute: carpintería de aluminio, vidrio a medida, toldos y persianas para vivienda, negocio y proyectos técnicos. Diseñé y desarrollé su web desde cero. Presenta sus servicios, cómo trabajan y los proyectos que han hecho en Sevilla, Estepona y Marbella. La idea era que pedir presupuesto fuera tan fácil como escribir por WhatsApp.',
+    'Cristalería Ruteña lleva desde 1977 trabajando el vidrio y el aluminio en Rute: carpintería de aluminio, vidrio a medida, toldos y persianas para vivienda, negocio y proyectos técnicos. Diseñé y desarrollé su web desde cero. Presenta sus servicios, cómo trabajan y los proyectos que han hecho en Sevilla, Estepona y Marbella. La idea era que consultar sus servicios y pedir presupuesto fuera sencillo.',
   // Linea de contexto de la tarjeta. NO es copy nuevo: es la primera frase de
   // `descripcion`, recortada literalmente y sin reescribir una sola palabra. Si el
   // propietario prefiere una linea propia, se sustituye aqui y solo aqui.
@@ -173,6 +164,14 @@ export const proyecto = {
 // decision del propietario: la portada ya solo muestra la tarjeta, asi que sin esta
 // pagina el proyecto destacado se queda sin ningun sitio donde demostrarse.
 export const casoEstudio = {
+  presentacion: 'Una nueva presencia digital para un negocio con historia.',
+  objetivo: 'Mostrar sus servicios y proyectos con claridad, también desde el móvil, y facilitar la solicitud de presupuesto.',
+  decisiones: [
+    { icono: 'web', titulo: 'Servicios bien explicados', texto: 'Carpintería de aluminio, vidrio a medida, toldos y persianas: una presentación clara de lo que ofrece la empresa.' },
+    { icono: 'grid', titulo: 'El trabajo, a la vista', texto: 'Un catálogo de proyectos propios con ubicación y detalle para mostrar trabajos realizados.' },
+    { icono: 'mail', titulo: 'Un contacto sencillo', texto: 'Formulario, teléfono y WhatsApp como vías directas para consultar o solicitar presupuesto.' },
+  ],
+  desarrollo: 'Diseño y desarrollo completo de la web, desde la presentación de servicios hasta el catálogo de proyectos y las vías de contacto.',
   // Bloque de datos del cliente, en el orden del formato de referencia:
   // Cliente / Industria / Año / Duración / Servicios / Rol. Las seis filas estan
   // completas desde el 2026-09-11, con los tres ultimos valores aportados por el
@@ -237,12 +236,9 @@ export const sobreMi = {
 };
 
 export const contacto = {
-  // Desde la v2 el copy del propietario se lee partido en dos: la pregunta es el
-  // titular de seccion y el resto la invitacion que va debajo. Las 24 h solo se
-  // prometen por WhatsApp, igual que en `hero.compromisos` (propietario, 2026-09-30).
   titular: '¿Hablamos de tu proyecto?',
   invitacion:
-    'Escríbeme por WhatsApp y te respondo en menos de 24 horas. Si prefieres llamarme o usar el formulario, te contesto lo antes posible.',
+    'Cuéntame qué necesitas. Escríbeme por correo o utiliza el formulario y te responderé lo antes posible.',
 };
 
 // Herramientas de trabajo, agrupadas como en la maqueta aprobada por el propietario.

@@ -1,65 +1,27 @@
-import { stack, titulares } from '../content/copy';
-import { Reveal } from '../components/Reveal';
-import { TituloSeccion } from '../components/TituloSeccion';
-
-/**
- * Tecnologia: las herramientas de trabajo como un indice editorial, sin pildoras
- * (propietario, 2026-09-24: la portada ya tiene bastantes en servicios).
- *
- * Una fila por categoria bajo un filete: numero y categoria en mono a la izquierda y
- * las herramientas como texto corrido a la derecha, separadas por barras en `border`.
- * Desde md las dos columnas van lado a lado; en movil, apiladas. Al pasar el raton por
- * una fila su texto pasa de `fg-dim` a `fg` y el numero se enciende en `accent-2`.
- *
- * Ocupa en el ritmo vertical el hueco que la referencia visual rellena con una franja
- * de cifras (7+ años, 150+ proyectos, 100+ clientes). No se copian esas cifras porque
- * JdDLabs no las tiene y el principio V prohibe inventarlas: en su lugar se enseña
- * algo que si es cierto y no afirma nada sobre resultados.
- */
+import { stack, titulares } from "../content/copy";
+import { TituloSeccion } from "../components/TituloSeccion";
+import { Icon } from "../components/Icon";
+const icons = ["code", "layers", "pencil", "server", "database", "cloud", "plug", "workflow"];
+const paths = ["M120 320 C60 320 80 72 0 72", "M120 320 C180 320 160 72 240 72", "M120 320 C60 320 80 237 0 237", "M120 320 C180 320 160 237 240 237", "M120 320 C60 320 80 403 0 403", "M120 320 C180 320 160 403 240 403", "M120 320 C60 320 80 568 0 568", "M120 320 C180 320 160 568 240 568"];
 export function Stack() {
   return (
-    <section id="stack" className="seccion bg-bg-2">
+    <section id="stack" className="section stack-section">
       <div className="contenedor">
-        <TituloSeccion eyebrow={titulares.stack.eyebrow} enfasis={titulares.stack.enfasis}>
-          {titulares.stack.titulo}
-        </TituloSeccion>
-
-        <ol className="mt-8 border-b border-border md:mt-14">
-          {stack.map((grupo, i) => (
-            <Reveal
-              as="li"
-              key={grupo.id}
-              retardo={Math.min(30 * i, 240)}
-              className="group grid gap-3 border-t border-border py-6 md:grid-cols-[minmax(0,17rem)_minmax(0,1fr)] md:gap-10 md:py-8"
-            >
-              <p className="flex items-baseline gap-4 font-mono text-fs-100 uppercase tracking-[0.16em] text-fg-dim">
-                <span
-                  aria-hidden="true"
-                  className="text-fg-mute transition-colors duration-fast ease-out-soft group-hover:text-accent-2 motion-reduce:transition-none"
-                >
-                  {String(i + 1).padStart(2, '0')}
-                </span>
-                {grupo.categoria}
-              </p>
-
-              <ul className="flex flex-wrap items-baseline gap-y-1 text-fs-500 font-medium leading-snug tracking-[-0.02em] text-fg-dim transition-colors duration-fast ease-out-soft group-hover:text-fg motion-reduce:transition-none">
-                {grupo.items.map((item, j) => (
-                  <li key={item} className="inline-flex items-baseline">
-                    {item}
-                    {j < grupo.items.length - 1 && (
-                      <span aria-hidden="true" className="mx-3 font-light text-fg-faint md:mx-4">
-                        /
-                      </span>
-                    )}
-                  </li>
-                ))}
-              </ul>
-            </Reveal>
-          ))}
-        </ol>
+        <TituloSeccion eyebrow={titulares.stack.eyebrow} enfasis={titulares.stack.enfasis}>{titulares.stack.titulo}</TituloSeccion>
+        <div className="tech-network">
+          <svg className="tech-connections" viewBox="0 0 240 640" preserveAspectRatio="none" fill="none" aria-hidden="true">
+            {paths.map((d,i)=><g key={d}><path d={d} className="tech-wire"/><path d={d} className="tech-signal" style={{animationDelay: i * -.65 + 's'}} /></g>)}
+          </svg>
+          <div className="tech-hub" aria-hidden="true"><img src="/JdDLogo_marca.svg" alt="" width="788" height="681"/><span>JdD<strong>Labs</strong></span></div>
+          <ol className="tech-nodes">
+            {stack.map((group,i)=><li key={group.id} className="tech-node">
+              <div className="tech-node-heading"><span className="tech-number" aria-hidden="true">{String(i+1).padStart(2,'0')}</span><Icon name={icons[i]}/><h3>{group.categoria}</h3></div>
+              <ul className="tech-tools">{group.items.map(item=><li key={item}>{item}</li>)}</ul>
+            </li>)}
+          </ol>
+        </div>
       </div>
     </section>
   );
 }
-
 export default Stack;

@@ -11,19 +11,14 @@ export const identity = {
   localidad: 'Rute',
   provincia: 'Córdoba',
   pais: 'España',
-  telefono: '+34 666 67 78 38',
-  whatsapp: '+34 666 67 78 38',
   email: 'hola@jddlabs.dev',
   dominio: 'jddlabs.dev',
 };
 
 // Formas listas para usar en href, derivadas de los valores canonicos de arriba para
 // que no exista una segunda copia del numero ni del correo.
-const soloDigitos = (t) => t.replace(/[^\d+]/g, '');
 
 export const enlaces = {
-  telefono: `tel:${soloDigitos(identity.telefono)}`,
-  whatsapp: `https://wa.me/${soloDigitos(identity.whatsapp).replace('+', '')}`,
   email: `mailto:${identity.email}`,
   sitio: `https://${identity.dominio}`,
   // Cuenta que el propietario abre el 2026-09-25 (dato suyo, 2026-09-24).

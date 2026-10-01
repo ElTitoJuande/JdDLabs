@@ -13,7 +13,7 @@ const AUTORIDAD = 'Agencia Española de Protección de Datos (www.aepd.es)';
 export const avisoLegal = {
   titulo: 'Aviso legal',
   descripcion: `Información general y datos identificativos de ${identity.nombreComercial}, conforme al artículo 10 de la LSSI.`,
-  actualizado: '8 de septiembre de 2026',
+  actualizado: '1 de octubre de 2026',
   secciones: [
     {
       titulo: 'Datos identificativos del prestador',
@@ -26,7 +26,6 @@ export const avisoLegal = {
         { clave: 'NIF', valor: identity.nif },
         { clave: 'Domicilio', valor: identity.domicilio },
         { clave: 'Correo electrónico', valor: identity.email, href: enlaces.email },
-        { clave: 'Teléfono', valor: identity.telefono, href: enlaces.telefono },
         { clave: 'Sitio web', valor: identity.dominio, href: enlaces.sitio },
       ],
     },
@@ -67,7 +66,7 @@ export const avisoLegal = {
 export const privacidad = {
   titulo: 'Política de privacidad',
   descripcion: `Cómo trata ${identity.nombreComercial} los datos que se envían a través del formulario de contacto, conforme al RGPD.`,
-  actualizado: '8 de septiembre de 2026',
+  actualizado: '1 de octubre de 2026',
   secciones: [
     {
       titulo: 'Responsable del tratamiento',
@@ -84,7 +83,7 @@ export const privacidad = {
     {
       titulo: 'Qué datos se recogen y con qué finalidad',
       parrafos: [
-        'A través del formulario de contacto se recogen el nombre, la dirección de correo electrónico, el teléfono (opcional) y el contenido del mensaje. La única finalidad de ese tratamiento es atender y responder la consulta enviada.',
+        'A través del formulario de contacto se recogen el nombre, la dirección de correo electrónico y el contenido del mensaje. La única finalidad de ese tratamiento es atender y responder la consulta enviada.',
         'No se elaboran perfiles, no se toman decisiones automatizadas y los datos no se utilizan para enviar comunicaciones comerciales no solicitadas.',
       ],
     },

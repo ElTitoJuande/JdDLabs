@@ -1,105 +1,88 @@
-import { useEffect, useState } from 'react';
-import { MobileMenu } from './MobileMenu';
-import { Boton } from './Boton';
-import { EscapeButton } from './EscapeButton';
-import { secciones, cabecera } from '../content/copy';
-import { identity } from '../content/identity';
-
-/**
- * Cabecera fija, visible durante todo el scroll (FR-009a).
- *
- * @param {string} base prefijo de los enlaces de ancla. Vacio en la portada; '/' en las
- *   paginas legales y en la 404, para que el ancla salte a la portada correcta.
- */
-export function Header({ base = '' }) {
-  // El alto sale del token `spacing.header`, el mismo que compensa `main` y las anclas
-  // (research.md R-006, FR-009b). No se mide: el border-b suma 1px a la altura medida y
-  // una medida que alimenta su propia altura crece 1px por frame sin fin. Con
-  // border-box el filete queda dentro de los 72px.
-  //
-  // Arriba del todo la cabecera es transparente y sin filete, para que el halo del hero
-  // pase por detras sin corte. En cuanto la pagina se mueve gana fondo, desenfoque y
-  // filete. setState con el mismo valor no re-renderiza: solo cuenta el cruce por 0.
-  const [arriba, setArriba] = useState(() => window.scrollY <= 0);
-
+import { PageMotion } from "./PageMotion";
+import { useEffect, useState } from "react";
+import { MobileMenu } from "./MobileMenu";
+import { Boton } from "./Boton";
+import { secciones } from "../content/copy";
+import { Brand } from "./Brand";
+export { Brand } from "./Brand";
+export function Header({ base = "", currentSection }) {
+  const [active, setActive] = useState("inicio");
   useEffect(() => {
-    const alDesplazar = () => setArriba(window.scrollY <= 0);
-    alDesplazar();
-    window.addEventListener('scroll', alDesplazar, { passive: true });
-    return () => window.removeEventListener('scroll', alDesplazar);
-  }, []);
+    if (base) return;
+    let frame = 0;
+    const update = () => {
+      frame = 0;
+      const headerBottom =
+        document.querySelector(".site-header")?.getBoundingClientRect()
+          .bottom || 0;
+      const probe =
+        headerBottom +
+        Math.min(180, (window.innerHeight - headerBottom) * 0.25);
+      const sections = [...document.querySelectorAll("main > section[id]")];
+      const current = sections.find((section) => {
+        const rect = section.getBoundingClientRect();
+        return rect.top <= probe && rect.bottom > probe;
+      });
+      // Tecnología has no navigation item: do not keep highlighting Sobre mí there.
+      setActive(current?.id || null);
+    };
+    const schedule = () => {
+      if (!frame) frame = requestAnimationFrame(update);
+    };
+    update();
+    window.addEventListener("scroll", schedule, { passive: true });
+    window.addEventListener("resize", schedule);
+    const observer = new ResizeObserver(schedule);
+    observer.observe(document.querySelector("main"));
+    return () => {
+      window.removeEventListener("scroll", schedule);
+      window.removeEventListener("resize", schedule);
+      observer.disconnect();
+      cancelAnimationFrame(frame);
+    };
+  }, [base]);
 
   return (
-    <header
-      className={[
-        'fixed inset-x-0 top-0 z-50 h-header border-b',
-        'transition-colors duration-fast ease-out-soft motion-reduce:transition-none',
-        arriba ? 'border-transparent bg-transparent' : 'border-border bg-bg/75 backdrop-blur-lg',
-      ].join(' ')}
-    >
-      <div className="contenedor flex h-full items-center justify-between gap-4">
-        <a
-          href={`${base}#inicio`}
-          className="flex items-center gap-3.5 no-underline"
-          aria-label={`${identity.nombreComercial}, ir al inicio`}
-        >
-          {/*
-            El monograma va en blanco puro (principio IV). El SVG pinta con
-            currentColor y dentro de un <img> resolveria a negro, invisible sobre el
-            fondo base: se sirve como mascara sobre el token `fg`. Sin resplandor, sin
-            recolorear con el acento y sin degradado.
-
-            Solo el monograma se aparta del raton unas cuantas veces y luego se deja
-            pulsar (EscapeButton); el filete y el wordmark no se mueven. Con teclado o
-            tactil nunca esquiva.
-          */}
-          <EscapeButton>
-            <span
-              aria-hidden="true"
-              data-monograma
-              className="block h-8 w-9 flex-none bg-fg"
-              style={{
-                WebkitMask: "url('/JdDLogo_marca.svg') center / contain no-repeat",
-                mask: "url('/JdDLogo_marca.svg') center / contain no-repeat",
-              }}
-            />
-          </EscapeButton>
-          {/* Filete `accent`: el unico color de marca del bloque (constitucion 3.2.0,
-              principio IV). No es parte del logo, asi que el monograma no se recolorea. */}
-          <span aria-hidden="true" className="h-6 w-px flex-none bg-accent" />
-          {/* Wordmark: "JdD" en bold `fg`, "Labs" en regular `fg` al 60 %. Nunca acento. */}
-          <span className="text-fs-400 tracking-tight">
-            <span className="font-bold text-fg">{identity.nombreComercial.slice(0, 3)}</span>
-            <span className="font-normal text-fg/60">{identity.nombreComercial.slice(3)}</span>
-          </span>
-        </a>
-
-        <nav aria-label="Secciones del sitio" className="hidden lg:block">
-          <ul className="flex items-center gap-8">
-            {secciones.map((seccion) => (
-              <li key={seccion.id}>
-                <a
-                  href={`${base}#${seccion.id}`}
-                  className="rounded-full text-fs-200 text-fg-dim no-underline transition-colors duration-fast ease-out-soft hover:text-fg motion-reduce:transition-none"
-                >
-                  {seccion.nombre}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </nav>
-
-        <div className="flex items-center gap-2">
-          {/* El desplazamiento suave lo hace scroll-behavior en CSS: ni una linea de
-              JavaScript de scroll (FR-008, research.md R-006). */}
-          <Boton href={`${base}#contacto`} variante="brillo" tamano="sm" flecha className="hidden lg:inline-flex">
-            {cabecera.cta}
+    <>
+      <PageMotion />
+      <a className="skip-link" href="#contenido">
+        Saltar al contenido
+      </a>
+      <header className="site-header">
+        <div className="contenedor header-inner">
+          <a href={base + "#inicio"} aria-label="JdDLabs, ir al inicio">
+            <Brand />
+          </a>
+          <nav className="desktop-nav" aria-label="Secciones del sitio">
+            <ul>
+              {secciones.map((s) => (
+                <li key={s.id}>
+                  <a
+                    href={base + "#" + s.id}
+                    aria-current={
+                      (currentSection ?? (!base ? active : null)) === s.id
+                        ? "location"
+                        : undefined
+                    }
+                  >
+                    {s.nombre}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </nav>
+          <Boton
+            href={base + "#contacto"}
+            tamano="sm"
+            flecha
+            className="header-cta"
+          >
+            Hablemos
           </Boton>
           <MobileMenu base={base} />
         </div>
-      </div>
-    </header>
+      </header>
+    </>
   );
 }
-
 export default Header;

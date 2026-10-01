@@ -1,70 +1,35 @@
-import { sobreMi, titulares } from '../content/copy';
-import { Reveal } from '../components/Reveal';
-import { TituloSeccion } from '../components/TituloSeccion';
-
-/**
- * Sobre mi (FR-005): parrafo principal mas la linea de refuerzo y, a la derecha, la foto
- * del propietario. Si `sobreMi.foto` es null la seccion queda en una columna.
- */
+import { sobreMi, titulares } from "../content/copy";
+import { TituloSeccion } from "../components/TituloSeccion";
 export function SobreMi() {
-  const { foto } = sobreMi;
-
   return (
-    <section id="sobre-mi" className="seccion overflow-x-clip">
-      <div className="contenedor">
-        <TituloSeccion eyebrow={titulares.sobreMi.eyebrow} enfasis={titulares.sobreMi.enfasis} className="max-w-[68rem]">
+    <section id="sobre-mi" className="section about-section">
+      <div className="contenedor about-grid">
+        <TituloSeccion
+          eyebrow={titulares.sobreMi.eyebrow}
+          enfasis={titulares.sobreMi.enfasis}
+        >
           {titulares.sobreMi.titulo}
         </TituloSeccion>
-
-        <div
-          className={[
-            'mt-8 grid gap-10 md:mt-14 md:items-center md:gap-14',
-            foto ? 'md:grid-cols-[minmax(0,1fr)_minmax(0,21rem)]' : '',
-          ].join(' ')}
-        >
-          <Reveal>
-            <p className="max-w-[34rem] text-fs-400 leading-relaxed text-fg-dim">
-              {sobreMi.parrafo}
-            </p>
-            {/* El filete de acento es relleno, no texto: la regla de los dos acentos no
-                le afecta y puede ir en `accent`. */}
-            <p className="mt-8 max-w-[34rem] border-l-2 border-accent pl-5 text-fs-500 font-medium leading-snug tracking-[-0.02em] text-fg md:mt-12 md:pl-7">
-              {sobreMi.refuerzo}
-            </p>
-          </Reveal>
-
-          {foto && (
-            <Reveal retardo={80} className="justify-self-center md:justify-self-end">
-              {/* Sin marco: la foto viene recortada. Un halo `accent-dim` amplio detras separa
-                  el polo negro del fondo oscuro de la seccion. Sube 60px en escritorio
-                  (propietario, 2026-09-24 y 2026-09-30); el desplazamiento va aqui y no en el Reveal,
-                  que anima su propio transform. La caja toma la proporcion de la foto
-                  (vertical) para no dejar hueco a los lados; 21rem de ancho la dejan a
-                  unos 36rem de alto en escritorio. */}
-              <div
-                className="relative w-full max-w-[21rem] md:-translate-y-[60px]"
-                style={{ aspectRatio: `${foto.ancho} / ${foto.alto}` }}
-              >
-                <div
-                  aria-hidden="true"
-                  className="absolute -inset-[6%] rounded-full bg-accent/25 blur-[110px]"
-                />
-                <img
-                  src={foto.src}
-                  alt={foto.alt}
-                  width={foto.ancho}
-                  height={foto.alto}
-                  loading="lazy"
-                  decoding="async"
-                  className="relative h-full w-full object-contain"
-                />
-              </div>
-            </Reveal>
-          )}
+        <div className="about-brand-panel" role="img" aria-label="JdDLabs: diseño y desarrollo web">
+          <span className="about-brand-kicker" aria-hidden="true">Diseño + desarrollo</span>
+          <div className="about-brand-art" aria-hidden="true">
+            <svg className="about-brand-geometry" viewBox="0 0 500 500" fill="none">
+              <path d="M70 0V500M250 0V500M430 0V500M0 70H500M0 250H500M0 430H500" stroke="currentColor" opacity=".16" />
+              <rect x="90" y="90" width="320" height="320" rx="4" stroke="currentColor" opacity=".4" />
+              <rect x="125" y="125" width="250" height="250" rx="4" transform="rotate(15 250 250)" fill="currentColor" fillOpacity=".07" stroke="currentColor" opacity=".6" />
+              <path d="M70 90V70H90M410 70H430V90M430 410V430H410M90 430H70V410" stroke="currentColor" strokeWidth="2" />
+              <path d="M410 90H430V110H410Z" fill="currentColor" />
+            </svg>
+            <img src="/JdDLogo_marca.svg" alt="" width="788" height="681" loading="lazy" decoding="async" />
+          </div>
+          <div className="about-brand-signature" aria-hidden="true"><span>JdD<strong>Labs</strong></span><span>Rute, Córdoba</span></div>
+        </div>
+        <div className="about-copy">
+          <p>{sobreMi.parrafo}</p>
+          <p className="about-statement">{sobreMi.refuerzo}</p>
         </div>
       </div>
     </section>
   );
 }
-
 export default SobreMi;

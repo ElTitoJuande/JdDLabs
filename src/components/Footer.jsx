@@ -1,166 +1,99 @@
-import { identity, enlaces } from '../content/identity';
-import { secciones, cabecera, pie } from '../content/copy';
-
-/**
- * Pie comun a las cinco paginas, adaptado del de la referencia visual (2026-09-24):
- * llamada a la accion, wordmark gigante, tres columnas y barra legal. El telefono vive en
- * la seccion Contacto; "Sígueme" repite WhatsApp y email junto a Instagram y GitHub.
- *
- * Los enlaces legales son obligatorios en todas las paginas (FR-021b, principio XII), y
- * por eso el pie es un unico componente compartido en vez de marcado duplicado.
- *
- * Tres adaptaciones que la referencia no tiene y aqui no son opcionales:
- *  - El wordmark gigante lleva el tratamiento del de la cabecera ("JdD" bold `fg`,
- *    "Labs" regular `fg` al 60 %) y nunca el acento (principio IV).
- *  - Es un SVG que se escala al ancho del contenedor: asi no hace falta un paso nuevo
- *    en la escala tipografica, que la constitucion fija en nueve.
- *  - "Hablemos" va en IBM Plex Sans: la serif esta acotada al h1 del hero y al cierre
- *    de los h2 de seccion (constitucion 3.3.0).
- *
- * @param {string} base prefijo de las anclas: vacio en la portada, '/' en el resto.
- */
-export function Footer({ base = '' }) {
-  const anio = new Date().getFullYear();
-
-  const enlace =
-    'text-fs-200 text-fg-dim no-underline transition-colors duration-fast ease-out-soft hover:text-accent-2 motion-reduce:transition-none';
-
-  const columnas = [
-    {
-      titulo: 'Dónde estoy',
-      contenido: (
-        <>
-          <p className="text-fs-200 font-medium text-fg">
-            {identity.localidad}, {identity.provincia}
-          </p>
-          <p className="mt-2 max-w-[18rem] text-fs-200 leading-relaxed text-fg-dim">
-            {pie.descripcion}
-          </p>
-        </>
-      ),
-    },
-    {
-      titulo: 'Sígueme',
-      contenido: (
-        <ul className="flex flex-col gap-2.5">
-          {[
-            ['Instagram', enlaces.instagram],
-            ['GitHub', enlaces.github],
-            ['WhatsApp', enlaces.whatsapp],
-          ].map(([nombre, href]) => (
-            <li key={nombre}>
-              <a href={href} target="_blank" rel="noopener noreferrer" className={enlace}>
-                {nombre} <span aria-hidden="true">↗</span>
-                <span className="sr-only"> (se abre en una pestaña nueva)</span>
-              </a>
-            </li>
-          ))}
-          <li>
-            <a href={enlaces.email} className={enlace}>
-              {identity.email}
-            </a>
-          </li>
-        </ul>
-      ),
-    },
-    {
-      titulo: 'Navegación',
-      contenido: (
-        <ul className="flex flex-col gap-2.5">
-          {secciones.map((seccion) => (
-            <li key={seccion.id}>
-              <a href={`${base}#${seccion.id}`} className={enlace}>
-                {seccion.nombre}
-              </a>
-            </li>
-          ))}
-        </ul>
-      ),
-    },
-  ];
-
+import { identity, enlaces } from "../content/identity";
+import { secciones, pie } from "../content/copy";
+import { Brand } from "./Header";
+import { Boton } from "./Boton";
+import { Icon } from "./Icon";
+export function Footer({ base = "" }) {
   return (
-    <footer data-inert-target className="border-t border-border bg-bg">
-      <div className="contenedor pt-section">
-        {/* Llamada a la accion */}
-        <div className="flex items-center gap-4 sm:gap-5">
-          <span aria-hidden="true" className="h-px w-7 flex-none bg-accent" />
-          <p className="font-mono text-fs-100 uppercase tracking-[0.16em] text-fg-mute">
-            {pie.eyebrow}
-          </p>
+    <footer data-inert-target>
+      <div className="footer-cta">
+        <div className="contenedor footer-cta-layout">
+          <div className="footer-cta-copy">
+            <p className="eyebrow">{pie.eyebrow}</p>
+            <h2>
+              Hablemos <Icon name="arrow" className="footer-heading-arrow" />
+            </h2>
+            <p className="footer-cta-description">
+              {pie.propuesta}
+            </p>
+          </div>
+          <div className="footer-cta-action">
+            <Boton href={base + "#contacto"} flecha>
+              Hablemos de tu proyecto
+            </Boton>
+          </div>
         </div>
-        <a
-          href={`${base}#contacto`}
-          className="group mt-4 inline-flex items-center gap-4 text-fs-800 font-medium tracking-[-0.04em] text-fg no-underline transition-colors duration-fast ease-out-soft hover:text-accent-2 motion-reduce:transition-none sm:mt-6"
-        >
-          {cabecera.cta}
-          <span
-            aria-hidden="true"
-            className="text-fs-600 text-accent-2 transition-transform duration-fast ease-out-soft motion-safe:group-hover:-translate-y-1 motion-safe:group-hover:translate-x-1"
-          >
-            ↗
-          </span>
-        </a>
-
-        {/* Wordmark gigante: decorativo, el nombre ya esta en la barra inferior. El
-            viewBox recorta la tinta del texto medida a 100px en IBM Plex Sans (x de 2 a 362,
-            y de 126 a 202), con 2px de aire a cada lado. */}
-        <svg
-          aria-hidden="true"
-          viewBox="0 126 364 78"
-          className="mt-14 block w-full md:mt-20"
-        >
-          <text
-            x="0"
-            y="200"
-            className="fill-fg font-sans"
-            style={{ fontSize: '100px', letterSpacing: '-0.05em' }}
-          >
-            <tspan fontWeight="700">{identity.nombreComercial.slice(0, 3)}</tspan>
-            <tspan fontWeight="400" className="fill-fg/60">
-              {identity.nombreComercial.slice(3)}
-            </tspan>
-          </text>
-        </svg>
-
-        {/* Columnas */}
-        <div className="mt-14 grid grid-cols-1 gap-10 border-t border-border pt-10 sm:grid-cols-3 md:mt-20 md:pt-12">
-          {columnas.map(({ titulo, contenido }) => (
-            <div key={titulo}>
-              <p className="font-mono text-fs-100 uppercase tracking-[0.16em] text-fg-mute">
-                {titulo}
+      </div>
+      <div className="footer-base">
+        <div className="contenedor">
+          <div className="footer-columns">
+            <div className="footer-location">
+              <a href={base + "#inicio"} aria-label="JdDLabs, ir al inicio">
+                <Brand />
+              </a>
+              <h3 className="footer-place">
+                {identity.localidad}, {identity.provincia}
+              </h3>
+              <p className="footer-description">
+                {pie.descripcion}
               </p>
-              <div className="mt-4">{contenido}</div>
             </div>
-          ))}
-        </div>
-
-        {/* Barra legal: los dos enlaces obligatorios del principio XII */}
-        <div className="mt-12 flex flex-col gap-5 border-t border-border py-8 sm:flex-row sm:items-center sm:justify-between md:mt-16">
-          <p className="text-fs-100 text-fg-mute">
-            © {anio} {identity.nombreComercial}. Todos los derechos reservados.
-          </p>
-          <nav aria-label="Información legal">
-            <ul className="flex gap-6">
-              <li>
-                <a href="/aviso-legal" className={enlace}>
-                  Aviso legal
-                </a>
-              </li>
-              <li>
-                <a href="/privacidad" className={enlace}>
-                  Política de privacidad
-                </a>
-              </li>
-            </ul>
-          </nav>
-          <p className="font-mono text-fs-100 uppercase tracking-[0.1em] text-fg-mute">
-            {identity.localidad}, ES
-          </p>
+            <div>
+              <p className="eyebrow">Conecta</p>
+              <ul>
+                <li>
+                  <a
+                    href={enlaces.instagram}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Instagram <Icon name="arrow" />
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href={enlaces.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    GitHub <Icon name="arrow" />
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href={enlaces.email}
+                    aria-label={"Correo electrónico: " + identity.email}
+                  >
+                    Correo <Icon name="arrow" />
+                  </a>
+                </li>
+              </ul>
+            </div>
+            <nav aria-label="Navegación del pie">
+              <p className="eyebrow">Navegación</p>
+              <ul>
+                {secciones.map((s) => (
+                  <li key={s.id}>
+                    <a href={base + "#" + s.id}>{s.nombre}</a>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+          </div>
+          <div className="footer-legal">
+            <p>
+              <span>© {new Date().getFullYear()} JdDLabs.</span>{" "}
+              <span>Todos los derechos reservados.</span>
+            </p>
+            <nav aria-label="Información legal">
+              <a href="/aviso-legal">Aviso legal</a>
+              <a href="/privacidad">Política de privacidad</a>
+            </nav>
+            <span>RUTE, ES</span>
+          </div>
         </div>
       </div>
     </footer>
   );
 }
-
 export default Footer;

@@ -1,110 +1,49 @@
-import { proyecto, casoEstudio, titulares } from '../content/copy';
-import { Reveal } from '../components/Reveal';
-import { TituloSeccion } from '../components/TituloSeccion';
-import { Boton } from '../components/Boton';
-
-/**
- * Proyecto destacado (FR-004, FR-009), en dos columnas: captura a un lado y, al otro,
- * datos, titulo, descripcion y los dos destinos — la web en vivo y el caso de estudio.
- *
- * Tres ausencias deliberadas que vienen de v1 y siguen vigentes:
- *  - Sin metricas de resultado: no hay analitica real que citar (principio V).
- *  - Sin testimonio: `copy.js` no exporta `testimonio` y aqui no se reserva hueco.
- *  - Si `proyecto.captura` es null no se dibuja ni imagen ni marco vacio, y el texto
- *    ocupa el ancho entero.
- *
- * La captura no es un enlace: los dos destinos ya estan en la columna de texto, y un
- * tercer enlace repetido solo alargaria el recorrido con el tabulador.
- */
+import { proyecto, casoEstudio, titulares } from "../content/copy";
+import { TituloSeccion } from "../components/TituloSeccion";
+import { Boton } from "../components/Boton";
 export function ProyectoDestacado() {
-  const { captura } = proyecto;
-
   return (
-    <section id="proyecto" className="seccion bg-bg-2">
+    <section id="proyecto" className="section project-section">
       <div className="contenedor">
-        <TituloSeccion eyebrow={titulares.proyecto.eyebrow} enfasis={titulares.proyecto.enfasis}>
+        <TituloSeccion
+          eyebrow={titulares.proyecto.eyebrow}
+          enfasis={titulares.proyecto.enfasis}
+        >
           {titulares.proyecto.titulo}
         </TituloSeccion>
-
-        <Reveal
-          as="article"
-          className={[
-            'mt-10 grid gap-8 md:mt-16 md:items-center md:gap-14',
-            captura ? 'md:grid-cols-[minmax(0,1.15fr)_minmax(0,1fr)]' : '',
-          ].join(' ')}
-        >
-          {/* La fachada es panoramica (1024x468): el marco 3:2 la recorta por los
-              laterales, centrada, y el rotulo queda entero dentro. */}
-          {captura && (
-            <div className="relative aspect-[3/2] w-full overflow-hidden rounded-lg2 border border-border bg-bg-3">
-              <img
-                src={captura.src}
-                alt={captura.alt}
-                width={captura.ancho}
-                height={captura.alto}
-                loading="lazy"
-                decoding="async"
-                className="h-full w-full object-cover"
-              />
-              <span className="absolute bottom-3.5 right-3.5 rounded-full border border-border bg-bg/60 px-3.5 py-1.5 font-mono text-fs-100 tracking-[0.14em] text-accent-2 backdrop-blur-md md:bottom-5 md:right-5 md:px-4">
-                01
-              </span>
-            </div>
+        <article className="project-grid">
+          {proyecto.captura && (
+            <img
+              className="project-photo"
+              src={proyecto.captura.src}
+              alt={proyecto.captura.alt}
+              width={proyecto.captura.ancho}
+              height={proyecto.captura.alto}
+              loading="lazy"
+              decoding="async"
+            />
           )}
-
-          <div>
-            <div className="flex items-center gap-3.5 font-mono text-fs-100 uppercase tracking-[0.14em] text-fg-mute md:gap-4">
-              <span>{casoEstudio.anio}</span>
-              <span aria-hidden="true" className="text-fg-faint">
-                /
-              </span>
-              <span>{proyecto.categoria}</span>
-            </div>
-
-            {/* El nombre del cliente lleva el mismo enfasis que el cierre de los h2: IBM Plex
-                Serif cursiva en `accent-2` a 1.12em (propietario, 2026-10-01; constitucion
-                3.5.0). */}
-            <h3 className="mt-4 text-fs-700 text-fg md:mt-5">
-              {proyecto.titulo.endsWith(proyecto.cliente) ? (
-                <>
-                  {proyecto.titulo.slice(0, -proyecto.cliente.length)}
-                  <span className="font-serif text-[1.12em] font-normal italic tracking-[-0.02em] text-accent-2">
-                    {proyecto.cliente}
-                  </span>
-                </>
-              ) : (
-                proyecto.titulo
-              )}
-            </h3>
-
-            <p className="mt-5 text-fs-300 leading-relaxed text-fg-dim md:mt-6">
-              {proyecto.descripcion}
+          <div className="project-copy">
+            <p className="eyebrow">
+              {casoEstudio.anio} / {proyecto.categoria}
             </p>
-
-            <div className="mt-8 flex flex-col items-start gap-5 sm:flex-row sm:items-center sm:gap-7 md:mt-10">
-              {/* Indicador "en vivo": punto `accent-2` con un pulso que se expande. Con
-                  movimiento reducido el pulso no se anima y queda solo el punto. */}
-              <Boton href={proyecto.url} variante="fantasma" tamano="sm" externo>
-                <span aria-hidden="true" className="relative flex h-2 w-2 flex-none">
-                  <span className="absolute inset-0 rounded-full bg-accent-2 opacity-75 motion-safe:animate-ping" />
-                  <span className="relative h-2 w-2 rounded-full bg-accent-2" />
-                </span>
+            <h3>
+              Nueva presencia digital para{" "}
+              <span className="title-accent">{proyecto.cliente}</span>
+            </h3>
+            <p>{proyecto.descripcion}</p>
+            <div className="button-row">
+              <Boton href={proyecto.url} externo>
                 {proyecto.textoEnlace}
               </Boton>
-
-              <a
-                href={proyecto.urlCaso}
-                className="group inline-flex items-center gap-2.5 text-fs-300 font-medium text-accent-2 no-underline"
-              >
+              <Boton href={proyecto.urlCaso} variante="fantasma" flecha>
                 {proyecto.enlaceCaso}
-                <span aria-hidden="true" className="flecha" />
-              </a>
+              </Boton>
             </div>
           </div>
-        </Reveal>
+        </article>
       </div>
     </section>
   );
 }
-
 export default ProyectoDestacado;

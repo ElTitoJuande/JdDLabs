@@ -1,11 +1,11 @@
 import { StrictMode } from 'react';
-import { createRoot } from 'react-dom/client';
+import { mount } from "../components/mount";
 import '../styles/index.css';
 import { Header } from '../components/Header';
 import { Footer } from '../components/Footer';
 import { avisoLegal, privacidad } from '../content/legal';
 
-const DOCUMENTOS = {
+export const DOCUMENTOS = {
   'aviso-legal': avisoLegal,
   privacidad,
 };
@@ -15,11 +15,11 @@ const DOCUMENTOS = {
  * con data-documento, de modo que Header y Footer no se dupliquen entre paginas: es
  * justo donde viven los enlaces obligatorios del principio XII.
  */
-function PaginaLegal({ documento }) {
+export function PaginaLegal({ documento }) {
   return (
     <>
       <Header base="/" />
-      <main data-inert-target className="pt-header">
+      <main id="contenido" data-inert-target className="pt-header">
         <article className="contenedor max-w-3xl py-section">
           <h1 className="text-fs-700 text-fg">{documento.titulo}</h1>
           <p className="mt-5 font-mono text-fs-100 uppercase tracking-[0.16em] text-fg-mute">
@@ -79,6 +79,7 @@ function PaginaLegal({ documento }) {
   );
 }
 
+if (!import.meta.env.SSR) {
 const raiz = document.getElementById('root');
 const documento = DOCUMENTOS[raiz.dataset.documento];
 
@@ -88,8 +89,10 @@ if (!documento) {
   );
 }
 
-createRoot(raiz).render(
+mount(
   <StrictMode>
     <PaginaLegal documento={documento} />
   </StrictMode>
 );
+
+}

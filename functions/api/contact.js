@@ -12,7 +12,6 @@ const VENTANA_FIABLE_MS = 24 * 60 * 60 * 1000; // mas alla de esto, el reloj no 
 const LIMITES = {
   nombre: { min: 2, max: 100 },
   email: { max: 254 },
-  telefono: { max: 20 },
   mensaje: { min: 10, max: 2000 },
 };
 
@@ -24,7 +23,7 @@ const REMITENTE_POR_DEFECTO = 'JdDLabs <hola@jddlabs.dev>';
 const json = (cuerpo, estado) =>
   new Response(JSON.stringify(cuerpo), {
     status: estado,
-    headers: { 'Content-Type': 'application/json; charset=utf-8' },
+    headers: { 'Content-Type': 'application/json; charset=utf-8', 'Cache-Control': 'no-store', 'X-Content-Type-Options': 'nosniff', 'Content-Security-Policy': "default-src 'none'; frame-ancestors 'none'" },
   });
 
 const ok = () => json({ ok: true }, 200);
@@ -46,7 +45,7 @@ function validar(datos) {
   const errores = {};
 
   const nombre = texto(datos.nombre);
-  if (nombre.length < LIMITES.nombre.min || nombre.length > LIMITES.nombre.max) {
+  if (/[\r\n\x00-\x1f\x7f]/.test(nombre) || nombre.length < LIMITES.nombre.min || nombre.length > LIMITES.nombre.max) {
     errores.nombre = `El nombre debe tener entre ${LIMITES.nombre.min} y ${LIMITES.nombre.max} caracteres.`;
   }
 
@@ -55,10 +54,6 @@ function validar(datos) {
     errores.email = 'Escribe una dirección de correo válida.';
   }
 
-  const telefono = texto(datos.telefono);
-  if (telefono.length > LIMITES.telefono.max) {
-    errores.telefono = `El teléfono no puede pasar de ${LIMITES.telefono.max} caracteres.`;
-  }
 
   const mensaje = texto(datos.mensaje);
   if (mensaje.length < LIMITES.mensaje.min || mensaje.length > LIMITES.mensaje.max) {
@@ -70,7 +65,7 @@ function validar(datos) {
       'Debes aceptar el tratamiento de tus datos para poder enviar el formulario.';
   }
 
-  return { errores, limpio: { nombre, email, telefono, mensaje } };
+  return { errores, limpio: { nombre, email, mensaje } };
 }
 
 /**
@@ -98,15 +93,32 @@ export async function onRequest(context) {
     return json({ ok: false }, 405);
   }
 
+  const origin = new URL(request.url).origin;
+  if (request.headers.get('Origin') !== origin || request.headers.get('Sec-Fetch-Site') === 'cross-site') return json({ ok: false }, 403);
+  if (request.headers.get('Content-Type')?.split(';')[0].trim().toLowerCase() !== 'application/json') return json({ ok: false }, 415);
+  if (Number(request.headers.get('Content-Length')) > 16384) return json({ ok: false }, 413);
+
   // 2. Cuerpo que no es JSON valido.
   let datos;
   try {
-    datos = await request.json();
+    const reader = request.body?.getReader();
+    if (!reader) return json({ ok: false }, 400);
+    let size = 0; const chunks = [];
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      size += value.byteLength;
+      if (size > 16384) { await reader.cancel(); return json({ ok: false }, 413); }
+      chunks.push(value);
+    }
+    const bytes = new Uint8Array(size); let offset = 0;
+    for (const chunk of chunks) { bytes.set(chunk, offset); offset += chunk.length; }
+    datos = JSON.parse(new TextDecoder().decode(bytes));
   } catch {
     return json({ ok: false, errores: { cuerpo: 'El cuerpo debe ser JSON válido.' } }, 400);
   }
 
-  if (datos === null || typeof datos !== 'object') {
+  if (datos === null || typeof datos !== 'object' || Array.isArray(datos)) {
     return json({ ok: false, errores: { cuerpo: 'El cuerpo debe ser un objeto JSON.' } }, 400);
   }
 
@@ -131,7 +143,7 @@ export async function onRequest(context) {
   const clave = env.RESEND_API_KEY;
   if (!clave) {
     // Nunca un envio perdido en silencio: se registra y se responde 500 para que el
-    // visitante vea el error de FR-017 y pueda recurrir a WhatsApp.
+    // visitante vea el error de FR-017 y pueda escribir por correo.
     console.error('contact: falta RESEND_API_KEY en el entorno de Cloudflare Pages');
     return json({ ok: false }, 500);
   }
@@ -139,7 +151,6 @@ export async function onRequest(context) {
   const lineas = [
     ['Nombre', limpio.nombre],
     ['Email', limpio.email],
-    ...(limpio.telefono ? [['Teléfono', limpio.telefono]] : []),
   ];
 
   const cuerpoHtml = [
@@ -157,6 +168,7 @@ export async function onRequest(context) {
   try {
     const respuesta = await fetch('https://api.resend.com/emails', {
       method: 'POST',
+      signal: AbortSignal.timeout(10000),
       headers: {
         Authorization: `Bearer ${clave}`,
         'Content-Type': 'application/json',
@@ -174,8 +186,7 @@ export async function onRequest(context) {
     });
 
     if (!respuesta.ok) {
-      const detalle = await respuesta.text().catch(() => '');
-      console.error('contact: Resend respondió', respuesta.status, detalle);
+      console.error('contact: Resend respondió', respuesta.status);
       return json({ ok: false }, 500);
     }
 
