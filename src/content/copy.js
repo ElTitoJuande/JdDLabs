@@ -252,7 +252,8 @@ export const contacto = {
 // metrica ni un dato de cliente: es una descripcion de con que trabaja Juan.
 // Herramientas de trabajo: lista aportada por el propietario el 2026-09-24, transcrita
 // sin añadir ni quitar ninguna (principio V: es lo que usa, no una afirmacion sobre
-// resultados). Nueve categorias; el orden es el suyo.
+// resultados). El orden es el suyo. El 2026-10-01 "IA & APIs" pasa a "Integraciones" y
+// se retira la fila "Herramientas" (propietario).
 export const stack = [
   { id: 'lenguajes', categoria: 'Lenguajes', items: ['TypeScript', 'JavaScript', 'PHP', 'SQL', 'HTML5', 'CSS'] },
   { id: 'frameworks', categoria: 'Frameworks', items: ['React', 'Next.js', 'Express'] },
@@ -260,9 +261,8 @@ export const stack = [
   { id: 'runtime', categoria: 'Runtime & server', items: ['Node.js', 'Vercel', 'Cloudflare Workers'] },
   { id: 'datos', categoria: 'Bases de datos', items: ['MongoDB', 'MySQL', 'Firebase', 'Supabase'] },
   { id: 'cloud', categoria: 'Cloud & DevOps', items: ['Cloudflare', 'Cloudflare Pages', 'Docker', 'GitHub'] },
-  { id: 'ia', categoria: 'IA & APIs', items: ['OpenAI', 'Anthropic Claude', 'Stripe', 'Resend', 'Formspree'] },
+  { id: 'integraciones', categoria: 'Integraciones', items: ['OpenAI', 'Anthropic Claude', 'Stripe', 'Resend', 'Formspree'] },
   { id: 'agentes', categoria: 'Agentes & automatización', items: ['Claude Code', 'OpenCode', 'n8n'] },
-  { id: 'herramientas', categoria: 'Herramientas', items: ['Git', 'VS Code', 'Cursor', 'Windsurf', 'Vite', 'npm', 'pnpm'] },
 ];
 
 // La clave `testimonio` NO existe a proposito (FR-007, principio V). El bloque de
