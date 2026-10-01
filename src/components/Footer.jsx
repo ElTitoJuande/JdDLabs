@@ -14,8 +14,8 @@ import { secciones, cabecera, pie } from '../content/copy';
  *    "Labs" regular `fg` al 60 %) y nunca el acento (principio IV).
  *  - Es un SVG que se escala al ancho del contenedor: asi no hace falta un paso nuevo
  *    en la escala tipografica, que la constitucion fija en nueve.
- *  - "Hablemos" va en Space Grotesk: la serif esta acotada al h1 del hero y al cierre
- *    de los h2 de seccion (constitucion 3.2.0).
+ *  - "Hablemos" va en IBM Plex Sans: la serif esta acotada al h1 del hero y al cierre
+ *    de los h2 de seccion (constitucion 3.3.0).
  *
  * @param {string} base prefijo de las anclas: vacio en la portada, '/' en el resto.
  */
@@ -103,10 +103,11 @@ export function Footer({ base = '' }) {
         </a>
 
         {/* Wordmark gigante: decorativo, el nombre ya esta en la barra inferior. El
-            viewBox recorta la caja del texto medida a 100px (383 de ancho). */}
+            viewBox recorta la tinta del texto medida a 100px en IBM Plex Sans (x de 2 a 362,
+            y de 126 a 202), con 2px de aire a cada lado. */}
         <svg
           aria-hidden="true"
-          viewBox="-2 126 387 78"
+          viewBox="0 126 364 78"
           className="mt-14 block w-full md:mt-20"
         >
           <text

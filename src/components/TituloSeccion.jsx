@@ -8,19 +8,20 @@ import { Reveal } from './Reveal';
  * cambia, cambia aqui y en un solo sitio. El punto final del titular viene de la
  * maqueta y es deliberado.
  *
- * La raya magenta delante del eyebrow es la misma del hero: el indicador de marca de
+ * La raya de acento delante del eyebrow es la misma del hero: el indicador de marca de
  * cada apertura. `accent` como relleno, nunca como texto.
  *
- * `enfasis`: el cierre del titular, que va en Instrument Serif cursiva y `accent-2`
- * (constitucion 3.2.0). Si no coincide con el final del texto, el titular sale entero
- * en Space Grotesk: mejor sin enfasis que con el enfasis en la palabra equivocada.
+ * `enfasis`: el cierre del titular, que va en IBM Plex Serif cursiva y `accent-2`
+ * (constitucion 3.3.0), a 1.12em para igualar la altura de la mono que la rodea. Si no
+ * coincide con el final del texto, el titular sale entero en IBM Plex Mono: mejor sin
+ * enfasis que con el enfasis en la palabra equivocada.
  */
 export function conEnfasis(texto, enfasis) {
   if (typeof texto !== 'string' || !enfasis || !texto.endsWith(enfasis)) return texto;
   return (
     <>
       {texto.slice(0, -enfasis.length)}
-      <span className="font-serif font-normal italic tracking-[-0.02em] text-accent-2">
+      <span className="font-serif text-[1.12em] font-normal italic tracking-[-0.02em] text-accent-2">
         {enfasis}
       </span>
     </>

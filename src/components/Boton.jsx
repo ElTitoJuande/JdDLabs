@@ -1,16 +1,16 @@
 /**
  * Pill de accion, en tres variantes.
  *
- *  - solido:   relleno `accent` con `accent-ink` encima. 4,8:1, pasa AA.
- *  - fantasma: sin relleno, filete `border`, texto `fg`, filete de acento en hover.
+ *  - solido:   relleno `accent` con `accent-ink` encima. 10:1, pasa AA.
+ *  - fantasma: velo `fg` al 4 %, filete `border-accent`, texto `fg`; en hover filete
+ *              `accent` y fondo `accent-dim`.
  *  - brillo:   boton de cristal oscuro (`.boton-cristal` en index.css): `bg-3`, filete
  *              `border-accent`, brillos interiores en capas y, en hover, resplandor
  *              `accent-2` desde abajo. Icono de destellos y letras con una onda de
  *              brillo escalonada. Para los CTAs principales: cabecera, menu movil y
  *              hero.
  *
- * El resplandor solo aparece en hover y solo en la variante solida: es lo que compensa
- * que el magenta tenga menos luminancia que el lima de la referencia visual.
+ * El resplandor solo aparece en hover y solo en la variante solida.
  *
  * `flecha` añade una flecha dibujada en CSS (`.flecha` en index.css): en reposo es solo
  * la punta; en hover y foco aparece el asta y la punta avanza. Sin glifo: el lector de
@@ -22,7 +22,8 @@
  */
 const VARIANTES = {
   solido: 'bg-accent text-accent-ink hover:shadow-glow',
-  fantasma: 'border border-border text-fg hover:border-border-accent',
+  fantasma:
+    'border border-border-accent bg-fg/[.04] text-fg hover:border-accent hover:bg-accent-dim',
   brillo: 'boton-cristal relative text-fg active:scale-[.97]',
 };
 

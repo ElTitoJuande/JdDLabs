@@ -3,9 +3,10 @@ import { identity } from '../content/identity';
 import { Eyebrow } from '../components/Eyebrow';
 import { Boton } from '../components/Boton';
 
-// Enfasis del titular (constitucion 3.1.0, principio II): Instrument Serif en cursiva,
-// solo aqui. La palabra de enlace en `fg-dim`; la frase clave en `accent-2`, que es el
-// acento de TEXTO (regla de los dos acentos).
+// Enfasis del titular (constitucion 3.3.0, principio II): IBM Plex Serif en cursiva, a
+// 1.12em para igualar la altura de la mono del resto del titular. La palabra de enlace
+// en `fg-dim`; la frase clave en `accent-2`, que es el acento de TEXTO (regla de los dos
+// acentos).
 const ENFASIS = {
   enlace: 'text-fg-dim',
   clave: 'text-accent-2',
@@ -54,7 +55,7 @@ export function Hero() {
             enfasis ? (
               <span
                 key={texto}
-                className={`font-serif font-normal italic tracking-[-0.02em] ${ENFASIS[enfasis]}`}
+                className={`font-serif text-[1.12em] font-normal italic tracking-[-0.02em] ${ENFASIS[enfasis]}`}
               >
                 {texto}
               </span>
@@ -104,10 +105,11 @@ export function Hero() {
                   cifra
                 )}
               </p>
-              {/* En movil, texto corrido pequeño: en columnas de ~100px las versalitas
-                  mono con tracking no caben. Desde sm, el eyebrow de siempre. */}
-              <p className="mt-3 text-fs-200 leading-snug text-fg-dim sm:hidden">{texto}</p>
-              <Eyebrow className="hidden max-w-[18rem] sm:mt-4 sm:block">{texto}</Eyebrow>
+              {/* Etiqueta en texto corrido, como en el comparador de tipografias (opcion
+                  D): la mono queda para la cifra y la etiqueta se lee de un tiron. */}
+              <p className="mt-2.5 text-fs-200 leading-snug text-fg-mute">
+                {texto}
+              </p>
             </li>
           ))}
         </ul>

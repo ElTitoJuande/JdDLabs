@@ -69,7 +69,7 @@ export function MobileMenu({ base = '' }) {
   useEffect(() => {
     if (typeof window.matchMedia !== 'function') return undefined;
 
-    const consulta = window.matchMedia('(min-width: 768px)');
+    const consulta = window.matchMedia('(min-width: 1024px)');
     const alCambiar = (evento) => {
       if (evento.matches) setAbierto(false);
     };
@@ -79,7 +79,7 @@ export function MobileMenu({ base = '' }) {
   }, []);
 
   return (
-    <div className="md:hidden">
+    <div className="lg:hidden">
       <button
         ref={botonRef}
         type="button"

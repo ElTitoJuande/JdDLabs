@@ -19,7 +19,7 @@ import { proyecto, casoEstudio, hero, contacto, titulares } from '../content/cop
  * datos del cliente, reto, solucion, highlights y tecnologia. No hay galeria de
  * capturas: quien quiera ver el sitio real tiene el enlace "Visitar en vivo".
  *
- * Estilo de la portada (propietario, 2026-09-24): halo magenta tras la cabecera, raya y
+ * Estilo de la portada (propietario, 2026-09-24): halo de acento tras la cabecera, raya y
  * eyebrow en la apertura, bloques en filas numeradas como Servicios con el cierre del h2
  * en serif, tecnologia en texto con barras como Tecnologia, y el cierre con el patron de
  * Contacto y el CTA de cristal. El h1 va sin serif: la constitucion (3.2.0) solo la

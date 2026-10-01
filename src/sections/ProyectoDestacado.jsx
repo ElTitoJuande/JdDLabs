@@ -62,8 +62,8 @@ export function ProyectoDestacado() {
             </div>
 
             {/* El nombre del cliente, en `fg` y cursiva (propietario, 2026-09-24). Cursiva
-                de la propia Space Grotesk, no la serif: la serif esta acotada a h1 y h2
-                (constitucion 3.2.0). */}
+                de la propia IBM Plex Mono, no la serif: la serif esta acotada a h1 y h2
+                (constitucion 3.3.0). */}
             <h3 className="mt-4 text-fs-700 text-fg md:mt-5">
               {proyecto.titulo.endsWith(proyecto.cliente) ? (
                 <>

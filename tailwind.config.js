@@ -4,15 +4,23 @@
 // suelto en JSX o CSS: todo color se referencia por su token, y el CSS que necesite uno
 // lo lee con theme().
 const paleta = {
-  // PRUEBA paleta verde (temporal, se deshace)
+  // Paleta verde (en produccion desde 2026-09-29). Sustituye a la magenta, que queda en
+  // la rama `v2-preview-magenta`.
   bg: '#0B2A22',
   'bg-2': '#12382F',
   'bg-3': '#174539',
   'bg-elev': '#1B4A3E',
   fg: '#F5F6F1',
   'fg-dim': '#BAC3BD', // light al 75% sobre bg
-  'fg-mute': '#97A49E', // light al 60% sobre bg
+  // Al 66 % y no al 60 % (#97A49E): ese valor daba 4,2:1 sobre bg-3 y 3,9:1 sobre
+  // bg-elev. Este pasa AA en las cuatro superficies (peor caso 4,5:1, bg-elev).
+  'fg-mute': '#A5B1AB', // light al 66% sobre bg
+  // Solo decorativo: filetes y separadores. Nunca texto.
   'fg-faint': 'rgba(69,224,176,.25)',
+  // Regla de los dos acentos (principio VII): `accent` como relleno, `accent-2` como
+  // acento de texto. En esta paleta valen lo mismo (el verde pasa AA como texto en todas
+  // las superficies, 6,0:1 en el peor caso), pero se mantienen los dos tokens para que el
+  // codigo diga la intencion y otra paleta pueda separarlos sin tocar componentes.
   accent: '#45E0B0',
   'accent-2': '#45E0B0',
   'accent-ink': '#15201C',
@@ -39,11 +47,12 @@ export default {
       borderColor: { DEFAULT: paleta.border },
       ringColor: { DEFAULT: paleta['accent-2'] },
       fontFamily: {
-        sans: ['"Space Grotesk Variable"', 'system-ui', '-apple-system', 'Segoe UI', 'sans-serif'],
-        mono: ['"JetBrains Mono Variable"', 'ui-monospace', 'SF Mono', 'Consolas', 'monospace'],
+        sans: ['"IBM Plex Sans Variable"', 'system-ui', '-apple-system', 'Segoe UI', 'sans-serif'],
+        // Titulares (h1-h3), eyebrows, cifras y metadatos (constitucion 3.3.0).
+        mono: ['"IBM Plex Mono"', 'ui-monospace', 'SF Mono', 'Consolas', 'monospace'],
         // Solo para el enfasis del h1 del hero y el cierre de los h2 de seccion
-        // (constitucion 3.2.0, principio II).
-        serif: ['"Instrument Serif"', 'Georgia', 'serif'],
+        // (constitucion 3.3.0, principio II).
+        serif: ['"IBM Plex Serif"', 'Georgia', 'serif'],
       },
       // Escala fluida de nueve pasos. Ninguna seccion escribe un tamaño en pixeles:
       // la maqueta de Claude Design esta exportada en px porque es un HTML estatico,
@@ -56,14 +65,14 @@ export default {
         'fs-500': 'clamp(1.25rem, 1.1rem + .7vw, 1.6rem)',
         'fs-600': 'clamp(1.6rem, 1.3rem + 1.4vw, 2.4rem)',
         'fs-700': 'clamp(2.2rem, 1.6rem + 2.8vw, 3.6rem)',
-        // fs-800 y fs-900 se recalibran contra los DOS artboards de la maqueta
-        // aprobada (375 y 1440), que son la referencia visual del propietario:
-        //   fs-800 -> h2 de seccion:  40px a 375,  88px a 1440
-        //   fs-900 -> h1 del hero:    40px a 375, 117,6px a 1440
-        // fs-900 baja en la constitucion 3.1.0 para que el titular quepa en dos
-        // lineas: a 140px "pymes y autónomos" mide 1253px y saltaba a tres.
-        'fs-800': 'clamp(2.5rem, 1.44rem + 4.5vw, 5.5rem)',
-        'fs-900': 'clamp(2.5rem, .79rem + 7.29vw, 7.35rem)',
+        // fs-800 y fs-900 bajan con el paso de los titulares a IBM Plex Mono
+        // (constitucion 3.3.0): la mono es mas ancha y pesa mas en pantalla, y a los
+        // 117,6px de antes el h1 aplastaba el resto del hero. Los valores salen de la
+        // comparativa de tipografias que aprobo el propietario el 2026-09-30:
+        //   fs-800 -> h2 de seccion:  35px a 375, 65px a 1440
+        //   fs-900 -> h1 del hero:    40px a 375, 88px a 1440
+        'fs-800': 'clamp(2.2rem, 1.53rem + 2.82vw, 4.05rem)',
+        'fs-900': 'clamp(2.5rem, 1.44rem + 4.5vw, 5.5rem)',
       },
       spacing: {
         section: 'clamp(5rem, 9vw, 11rem)',
@@ -91,11 +100,11 @@ export default {
           to: { transform: 'translateX(-50%)' },
         },
       },
-      // 130s: la maqueta pedia 38s con 8 terminos a 13,6px. Con la banda a fs-600 y 14
-      // terminos cada copia mide 5538px a 1440; 130s la mantiene a ~42px/s, la
-      // velocidad de la version original. Si cambia la lista, se recalcula.
+      // 90s: la maqueta pedia 38s con 8 terminos a 13,6px. Con la banda a fs-600 y 14
+      // terminos cada copia mide 5538px a 1440; 90s la lleva a ~62px/s, algo mas viva
+      // que los ~42px/s de la version original (130s). Si cambia la lista, se recalcula.
       animation: {
-        marquee: 'marquee 130s linear infinite',
+        marquee: 'marquee 90s linear infinite',
         // CTAs de cristal (variante `brillo` de Boton): onda de brillo de las letras,
         // escalonada 80ms por letra, y parpadeo del icono. Sus @keyframes, en index.css.
         letra: 'letra 2s ease-in-out infinite',

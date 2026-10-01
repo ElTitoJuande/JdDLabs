@@ -22,7 +22,7 @@ export function useAnclaInicial() {
       document.getElementById(id)?.scrollIntoView({ behavior: 'instant', block: 'start' });
     };
 
-    // Tras las fuentes: el cambio a Space Grotesk puede mover unos px lo que hay encima.
+    // Tras las fuentes: el cambio a IBM Plex puede mover unos px lo que hay encima.
     (document.fonts?.ready ?? Promise.resolve()).then(bajar);
   }, []);
 }

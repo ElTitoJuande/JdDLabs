@@ -124,8 +124,9 @@ export function ContactForm() {
     }
   }
 
-  // El filete del campo va a `fg-mute` y no a `border`: un borde a rgba(255,255,255,.08)
-  // sobre `bg-3` no llega al 3:1 que WCAG 1.4.11 exige a un control de formulario.
+  // El filete del campo va a `fg-mute` y no a `border`: `border` (el acento al 15 %) se
+  // queda en 1,4:1 sobre `bg-3`, lejos del 3:1 que WCAG 1.4.11 exige a un control de
+  // formulario. `fg-mute` da 4,9:1.
   const claseCampo =
     'mt-2.5 block w-full rounded-lg border border-fg-mute bg-bg-3 px-4 py-3.5 text-fs-300 text-fg placeholder:text-fg-mute transition-colors duration-fast ease-out-soft focus:border-accent motion-reduce:transition-none';
 
@@ -133,8 +134,8 @@ export function ContactForm() {
   const claseEtiqueta =
     'block font-mono text-fs-100 uppercase tracking-[0.16em] text-fg-mute';
 
-  // El texto de error va en `accent-2` y nunca en `accent`: sobre `bg-3` el acento de
-  // relleno se queda en 4,4:1 y no pasa AA (principio VII).
+  // El texto de error va en `accent-2`, el acento de texto, y no en `accent`, el de
+  // relleno (principio VII). Sobre `bg-3` queda a 6,4:1.
   const mensajeError = (clave) =>
     errores[clave] ? (
       <p id={`error-${clave}`} className="mt-2 text-fs-200 text-accent-2">

@@ -223,15 +223,16 @@ export const sobreMi = {
     'Soy desarrollador web y trabajo desde Rute con empresas del pueblo y alrededores que necesitan una web profesional o una herramienta hecha para su negocio.',
   refuerzo:
     'Atiendo tu llamada, diseño tu proyecto y escribo cada línea de código.',
-  // Foto del propietario (2026-09-24), 571x571 en WebP (13,2 KB) con el fondo
-  // recortado: va sin marco, sobre el fondo de la seccion. Nombre de archivo nuevo para
-  // que ninguna cache sirva la version con fondo. Si se retira, la seccion vuelve a una
-  // sola columna sin hueco (null = sin imagen).
+  // Foto del propietario (2026-09-30), vertical 594x1024 en WebP (38,6 KB) con el fondo
+  // recortado, el polo con el logo JdD y el brillo blanco del flequillo retocado: va sin marco, sobre el fondo de la seccion y
+  // centrada en el hueco cuadrado con `object-contain`. Nombre de archivo nuevo para que
+  // ninguna cache sirva la version anterior. Si se retira, la seccion vuelve a una sola
+  // columna sin hueco (null = sin imagen).
   foto: {
-    src: '/img/juan-de-dios-recorte.webp',
-    alt: 'Juan de Dios, desarrollador de JdDLabs, con polo negro y los brazos cruzados.',
-    ancho: 571,
-    alto: 571,
+    src: '/img/juan-de-dios-polo.webp',
+    alt: 'Juan de Dios, desarrollador de JdDLabs, con un polo negro con el logo JdD y los brazos cruzados.',
+    ancho: 594,
+    alto: 1024,
   },
 };
 

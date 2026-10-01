@@ -66,7 +66,7 @@ export function Header({ base = '' }) {
           </span>
         </a>
 
-        <nav aria-label="Secciones del sitio" className="hidden md:block">
+        <nav aria-label="Secciones del sitio" className="hidden lg:block">
           <ul className="flex items-center gap-8">
             {secciones.map((seccion) => (
               <li key={seccion.id}>
@@ -84,7 +84,7 @@ export function Header({ base = '' }) {
         <div className="flex items-center gap-2">
           {/* El desplazamiento suave lo hace scroll-behavior en CSS: ni una linea de
               JavaScript de scroll (FR-008, research.md R-006). */}
-          <Boton href={`${base}#contacto`} variante="brillo" tamano="sm" flecha className="hidden md:inline-flex">
+          <Boton href={`${base}#contacto`} variante="brillo" tamano="sm" flecha className="hidden lg:inline-flex">
             {cabecera.cta}
           </Boton>
           <MobileMenu base={base} />

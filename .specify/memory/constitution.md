@@ -1,19 +1,20 @@
 <!--
 Sync Impact Report
-- Cambio de versión: 3.1.0 → 3.2.0
-- Motivo del MINOR: amplía la guía sin redefinir ningún principio. El principio II ya
-  exigía enmienda MINOR para ampliar el uso de la serif, y el IV gana una guía nueva.
+- Cambio de versión: 3.3.0 → 3.4.0
+- Motivo del MINOR: las reglas del principio III (dieciséis tokens, superficie oscura
+  continua) y del VII (AA, regla de los dos acentos) no cambian; cambian los valores de
+  la paleta, que pasa de magenta a verde, y con ellos los contrastes verificados.
 - Principios modificados:
-  - II. Fuentes auto-alojadas: el uso de Instrument Serif se amplía del `h1` del hero al
-    cierre de los `h2` de apertura de sección.
-  - IV. Integridad del logo: sin cambios en el monograma, que sigue en blanco puro sin
-    recolorear. Se añade el tratamiento del wordmark ("JdD" en bold `fg`, "Labs" en regular
-    `fg` al 60 %) y el filete vertical en `accent` entre monograma y wordmark, que no es
-    parte del logo.
+  - VII. Accesibilidad: la regla de los dos acentos se mantiene, pero con la paleta verde
+    `accent` y `accent-2` comparten valor (`#45E0B0`), que pasa AA como texto en las
+    cuatro superficies. El motivo de la regla deja de ser el contraste de hoy y pasa a
+    ser que una paleta futura pueda separarlos sin tocar componentes.
 - Principios añadidos: ninguno.
 - Principios eliminados: ninguno.
-- Secciones modificadas: "Referencia de tokens y assets" → Tipografía (uso y tratamiento
-  del énfasis serif) y Assets y build (fila del logo).
+- Secciones modificadas: "Referencia de tokens y assets" → Color: tabla de tokens con la
+  paleta verde (en producción desde 2026-09-29, rama `v2-preview-verde`) y tabla de
+  contrastes recalculada, ahora en las cuatro superficies. `fg-mute` sube de `#97A49E` a
+  `#A5B1AB`: el valor de la prueba no llegaba a AA sobre `bg-3` ni `bg-elev`.
 - Placeholders diferidos: ninguno.
 - Templates dependientes: sin cambios; plan-template.md, spec-template.md y
   tasks-template.md leen esta constitución en tiempo de ejecución.
@@ -27,6 +28,10 @@ Historial
   del hero; `fs-900` baja a 7,35rem para que el titular quepa en dos líneas.
 - 3.2.0 (2026-09-24): la serif de énfasis llega al cierre de los `h2` de sección; guía del
   wordmark y del filete `accent` junto al monograma, que sigue en blanco puro.
+- 3.3.0 (2026-09-30): las tres familias pasan a IBM Plex (Sans, Mono y Serif); los
+  titulares van en Plex Mono.
+- 3.4.0 (2026-10-01): paleta verde en lugar de la magenta; contrastes recalculados y
+  `fg-mute` subido a `#A5B1AB` para pasar AA en las cuatro superficies.
 -->
 
 # Constitución del Portfolio JdDLabs
@@ -53,20 +58,24 @@ backend completo.
 
 Tres familias, todas auto-alojadas vía paquete de `@fontsource` y en subconjunto latino:
 
-- **Space Grotesk** (`@fontsource-variable/space-grotesk`, corte variable) para titulares y
-  cuerpo.
-- **JetBrains Mono** (`@fontsource-variable/jetbrains-mono`, corte variable) para eyebrows de
-  sección, cifras y metadatos.
-- **Instrument Serif** (`@fontsource/instrument-serif`, solo cursiva 400) para las palabras de
+- **IBM Plex Sans** (`@fontsource-variable/ibm-plex-sans`, corte variable) para cuerpo,
+  botones y navegación.
+- **IBM Plex Mono** (`@fontsource/ibm-plex-mono`, cortes estáticos latinos 400, 500 y
+  cursiva 500) para titulares `h1`–`h3`, eyebrows de sección, cifras y metadatos.
+- **IBM Plex Serif** (`@fontsource/ibm-plex-serif`, solo cursiva 400) para las palabras de
   énfasis del `h1` del hero y del cierre de cada `h2` de apertura de sección. Uso cerrado: NO
-  SE DEBE usar en un titular entero, en `h3` ni en texto corrido. Es la única familia en corte estático porque no existe en
-  variable, y se importa solo el fichero de cursiva 400.
+  SE DEBE usar en un titular entero, en `h3` ni en texto corrido. Se importa solo el fichero
+  de cursiva 400.
+
+Mono y serif van en corte estático porque no existen en variable: se importa solo cada
+peso que se usa.
 
 NO DEBE existir ninguna petición a `fonts.googleapis.com` ni a `fonts.gstatic.com` en ninguna
 página publicada. NO SE DEBE añadir una cuarta familia, ni ampliar el uso de la serif, sin
 enmienda MINOR.
 
-Fraunces e Inter quedan retiradas en la v2. El fichero `public/fonts/fraunces-latin-700.woff2`
+Space Grotesk, JetBrains Mono e Instrument Serif quedan retiradas en la 3.3.0, y sus
+dependencias se eliminan del repositorio. Fraunces e Inter quedan retiradas en la v2. El fichero `public/fonts/fraunces-latin-700.woff2`
 y la dependencia `@fontsource/inter` se eliminan del repositorio: una fuente que ya no se usa
 pero se sigue sirviendo es peso muerto que compite con el principio VI.
 
@@ -138,14 +147,15 @@ por teclado, con foco visible. Las animaciones de scroll DEBEN respetar `prefers
 **Regla de los dos acentos** (NO NEGOCIABLE). El acento tiene dos tokens y no son
 intercambiables:
 
-- `accent` (`#F31A64`) se usa **como relleno**, siempre con `accent-ink` encima. Como texto
-  solo se admite sobre `bg` y `bg-2`.
-- `accent-2` (`#FF5C99`) es el acento **de texto** sobre cualquier superficie: enlaces, cifras,
-  iconos, numeración de tarjetas, estados de foco.
+- `accent` se usa **como relleno**, siempre con `accent-ink` encima.
+- `accent-2` es el acento **de texto** sobre cualquier superficie: enlaces, cifras, iconos,
+  numeración de tarjetas, estados de foco.
 
-Motivo: `accent` sobre las superficies elevadas `bg-3` y `bg-elev` cae a 4,35:1 y no llega a AA
-para texto normal. `accent-2` pasa en las cuatro superficies. Confundir los dos tokens es un
-fallo de accesibilidad, no una cuestión de gusto.
+Con la paleta verde los dos tokens valen lo mismo (`#45E0B0`), que como texto pasa AA en las
+cuatro superficies (6,0:1 en el peor caso, `bg-elev`). La regla se mantiene igual: el código
+declara la intención con el token y no con el valor, y una paleta futura puede volver a
+separarlos sin tocar componentes. La paleta magenta los separaba porque su relleno caía a
+4,4:1 sobre `bg-3`.
 
 Los contrastes de la tabla de la sección "Referencia de tokens y assets" están verificados y se
 vuelven a comprobar con una herramienta real ante cualquier cambio de un token.
@@ -201,50 +211,49 @@ Valores canónicos. Los principios los referencian en lugar de repetirlos.
 
 | Token | Valor | Rol |
 |---|---|---|
-| `bg` | `#0a0a0a` | Fondo base del documento |
-| `bg-2` | `#111111` | Fondo de sección alterna |
-| `bg-3` | `#181818` | Superficie de tarjeta |
-| `bg-elev` | `#1f1f1f` | Superficie elevada (celda destacada del bento) |
-| `fg` | `#F5F5F0` | Texto principal |
-| `fg-dim` | `#A1A1A1` | Texto secundario, párrafos de apoyo |
-| `fg-mute` | `#8A8A8A` | Eyebrows, metadatos, etiquetas |
-| `fg-faint` | `#3A3A3A` | **Solo decorativo**: filetes, separadores. Nunca texto |
-| `accent` | `#F31A64` | Relleno de acento (botones, badges). Ver principio VII |
-| `accent-2` | `#FF5C99` | Acento de texto sobre cualquier superficie |
-| `accent-ink` | `#0a0a0a` | Texto sobre relleno `accent` |
-| `accent-dim` | `rgba(243,26,100,.15)` | Fondos tenues de badge |
-| `accent-glow` | `rgba(243,26,100,.35)` | Resplandor de botón y foco |
-| `border` | `rgba(255,255,255,.08)` | Filete estándar |
-| `border-strong` | `rgba(255,255,255,.18)` | Filete de botón fantasma |
-| `border-accent` | `rgba(243,26,100,.4)` | Filete en hover de tarjeta |
+| `bg` | `#0B2A22` | Fondo base del documento |
+| `bg-2` | `#12382F` | Fondo de sección alterna |
+| `bg-3` | `#174539` | Superficie de tarjeta |
+| `bg-elev` | `#1B4A3E` | Superficie elevada (celda destacada del bento) |
+| `fg` | `#F5F6F1` | Texto principal |
+| `fg-dim` | `#BAC3BD` | Texto secundario, párrafos de apoyo |
+| `fg-mute` | `#A5B1AB` | Eyebrows, metadatos, etiquetas |
+| `fg-faint` | `rgba(69,224,176,.25)` | **Solo decorativo**: filetes, separadores. Nunca texto |
+| `accent` | `#45E0B0` | Relleno de acento (botones, badges). Ver principio VII |
+| `accent-2` | `#45E0B0` | Acento de texto sobre cualquier superficie |
+| `accent-ink` | `#15201C` | Texto sobre relleno `accent` |
+| `accent-dim` | `rgba(69,224,176,.15)` | Fondos tenues de badge |
+| `accent-glow` | `rgba(69,224,176,.35)` | Resplandor de botón y foco |
+| `border` | `rgba(69,224,176,.15)` | Filete estándar |
+| `border-strong` | `rgba(69,224,176,.3)` | Filete de botón fantasma |
+| `border-accent` | `rgba(69,224,176,.4)` | Filete en hover de tarjeta |
 
-**Contrastes verificados** (calculados según WCAG 2.1 relative luminance el 2026-09-20; se
+**Contrastes verificados** (calculados según WCAG 2.1 relative luminance el 2026-10-01; se
 vuelven a comprobar con herramienta ante cualquier cambio de token):
 
-| Par | `bg` `#0a0a0a` | `bg-2` `#111111` | `bg-3` `#181818` |
-|---|---|---|---|
-| `fg` `#F5F5F0` | 18,1:1 | 17,3:1 | 15,4:1 |
-| `fg-dim` `#A1A1A1` | 7,7:1 | 7,3:1 | 6,9:1 |
-| `fg-mute` `#8A8A8A` | 6,7:1 | 6,4:1 | 5,1:1 |
-| `accent-2` `#FF5C99` | 6,8:1 | 6,5:1 | 6,1:1 |
-| `accent` `#F31A64` | 4,8:1 | 4,6:1 | **4,4:1 ✗** |
+| Par | `bg` `#0B2A22` | `bg-2` `#12382F` | `bg-3` `#174539` | `bg-elev` `#1B4A3E` |
+|---|---|---|---|---|
+| `fg` `#F5F6F1` | 14,1:1 | 11,8:1 | 9,9:1 | 9,2:1 |
+| `fg-dim` `#BAC3BD` | 8,5:1 | 7,1:1 | 6,0:1 | 5,5:1 |
+| `fg-mute` `#A5B1AB` | 6,9:1 | 5,8:1 | 4,9:1 | 4,5:1 |
+| `accent` / `accent-2` `#45E0B0` | 9,2:1 | 7,7:1 | 6,4:1 | 6,0:1 |
 
-`accent-ink` `#0a0a0a` sobre relleno `accent` `#F31A64`: **4,8:1** ✓ (AA texto normal).
+`accent-ink` `#15201C` sobre relleno `accent` `#45E0B0`: **10:1** ✓ (AA texto normal).
 
-La única celda que no pasa AA es `accent` como texto sobre `bg-3`, y es exactamente lo que la
-regla de los dos acentos del principio VII prohíbe.
+Todas las celdas pasan AA para texto normal. La más justa es `fg-mute` sobre `bg-elev`
+(4,5:1): `fg-mute` es el texto claro al 66 % sobre `bg` y no al 60 % (`#97A49E`), que daba
+4,2:1 sobre `bg-3` y 3,9:1 sobre `bg-elev`.
 
-`fg-mute` es `#8A8A8A` y no el `#6B6B6B` de la referencia visual deliberadamente: ese valor da
-3,7:1 sobre `#0a0a0a` y no llega a AA. La referencia lo usa igualmente en eyebrows a 13,6px;
-aquí no se replica ese fallo.
+`border` (el acento al 15 %) es solo decorativo: queda a 1,4:1 sobre el fondo y no sirve como
+borde de un control de formulario, que necesita 3:1 (WCAG 1.4.11). Los campos usan `fg-mute`.
 
 ### Tipografía
 
 | Rol | Familia | Uso |
 |---|---|---|
-| Titulares y cuerpo | Space Grotesk Variable | `h1`–`h3`, párrafos, botones, navegación |
-| Mono | JetBrains Mono Variable | Eyebrows de sección, cifras, metadatos, etiquetas de stack |
-| Énfasis | Instrument Serif, cursiva 400 | Énfasis del `h1` del hero y cierre de los `h2` de sección |
+| Cuerpo | IBM Plex Sans Variable | Párrafos, botones, navegación |
+| Mono | IBM Plex Mono 400, 500 y cursiva 500 | `h1`–`h3` (500), eyebrows de sección, cifras, metadatos, etiquetas de stack |
+| Énfasis | IBM Plex Serif, cursiva 400 | Énfasis del `h1` del hero y cierre de los `h2` de sección, a 1.12em |
 
 Escala fluida, en `tailwind.config.js` como única fuente de verdad:
 
@@ -257,12 +266,13 @@ Escala fluida, en `tailwind.config.js` como única fuente de verdad:
 | `fs-500` | `clamp(1.25rem, 1.1rem + .7vw, 1.6rem)` |
 | `fs-600` | `clamp(1.6rem, 1.3rem + 1.4vw, 2.4rem)` |
 | `fs-700` | `clamp(2.2rem, 1.6rem + 2.8vw, 3.6rem)` |
-| `fs-800` | `clamp(2.5rem, 1.44rem + 4.5vw, 5.5rem)` |
-| `fs-900` | `clamp(2.5rem, .79rem + 7.29vw, 7.35rem)` |
+| `fs-800` | `clamp(2.2rem, 1.53rem + 2.82vw, 4.05rem)` |
+| `fs-900` | `clamp(2.5rem, 1.44rem + 4.5vw, 5.5rem)` |
 
-Tratamiento de titular: peso 500, `letter-spacing: -0.04em` (−0.05em en `fs-900`),
+Tratamiento de titular: IBM Plex Mono, peso 500, `letter-spacing: -0.04em` (−0.05em en `fs-900`),
 `line-height: 0.9`, `text-wrap: balance`.
-Tratamiento de énfasis: Instrument Serif cursiva 400, `letter-spacing: -0.02em`. En el hero, la
+Tratamiento de énfasis: IBM Plex Serif cursiva 400 a `1.12em` (iguala la altura de la mono),
+`letter-spacing: -0.02em`. En el hero, la
 palabra de enlace va en `fg-dim` y la frase clave en `accent-2`; en los `h2` de sección, solo el
 cierre de la frase, en `accent-2` (regla de los dos acentos).
 Tratamiento de eyebrow: mono 400, `fs-100`, `text-transform: uppercase`,
@@ -361,4 +371,4 @@ Sync Impact Report de la cabecera, la aprueba Juan explícitamente y se aplica e
 
 **Revisión de cumplimiento**: en cada ejecución de `/speckit-plan` y de `/speckit-analyze`.
 
-**Version**: 3.2.0 | **Ratified**: 2026-09-08 | **Last Amended**: 2026-09-24
+**Version**: 3.4.0 | **Ratified**: 2026-09-08 | **Last Amended**: 2026-10-01

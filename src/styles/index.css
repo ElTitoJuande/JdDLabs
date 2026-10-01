@@ -1,12 +1,18 @@
-/* Tres familias auto-alojadas via @fontsource (principio II): dos variables, en las que
-   un unico fichero por familia cubre todos los pesos, y la serif de enfasis. Cero peticiones a los
-   dominios de Google Fonts: la maqueta de referencia los enlaza porque es un export
+/* Tres familias auto-alojadas via @fontsource (principio II), las tres de la superfamilia
+   IBM Plex: la sans en corte variable, en el que un unico fichero cubre todos los pesos, y
+   la mono y la serif en cortes estaticos porque no existen en variable. Cero peticiones a
+   los dominios de Google Fonts: la maqueta de referencia los enlaza porque es un export
    estatico, y eso es justo lo que aqui no se copia (principio II, AC-03). */
-@import '@fontsource-variable/space-grotesk';
-@import '@fontsource-variable/jetbrains-mono';
-/* Tercera familia (constitucion 3.1.0 y 3.2.0): solo la cursiva 400 en latin, que es lo
-   unico que usa el enfasis de los titulares. El paquete entero traeria tambien la redonda. */
-@import '@fontsource/instrument-serif/latin-400-italic.css';
+@import '@fontsource-variable/ibm-plex-sans/wght.css';
+/* La mono solo en latin y en lo que se usa: 400 para eyebrows, cifras y etiquetas, 500
+   para los titulares, y la cursiva 500 para el nombre del cliente en el h3 de Proyecto
+   destacado (sin ella el navegador la simula inclinando la redonda). */
+@import '@fontsource/ibm-plex-mono/latin-400.css';
+@import '@fontsource/ibm-plex-mono/latin-500.css';
+@import '@fontsource/ibm-plex-mono/latin-500-italic.css';
+/* Tercera familia (constitucion 3.3.0): solo la cursiva 400 en latin, que es lo unico
+   que usa el enfasis de los titulares. El paquete entero traeria tambien la redonda. */
+@import '@fontsource/ibm-plex-serif/latin-400-italic.css';
 
 @tailwind base;
 @tailwind components;
@@ -37,26 +43,24 @@
     @apply bg-bg text-fg font-sans antialiased;
   }
 
-  /* Seleccion de texto en el magenta de la marca y no en el azul del sistema, pero
-     translucido: `accent-glow` (el magenta al 35 %) y el texto conserva su color. Sobre
-     el fondo base, `fg` seleccionado queda a ~11:1. */
+  /* Seleccion de texto en el verde de la marca y no en el azul del sistema, pero
+     translucido: `accent-glow` (el acento al 35 %) y el texto conserva su color. Sobre
+     el fondo base, `fg` seleccionado queda a ~6:1. */
   ::selection {
     background-color: theme('colors.accent-glow');
   }
 
   /* Tratamiento unico de titular: peso 500 y no 700, tracking cerrado y line-height
-     por debajo de 1. Es lo que separa un titular grande de un titular caro. */
+     por debajo de 1. Valores del comparador de tipografias (opcion D): a -0.06em la
+     mono pierde el aire de maquina de escribir y a 0.98 la cursiva de la segunda
+     linea no se come los ascendentes de la primera. */
   h1,
   h2,
   h3 {
-    @apply font-sans font-medium;
-    letter-spacing: -0.04em;
-    line-height: 0.9;
+    @apply font-mono font-medium;
+    letter-spacing: -0.06em;
+    line-height: 0.98;
     text-wrap: balance;
-  }
-
-  h1 {
-    letter-spacing: -0.05em;
   }
 
   /* Los h3 de tarjeta respiran una pizca mas que los titulares de seccion: a 0.9 se
@@ -65,8 +69,8 @@
     line-height: 1;
   }
 
-  /* Foco siempre visible (principio VII, FR-013). Va en accent-2 y no en accent:
-     sobre las superficies de tarjeta accent no llega a AA. */
+  /* Foco siempre visible (principio VII, FR-013). Va en `accent-2`, el acento de
+     texto y de indicador, y no en `accent`, el de relleno. */
   :focus-visible {
     @apply outline-none ring-2 ring-accent-2 ring-offset-2 ring-offset-bg rounded-sm;
   }
@@ -105,19 +109,20 @@
   }
 
   /* CTAs principales (Boton, variante `brillo`): boton de cristal oscuro.
-     - Reposo: `bg-3` teñido de `accent` al 65 %, filete `border-accent`, brillos interiores de `fg` en capas
+     - Reposo: `bg-3` teñido de `accent` al 30 %, filete `border-accent`, brillos interiores de `fg` en capas
        (arriba mas intensos) y un anillo exterior de sombras que lo biselan.
      - Hover y foco: el filete pasa a `accent`, los brillos interiores se tiñen de
        `accent-2` desde abajo y aparece un resplandor fino en el borde inferior.
      - Letras: siempre en `fg`; la onda escalonada es un destello `accent-2` que las
        recorre (text-shadow), sin apagarlas, para que el tinte pueda ser intenso.
      Con movimiento reducido no hay onda ni parpadeo. */
-  /* Tinte `accent` al 65 % sobre `bg-3`: el CTA tiene que destacar sobre el boton
-     fantasma. Es posible porque las letras ya no se apagan: con `fg` fijo el peor caso
-     medido es 5,8:1 (cabecera, hover). */
+  /* Tinte `accent` al 30 % sobre `bg-3`: el CTA destaca sobre el boton fantasma sin
+     comerse la onda de las letras. Con la paleta verde el halo `accent-2` es el mismo
+     tono que el tinte: al 65 % el texto caia a 2,7:1 y el halo no se distinguia. Al
+     30 %, `fg` queda a ~5,2:1 y el halo a ~3,4:1 sobre el fondo. */
   .boton-cristal {
     background-color: theme('colors.bg-3');
-    background-image: linear-gradient(theme('colors.accent / 65%'), theme('colors.accent / 65%'));
+    background-image: linear-gradient(theme('colors.accent / 30%'), theme('colors.accent / 30%'));
     border: 1px solid theme('colors.border-accent');
     box-shadow:
       inset 0 1px 1px theme('colors.fg / 20%'),
@@ -180,7 +185,7 @@
     width: 1.15em;
     height: 1.15em;
     flex: none;
-    /* `fg` y no `accent-2`: sobre el tinte magenta el rosa se perdia. */
+    /* `fg` y no `accent-2`: sobre el tinte verde del boton el acento se pierde. */
     fill: theme('colors.fg');
     filter: drop-shadow(0 0 2px theme('colors.accent-2 / 80%'));
     transition: fill theme('transitionDuration.fast'), filter theme('transitionDuration.fast');
@@ -217,8 +222,8 @@
      @keyframes, aqui: declarados en la config, Tailwind solo los emite si alguien usa la
      clase animate-*. */
   /* Onda bien marcada (propietario, 2026-09-24): la letra se enciende con nucleo blanco
-     y halo `accent-2`, sin cambiar de tamaño. Solo rosa no se ve: el boton ya lleva tinte
-     magenta. La chispa late entre apagada y pequeña, y grande, girada y con halo. */
+     y halo `accent-2`, sin cambiar de tamaño. Solo el halo no se ve: es el mismo verde
+     que tiñe el boton. La chispa late entre apagada y pequeña, y grande, girada y con halo. */
   @keyframes letra {
     50% {
       text-shadow:

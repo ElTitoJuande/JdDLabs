@@ -10,7 +10,7 @@ export function SobreMi() {
   const { foto } = sobreMi;
 
   return (
-    <section id="sobre-mi" className="seccion">
+    <section id="sobre-mi" className="seccion overflow-x-clip">
       <div className="contenedor">
         <TituloSeccion eyebrow={titulares.sobreMi.eyebrow} enfasis={titulares.sobreMi.enfasis} className="max-w-[68rem]">
           {titulares.sobreMi.titulo}
@@ -19,7 +19,7 @@ export function SobreMi() {
         <div
           className={[
             'mt-8 grid gap-10 md:mt-14 md:items-center md:gap-14',
-            foto ? 'md:grid-cols-[minmax(0,1fr)_minmax(0,32rem)]' : '',
+            foto ? 'md:grid-cols-[minmax(0,1fr)_minmax(0,21rem)]' : '',
           ].join(' ')}
         >
           <Reveal>
@@ -34,12 +34,17 @@ export function SobreMi() {
           </Reveal>
 
           {foto && (
-            <Reveal retardo={80} className="md:justify-self-end">
+            <Reveal retardo={80} className="justify-self-center md:justify-self-end">
               {/* Sin marco: la foto viene recortada. Un halo `accent-dim` amplio detras separa
-                  el polo negro del fondo oscuro de la seccion. Sube 30px en escritorio
-                  (propietario, 2026-09-24); el desplazamiento va aqui y no en el Reveal,
-                  que anima su propio transform. */}
-              <div className="relative aspect-square w-full max-w-[32rem] md:-translate-y-[30px]">
+                  el polo negro del fondo oscuro de la seccion. Sube 60px en escritorio
+                  (propietario, 2026-09-24 y 2026-09-30); el desplazamiento va aqui y no en el Reveal,
+                  que anima su propio transform. La caja toma la proporcion de la foto
+                  (vertical) para no dejar hueco a los lados; 21rem de ancho la dejan a
+                  unos 36rem de alto en escritorio. */}
+              <div
+                className="relative w-full max-w-[21rem] md:-translate-y-[60px]"
+                style={{ aspectRatio: `${foto.ancho} / ${foto.alto}` }}
+              >
                 <div
                   aria-hidden="true"
                   className="absolute -inset-[6%] rounded-full bg-accent/25 blur-[110px]"
