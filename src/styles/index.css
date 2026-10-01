@@ -610,4 +610,107 @@
   .icono-menu[data-abierto] .icono-menu__linea:last-child {
     transform: rotate(-45deg) translateY(-2.5px);
   }
+
+  /* ══ Intro de la portada (src/intro.js) ══════════════════════════════════════════
+     Secuencia, en ms desde que arranca el script:
+       0-600      el monograma sube 12px y aparece de abajo arriba
+       300-1100   el filete verde se llena de izquierda a derecha
+       1150-1450  el filete se recoge hacia la derecha
+       1250-1950  el monograma vuela a la cabecera y la cortina sube
+     Las dos primeras fases van por retardo de CSS; el vuelo lo arranca el script
+     (data-intro="vuelo") porque necesita medir donde esta el monograma de la cabecera.
+     Solo se anima transform y clip-path: nada de layout ni de pintura cara. */
+  [data-intro] [data-monograma] {
+    visibility: hidden;
+  }
+
+  /* Por encima de la cabecera (z-50) y del menu movil (z-40). */
+  .intro-cortina {
+    position: fixed;
+    inset: 0;
+    z-index: 60;
+    background-color: theme('colors.bg');
+  }
+
+  /* Tamaño de la cabecera (h-8 w-9) por 8/3: al aterrizar escala a 0,375. */
+  .intro-marca {
+    position: fixed;
+    inset: 0;
+    z-index: 61;
+    width: 6rem;
+    height: 5.333rem;
+    margin: auto;
+    background-color: theme('colors.fg');
+    -webkit-mask: url('/JdDLogo_marca.svg') center / contain no-repeat;
+    mask: url('/JdDLogo_marca.svg') center / contain no-repeat;
+    animation: intro-marca 600ms theme('transitionTimingFunction.out-soft') both;
+  }
+
+  .intro-filete {
+    position: absolute;
+    left: 50%;
+    top: calc(50% + 4rem);
+    width: 8rem;
+    height: 1px;
+    margin-left: -4rem;
+  }
+
+  .intro-filete__relleno {
+    display: block;
+    height: 100%;
+    background-color: theme('colors.accent');
+    animation: intro-filete 1150ms linear 300ms both;
+  }
+
+  [data-intro='vuelo'] .intro-marca {
+    animation: intro-vuelo 700ms theme('transitionTimingFunction.in-out-soft') forwards;
+  }
+
+  [data-intro='vuelo'] .intro-cortina {
+    animation: intro-persiana 700ms theme('transitionTimingFunction.in-out-soft') forwards;
+  }
+
+  @keyframes intro-marca {
+    from {
+      transform: translateY(0.75rem);
+      clip-path: inset(100% 0 0 0);
+    }
+    to {
+      transform: none;
+      clip-path: inset(0);
+    }
+  }
+
+  /* Una sola animacion de 300 a 1450 ms: 800 ms de llenado (hasta el 69,6 %), 50 ms
+     quieto y 300 ms de recogida. */
+  @keyframes intro-filete {
+    0% {
+      clip-path: inset(0 100% 0 0);
+      animation-timing-function: theme('transitionTimingFunction.in-out-soft');
+    }
+    69.6%,
+    73.9% {
+      clip-path: inset(0);
+      animation-timing-function: theme('transitionTimingFunction.in-out-soft');
+    }
+    100% {
+      clip-path: inset(0 0 0 100%);
+    }
+  }
+
+  @keyframes intro-vuelo {
+    to {
+      transform: translate(var(--dx), var(--dy)) scale(var(--s));
+    }
+  }
+
+  /* La persiana del menu movil al reves: el borde inferior sube hasta arriba. */
+  @keyframes intro-persiana {
+    from {
+      clip-path: inset(0);
+    }
+    to {
+      clip-path: inset(0 0 100% 0);
+    }
+  }
 }

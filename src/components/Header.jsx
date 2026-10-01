@@ -56,6 +56,7 @@ export function Header({ base = '' }) {
           <EscapeButton>
             <span
               aria-hidden="true"
+              data-monograma
               className="block h-8 w-9 flex-none bg-fg"
               style={{
                 WebkitMask: "url('/JdDLogo_marca.svg') center / contain no-repeat",

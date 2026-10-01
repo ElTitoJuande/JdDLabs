@@ -12,6 +12,7 @@ import { SobreMi } from '../sections/SobreMi';
 import { Contacto } from '../sections/Contacto';
 import { capacidades } from '../content/copy';
 import { useAnclaInicial } from '../hooks/useAnclaInicial';
+import { iniciarIntro } from '../intro';
 
 /**
  * Portada v2. Siete bloques, en el orden de la maqueta aprobada.
@@ -45,6 +46,9 @@ function Portada() {
     </>
   );
 }
+
+// Antes del render: la cortina entra en el mismo primer frame que la portada.
+iniciarIntro();
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
