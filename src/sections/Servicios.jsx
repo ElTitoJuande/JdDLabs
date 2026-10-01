@@ -51,7 +51,7 @@ export function Servicios() {
 
         <ul className="mt-10 border-b border-border md:mt-16">
           {servicios.map((servicio, i) => (
-            <Reveal as="li" key={servicio.id} retardo={80 * i} className="border-t border-border">
+            <Reveal as="li" key={servicio.id} retardo={Math.min(80 * i, 240)} className="border-t border-border">
               <a
                 ref={(el) => (filas.current[i] = el)}
                 data-activo={activo === i || undefined}

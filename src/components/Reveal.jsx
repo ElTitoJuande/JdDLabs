@@ -8,6 +8,10 @@ import { useReveal } from '../hooks/useReveal';
  *
  * `retardo` escalona la aparicion de los elementos de una lista. Maximo util: 240ms.
  * Por encima se nota como lentitud, no como elegancia.
+ *
+ * 500ms (`duration-base`) y 16px de recorrido, no 900ms y 24px (propietario,
+ * 2026-10-01): con la version lenta, al hacer scroll rapido quedaba un hueco vacio en
+ * la parte baja de la pantalla esperando a que el contenido terminase de aparecer.
  */
 export function Reveal({
   children,
@@ -24,8 +28,8 @@ export function Reveal({
       ref={ref}
       style={retardo ? { transitionDelay: `${retardo}ms`, ...style } : style}
       className={[
-        'transition duration-slow ease-out-soft motion-reduce:transition-none',
-        visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6',
+        'transition duration-base ease-out-soft motion-reduce:transition-none',
+        visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4',
         className,
       ]
         .filter(Boolean)

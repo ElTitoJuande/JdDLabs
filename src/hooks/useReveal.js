@@ -45,6 +45,9 @@ export function useReveal() {
 
     setVisible(false);
 
+    // Se dispara en cuanto asoma el primer pixel por abajo. Antes esperaba a que el
+    // elemento subiera un 10 % de la pantalla y se viera un 5 % de el, y esa franja
+    // inferior se quedaba vacia mientras tanto (propietario, 2026-10-01).
     const observador = new IntersectionObserver(
       (entradas) => {
         entradas.forEach((entrada) => {
@@ -54,7 +57,7 @@ export function useReveal() {
           }
         });
       },
-      { rootMargin: '0px 0px -10% 0px', threshold: 0.05 }
+      { rootMargin: '0px', threshold: 0 }
     );
 
     observador.observe(elemento);
