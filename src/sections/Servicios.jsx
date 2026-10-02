@@ -1,7 +1,7 @@
 import { servicios, titulares } from "../content/copy";
 import { TituloSeccion } from "../components/TituloSeccion";
 import { Icon } from "../components/Icon";
-const icons = ["web", "cart", "settings"];
+const icons = ["web", "store", "settings"];
 const features = [
   ["pencil", "user", "phone", "search"],
   ["cart", "card", "box", "mail"],

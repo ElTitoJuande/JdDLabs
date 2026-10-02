@@ -4,6 +4,8 @@ const paths = {
   mail: "M3 5h18v14H3z M3 6l9 7 9-7",
   web: "M3 4h18v16H3z M3 9h18 M7 6.5h.01 M10 6.5h.01",
   cart: "M2 3h3l3 12h10l3-9H6 M9 20h.01 M18 20h.01",
+  store:
+    "M3 9 4.5 4h15L21 9 M3 9a3 3 0 0 0 6 0 3 3 0 0 0 6 0 3 3 0 0 0 6 0 M5 12v9h14v-9 M10 21v-5h4v5",
   code: "m8 5-6 7 6 7 M16 5l6 7-6 7 M14 3l-4 18",
   grid: "M3 3h7v7H3z M14 3h7v7h-7z M3 14h7v7H3z M14 14h7v7h-7z",
   phone: "M7 2h10v20H7z M10 18h4",
@@ -22,6 +24,7 @@ const paths = {
   cloud: "M7 19a5 5 0 0 1-1-9.9 6.5 6.5 0 0 1 12.5-1.6A5.8 5.8 0 0 1 18 19Z",
   plug: "M8 2v5 M16 2v5 M5 7h14v4a7 7 0 0 1-14 0z M12 18v4",
   workflow: "M8 3h8v5H8z M2 17h7v5H2z M15 17h7v5h-7z M12 8v5 M5.5 17v-4h13v4",
+  clock: "M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0 M12 7v5 M12 12l3 2",
   settings:
     "M12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8 M9 2h6l1 4 4 1 2 5-2 5-4 1-1 4H9l-1-4-4-1-2-5 2-5 4-1z",
 };

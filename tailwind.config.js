@@ -26,13 +26,11 @@ export default {
       },
       borderColor: { DEFAULT: paleta.border },
       ringColor: { DEFAULT: paleta['accent-2'] },
+      // Las dos familias de la web (2026-10-02): Roboto para el texto, Inter para
+      // titulares y cifras grandes. Se cargan en src/styles/index.css.
       fontFamily: {
-        sans: ['"IBM Plex Sans Variable"', 'system-ui', '-apple-system', 'Segoe UI', 'sans-serif'],
-        // Titulares (h1-h3), eyebrows, cifras y metadatos (constitucion 3.3.0).
-        mono: ['"IBM Plex Mono"', 'ui-monospace', 'SF Mono', 'Consolas', 'monospace'],
-        // Solo para el enfasis del h1 del hero y el cierre de los h2 de seccion
-        // (constitucion 3.3.0, principio II).
-        serif: ['"IBM Plex Serif"', 'Georgia', 'serif'],
+        sans: ['"Roboto Variable"', 'Arial', 'sans-serif'],
+        display: ['"Inter Variable"', 'Arial', 'sans-serif'],
       },
       // Escala fluida de nueve pasos. Ninguna seccion escribe un tamaño en pixeles:
       // la maqueta de Claude Design esta exportada en px porque es un HTML estatico,
@@ -45,8 +43,8 @@ export default {
         'fs-500': 'clamp(1.25rem, 1.1rem + .7vw, 1.6rem)',
         'fs-600': 'clamp(1.6rem, 1.3rem + 1.4vw, 2.4rem)',
         'fs-700': 'clamp(2.2rem, 1.6rem + 2.8vw, 3.6rem)',
-        // fs-800 y fs-900 bajan con el paso de los titulares a IBM Plex Mono
-        // (constitucion 3.3.0): la mono es mas ancha y pesa mas en pantalla, y a los
+        // fs-800 y fs-900 se fijaron en la etapa de IBM Plex Mono (constitucion 3.3.0),
+        // ya retirada; se conservan los valores: la mono era mas ancha, y a los
         // 117,6px de antes el h1 aplastaba el resto del hero. Los valores salen de la
         // comparativa de tipografias que aprobo el propietario el 2026-09-30:
         //   fs-800 -> h2 de seccion:  35px a 375, 65px a 1440

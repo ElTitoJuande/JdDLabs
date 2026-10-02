@@ -4,7 +4,7 @@ const useBrowserLayoutEffect = typeof window === "undefined" ? useEffect : useLa
 // One motion controller shared by every page through Header. No layout wrappers.
 const SELECTORS = [
   ".hero-copy > *",
-  ".hero-photo",
+  ".hero-ilustracion",
   ".section-heading",
   ".service-card",
   ".project-photo",

@@ -7,12 +7,21 @@ export function ContactForm() {
   const [ts] = useState(() => Date.now());
   const [state, setState] = useState("idle");
   const [errors, setErrors] = useState({});
+  const [largo, setLargo] = useState(0);
   const formRef = useRef(null);
   const sending = useRef(false);
   function showErrors(next) {
     setErrors(next);
     setState("idle");
     formRef.current?.elements.namedItem(Object.keys(next)[0])?.focus();
+  }
+  /* al corregir un campo su error deja de valer: se retira ya, sin esperar al
+     siguiente envío. El contador del mensaje sigue al texto real. */
+  function editar(event) {
+    const { name, value } = event.target;
+    if (name === "mensaje") setLargo(value.length);
+    if (errors[name])
+      setErrors(({ [name]: _, ...resto }) => resto);
   }
   async function submit(event) {
     event.preventDefault();
@@ -53,6 +62,7 @@ export function ContactForm() {
       });
       if (response.ok) {
         form.reset();
+        setLargo(0);
         setState("sent");
       } else if (response.status === 400) {
         const detail = await response.json().catch(() => ({}));
@@ -66,10 +76,13 @@ export function ContactForm() {
       sending.current = false;
     }
   }
-  const invalid = (key) =>
-    errors[key]
-      ? { "aria-invalid": true, "aria-describedby": "error-" + key }
-      : {};
+  const invalid = (key, ayuda) => {
+    const ids = [errors[key] && "error-" + key, ayuda].filter(Boolean);
+    return {
+      ...(errors[key] && { "aria-invalid": true }),
+      ...(ids.length && { "aria-describedby": ids.join(" ") }),
+    };
+  };
   const error = (key) =>
     errors[key] ? (
       <p className="form-error" id={"error-" + key}>
@@ -82,6 +95,7 @@ export function ContactForm() {
       action="/api/contact"
       ref={formRef}
       onSubmit={submit}
+      onChange={editar}
       className="contact-form"
       noValidate
       aria-label="Formulario de contacto"
@@ -124,8 +138,12 @@ export function ContactForm() {
             required
             minLength={10}
             maxLength={2000}
-            {...invalid("mensaje")}
+            {...invalid("mensaje", "ayuda-mensaje")}
           />
+          <p className="form-hint" id="ayuda-mensaje">
+            <span>Mínimo 10 caracteres.</span>
+            <span data-lleno={largo >= 2000}>{largo}/2000</span>
+          </p>
           {error("mensaje")}
         </div>
       </div>

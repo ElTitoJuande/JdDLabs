@@ -23,6 +23,15 @@ export function Boton({
       className={`button ${variante === "fantasma" ? "button-outline" : "button-primary"} ${tamano === "sm" ? "button-small" : ""} ${className}`}
       {...props}
     >
+      {/* Destellos del borde (StarBorder de React Bits, adaptado): solo en el CTA principal. */}
+      {variante !== "fantasma" && (
+        <>
+          <span className="star-border-bottom" aria-hidden="true" />
+          <span className="star-border-top" aria-hidden="true" />
+          <span className="star-border-bottom star-glow" aria-hidden="true" />
+          <span className="star-border-top star-glow" aria-hidden="true" />
+        </>
+      )}
       {children}
       {(flecha || externo) && <Icon name="arrow" />}
     </Tag>

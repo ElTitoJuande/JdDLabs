@@ -137,7 +137,6 @@ export function CasoCristaleria() {
                     {String(i + 1).padStart(2, "0")}
                   </span>
                   <p>{text}</p>
-                  <Icon name="arrow" />
                 </li>
               ))}
             </ul>

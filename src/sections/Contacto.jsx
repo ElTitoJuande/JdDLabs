@@ -1,4 +1,4 @@
-import { ContactArtwork } from "../components/ContactArtwork";
+import { ContactFlow } from "../components/ContactFlow";
 import { contacto, titulares } from "../content/copy";
 import { identity, enlaces } from "../content/identity";
 import { TituloSeccion } from "../components/TituloSeccion";
@@ -8,6 +8,7 @@ export function Contacto() {
   return (
     <section id="contacto" className="section contact-section">
       <div className="contenedor contact-grid">
+        <ContactFlow />
         <div className="contact-copy">
           <TituloSeccion
             eyebrow={titulares.contacto.eyebrow}
@@ -24,7 +25,6 @@ export function Contacto() {
               </span>
               {identity.email}
             </a>
-            <ContactArtwork />
           </div>
         </div>
         <ContactForm />

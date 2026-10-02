@@ -22,7 +22,7 @@ export function PaginaLegal({ documento }) {
       <main id="contenido" data-inert-target className="pt-header">
         <article className="contenedor max-w-3xl py-section">
           <h1 className="text-fs-700 text-fg">{documento.titulo}</h1>
-          <p className="mt-5 font-mono text-fs-100 uppercase tracking-[0.16em] text-fg-mute">
+          <p className="mt-5 text-fs-100 uppercase tracking-[0.16em] text-fg-mute">
             Última actualización: {documento.actualizado}
           </p>
 
@@ -40,7 +40,7 @@ export function PaginaLegal({ documento }) {
                 <dl className="mt-5 divide-y divide-border border-y border-border">
                   {seccion.datos.map((dato) => (
                     <div key={dato.clave} className="flex flex-col gap-1 py-3 sm:flex-row sm:gap-4">
-                      <dt className="w-48 shrink-0 font-mono text-fs-100 uppercase tracking-[0.16em] text-fg-mute">
+                      <dt className="w-48 shrink-0 text-fs-100 uppercase tracking-[0.16em] text-fg-mute">
                         {dato.clave}
                       </dt>
                       <dd className="text-fs-300 text-fg">

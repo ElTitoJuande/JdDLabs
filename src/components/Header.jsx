@@ -7,6 +7,14 @@ import { Brand } from "./Brand";
 export { Brand } from "./Brand";
 export function Header({ base = "", currentSection }) {
   const [active, setActive] = useState("inicio");
+  const [scrolled, setScrolled] = useState(false);
+  // Fuera de lo alto de la página el header pasa a semitransparente.
+  useEffect(() => {
+    const update = () => setScrolled(window.scrollY > 8);
+    update();
+    window.addEventListener("scroll", update, { passive: true });
+    return () => window.removeEventListener("scroll", update);
+  }, []);
   useEffect(() => {
     if (base) return;
     let frame = 0;
@@ -48,7 +56,7 @@ export function Header({ base = "", currentSection }) {
       <a className="skip-link" href="#contenido">
         Saltar al contenido
       </a>
-      <header className="site-header">
+      <header className="site-header" data-scrolled={scrolled || undefined}>
         <div className="contenedor header-inner">
           <a href={base + "#inicio"} aria-label="JdDLabs, ir al inicio">
             <Brand />

@@ -33,6 +33,21 @@ export const hero = {
   // Segunda accion del hero, introducida por la maqueta v2: lleva al unico proyecto
   // publicable que hay. Es navegacion, no una afirmacion sobre el negocio.
   ctaSecundario: 'Ver trabajo',
+  // Ilustración de la mitad derecha (propietario, 2026-10-02): render del escritorio con
+  // la sudadera verde y su teclado real (imagen del propietario). Dos anchos para srcset.
+  ilustracion: {
+    src: '/img/hero-escritorio-1165.webp',
+    srcSet: '/img/hero-escritorio-720.webp 720w, /img/hero-escritorio-1165.webp 1165w',
+    alt: 'Ilustración de Juan de Dios programando en su escritorio con dos monitores',
+  },
+  // Banda de confianza al pie del hero (propietario, 2026-10-02). Sin cifras ni plazos:
+  // nada que verificar salvo las 24 h, que el propietario promete por correo, su contacto
+  // principal (2026-10-02). Ninguna habla de Rute: ya sale en el eyebrow.
+  confianza: [
+    { icono: 'user', titulo: 'Trato directo', texto: 'Hablas conmigo de principio a fin, sin intermediarios.' },
+    { icono: 'code', titulo: 'Hecha a medida', texto: 'Diseño y código propios. Nada de plantillas.' },
+    { icono: 'clock', titulo: 'Respuesta en <24 h', texto: 'Escríbeme por correo y te contesto en menos de un día.' },
+  ],
 };
 
 // Pie (2026-09-24). `eyebrow` elegido por el propietario el 2026-09-30. `descripcion` NO es nueva: es la del JSON-LD de negocio
@@ -40,7 +55,7 @@ export const hero = {
 export const pie = {
   eyebrow: '¿Empezamos?',
   descripcion: 'Desarrollo a medida para pymes y autónomos en Rute y alrededores.',
-  propuesta: 'Desarrollo soluciones a medida para tu negocio: aplicaciones, automatizaciones y webs que te ayuden a ahorrar tiempo y trabajar mejor. Yo me encargo de la tecnología; tú, de tu negocio.',
+  propuesta: 'Desarrollo soluciones a medida para tu negocio: aplicaciones y webs que te ayuden a ahorrar tiempo y trabajar mejor. Yo me encargo de la tecnología; tú, de tu negocio.',
 };
 
 // CTA de la cabecera, en escritorio y en el menu movil. Mas corto que `hero.cta`: en
@@ -249,7 +264,9 @@ export const contacto = {
 // Herramientas de trabajo: lista aportada por el propietario el 2026-09-24, transcrita
 // sin añadir ni quitar ninguna (principio V: es lo que usa, no una afirmacion sobre
 // resultados). El orden es el suyo. El 2026-10-01 "IA & APIs" pasa a "Integraciones" y
-// se retira la fila "Herramientas" (propietario).
+// se retira la fila "Herramientas" (propietario). El 2026-10-02 se quita
+// toda mencion a automatizaciones (fila "Agentes & automatización" → "Agentes de IA", sin n8n).
+// El mismo dia el propietario añade Codex a los agentes.
 export const stack = [
   { id: 'lenguajes', categoria: 'Lenguajes', items: ['TypeScript', 'JavaScript', 'PHP', 'SQL', 'HTML5', 'CSS'] },
   { id: 'frameworks', categoria: 'Frameworks', items: ['React', 'Next.js', 'Express'] },
@@ -258,7 +275,7 @@ export const stack = [
   { id: 'datos', categoria: 'Bases de datos', items: ['MongoDB', 'MySQL', 'Firebase', 'Supabase'] },
   { id: 'cloud', categoria: 'Cloud & DevOps', items: ['Cloudflare', 'Cloudflare Pages', 'Docker', 'GitHub'] },
   { id: 'integraciones', categoria: 'Integraciones', items: ['OpenAI', 'Anthropic Claude', 'Stripe', 'Resend', 'Formspree'] },
-  { id: 'agentes', categoria: 'Agentes & automatización', items: ['Claude Code', 'OpenCode', 'n8n'] },
+  { id: 'agentes', categoria: 'Agentes de IA', items: ['Claude Code', 'Codex', 'OpenCode'] },
 ];
 
 // La clave `testimonio` NO existe a proposito (FR-007, principio V). El bloque de
