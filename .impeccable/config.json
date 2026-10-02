@@ -1,0 +1,20 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "overused-font",
+        "value": "inter",
+        "createdAt": "2026-10-02T11:37:00.335Z",
+        "reason": "Owner decision 2026-10-02 recorded in PRODUCT.md: the published web (Inter/Roboto) is the approved visual system"
+      },
+      {
+        "rule": "overused-font",
+        "value": "roboto",
+        "createdAt": "2026-10-02T13:55:28.941Z",
+        "reason": "Owner decision 2026-10-02 recorded in PRODUCT.md: the published web (Inter/Roboto) is the approved visual system"
+      }
+    ]
+  }
+}

@@ -11,3 +11,11 @@ dist/
 
 # Cache local del hook de impeccable: se regenera en cada sesion
 .impeccable/hook.cache.json
+
+# Restos locales de Lighthouse (rutas de Windows creadas en WSL) y capturas sueltas
+/C:*
+/after-*.png
+
+# Sesiones locales de impeccable; config.json sí se versiona
+.impeccable/critique/
+.impeccable/live/
