@@ -3082,8 +3082,18 @@ section[id] {
     display: inline-flex;
     letter-spacing: -0.035em;
   }
+  /* El mismo icono que en escritorio, a escala de la tarjeta. */
+  .contact-email > a {
+    align-items: center;
+    gap: 12px;
+  }
   .contact-email .email-icon {
-    display: none;
+    width: 40px;
+    height: 40px;
+  }
+  .contact-email .email-icon .icon {
+    width: 22px;
+    height: 22px;
   }
   .contact-grid {
     gap: 22px;
