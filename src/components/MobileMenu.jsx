@@ -9,6 +9,7 @@ export function MobileMenu({ base = "" }) {
   const trigger = useRef(null);
   const animation = useRef(null);
   const closing = useRef(false);
+  const pending = useRef(null);
   const [open, setOpen] = useState(false);
   const duration = () =>
     window.matchMedia("(prefers-reduced-motion: reduce)").matches ? 0 : 280;
@@ -70,7 +71,23 @@ export function MobileMenu({ base = "" }) {
     setOpen(false);
     closing.current = false;
     document.body.style.overflow = "";
-    trigger.current?.focus();
+    trigger.current?.focus({ preventScroll: true });
+    // El salto al ancla se hace aquí: con el modal abierto la página está
+    // inerte y bloqueada, y algunos navegadores ignoran la navegación.
+    const id = pending.current;
+    pending.current = null;
+    const target = id && document.getElementById(id);
+    if (!target) return;
+    if (location.hash !== "#" + id) history.pushState(null, "", "#" + id);
+    target.scrollIntoView({ block: "start" });
+  }
+  // Mismo documento: cerrar primero y navegar después. Con `base` es otra
+  // página, así que basta con dejar que el enlace navegue.
+  function go(event, id) {
+    if (base) return close();
+    event.preventDefault();
+    pending.current = id;
+    close();
   }
   return (
     <div className="mobile-menu">
@@ -118,14 +135,21 @@ export function MobileMenu({ base = "" }) {
             <ul>
               {secciones.map((section) => (
                 <li key={section.id}>
-                  <a onClick={close} href={base + "#" + section.id}>
+                  <a
+                    onClick={(event) => go(event, section.id)}
+                    href={base + "#" + section.id}
+                  >
                     {section.nombre}
                   </a>
                 </li>
               ))}
             </ul>
           </nav>
-          <Boton href={base + "#contacto"} onClick={close} flecha>
+          <Boton
+            href={base + "#contacto"}
+            onClick={(event) => go(event, "contacto")}
+            flecha
+          >
             Hablemos
           </Boton>
           <div className="menu-footer">
