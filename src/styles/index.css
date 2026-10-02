@@ -4180,3 +4180,126 @@ textarea.lbi-field {
 @media (max-width: 767px) {
   .hero-ilustracion img { width: min(100%, 420px); max-height: none; }
 }
+
+/* ══ Intro de la portada (src/intro.js) ══════════════════════════════════════════
+   Secuencia, en ms desde que arranca el script:
+     0-600      el monograma sube 12px y aparece de abajo arriba
+     300-1100   el filete menta se llena de izquierda a derecha
+     1150-1450  el filete se recoge hacia la derecha
+     1250-1950  el monograma vuela a la cabecera y la cortina sube
+   Las dos primeras fases van por retardo de CSS; el vuelo lo arranca el script
+   (data-intro="vuelo") porque necesita medir dónde está el monograma de la cabecera.
+   Solo se anima transform y clip-path. La cortina usa el verde de la cabecera, así
+   que al subir se funde con ella. */
+[data-intro] [data-monograma] {
+  visibility: hidden;
+}
+
+/* Tapado previo: lo pone el script en línea del <head> antes del primer pintado y
+   desaparece en cuanto intro.js cambia data-intro. Si el módulo no llega a cargar,
+   se retira solo a los 3 s para no dejar la página tapada. */
+[data-intro="pre"]::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  background: var(--dark-surface);
+  animation: intro-pre-fuera 0s linear 3s forwards;
+}
+@keyframes intro-pre-fuera {
+  to { visibility: hidden; }
+}
+
+/* Por encima de la cabecera (50) y del menú móvil. */
+.intro-cortina {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  background: var(--dark-surface);
+}
+
+/* Monograma en blanco puro (compromiso de marca), por máscara sobre el SVG. */
+.intro-marca {
+  position: fixed;
+  inset: 0;
+  z-index: 61;
+  width: 6rem;
+  height: 5.333rem;
+  margin: auto;
+  background-color: #fff;
+  -webkit-mask: url("/JdDLogo_marca.svg") center / contain no-repeat;
+  mask: url("/JdDLogo_marca.svg") center / contain no-repeat;
+  animation: intro-marca 600ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.intro-filete {
+  position: absolute;
+  left: 50%;
+  top: calc(50% + 4rem);
+  width: 8rem;
+  height: 2px;
+  margin-left: -4rem;
+}
+
+.intro-filete__relleno {
+  display: block;
+  height: 100%;
+  background: var(--mint);
+  animation: intro-filete 1150ms linear 300ms both;
+}
+
+[data-intro="vuelo"] .intro-marca {
+  animation: intro-vuelo 700ms cubic-bezier(0.65, 0, 0.35, 1) forwards;
+}
+
+[data-intro="vuelo"] .intro-cortina {
+  animation: intro-persiana 700ms cubic-bezier(0.65, 0, 0.35, 1) forwards;
+}
+
+@keyframes intro-marca {
+  from {
+    transform: translateY(0.75rem);
+    clip-path: inset(100% 0 0 0);
+  }
+  to {
+    transform: none;
+    clip-path: inset(0);
+  }
+}
+
+/* Una sola animación de 300 a 1450 ms: 800 ms de llenado (hasta el 69,6 %), 50 ms
+   quieto y 300 ms de recogida. */
+@keyframes intro-filete {
+  0% {
+    clip-path: inset(0 100% 0 0);
+    animation-timing-function: cubic-bezier(0.65, 0, 0.35, 1);
+  }
+  69.6%,
+  73.9% {
+    clip-path: inset(0);
+    animation-timing-function: cubic-bezier(0.65, 0, 0.35, 1);
+  }
+  100% {
+    clip-path: inset(0 0 0 100%);
+  }
+}
+
+@keyframes intro-vuelo {
+  to {
+    transform: translate(var(--dx), var(--dy)) scale(var(--s));
+  }
+}
+
+/* La persiana sube: el borde inferior llega hasta arriba. */
+@keyframes intro-persiana {
+  from { clip-path: inset(0); }
+  to { clip-path: inset(0 0 100% 0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-intro="pre"]::after,
+  .intro-cortina,
+  .intro-marca {
+    display: none;
+  }
+}

@@ -18,6 +18,11 @@
 
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
+    <!-- Intro de la portada (src/intro.js): decide antes del primer pintado si se va a
+         ver, para que la pagina prerenderizada no asome antes de la cortina. Mismas
+         condiciones que intro.js. Su hash lo añade scripts/prerender.mjs a la CSP. -->
+    <script>try{if(!matchMedia('(prefers-reduced-motion: reduce)').matches&&!location.hash&&sessionStorage.getItem('jdd-intro-vista')!=='1')document.documentElement.setAttribute('data-intro','pre')}catch(e){}</script>
+
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="es_ES" />
     <meta property="og:site_name" content="JdDLabs" />

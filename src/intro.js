@@ -9,7 +9,10 @@
  *   en opacity 0 hasta el segundo 1,5 si lo haria.
  * - Vanilla y CSS, nada de estado de React: ni re-renders ni trabajo en el hilo
  *   principal durante la animacion. Solo se anima transform y clip-path.
- * - La cortina la crea este script. Sin JavaScript no existe y no tapa nada.
+ * - La cortina la crea este script. Como la portada llega prerenderizada, un script en
+ *   linea del <head> de index.html pone data-intro="pre" antes del primer pintado y el
+ *   CSS tapa la pagina hasta que este modulo carga; si no llega a cargar, ese tapado se
+ *   retira solo a los 3 s. Sin JavaScript no existe ninguno de los dos.
  *
  * No se muestra: con movimiento reducido, si la URL trae ancla (el usuario va a una
  * seccion concreta) ni mas de una vez por sesion. Cualquier clic, tecla, rueda o toque
@@ -41,7 +44,10 @@ function marcarVista() {
 
 export function iniciarIntro() {
   if (window.matchMedia?.('(prefers-reduced-motion: reduce)').matches) return;
-  if (window.location.hash || yaVista()) return;
+  if (window.location.hash || yaVista()) {
+    document.documentElement.removeAttribute('data-intro');
+    return;
+  }
   marcarVista();
 
   const raiz = document.documentElement;
@@ -83,11 +89,19 @@ export function iniciarIntro() {
     }
     // El vuelo se calcula aqui y no al empezar: para entonces React ya ha pintado la
     // cabecera, y el ancho de la ventana es el de ahora.
+    // Se apunta a la caja de contenido: el monograma de la cabecera lleva padding y un
+    // borde a la derecha que lo separan del nombre, y no forman parte del dibujo.
     const a = marca.getBoundingClientRect();
-    const b = destino.getBoundingClientRect();
-    marca.style.setProperty('--dx', `${b.left + b.width / 2 - (a.left + a.width / 2)}px`);
-    marca.style.setProperty('--dy', `${b.top + b.height / 2 - (a.top + a.height / 2)}px`);
-    marca.style.setProperty('--s', String(b.width / a.width));
+    const r = destino.getBoundingClientRect();
+    const cs = getComputedStyle(destino);
+    const px = (prop) => parseFloat(cs[prop]) || 0;
+    const left = r.left + px('paddingLeft') + px('borderLeftWidth');
+    const top = r.top + px('paddingTop') + px('borderTopWidth');
+    const ancho = r.width - left + r.left - px('paddingRight') - px('borderRightWidth');
+    const alto = r.height - top + r.top - px('paddingBottom') - px('borderBottomWidth');
+    marca.style.setProperty('--dx', `${left + ancho / 2 - (a.left + a.width / 2)}px`);
+    marca.style.setProperty('--dy', `${top + alto / 2 - (a.top + a.height / 2)}px`);
+    marca.style.setProperty('--s', String(ancho / a.width));
     raiz.setAttribute('data-intro', 'vuelo');
     marca.addEventListener('animationend', (e) => e.animationName === 'intro-vuelo' && terminar());
   };

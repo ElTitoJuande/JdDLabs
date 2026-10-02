@@ -59,7 +59,7 @@ export function Header({ base = "", currentSection }) {
       <header className="site-header" data-scrolled={scrolled || undefined}>
         <div className="contenedor header-inner">
           <a href={base + "#inicio"} aria-label="JdDLabs, ir al inicio">
-            <Brand />
+            <Brand monograma />
           </a>
           <nav className="desktop-nav" aria-label="Secciones del sitio">
             <ul>

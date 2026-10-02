@@ -11,6 +11,7 @@ import { LogosStack } from '../sections/LogosStack';
 import { SobreMi } from '../sections/SobreMi';
 import { Contacto } from '../sections/Contacto';
 import { useAnclaInicial } from '../hooks/useAnclaInicial';
+import { iniciarIntro } from '../intro';
 
 /** Portfolio según el diseño aprobado: inicio, servicios, proyecto, sobre mí, tecnología y contacto. */
 export function Portada() {
@@ -34,6 +35,9 @@ export function Portada() {
 }
 
 
+
+// Antes del render: la cortina sustituye al tapado del <head> en el mismo frame.
+if (!import.meta.env.SSR) iniciarIntro();
 
 if (!import.meta.env.SSR) mount(
   <StrictMode>
