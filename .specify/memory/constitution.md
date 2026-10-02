@@ -1,20 +1,14 @@
 <!--
 Sync Impact Report
-- Cambio de versión: 3.4.0 → 3.5.0
-- Motivo del MINOR: se amplía el uso de la serif, que el principio II reserva a enmienda
-  MINOR.
+- Cambio de versión: 3.5.0 → 3.6.0
+- Motivo del MINOR: se sustituyen las familias tipográficas, como en la 3.3.0.
 - Principios modificados:
-  - II. Fuentes auto-alojadas: la serif de énfasis llega también al nombre del cliente en
-    el `h3` de Proyecto destacado, con el mismo tratamiento que el cierre de los `h2`
-    (pedido por el propietario el 2026-10-01). Ese nombre iba en Plex Mono cursiva 500,
-    que deja de usarse y se retira: la mono queda en 400 y 500.
-- Principios añadidos: ninguno.
-- Principios eliminados: ninguno.
-- Secciones modificadas: "Referencia de tokens y assets" → Tipografía (roles de la mono
-  y de la serif, tratamiento de énfasis).
-- Placeholders diferidos: ninguno.
-- Templates dependientes: sin cambios; plan-template.md, spec-template.md y
-  tasks-template.md leen esta constitución en tiempo de ejecución.
+  - II. Fuentes auto-alojadas: IBM Plex (Sans, Mono, Serif) → Inter Variable (titulares) y
+    Roboto Variable (texto), solo subconjunto latino. Ratifica lo que ya publicaba el
+    rediseño de a5ca955; el propietario decide el 2026-10-02 que prevalece la web.
+- Secciones modificadas: "Referencia de tokens y assets" → Tipografía.
+- Pendiente (no tocado en esta enmienda): principios III y IV siguen describiendo la paleta
+  oscura continua y el wordmark sin acento, que la web publicada tampoco cumple.
 
 Historial
 - 1.0.0 (2026-09-08): primera ratificación formal, once principios.
@@ -31,6 +25,7 @@ Historial
   `fg-mute` subido a `#A5B1AB` para pasar AA en las cuatro superficies.
 - 3.5.0 (2026-10-01): la serif de énfasis llega al nombre del cliente en el `h3` de
   Proyecto destacado; se retira la Plex Mono cursiva 500.
+- 3.6.0 (2026-10-02): Inter + Roboto sustituyen a IBM Plex; se retira la serif de énfasis.
 -->
 
 # Constitución del Portfolio JdDLabs
@@ -55,34 +50,28 @@ backend completo.
 
 ### II. Fuentes auto-alojadas (RGPD, NO NEGOCIABLE)
 
-Tres familias, todas auto-alojadas vía paquete de `@fontsource` y en subconjunto latino:
+Dos familias, auto-alojadas a partir de los ficheros de `@fontsource-variable` y declaradas
+en `src/styles/index.css` con `@font-face` propio, **solo en subconjunto latino** (cubre el
+español entero):
 
-- **IBM Plex Sans** (`@fontsource-variable/ibm-plex-sans`, corte variable) para cuerpo,
-  botones y navegación.
-- **IBM Plex Mono** (`@fontsource/ibm-plex-mono`, cortes estáticos latinos 400 y 500) para
-  titulares `h1`–`h3`, eyebrows de sección, cifras y metadatos.
-- **IBM Plex Serif** (`@fontsource/ibm-plex-serif`, solo cursiva 400) para las palabras de
-  énfasis del `h1` del hero, del cierre de cada `h2` de apertura de sección y del nombre del
-  cliente en el `h3` de Proyecto destacado. Uso cerrado: NO SE DEBE usar en un titular
-  entero, en ningún otro `h3` ni en texto corrido. Se importa solo el fichero
-  de cursiva 400.
-
-Mono y serif van en corte estático porque no existen en variable: se importa solo cada
-peso que se usa.
+- **Inter Variable** (`@fontsource-variable/inter`) para titulares `h1`–`h3`, el wordmark y
+  las cifras grandes. Clase Tailwind `font-display`.
+- **Roboto Variable** (`@fontsource-variable/roboto`) para cuerpo, botones, navegación,
+  formularios y etiquetas. Clase Tailwind `font-sans`.
 
 NO DEBE existir ninguna petición a `fonts.googleapis.com` ni a `fonts.gstatic.com` en ninguna
-página publicada. NO SE DEBE añadir una cuarta familia, ni ampliar el uso de la serif, sin
-enmienda MINOR.
+página publicada. NO SE DEBE añadir una tercera familia sin enmienda MINOR, ni importar los
+ficheros `wght.css` completos de `@fontsource`, que arrastran cirílico, griego y vietnamita.
 
-Space Grotesk, JetBrains Mono e Instrument Serif quedan retiradas en la 3.3.0, y sus
-dependencias se eliminan del repositorio. Fraunces e Inter quedan retiradas en la v2. El fichero `public/fonts/fraunces-latin-700.woff2`
-y la dependencia `@fontsource/inter` se eliminan del repositorio: una fuente que ya no se usa
-pero se sigue sirviendo es peso muerto que compite con el principio VI.
+IBM Plex (Sans, Mono y Serif) queda retirada en la 3.6.0 y sus dependencias se eliminan del
+repositorio, como antes Space Grotesk, JetBrains Mono, Instrument Serif y Fraunces en
+versiones anteriores. Una fuente que ya no se usa pero se sigue sirviendo es peso muerto que compite con el
+principio VI.
 
 Racional: la carga desde Google transfiere la IP del visitante sin consentimiento previo y ha
 sido sancionada por tribunales europeos. Es un riesgo legal, no una preferencia técnica. El
 corte variable se prefiere al estático porque un único fichero cubre todos los pesos que el
-diseño usa, en lugar de uno por peso.
+diseño usa.
 
 ### III. Paleta cerrada
 
@@ -251,9 +240,8 @@ borde de un control de formulario, que necesita 3:1 (WCAG 1.4.11). Los campos us
 
 | Rol | Familia | Uso |
 |---|---|---|
-| Cuerpo | IBM Plex Sans Variable | Párrafos, botones, navegación |
-| Mono | IBM Plex Mono 400 y 500 | `h1`–`h3` (500), eyebrows de sección, cifras, metadatos, etiquetas de stack |
-| Énfasis | IBM Plex Serif, cursiva 400 | Énfasis del `h1` del hero, cierre de los `h2` de sección y nombre del cliente en el `h3` de Proyecto destacado, a 1.12em |
+| Titulares | Inter Variable | `h1`–`h3`, wordmark «JdDLabs», cifras grandes |
+| Texto | Roboto Variable | Párrafos, botones, navegación, formularios, eyebrows y etiquetas |
 
 Escala fluida, en `tailwind.config.js` como única fuente de verdad:
 
@@ -269,15 +257,8 @@ Escala fluida, en `tailwind.config.js` como única fuente de verdad:
 | `fs-800` | `clamp(2.2rem, 1.53rem + 2.82vw, 4.05rem)` |
 | `fs-900` | `clamp(2.5rem, 1.44rem + 4.5vw, 5.5rem)` |
 
-Tratamiento de titular: IBM Plex Mono, peso 500, `letter-spacing: -0.04em` (−0.05em en `fs-900`),
-`line-height: 0.9`, `text-wrap: balance`.
-Tratamiento de énfasis: IBM Plex Serif cursiva 400 a `1.12em` (iguala la altura de la mono),
-`letter-spacing: -0.02em`. En el hero, la
-palabra de enlace va en `fg-dim` y la frase clave en `accent-2`; en los `h2` de sección, solo el
-cierre de la frase, en `accent-2` (regla de los dos acentos); en el `h3` de Proyecto destacado,
-solo el nombre del cliente, en `accent-2`.
-Tratamiento de eyebrow: mono 400, `fs-100`, `text-transform: uppercase`,
-`letter-spacing: 0.16em`, color `fg-mute`.
+Los tratamientos concretos (peso, tracking, interlineado) viven en `src/styles/index.css`;
+el tracking de titular no baja de −0.06em.
 
 ### Ritmo y forma
 
@@ -372,4 +353,4 @@ Sync Impact Report de la cabecera, la aprueba Juan explícitamente y se aplica e
 
 **Revisión de cumplimiento**: en cada ejecución de `/speckit-plan` y de `/speckit-analyze`.
 
-**Version**: 3.5.0 | **Ratified**: 2026-09-08 | **Last Amended**: 2026-10-01
+**Version**: 3.6.0 | **Ratified**: 2026-09-08 | **Last Amended**: 2026-10-02
